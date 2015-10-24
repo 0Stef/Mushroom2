@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Mushroom</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    // strings voor homescreen
+    <string name="title_activity_homescreen">Homescreen</string>
+    <string name="optionalbutton">Optional button</string>
+    <string name="challenges">Challenges</string>
+    <string name="settings">MAP</string>
+
 </resources>

@@ -5,4 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    // Extra style om actionbar te verwijderen van scherm
+    <style name="AppTheme_NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
 </resources>
