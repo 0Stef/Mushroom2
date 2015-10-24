@@ -1,0 +1,18 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=E1:4C:CB:18:84:BB:43:55:B5:BA:A6:18:16:63:04:AA:7C:57:72:79%3Bcom.mushroom.cwb1.mushroom2
+
+    You can also add your credentials to an existing key, using this line:
+    E1:4C:CB:18:84:BB:43:55:B5:BA:A6:18:16:63:04:AA:7C:57:72:79;com.mushroom.cwb1.mushroom2
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyDkjan3dqOb4vxKDSh1wAydkuzNdvdx39Q
+    </string>
+</resources>

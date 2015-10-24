@@ -7,5 +7,6 @@
     <string name="optionalbutton">Optional button</string>
     <string name="challenges">Challenges</string>
     <string name="settings">MAP</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
