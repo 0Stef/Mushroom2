@@ -10,4 +10,5 @@
     tools:showIn="@layout/activity_record_magnetic_field"
     tools:context="com.mushroom.cwb1.mushroom2.RecordMagneticField">
 
+
 </RelativeLayout>

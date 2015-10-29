@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 
@@ -31,7 +30,6 @@ public class Login_screen extends AppCompatActivity {
                     }
                 }
         );
-
     }
 
     @Override

@@ -17,7 +17,6 @@ public class RecordMagneticField extends AppCompatActivity implements SensorEven
     TextView orientation;
     private SensorManager mSensorManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,5 +54,4 @@ public class Challenges extends AppCompatActivity {
         startActivity(intent3);
     }
 
-
 }

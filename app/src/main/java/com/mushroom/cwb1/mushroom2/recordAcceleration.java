@@ -34,7 +34,6 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
 
         mSensorManager.registerListener(this, mAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
 
-
     }
 
     @Override

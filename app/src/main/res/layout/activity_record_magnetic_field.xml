@@ -27,5 +27,4 @@
         android:layout_toRightOf="@id/start_button"
         android:layout_toEndOf="@id/start_button"/>
 
-
 </RelativeLayout>

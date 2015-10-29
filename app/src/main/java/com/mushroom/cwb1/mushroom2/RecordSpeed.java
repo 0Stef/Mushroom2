@@ -18,7 +18,6 @@ public class RecordSpeed extends AppCompatActivity {
     TextView succes;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -85,5 +85,4 @@
                 android:value="com.mushroom.cwb1.mushroom2.Challenges" />
         </activity>
     </application>
-
 </manifest>
