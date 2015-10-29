@@ -1,41 +1,33 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-public class Homescreen extends AppCompatActivity {
+
+public class Login_screen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homescreen);
 
-        ImageButton mpbutton = (ImageButton)findViewById(R.id.button4);
 
-        mpbutton.setOnClickListener(
+        setContentView(R.layout.activity_login_screen);
+
+        Button loginbutton = (Button)findViewById(R.id.button);
+
+
+        loginbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                        Intent i = new Intent(getApplicationContext(), Homescreen.class);
                         startActivity(i);
-
-                    }
-                }
-        );
-
-        Button ch1button = (Button)findViewById(R.id.button3);
-
-        ch1button.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), Challenges.class);
-                        startActivity(i);
-
                     }
                 }
         );
@@ -45,7 +37,7 @@ public class Homescreen extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
+        getMenuInflater().inflate(R.menu.menu_login_screen, menu);
         return true;
     }
 
@@ -64,3 +56,4 @@ public class Homescreen extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

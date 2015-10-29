@@ -6,46 +6,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
-public class Homescreen extends AppCompatActivity {
+public class Challenges extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homescreen);
-
-        ImageButton mpbutton = (ImageButton)findViewById(R.id.button4);
-
-        mpbutton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                        startActivity(i);
-
-                    }
-                }
-        );
-
-        Button ch1button = (Button)findViewById(R.id.button3);
-
-        ch1button.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), Challenges.class);
-                        startActivity(i);
-
-                    }
-                }
-        );
-
+        setContentView(R.layout.activity_challenges);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
+        getMenuInflater().inflate(R.menu.menu_challenges, menu);
         return true;
     }
 
@@ -63,4 +36,23 @@ public class Homescreen extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void button5(View view) {
+        Intent intent = new Intent(this, recordAcceleration.class);
+        startActivity(intent);
+
+    }
+
+    public void button6(View view) {
+        Intent intent2 = new Intent(this, RecordSpeed.class);
+        startActivity(intent2);
+
+    }
+
+    public void button7(View view) {
+        Intent intent3 = new Intent(this, RecordMagneticField.class);
+        startActivity(intent3);
+    }
+
+
 }

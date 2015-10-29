@@ -1,12 +1,44 @@
 <resources>
     <string name="app_name">Mushroom</string>
-    <string name="action_settings">Settings</string>
 
     // strings voor homescreen
     <string name="title_activity_homescreen">Homescreen</string>
     <string name="optionalbutton">Optional button</string>
     <string name="challenges">Challenges</string>
     <string name="settings">MAP</string>
-    <string name="title_activity_maps">Map</string>
 
+    <string name="title_activity_login_screen">Login_screen</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">Mushroom</string>
+    <string name="mail">Enter your email address</string>
+    <string name="password">Enter your password</string>
+    <string name="loginbutton">Log in</string>
+
+
+    <string name="title_activity_challenges">Challenges</string>
+    <string name="challengestitle">Challenges</string>
+    <string name="gethighestacceleration">Get highest acceleration</string>
+    <string name="challenge2">Get average speed over 20 km/h</string>
+    <string name="challenge3">Drive only north for 1 km</string>
+    <string name="getstartedch1">Start challenge</string>
+    <string name="getstartedch2">Start challenge</string>
+    <string name="getstartedch3">Start challenge</string>
+    <string name="title_activity_main_dbactivity">MainDBactivity</string>
+    <string name="title_activity_data_base_handler">DataBaseHandler</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_record_acceleration">recordAcceleration</string>
+    <string name="button_stop">Stop</string>
+    <string name="Versnelling">Versnelling: </string>
+    <string name="acceleration_result_text"></string>
+    <string name="button_start">Start</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_record_speed">RecordSpeed</string>
+
+    <string name="title_activity_record_magnetic_field">RecordMagneticField</string>
+    <string name="Windrichting">Windrichting: </string>
+    <string name="noord">Noorden</string>
+    <string name="oost">Oosten</string>
+    <string name="zuid">Zuiden</string>
+    <string name="west">Westen</string>
 </resources>
