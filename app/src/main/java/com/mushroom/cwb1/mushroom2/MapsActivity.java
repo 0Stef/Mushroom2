@@ -1,12 +1,14 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -54,13 +56,17 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
+
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        PolylineOptions lijn = new PolylineOptions()
+                .add(new LatLng(50.8671753, 4.7084025), new LatLng(50.89, 4.72),new LatLng(50.85, 4.72))
+                .width(5)
+                .color(Color.RED);
+        mMap.addPolyline(lijn);
+
+        LatLng midden = new LatLng(50.89, 4.72);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(midden, 12.0f));
+
     }
 }
