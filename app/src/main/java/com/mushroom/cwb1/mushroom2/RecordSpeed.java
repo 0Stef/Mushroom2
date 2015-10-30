@@ -1,8 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
-import android.app.Activity;
 import android.content.Context;
-import android.hardware.Sensor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,35 +16,7 @@ public class RecordSpeed extends AppCompatActivity {
     TextView snelheid;
     TextView succes;
     private LocationManager locationManager;
-
-    LocationListener locationListener = new LocationListener() {
-
-        public void onLocationChanged(Location location) {
-            float speed = location.getSpeed();
-            double speedkmh = speed*3.6;
-            snelheid.setText("Snelheid : " + speedkmh);
-            if (speedkmh >= 20){
-                succes.setVisibility(View.VISIBLE);
-            }
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            Toast.makeText(RecordSpeed.this, "onStatusChanged", Toast.LENGTH_SHORT).show();
-        }
-
-        public void onProviderEnabled(String provider) {
-
-            Toast.makeText(RecordSpeed.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
-
-        }
-
-        public void onProviderDisabled(String provider) {
-
-            Toast.makeText(RecordSpeed.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
-
-        }
-    };
+    private LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +30,35 @@ public class RecordSpeed extends AppCompatActivity {
 
     public void clickStart(View view){
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
 
+            public void onLocationChanged(Location location) {
+                float speed = location.getSpeed();
+                double speedkmh = speed*3.6;
+                snelheid.setText("Snelheid : " + speedkmh);
+                if (speedkmh >= 20){
+                    succes.setVisibility(View.VISIBLE);
+                    locationManager.removeUpdates(locationListener);
+                }
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                Toast.makeText(RecordSpeed.this, "onStatusChanged", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onProviderEnabled(String provider) {
+
+                Toast.makeText(RecordSpeed.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
+
+            }
+
+            public void onProviderDisabled(String provider) {
+
+                Toast.makeText(RecordSpeed.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
+
+            }
+        };
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
