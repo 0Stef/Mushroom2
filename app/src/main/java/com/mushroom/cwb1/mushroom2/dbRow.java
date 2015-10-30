@@ -19,6 +19,7 @@ public class dbRow {
     private float Magnetic_yValue;
     private float Magnetic_zValue;
 
+
     public dbRow() {
         //Nothing here.
     }

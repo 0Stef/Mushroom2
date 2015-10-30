@@ -21,6 +21,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
     DataBaseHandler2 handler;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
