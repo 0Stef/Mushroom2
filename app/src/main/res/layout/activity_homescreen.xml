@@ -19,32 +19,23 @@
         android:textColor="#000000"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:text="@string/optionalbutton"
         android:id="@+id/button2"
         android:layout_alignTop="@+id/button3"
-        android:layout_toLeftOf="@+id/button3"
         android:layout_toStartOf="@+id/button3" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:text="@string/challenges"
         android:id="@+id/button3"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DATABASE"
-        android:id="@+id/database"
-        android:layout_above="@+id/button2"
-        android:layout_toRightOf="@+id/button2"
-        android:layout_alignRight="@+id/button3"
-        android:layout_alignEnd="@+id/button3" />
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignEnd="@+id/button4"
+        android:layout_marginRight="57dp"
+        android:layout_marginEnd="57dp" />
 
     <ImageButton
         android:text="@string/settings"
