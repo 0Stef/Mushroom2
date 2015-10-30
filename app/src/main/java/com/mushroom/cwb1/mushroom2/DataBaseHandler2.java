@@ -14,20 +14,21 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "GeneralDatabase2.db";
 
 
-    private static final String CREATE = "CREATE TABLE ";
-    private static final String START_COLUMNS = " (";
+    private static final String CREATE = "CREATE ";
+    private static final String START_COLUMNS = " ( ";
     private static final String STOP_COLUMNS = ");";
-    private static final String FLOAT = " REAL ";
-    private static final String LONG = " INTEGER ";
-    private static final String DOUBLE = " REAL ";
+    private static final String FLOAT = " REAL";
+    private static final String LONG = " INTEGER";
+    private static final String DOUBLE = " REAL";
     private static final String COMMA = ", ";
 
 
 
     // Algemene data
-    public static final String TABLE = "TABLE";
+    public static final String TABLE = "rides";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TIME = "TIME";
+    public static final String COLUMN_RIDE_ID = "ride_id";
+    public static final String COLUMN_TIME = "time";
 
 
     // Accelerometer data
@@ -57,7 +58,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         String db2querry = CREATE + TABLE + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
-                COLUMN_TIME + "TIMESTAMP" + COMMA +
+                COLUMN_RIDE_ID + " INTEGER" + COMMA +
+                COLUMN_TIME + " TIMESTAMP" + COMMA +
                 COLUMN_ACC_X + FLOAT + COMMA +
                 COLUMN_ACC_Y + FLOAT + COMMA +
                 COLUMN_ACC_Z + FLOAT + COMMA +
@@ -96,8 +98,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TIME, point.getMillisec());
 
+        values.put(COLUMN_RIDE_ID, point.getRide_id());
+        values.put(COLUMN_TIME, point.getMillisec());
         values.put(COLUMN_ACC_X, point.getAccelerometer_xValue());
         values.put(COLUMN_ACC_Y, point.getAccelerometer_yValue());
         values.put(COLUMN_ACC_Z, point.getAccelerometer_xValue());
@@ -112,6 +115,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         values.put(COLUMN_MAGN_Z, point.getMagnetic_zValue());
 
         db.insert(TABLE, null, values);
+
+        db.close();
     }
 
     public ArrayList<dbRow> getRows(Cursor cursor) {
@@ -123,6 +128,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
                 dbRow row = new dbRow();
 
                 row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+                row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
                 row.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
 
                 row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));

@@ -75,8 +75,9 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             float versnellingy = event.values[1];
             float versnellingz = event.values[2] - g;
             acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
-            dbRow point = new dbRow(555555l,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f);
+            dbRow point = new dbRow(1,123456,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f);
             handler.addPoint(point);
+
 
         }
     }

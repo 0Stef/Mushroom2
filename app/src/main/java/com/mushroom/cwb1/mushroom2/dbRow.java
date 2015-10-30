@@ -4,6 +4,7 @@ public class dbRow {
 
 
     private int _id;
+    private int ride_id;
     private long millisec;
 
     private float Accelerometer_xValue;
@@ -24,12 +25,13 @@ public class dbRow {
         //Nothing here.
     }
 
-    public dbRow(int _id, long millisec,
+    public dbRow(int _id, int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
                  float velocity, double longitude, double latitude, float altitude,
                  float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue) {
 
         this._id = _id;
+        this.ride_id = ride_id;
         this.millisec = millisec;
 
         this.Accelerometer_xValue = Accelerometer_xValue;
@@ -47,11 +49,12 @@ public class dbRow {
 
     }
 
-    public dbRow(long millisec,
+    public dbRow(int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
                  float velocity, double longitude, double latitude, float altitude,
                  float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue) {
 
+        this.ride_id = ride_id;
         this.millisec = millisec;
 
         this.Accelerometer_xValue = Accelerometer_xValue;
@@ -76,6 +79,10 @@ public class dbRow {
     public int get_id() {
         return _id;
     }
+
+    public void setRide_id(int ride_id) {this.ride_id = ride_id;}
+
+    public int getRide_id() {return  ride_id;}
 
     public void setMillis(long millisec) {
         this.millisec = millisec;
@@ -167,5 +174,13 @@ public class dbRow {
     public float getMagnetic_zValue() {
         return Magnetic_zValue;
     }
+
+
+    @Override
+    public String toString() {
+        return "DataPoint: id="+ _id +" ride_id="+ride_id+" time="+millisec+" latitude="+latitude+" longitude="+longitude;
+    }
+
+
 }
 
