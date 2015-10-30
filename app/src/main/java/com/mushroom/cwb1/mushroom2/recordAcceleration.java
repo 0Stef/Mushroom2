@@ -1,5 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,12 +18,20 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
     private SensorManager mSensorManager;
     private Sensor mAcceleration;
 
+    DataBaseHandler2 handler;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_acceleration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        handler = new DataBaseHandler2(getApplicationContext());
+        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+
 
         acceleration = (TextView) findViewById(R.id.acceleration);
 
@@ -65,6 +74,9 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             float versnellingy = event.values[1];
             float versnellingz = event.values[2] - g;
             acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
+            dbRow point = new dbRow(555555l,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f);
+            handler.addPoint(point);
+
         }
     }
 
@@ -77,7 +89,10 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
     public void clickStop(View view){
         mSensorManager.unregisterListener(this);
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
-        result_acceleration.setText("Your highest acceleration is");
+        Cursor greatestvalue = handler.getGreatestValue("Accelerometer_xValue");
+        float showgreatestvalue = greatestvalue.getFloat(2);
+
+        result_acceleration.setText("Your highest acceleration is" + showgreatestvalue);
     }
 
     @Override

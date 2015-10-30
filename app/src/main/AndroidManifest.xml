@@ -40,7 +40,6 @@
             android:name=".Homescreen"
             android:label="@string/title_activity_homescreen" >
         </activity>
-
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
@@ -84,5 +83,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mushroom.cwb1.mushroom2.Challenges" />
         </activity>
+        <activity
+            android:name=".DataBaseHandler2"
+            android:label="@string/title_activity_data_base_handler2" >
+        </activity>
     </application>
+
 </manifest>

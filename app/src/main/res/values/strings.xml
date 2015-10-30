@@ -41,4 +41,5 @@
     <string name="oost">Oosten</string>
     <string name="zuid">Zuiden</string>
     <string name="west">Westen</string>
+    <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
 </resources>
