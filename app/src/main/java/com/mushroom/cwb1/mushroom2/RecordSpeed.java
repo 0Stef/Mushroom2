@@ -88,5 +88,4 @@ public class RecordSpeed extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
