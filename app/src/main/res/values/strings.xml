@@ -34,6 +34,8 @@
     <string name="button_start">Start</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_record_speed">RecordSpeed</string>
+    <string name="snelheid">Snelheid: </string>
+    <string name="succes">Succes!</string>
 
     <string name="title_activity_record_magnetic_field">RecordMagneticField</string>
     <string name="Windrichting">Windrichting: </string>
