@@ -2,6 +2,7 @@ package com.mushroom.cwb1.mushroom2;
 
 public class dbRow {
 
+
     private int _id;
     private long millisec;
 

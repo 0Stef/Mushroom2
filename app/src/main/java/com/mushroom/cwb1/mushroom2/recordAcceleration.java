@@ -29,6 +29,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         setSupportActionBar(toolbar);
 
 
+
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 

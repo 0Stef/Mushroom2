@@ -26,6 +26,7 @@ public class RecordSpeed extends AppCompatActivity {
         succes = (TextView) findViewById(R.id.succes);
         snelheid = (TextView) findViewById(R.id.snelheid);
         succes.setVisibility(View.INVISIBLE);
+
     }
 
     public void clickStart(View view){

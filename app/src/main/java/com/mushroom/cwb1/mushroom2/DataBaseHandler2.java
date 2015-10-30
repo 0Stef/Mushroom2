@@ -22,6 +22,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final String COMMA = ", ";
 
 
+
     // Algemene data
     public static final String TABLE = "TABLE";
     public static final String COLUMN_ID = "_id";
