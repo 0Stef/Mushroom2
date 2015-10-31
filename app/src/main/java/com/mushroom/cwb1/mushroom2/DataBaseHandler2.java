@@ -14,7 +14,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "GeneralDatabase2.db";
 
 
-    private static final String CREATE = "CREATE ";
+    private static final String CREATE = "CREATE TABLE ";
     private static final String START_COLUMNS = " ( ";
     private static final String STOP_COLUMNS = ");";
     private static final String FLOAT = " REAL";
