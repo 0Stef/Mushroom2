@@ -4,15 +4,14 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=E1:4C:CB:18:84:BB:43:55:B5:BA:A6:18:16:63:04:AA:7C:57:72:79%3Bcom.mushroom.cwb1.mushroom2
-
+https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B4:C4:B3:D1:C9:B4:00:A5:FC:F6:A7:DE:55:1D:67:93:C3:2B:52:CB%3Bcom.mushroom.cwb1.mushroom2
     You can also add your credentials to an existing key, using this line:
-    E1:4C:CB:18:84:BB:43:55:B5:BA:A6:18:16:63:04:AA:7C:57:72:79;com.mushroom.cwb1.mushroom2
+    B4:C4:B3:D1:C9:B4:00:A5:FC:F6:A7:DE:55:1D:67:93:C3:2B:52:CB;cwb1.myapplication
 
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
-        AIzaSyBBb2fCqotvmMVuPF94mAaAeD1Lwe04ypU
+        AIzaSyBWE9o3ZV6ezHP8FarI3d3DEzj8uSoNi0U
     </string>
 </resources>
