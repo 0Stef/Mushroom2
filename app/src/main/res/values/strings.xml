@@ -3,7 +3,7 @@
 
     // strings voor homescreen
     <string name="title_activity_homescreen">Homescreen</string>
-    <string name="optionalbutton">Optional button</string>
+    <string name="optionalbutton">Achievements</string>
     <string name="challenges">Challenges</string>
     <string name="settings">MAP</string>
 
@@ -18,7 +18,7 @@
     <string name="title_activity_challenges">Challenges</string>
     <string name="challengestitle">Challenges</string>
     <string name="gethighestacceleration">Get highest acceleration</string>
-    <string name="challenge2">Get average speed over 20 km/h</string>
+    <string name="challenge2">Get speed over 20 km/h</string>
     <string name="challenge3">Drive only north for 1 km</string>
     <string name="getstartedch1">Start challenge</string>
     <string name="getstartedch2">Start challenge</string>
