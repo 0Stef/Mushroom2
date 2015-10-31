@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DataBaseHandler2 extends SQLiteOpenHelper {
 
@@ -145,6 +147,39 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         }
 
         return list;
+    }
+
+    public List getAllDataPoints() {
+        List datapoints = new LinkedList();
+
+        String query = "SELECT * FROM "+TABLE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        dbRow dataPoint = null;
+        if (cursor.moveToFirst()){
+            do {
+                dataPoint = new dbRow();
+                dataPoint.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
+                dataPoint.setMillis(cursor.getInt(cursor.getColumnIndex(COLUMN_TIME)));
+                dataPoint.setAccelerometer_xValue(cursor.getLong(cursor.getColumnIndex(COLUMN_ACC_X)));
+                dataPoint.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+                dataPoint.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
+                dataPoint.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
+
+                dataPoint.setLongitude(cursor.getLong(cursor.getColumnIndex(COLUMN_ACC_X)));
+                dataPoint.setLatitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+                dataPoint.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
+                //TODO rest aanvullen
+
+
+
+                datapoints.add(dataPoint);
+
+            } while (cursor.moveToNext());
+        }
+        return datapoints;
     }
 
     public dbRow getRow(Cursor cursor) {

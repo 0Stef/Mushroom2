@@ -17,6 +17,7 @@
 
     <string name="title_activity_challenges">Challenges</string>
     <string name="challengestitle">Challenges</string>
+    <string name="rideActivityButton">Ride modus</string>
     <string name="gethighestacceleration">Get highest acceleration</string>
     <string name="challenge2">Get speed over 20 km/h</string>
     <string name="challenge3">Drive only north for 1 km</string>
@@ -44,5 +45,7 @@
     <string name="zuid">Zuiden</string>
     <string name="west">Westen</string>
     <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
+    <string name="title_activity_ride">RideActivity</string>
+    <string name="titelRideActivity">ride modus</string>
 
 </resources>

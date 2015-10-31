@@ -1,6 +1,5 @@
 package com.mushroom.cwb1.mushroom2;
 
-import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -91,10 +90,11 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
     public void clickStop(View view){
         mSensorManager.unregisterListener(this);
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
-        Cursor greatestvalue = handler.getGreatestValue("Accelerometer_xValue");
-        float showgreatestvalue = greatestvalue.getFloat(2);
 
-        result_acceleration.setText("Your highest acceleration is" + showgreatestvalue);
+        //TODO hier staat nog een foutje
+        //Cursor greatestvalue = handler.getGreatestValue("Accelerometer_xValue");
+        //float showgreatestvalue = greatestvalue.getFloat(cursor.getColumnIndex(COLUMN_ACC_X));
+        //result_acceleration.setText("Your highest acceleration is" + showgreatestvalue);
     }
 
     @Override

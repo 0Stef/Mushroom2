@@ -8,7 +8,7 @@
     android:background="#FFBF6A">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="MUSHROOM"
@@ -19,23 +19,34 @@
         android:textColor="#000000"/>
 
     <Button
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rideActivityButton"
+        android:id="@+id/rideActivityButton"
+        android:layout_below="@+id/button4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/optionalbutton"
         android:id="@+id/button2"
-        android:layout_alignTop="@+id/button3"
-        android:layout_toStartOf="@+id/button3" />
+        android:layout_below="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/challenges"
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button4"
-        android:layout_alignEnd="@+id/button4"
-        android:layout_marginRight="57dp"
-        android:layout_marginEnd="57dp" />
+        android:layout_below="@+id/rideActivityButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/rideActivityButton"
+        android:layout_alignEnd="@+id/rideActivityButton" />
 
     <ImageButton
         android:text="@string/settings"

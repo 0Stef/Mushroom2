@@ -40,6 +40,18 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
+        Button rideActivitybutton = (Button)findViewById(R.id.rideActivityButton);
+
+        rideActivitybutton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), RideActivity.class);
+                        startActivity(i);
+
+                    }
+                }
+        );
+
     }
 
     @Override
