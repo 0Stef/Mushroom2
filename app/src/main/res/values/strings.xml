@@ -20,9 +20,7 @@
     <string name="gethighestacceleration">Get highest acceleration</string>
     <string name="challenge2">Get speed over 20 km/h</string>
     <string name="challenge3">Drive only north for 1 km</string>
-    <string name="getstartedch1">Start challenge</string>
-    <string name="getstartedch2">Start challenge</string>
-    <string name="getstartedch3">Start challenge</string>
+    <string name="getstartedch">Start challenge</string>
     <string name="title_activity_main_dbactivity">MainDBactivity</string>
     <string name="title_activity_data_base_handler">DataBaseHandler</string>
 
