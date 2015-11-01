@@ -7,16 +7,14 @@
     tools:context="cwb1.mushroom.com.Homescreen"
     android:background="#FFBF6A">
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="MUSHROOM"
-        android:id="@+id/textView4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:textColor="#000000"/>
+        android:text="@string/settings"
+        android:id="@+id/button4"
+        android:background="#FAA460"
+        android:layout_marginBottom="10dp"
+        />
 
     <Button
         android:layout_width="match_parent"
@@ -24,18 +22,9 @@
         android:text="@string/rideActivityButton"
         android:id="@+id/rideActivityButton"
         android:layout_below="@+id/button4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/optionalbutton"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:background="#FAA460"
+        android:layout_marginBottom="10dp"
+        />
 
     <Button
         android:layout_width="match_parent"
@@ -43,22 +32,18 @@
         android:text="@string/challenges"
         android:id="@+id/button3"
         android:layout_below="@+id/rideActivityButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/rideActivityButton"
-        android:layout_alignEnd="@+id/rideActivityButton" />
-
-    <ImageButton
-        android:text="@string/settings"
-        android:contentDescription="@string/settings"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/textView4"
-        android:scaleType="fitStart"
-        android:src="@drawable/ic_maps"
-        android:padding="3dp"
         android:background="#FAA460"
-        android:id="@+id/button4">
-    </ImageButton>
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/optionalbutton"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button3"
+        android:background="#FAA460"
+        />
+
 
 </RelativeLayout>

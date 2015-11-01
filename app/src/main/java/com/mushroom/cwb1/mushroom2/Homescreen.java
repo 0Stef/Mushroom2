@@ -16,7 +16,7 @@ public class Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
-        ImageButton mpbutton = (ImageButton)findViewById(R.id.button4);
+        Button mpbutton = (Button)findViewById(R.id.button4);
 
         mpbutton.setOnClickListener(
                 new Button.OnClickListener() {
