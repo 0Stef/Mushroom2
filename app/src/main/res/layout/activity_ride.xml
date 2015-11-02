@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.mushroom.cwb1.mushroom2.RideActivity">
+    tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
+    android:focusableInTouchMode="true" >
 
     <TextView android:text="@string/titelRideActivity" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +18,6 @@
         android:text="Snelheid"
         android:id="@+id/snelheid"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:layout_below="@+id/titleRideActivity"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -28,7 +28,6 @@
         android:text="Hoogte"
         android:id="@+id/hoogte"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:layout_below="@+id/snelheid"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -39,7 +38,6 @@
         android:text="Tijd"
         android:id="@+id/tijd"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:layout_below="@+id/hoogte"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -50,7 +48,6 @@
         android:text="Breedtegraad"
         android:id="@+id/breedtegraad"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:layout_below="@+id/tijd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -61,7 +58,6 @@
         android:text="Lengtegraad"
         android:id="@+id/lengtegraad"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:layout_below="@+id/breedtegraad"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -69,11 +65,64 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Punten"
+        android:text="Magnetisch veld"
+        android:id="@+id/magneticfield"
+        android:textSize="16sp"
+        android:layout_below="@+id/lengtegraad"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Versnelling"
+        android:id="@+id/acceleration"
+        android:textSize="16sp"
+        android:layout_below="@+id/magneticfield"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="laatste punt"
         android:id="@+id/punten"
-        android:textSize="10sp"
-        android:textAlignment="center"
+        android:textSize="12sp"
+        android:gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/startrecordingbutton"
+        android:textSize="15sp"
+        android:background="#14ff2d"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:onClick="startrecording"
+        android:layout_above="@+id/stoprecordingbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:id="@+id/stoprecordingbutton"
+        android:textSize="15sp"
+        android:background="#ff0046"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:onClick="stoprecording"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 
 </RelativeLayout>

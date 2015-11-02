@@ -77,8 +77,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        deleteDataBase(db);
-        onCreate(db);
+//        deleteDataBase(db);
+//        onCreate(db);
     }
 
     public void closeDataBase() {
@@ -161,20 +161,19 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         if (cursor.moveToFirst()){
             do {
                 dataPoint = new dbRow();
+                dataPoint.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
                 dataPoint.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-                dataPoint.setMillis(cursor.getInt(cursor.getColumnIndex(COLUMN_TIME)));
-                dataPoint.setAccelerometer_xValue(cursor.getLong(cursor.getColumnIndex(COLUMN_ACC_X)));
+                dataPoint.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
+                dataPoint.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
                 dataPoint.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
                 dataPoint.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
                 dataPoint.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
-
-                dataPoint.setLongitude(cursor.getLong(cursor.getColumnIndex(COLUMN_ACC_X)));
-                dataPoint.setLatitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
-                dataPoint.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
-                //TODO rest aanvullen
-
-
-
+                dataPoint.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
+                dataPoint.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_ALT)));
+                dataPoint.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
+                dataPoint.setMagnetic_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
+                dataPoint.setMagnetic_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+                dataPoint.setMagnetic_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
                 datapoints.add(dataPoint);
 
             } while (cursor.moveToNext());

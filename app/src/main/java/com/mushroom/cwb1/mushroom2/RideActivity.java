@@ -1,6 +1,10 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -8,18 +12,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.fitness.data.DataPoint;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class RideActivity extends AppCompatActivity {
+public class RideActivity extends AppCompatActivity implements SensorEventListener {
 
 
     TextView snelheid;
@@ -27,6 +33,28 @@ public class RideActivity extends AppCompatActivity {
     TextView tijd;
     TextView breedtegraad;
     TextView lengtegraad;
+    TextView magneticField;
+    TextView accceleration;
+
+    private SensorManager mSensorManager;
+
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
+
+    //TODO uit db laatste ride_id opvragen en met 1ophogen
+    private int current_ride_id;
+
+
+    private long time;
+    private float accx;
+    private float accy;
+    private float accz;
+    private float magnfx;
+    private float magnfy;
+    private float magnfz;
+
+    private SimpleDateFormat sdf;
 
     TextView punten;
 
@@ -38,7 +66,6 @@ public class RideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
-
 
 
         handler = new DataBaseHandler2(getApplicationContext());
@@ -55,30 +82,61 @@ public class RideActivity extends AppCompatActivity {
         tijd = (TextView) findViewById(R.id.tijd);
         breedtegraad = (TextView) findViewById(R.id.breedtegraad);
         lengtegraad = (TextView) findViewById(R.id.lengtegraad);
+        magneticField = (TextView) findViewById(R.id.magneticfield);
+        accceleration = (TextView) findViewById(R.id.acceleration);
+
+
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
 
 
+
+        sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
+        sdf.setTimeZone(TimeZone.getDefault());
+
+    }
+
+    public void startrecording(View view){
+
+        Toast.makeText(RideActivity.this, "start", Toast.LENGTH_SHORT).show();
+
+        Sensor mAcceleration;
+        Sensor mMagneticfield;
+
+        //TODO sensor updatefrequentie verlagen
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
+            mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            mSensorManager.registerListener(this,mAcceleration,1000000);
+        }
+        else{
+            //TODO iets verzinnen als sensor niet aanwezig is
+        }
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null){
+            mMagneticfield = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+            mSensorManager.registerListener(this,mMagneticfield,1000000);
+        }
+        else{
+        }
 
         // Acquire a reference to the system Location Manager
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-// Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        // Define a listener that responds to location updates
+        locationListener = new LocationListener() {
 
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
 
+
                 Toast.makeText(RideActivity.this, "onLocationChanged", Toast.LENGTH_SHORT).show();
 
-                Date dateUnformatted = new Date(location.getTime());
-                SimpleDateFormat sdf;
-                sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
-                sdf.setTimeZone(TimeZone.getDefault());
+                time = location.getTime();
+                Date dateUnformatted = new Date(time);
                 String date = sdf.format(dateUnformatted);
 
                 float speed = location.getSpeed();
                 double altitude = location.getAltitude();
-
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
@@ -89,23 +147,12 @@ public class RideActivity extends AppCompatActivity {
                 lengtegraad.setText("Lengtegraad : " + longitude);
 
 
-//TODO checken met db
-                int current_ride_id = 1;
-
-                float acc_x = 0;
-                float acc_y = 0;
-                float acc_z = 0;
-
-                float magnf_x = 0;
-                float magnf_y = 0;
-                float magnf_z = 0;
-
-                dbRow punt = new dbRow(current_ride_id,location.getTime(),acc_x,acc_y,acc_z,speed,longitude,altitude,0f,magnf_x,magnf_y,magnf_z);
+                dbRow punt = new dbRow(current_ride_id,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz);
                 handler.addPoint(punt);
 
-                List<DataPoint> list = handler.getAllDataPoints();
-                for (DataPoint point : list) {
-                    punten.setText("Punt"+point.getId()+": geeft "+sdf.format(point.getTime())+" en "+point.getLongitude());
+                List<dbRow> list = handler.getAllDataPoints();
+                for (dbRow point : list) {
+                    punten.setText("Punt "+point.get_id()+" en ride id "+point.getRide_id()+" op "+sdf.format(point.getMillisec())+" coordinaten "+point.getLongitude()+","+point.getLatitude()+" snelheid "+point.getVelocity());
                 }
 
 
@@ -153,6 +200,44 @@ public class RideActivity extends AppCompatActivity {
 
 
     }
+
+
+    public void stoprecording(View view){
+
+        Toast.makeText(RideActivity.this, "stop", Toast.LENGTH_SHORT).show();
+
+        mSensorManager.unregisterListener(this);
+        locationManager.removeUpdates(locationListener);
+
+    }
+
+
+    @Override
+    public final void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do something here if sensor accuracy changes.
+    }
+
+
+    @Override
+    public final void onSensorChanged(SensorEvent event){
+
+
+        if(event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD) {
+            magnfx = event.values[0];
+            magnfy = event.values[1];
+            magnfz = event.values[2];
+            magneticField.setText("Magnetisch veld is: " + magnfx + " x " + magnfy + " y " + magnfz + " z ");
+        }
+
+        if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+            accx = event.values[0];
+            accy = event.values[1];
+            accz = event.values[2];
+            accceleration.setText("Versnelling: " + accx + " x " + accy + " y " + accz + " z ");
+        }
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
