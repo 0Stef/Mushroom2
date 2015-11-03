@@ -14,6 +14,9 @@ public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,4 +72,15 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(midden, 12.0f));
 
     }
+
+    public void drawline(double prev_lat,double prev_long,double curr_lat,double curr_long) {
+
+        PolylineOptions line = new PolylineOptions()
+                .add(new LatLng(prev_lat,prev_long), new LatLng(curr_lat,curr_long))
+                .width(5)
+                .color(Color.BLUE);
+        mMap.addPolyline(line);
+
+    }
 }
+

@@ -40,7 +40,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
 
     public void clickStart(View view){
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         mSensorManager.registerListener(this, mAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
     }
@@ -74,6 +74,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             float versnellingy = event.values[1];
             float versnellingz = event.values[2] - g;
             acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
+
             dbRow point = new dbRow(1,123456,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f);
             handler.addPoint(point);
 
@@ -92,9 +93,11 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
 
         //TODO hier staat nog een foutje
-        //Cursor greatestvalue = handler.getGreatestValue("Accelerometer_xValue");
-        //float showgreatestvalue = greatestvalue.getFloat(cursor.getColumnIndex(COLUMN_ACC_X));
-        //result_acceleration.setText("Your highest acceleration is" + showgreatestvalue);
+        float greatestvalue = handler.getGreatestValue("Accelerometer_xValue");
+        //float showgreatestvalue = greatestvalue.getFloat(greatestvalue.getColumnIndex("Accelerometer_xValue"));
+        result_acceleration.setText("Your highest acceleration is" + greatestvalue);
+
+
     }
 
     @Override
