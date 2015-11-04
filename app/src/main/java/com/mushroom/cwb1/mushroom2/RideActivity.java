@@ -232,7 +232,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
             accx = event.values[0];
             accy = event.values[1];
-            accz = event.values[2];
+            accz = event.values[2]-10;
             accceleration.setText("Versnelling: " + accx + " x " + accy + " y " + accz + " z ");
         }
 
