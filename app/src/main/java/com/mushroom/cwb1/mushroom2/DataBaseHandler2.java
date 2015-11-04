@@ -52,7 +52,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public static final String COLUMN_MAGN_Z = "Magnetic_zValue";
 
     public DataBaseHandler2(Context context) {
-        super(context,DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     //FIXME Wat als bepaalde sensoren niet ondersteund worden?
@@ -181,6 +181,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return datapoints;
     }
 
+
+
     public dbRow getRow(Cursor cursor) {
         ArrayList<dbRow> list = getRows(cursor);
 
@@ -205,14 +207,16 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getGreatestValue(String column) {
+    public float getGreatestValue(String column) {
         //SELECT * FROM TABLE WHERE COLUMN = (SELECT MAX(COLUMN) FROM TABLE)
         String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
 
-        return cursor;
+        float highest_value = cursor.getFloat(3);
+
+        return highest_value;
     }
 
     public Cursor getAllMeasurements(String table) {
