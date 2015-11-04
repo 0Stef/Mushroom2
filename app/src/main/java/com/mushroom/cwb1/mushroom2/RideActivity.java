@@ -1,6 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -16,7 +17,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.support.v4.app.FragmentActivity;
+
 import com.google.android.gms.fitness.data.DataPoint;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,6 +35,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class RideActivity extends AppCompatActivity implements SensorEventListener {
+
+    private GoogleMap mMap;
 
 
     TextView snelheid;
@@ -54,6 +65,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float magnfy;
     private float magnfz;
 
+    private LatLng lastPoint;
+    private List<LatLng> gpsPoints;
+    private Polyline route;
+
     private SimpleDateFormat sdf;
 
     TextView punten;
@@ -67,6 +82,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+        setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
@@ -94,6 +110,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
         sdf.setTimeZone(TimeZone.getDefault());
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
     }
 
     public void startrecording(View view){
@@ -145,6 +167,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 hoogte.setText("Hoogte : " + altitude);
                 breedtegraad.setText("Breedtegraad : " + latitude);
                 lengtegraad.setText("Lengtegraad : " + longitude);
+
+                lastPoint = new LatLng(latitude,longitude);
+
+                gpsPoints = route.getPoints();
+                gpsPoints.add(lastPoint);
+                route.setPoints(gpsPoints);
+
+                //TODO zoom zodat alles in beeld is zie http://stackoverflow.com/questions/5114710/android-setting-zoom-level-in-google-maps-to-include-all-marker-points
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 20.0f));
+
 
 
                 dbRow punt = new dbRow(current_ride_id,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz);
@@ -260,4 +292,35 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
+
+    private void setUpMap() {
+
+        //mPolylineOptions.width(5).color(Color.BLUE);
+        //route = mMap.addPolyline(mPolylineOptions);
+
+        PolylineOptions mPolylineOptions = new PolylineOptions();
+        mPolylineOptions.width(5).color(Color.BLUE);
+        route = mMap.addPolyline(mPolylineOptions);
+
+
+        //TODO HAAL LAATSTE PUNT UIT DB
+        LatLng lastPointVisited = new LatLng(50.8671062,4.708445);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPointVisited, 10.0f));
+
+    }
+
+
 }
