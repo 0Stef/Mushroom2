@@ -1,4 +1,4 @@
-package com.mushroom.cwb1.mushroom2;
+package cwb1.mushroom.com.mushroom;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DataBaseHandler2 extends SQLiteOpenHelper {
 
@@ -123,69 +121,62 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     public LinkedList getRows(Cursor cursor) {
 
-        List list = new LinkedList();
+        LinkedList list = new LinkedList();
 
         if (cursor.moveToFirst()) {
             do {
-                dbRow row = new dbRow();
-
-                row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
-                row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-                row.setMillisec(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
-
-                row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
-                row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
-                row.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
-
-                row.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
-                row.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT)));
-                row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
-                row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
-
+                dbRow row = setRow(cursor);
                 list.add(row);
             } while (cursor.moveToNext());
         }
 
         return list;
     }
-    
+
     public dbRow getRow(Cursor cursor) {
-        
+
         if (cursor.moveToFirst()) {
-            dbRow row = new dbRow();
-
-            row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
-            row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-            row.setMillisec(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
-
-            row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
-            row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
-            row.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
-
-            row.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
-            row.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT)));
-            row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
-            row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
-            
+            dbRow row = setRow(cursor);
             return row;
         } else {
             return new dbRow();
         }
     }
-    
-    //Deze functie heeft strikt genomen geen nut.
-    public LinkedList getAllDataPoints() {
-        List list = getRows(getAllMeasurements);
-        
-        return list;
-    }
-    
-    //Deze functie heeft strikt genomen geen nut.
-    public dbRow getGreatestValue(String column) {
-        dbRow row = getRow(getGreatestValue(column));
+
+    private dbRow setRow(Cursor cursor) {
+        dbRow row = new dbRow();
+
+        row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+        row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
+        row.setMillisec(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
+
+        row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
+        row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+        row.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
+
+        row.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
+        row.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT)));
+        row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
+        row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
 
         return row;
     }
+
+    // Prefabricated functions
+
+    public LinkedList getAllDataPoints() {
+        LinkedList list = getRows(getAll());
+
+        return list;
+    }
+
+    public dbRow getGreatestValue(String column) {
+        dbRow row = getRow(getGreatest(column));
+
+        return row;
+    }
+
+    // Searchquery
 
     public Cursor customSearch(String searchQuery) {
 
@@ -201,8 +192,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         return cursor;
     }
-    
-    public cursor getGreatestValue(String column) {
+
+    public Cursor getGreatest(String column) {
         //SELECT * FROM TABLE WHERE COLUMN = (SELECT MAX(COLUMN) FROM TABLE)
         String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")";
 
@@ -213,7 +204,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getAllMeasurements() {
+    public Cursor getAll() {
         String searchQuery = "SELECT * FROM " + TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -223,7 +214,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getAllMeasurementsAfter(long millisec) {
+    public Cursor getAllAfter(long millisec) {
         String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + COLUMN_TIME + " > " + millisec;
 
         SQLiteDatabase db = this.getReadableDatabase();
