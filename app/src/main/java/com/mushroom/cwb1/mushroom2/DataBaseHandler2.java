@@ -182,7 +182,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     
     //Deze functie heeft strikt genomen geen nut.
     public dbRow getGreatestValue(String column) {
-        dbRow row = getRow(getGreatestValue(column);
+        dbRow row = getRow(getGreatestValue(column));
 
         return row;
     }
