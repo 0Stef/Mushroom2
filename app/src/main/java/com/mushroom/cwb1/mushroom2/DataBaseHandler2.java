@@ -1,4 +1,4 @@
-package cwb1.mushroom.com.mushroom;
+package com.mushroom.cwb1.mushroom2;
 
 import android.content.ContentValues;
 import android.content.Context;
