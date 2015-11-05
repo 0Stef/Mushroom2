@@ -131,7 +131,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
                 row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
                 row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-                row.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
+                row.setMillisec(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
 
                 row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
                 row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
@@ -156,7 +156,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
             row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
             row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-            row.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
+            row.setMillisec(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
 
             row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
             row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
