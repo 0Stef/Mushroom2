@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     DataBaseHandler2 handler;
 
+    Button startrecordingbutton;
+    Button pauserecordingbutton;
+    Button stoprecordingbutton;
+
 
 
     @Override
@@ -117,6 +122,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void startrecording(View view){
+
+        startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+        startrecordingbutton.setVisibility(View.INVISIBLE);
+        pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+        pauserecordingbutton.setVisibility(View.VISIBLE);
+        stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
+        stoprecordingbutton.setVisibility(View.VISIBLE);
+
 
 
         Sensor mAcceleration;
@@ -224,13 +237,36 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    public void pauserecording(View view){
 
-    public void stoprecording(View view){
+        startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+        startrecordingbutton.setVisibility(View.VISIBLE);
+        pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+        pauserecordingbutton.setVisibility(View.INVISIBLE);
+        stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
+        stoprecordingbutton.setVisibility(View.INVISIBLE);
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
 
+
+
     }
+
+    public void stoprecording(View view){
+
+        startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+        startrecordingbutton.setVisibility(View.VISIBLE);
+        pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+        pauserecordingbutton.setVisibility(View.INVISIBLE);
+        stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
+        stoprecordingbutton.setVisibility(View.INVISIBLE);
+        mSensorManager.unregisterListener(this);
+        locationManager.removeUpdates(locationListener);
+
+    }
+
+
 
 
     @Override

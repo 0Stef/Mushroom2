@@ -98,7 +98,7 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start"
         android:id="@+id/startrecordingbutton"
@@ -110,8 +110,7 @@
         android:onClick="startrecording"
         android:layout_above="@id/map"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:visibility="visible" />
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -123,10 +122,8 @@
         android:gravity="center"
         android:textStyle="bold"
         android:padding="10dp"
-        android:onClick="stoprecording"
+        android:onClick="pauserecording"
         android:layout_above="@id/map"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible"
         android:layout_marginBottom="5dp"/>
 
     <Button
@@ -140,10 +137,9 @@
         android:textStyle="bold"
         android:padding="10dp"
         android:onClick="stoprecording"
-        android:layout_above="@id/map"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible"
-        android:layout_marginBottom="5dp"/>
+        android:layout_alignTop="@+id/startrecordingbutton"
+        android:layout_alignRight="@+id/startrecordingbutton"
+        android:layout_alignEnd="@+id/startrecordingbutton" />
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
