@@ -58,7 +58,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         String db2querry = CREATE + TABLE + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
                 COLUMN_RIDE_ID + INTEGER + COMMA +
-                COLUMN_TIME + " TIMESTAMP" + COMMA +
+                COLUMN_TIME + LONG + COMMA +
                 COLUMN_ACC_X + FLOAT + COMMA +
                 COLUMN_ACC_Y + FLOAT + COMMA +
                 COLUMN_ACC_Z + FLOAT + COMMA +
