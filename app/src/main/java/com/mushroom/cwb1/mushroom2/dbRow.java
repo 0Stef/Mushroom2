@@ -1,8 +1,9 @@
 package com.mushroom.cwb1.mushroom2;
 
+import java.util.Calendar;
+
 public class dbRow {
-
-
+    
     private int _id;
     private int ride_id;
     private long millisec;
@@ -25,30 +26,6 @@ public class dbRow {
         //Nothing here.
     }
 
-    public dbRow(int _id, int ride_id, long millisec,
-                 float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
-                 float velocity, double longitude, double latitude, float altitude,
-                 float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue) {
-
-        this._id = _id;
-        this.ride_id = ride_id;
-        this.millisec = millisec;
-
-        this.Accelerometer_xValue = Accelerometer_xValue;
-        this.Accelerometer_yValue = Accelerometer_yValue;
-        this.Accelerometer_zValue = Accelerometer_zValue;
-
-        this.velocity = velocity;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.altitude = altitude;
-
-        this.Magnetic_xValue = Magnetic_xValue;
-        this.Magnetic_yValue = Magnetic_yValue;
-        this.Magnetic_zValue = Magnetic_zValue;
-
-    }
-
     public dbRow(int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
                  float velocity, double longitude, double latitude, float altitude,
@@ -69,10 +46,16 @@ public class dbRow {
         this.Magnetic_xValue = Magnetic_xValue;
         this.Magnetic_yValue = Magnetic_yValue;
         this.Magnetic_zValue = Magnetic_zValue;
-
     }
-
-    public void set_id(int _id) {
+    
+    // General
+    
+    protected void set_id(int _id) {
+        /**
+         * Deze functie wordt alleen geacht gebruikt te worden door databasehandler. De desbetreffende _id
+         * wordt door databasehandler automatisch gegenereerd en opgeslagen. Deze waarde is default 0.
+         * Deze functie elders gebruiken zal waarschijnlijk tot problemen zorgen.
+         */
         this._id = _id;
     }
 
@@ -80,9 +63,18 @@ public class dbRow {
         return _id;
     }
 
-    public void setRide_id(int ride_id) {this.ride_id = ride_id;}
+    public void setRide_id(int ride_id) {
+        this.ride_id = ride_id;
+    }
 
-    public int getRide_id() {return  ride_id;}
+    public int getRide_id() {
+        return  ride_id;
+    }
+    
+    public void setMillisec() {
+        Calendar calendar = Calendar.getInstance();
+        this.millisec = calendar.getTimeInMillis();
+    }
 
     public void setMillis(long millisec) {
         this.millisec = millisec;
@@ -92,6 +84,7 @@ public class dbRow {
         return millisec;
     }
 
+    // Accelerometer
 
     public void setAccelerometer_xValue(float Accelerometer_xValue) {
         this.Accelerometer_xValue = Accelerometer_xValue;
@@ -116,7 +109,8 @@ public class dbRow {
     public float getAccelerometer_zValue() {
         return Accelerometer_zValue;
     }
-
+    
+    // GPS
 
     public void setVelocity(float velocity) {
         this.velocity = velocity;
@@ -149,7 +143,8 @@ public class dbRow {
     public float getAltitude() {
         return altitude;
     }
-
+    
+    // Magnetic
 
     public void setMagnetic_xValue(float Magnetic_xValue) {
         this.Magnetic_xValue = Magnetic_xValue;
@@ -175,12 +170,15 @@ public class dbRow {
         return Magnetic_zValue;
     }
 
-
+    // Other
+    
     @Override
     public String toString() {
-        return "DataPoint: id="+ _id +" ride_id="+ride_id+" time="+millisec+" latitude="+latitude+" longitude="+longitude;
+        return "DataPoint: id=" +  _id + 
+            " ride_id=" + ride_id + 
+            " time=" + millisec + 
+            " latitude=" + latitude + 
+            " longitude=" + longitude;
     }
-
-
 }
 
