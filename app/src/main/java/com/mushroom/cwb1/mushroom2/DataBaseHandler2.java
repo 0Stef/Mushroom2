@@ -75,8 +75,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        deleteDataBase(db);
-//        onCreate(db);
+        deleteDataBase(db);
+        onCreate(db);
     }
 
     public void closeDataBase() {
@@ -188,7 +188,6 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
-        db.close();
 
         return cursor;
     }
@@ -199,7 +198,6 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
-        db.close();
 
         return cursor;
     }
@@ -209,7 +207,6 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
-        db.close();
 
         return cursor;
     }
@@ -219,7 +216,6 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
-        db.close();
 
         return cursor;
     }

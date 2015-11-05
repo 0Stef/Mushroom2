@@ -91,8 +91,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         punten = (TextView) findViewById(R.id.punten);
 
 
-        Toast.makeText(RideActivity.this, "OnCreate", Toast.LENGTH_SHORT).show();
-
         snelheid = (TextView) findViewById(R.id.snelheid);
         hoogte = (TextView) findViewById(R.id.hoogte);
         tijd = (TextView) findViewById(R.id.tijd);
@@ -120,7 +118,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void startrecording(View view){
 
-        Toast.makeText(RideActivity.this, "start", Toast.LENGTH_SHORT).show();
 
         Sensor mAcceleration;
         Sensor mMagneticfield;
@@ -149,9 +146,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-
-
-                Toast.makeText(RideActivity.this, "onLocationChanged", Toast.LENGTH_SHORT).show();
 
                 time = location.getTime();
                 Date dateUnformatted = new Date(time);
@@ -191,9 +185,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                Toast.makeText(RideActivity.this, "onStatusChanged", Toast.LENGTH_SHORT).show();
-
 
                 /*
  OUT_OF_SERVICE if the provider is out of service,
@@ -235,8 +226,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     public void stoprecording(View view){
-
-        Toast.makeText(RideActivity.this, "stop", Toast.LENGTH_SHORT).show();
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
