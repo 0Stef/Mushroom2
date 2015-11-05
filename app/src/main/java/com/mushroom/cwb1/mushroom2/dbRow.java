@@ -76,7 +76,7 @@ public class dbRow {
         this.millisec = calendar.getTimeInMillis();
     }
 
-    public void setMillis(long millisec) {
+    public void setMillisec(long millisec) {
         this.millisec = millisec;
     }
 
