@@ -85,6 +85,8 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         }
     }
 
+
+
     @Override
     protected void onPause() {
         super.onPause();

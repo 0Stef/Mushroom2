@@ -96,6 +96,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/map"
+        tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_alignParentBottom="true"<
+
+
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,9 +121,25 @@
         android:textStyle="bold"
         android:padding="10dp"
         android:onClick="startrecording"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:visibility="visible" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        android:id="@+id/pauserecordingbutton"
+        android:textSize="15sp"
+        android:background="#ffc600"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:onClick="stoprecording"
+        android:layout_below="@id/startrecordingbutton"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible" />
 
     <Button
         android:layout_width="match_parent"
@@ -122,17 +152,13 @@
         android:textStyle="bold"
         android:padding="10dp"
         android:onClick="stoprecording"
-        android:layout_below="@id/startrecordingbutton" />
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/map"
-        tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@id/pauserecordingbutton"
         android:layout_alignParentBottom="true"
-        />
+        android:visibility="invisible" />
+
+
+
+        <fragment/>
 
 
 

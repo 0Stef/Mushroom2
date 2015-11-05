@@ -29,6 +29,7 @@ public class RecordSpeed extends AppCompatActivity {
 
     }
 
+
     public void clickStart(View view){
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {

@@ -48,6 +48,8 @@ public class dbRow {
         this.Magnetic_zValue = Magnetic_zValue;
     }
 
+
+
     // General
 
     protected void set_id(int _id) {
