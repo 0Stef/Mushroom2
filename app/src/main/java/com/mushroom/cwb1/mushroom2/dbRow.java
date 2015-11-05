@@ -1,9 +1,9 @@
-package com.mushroom.cwb1.mushroom2;
+package cwb1.mushroom.com.mushroom;
 
 import java.util.Calendar;
 
 public class dbRow {
-    
+
     private int _id;
     private int ride_id;
     private long millisec;
@@ -47,9 +47,9 @@ public class dbRow {
         this.Magnetic_yValue = Magnetic_yValue;
         this.Magnetic_zValue = Magnetic_zValue;
     }
-    
+
     // General
-    
+
     protected void set_id(int _id) {
         /**
          * Deze functie wordt alleen geacht gebruikt te worden door databasehandler. De desbetreffende _id
@@ -70,7 +70,7 @@ public class dbRow {
     public int getRide_id() {
         return  ride_id;
     }
-    
+
     public void setMillisec() {
         Calendar calendar = Calendar.getInstance();
         this.millisec = calendar.getTimeInMillis();
@@ -85,6 +85,12 @@ public class dbRow {
     }
 
     // Accelerometer
+
+    public void setAccelerometer(float xValue, float yValue, float zValue) {
+        setAccelerometer_xValue(xValue);
+        setAccelerometer_yValue(yValue);
+        setAccelerometer_zValue(zValue);
+    }
 
     public void setAccelerometer_xValue(float Accelerometer_xValue) {
         this.Accelerometer_xValue = Accelerometer_xValue;
@@ -109,8 +115,15 @@ public class dbRow {
     public float getAccelerometer_zValue() {
         return Accelerometer_zValue;
     }
-    
+
     // GPS
+
+    public void setGps(float velocity, double longitude, double latitude, float altitude) {
+        setVelocity(velocity);
+        setLongitude(longitude);
+        setLatitude(latitude);
+        setAltitude(altitude);
+    }
 
     public void setVelocity(float velocity) {
         this.velocity = velocity;
@@ -143,8 +156,14 @@ public class dbRow {
     public float getAltitude() {
         return altitude;
     }
-    
+
     // Magnetic
+
+    public void setMagnetic(float xValue, float yValue, float zValue) {
+        setMagnetic_xValue(xValue);
+        setMagnetic_yValue(yValue);
+        setMagnetic_zValue(zValue);
+    }
 
     public void setMagnetic_xValue(float Magnetic_xValue) {
         this.Magnetic_xValue = Magnetic_xValue;
@@ -171,14 +190,13 @@ public class dbRow {
     }
 
     // Other
-    
+
     @Override
     public String toString() {
-        return "DataPoint: id=" +  _id + 
-            " ride_id=" + ride_id + 
-            " time=" + millisec + 
-            " latitude=" + latitude + 
-            " longitude=" + longitude;
+        return "DataPoint: id=" +  _id +
+                " ride_id=" + ride_id +
+                " time=" + millisec +
+                " latitude=" + latitude +
+                " longitude=" + longitude;
     }
 }
-
