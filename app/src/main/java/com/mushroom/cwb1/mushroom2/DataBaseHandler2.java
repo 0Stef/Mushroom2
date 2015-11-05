@@ -21,9 +21,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final String STOP_COLUMNS = ");";
     private static final String FLOAT = " REAL";
     private static final String LONG = " INTEGER";
+    private static final String INTEGER = " INTEGER";
     private static final String DOUBLE = " REAL";
     private static final String COMMA = ", ";
-
 
 
     // Algemene data
@@ -55,12 +55,11 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    //FIXME Wat als bepaalde sensoren niet ondersteund worden?
     @Override
     public void onCreate(SQLiteDatabase db){
         String db2querry = CREATE + TABLE + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
-                COLUMN_RIDE_ID + " INTEGER" + COMMA +
+                COLUMN_RIDE_ID + INTEGER + COMMA +
                 COLUMN_TIME + " TIMESTAMP" + COMMA +
                 COLUMN_ACC_X + FLOAT + COMMA +
                 COLUMN_ACC_Y + FLOAT + COMMA +
@@ -75,6 +74,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         db.execSQL(db2querry);
     }
 
+    //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 //        deleteDataBase(db);
@@ -121,9 +121,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<dbRow> getRows(Cursor cursor) {
+    public LinkedList getRows(Cursor cursor) {
 
-        ArrayList<dbRow> list = new ArrayList<>();
+        List list = new LinkedList();
 
         if (cursor.moveToFirst()) {
             do {
@@ -148,49 +148,43 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         return list;
     }
-
-    public List getAllDataPoints() {
-        List datapoints = new LinkedList();
-
-        String query = "SELECT * FROM "+TABLE;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        dbRow dataPoint = null;
-        if (cursor.moveToFirst()){
-            do {
-                dataPoint = new dbRow();
-                dataPoint.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
-                dataPoint.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
-                dataPoint.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
-                dataPoint.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
-                dataPoint.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
-                dataPoint.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
-                dataPoint.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
-                dataPoint.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
-                dataPoint.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_ALT)));
-                dataPoint.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
-                dataPoint.setMagnetic_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
-                dataPoint.setMagnetic_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
-                dataPoint.setMagnetic_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
-                datapoints.add(dataPoint);
-
-            } while (cursor.moveToNext());
-        }
-        return datapoints;
-    }
-
-
-
+    
     public dbRow getRow(Cursor cursor) {
-        ArrayList<dbRow> list = getRows(cursor);
+        
+        if (cursor.moveToFirst()) {
+            dbRow row = new dbRow();
 
-        if (list.isEmpty()) {
-            return new dbRow();
+            row.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+            row.setRide_id(cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID)));
+            row.setMillis(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME)));
+
+            row.setAccelerometer_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
+            row.setAccelerometer_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+            row.setAccelerometer_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
+
+            row.setVelocity(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_VEL)));
+            row.setLatitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT)));
+            row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
+            row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
+            
+            return row;
         } else {
-            return list.get(0);
+            return new dbRow();
         }
+    }
+    
+    //Deze functie heeft strikt genomen geen nut.
+    public LinkedList getAllDataPoints() {
+        List list = getRows(getAllMeasurements);
+        
+        return list;
+    }
+    
+    //Deze functie heeft strikt genomen geen nut.
+    public dbRow getGreatestValue(String column) {
+        dbRow row = getRow(getGreatestValue(column);
+
+        return row;
     }
 
     public Cursor customSearch(String searchQuery) {
@@ -203,27 +197,28 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
+        db.close();
 
         return cursor;
     }
-
-    public float getGreatestValue(String column) {
+    
+    public cursor getGreatestValue(String column) {
         //SELECT * FROM TABLE WHERE COLUMN = (SELECT MAX(COLUMN) FROM TABLE)
         String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
+        db.close();
 
-        float highest_value = cursor.getFloat(3);
-
-        return highest_value;
+        return cursor;
     }
 
-    public Cursor getAllMeasurements(String table) {
-        String searchQuery = "SELECT * FROM " + table;
+    public Cursor getAllMeasurements() {
+        String searchQuery = "SELECT * FROM " + TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
+        db.close();
 
         return cursor;
     }
@@ -233,6 +228,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
+        db.close();
 
         return cursor;
     }
