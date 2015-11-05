@@ -199,7 +199,6 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
-        db.close();
 
         return cursor;
     }
