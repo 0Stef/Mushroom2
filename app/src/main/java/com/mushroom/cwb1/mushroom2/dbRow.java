@@ -21,7 +21,6 @@ public class dbRow {
     private float Magnetic_yValue;
     private float Magnetic_zValue;
 
-
     public dbRow() {
         //Nothing here.
     }
@@ -48,16 +47,10 @@ public class dbRow {
         this.Magnetic_zValue = Magnetic_zValue;
     }
 
-
-
     // General
 
-    protected void set_id(int _id) {
-        /**
-         * Deze functie wordt alleen geacht gebruikt te worden door databasehandler. De desbetreffende _id
-         * wordt door databasehandler automatisch gegenereerd en opgeslagen. Deze waarde is default 0.
-         * Deze functie elders gebruiken zal waarschijnlijk tot problemen zorgen.
-         */
+    @Deprecated
+    public void set_id(int _id) {
         this._id = _id;
     }
 
