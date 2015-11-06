@@ -45,5 +45,30 @@
     <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
     <string name="title_activity_ride">RideActivity</string>
     <string name="titelRideActivity">ride modus</string>
+    <string name="title_activity_achievements">Achievements</string>
+
+    // Strings voor punten
+    <string name="punten1">1 Punt.</string>
+    <string name="punten5">5 Punten.</string>
+    <string name="punten10">10 Punten.</string>
+    <string name="punten100">100 Punten.</string>
+    <string name="punten200">200 Punten.</string>
+    <string name="punten1000">1000 Punten.</string>
+    <string name="punten2000">2000 Punten.</string>
+    <string name="punten8000">8000 Punten.</string>
+    <string name="punten40000">40000 Punten.</string>
+
+
+    // Strings voor Achievements
+    <string name="achievemnt1">Rijd 1 kilometer.</string>
+    <string name="achievemnt2">Rijd 5 kilometer.</string>
+    <string name="achievemnt3">Rijd 10 kilometer.</string>
+    <string name="achievemnt4">Rijd 50 kilometer.</string>
+    <string name="achievemnt5">Rijd 100 kilometer.</string>
+    <string name="achievemnt6">Rijd 250 kilometer.</string>
+    <string name="achievemnt7">Rijd 500 kilometer.</string>
+    <string name="achievemnt8">Rijd 1000 kilometer.</string>
+    <string name="achievemnt9">Rijd 5000 kilometer.</string>
+
 
 </resources>
