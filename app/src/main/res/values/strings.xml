@@ -51,13 +51,30 @@
     <string name="punten1">1 Punt.</string>
     <string name="punten5">5 Punten.</string>
     <string name="punten10">10 Punten.</string>
+    <string name="punten50">50 Punten.</string>
     <string name="punten100">100 Punten.</string>
     <string name="punten200">200 Punten.</string>
+    <string name="punten300">300 Punten.</string>
+    <string name="punten400">400 Punten.</string>
+    <string name="punten500">500 Punten.</string>
+    <string name="punten600">600 Punten.</string>
+    <string name="punten700">700 Punten.</string>
     <string name="punten1000">1000 Punten.</string>
     <string name="punten2000">2000 Punten.</string>
+    <string name="punten2400">2400 Punten.</string>
+    <string name="punten4800">4800 Punten.</string>
     <string name="punten8000">8000 Punten.</string>
+    <string name="punten10000">10000 Punten.</string>
+    <string name="punten20000">20000 Punten.</string>
     <string name="punten40000">40000 Punten.</string>
-
+    <string name="punten100000">100000 Punten.</string>
+    <string name="punten120000">120000 Punten.</string>
+    <string name="punten168000">168000 Punten.</string>
+    <string name="punten336000">336000 Punten.</string>
+    <string name="punten400000">400000 Punten.</string>
+    <string name="punten744000">744000 Punten.</string>
+    <string name="punten1000000">1000000 Punten.</string>
+    <string name="punten2400000">2400000 Punten.</string>
 
     // Strings voor Achievements
     <string name="achievemnt1">Rijd 1 kilometer.</string>
@@ -69,6 +86,29 @@
     <string name="achievemnt7">Rijd 500 kilometer.</string>
     <string name="achievemnt8">Rijd 1000 kilometer.</string>
     <string name="achievemnt9">Rijd 5000 kilometer.</string>
-
+    <string name="achievemnt10">Behaal een topsnelheid van 30km/h.</string>
+    <string name="achievemnt11">Behaal een topsnelheid van 35km/h.</string>
+    <string name="achievemnt12">Behaal een topsnelheid van 40km/h.</string>
+    <string name="achievemnt13">Behaal een topsnelheid van 45km/h.</string>
+    <string name="achievemnt14">Behaal een topsnelheid van 50km/h.</string>
+    <string name="achievemnt15">1 challenge behaald.</string>
+    <string name="achievemnt16">5 challenges behaald.</string>
+    <string name="achievemnt17">10 challenges behaald.</string>
+    <string name="achievemnt18">50 challenges behaald.</string>
+    <string name="achievemnt19">200 challenges behaald.</string>
+    <string name="achievemnt20">500 challenges behaald.</string>
+    <string name="achievemnt21">1 dag lang gefietst.</string>
+    <string name="achievemnt22">2 dagen lang gefietst.</string>
+    <string name="achievemnt23">5 dagen lang gefietst.</string>
+    <string name="achievemnt24">7 dagen lang gefietst.</string>
+    <string name="achievemnt25">14 dagen lang gefietst.</string>
+    <string name="achievemnt26">31 dagen lang gefietst.</string>
+    <string name="achievemnt27">100 dagen lang gefietst.</string>
+    <string name="achievemnt28">Onder zeeniveau.</string>
+    <string name="achievemnt29">Boven 1000 meter hoogte.</string>
+    <string name="achievemnt30">Niveauverschil van 10 meter.</string>
+    <string name="achievemnt31">Niveauverschil van 25 meter.</string>
+    <string name="achievemnt32">Niveauverschil van 50 meter.</string>
+    <string name="achievemnt33">Niveauverschil van 100 meter.</string>
 
 </resources>
