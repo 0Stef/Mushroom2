@@ -1,5 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
+package cwb1.mushroom.com.mushroom;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +14,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "GeneralDatabase2.db";
+    private String TABLE;
 
 
     private static final String CREATE = "CREATE TABLE ";
@@ -25,7 +28,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
 
     // Algemene data
-    public static final String TABLE = "rides";
+    public static final String TABLE_DEFAULT = "rides";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_RIDE_ID = "ride_id";
     public static final String COLUMN_TIME = "time";
@@ -49,18 +52,39 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public static final String COLUMN_MAGN_Y = "Magnetic_yValue";
     public static final String COLUMN_MAGN_Z = "Magnetic_zValue";
 
+    // Database
+
     public DataBaseHandler2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        TABLE = TABLE_DEFAULT;
     }
-
-
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        String db2querry = CREATE + TABLE + START_COLUMNS +
+        createTable(db, TABLE_DEFAULT);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
+        deleteTable(TABLE_DEFAULT);
+        onCreate(db);
+    }
+
+    public void closeDataBase() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
+    }
+
+    // Table
+
+    public void createTable(SQLiteDatabase db, String table) {
+        String db2querry = CREATE + table + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
                 COLUMN_RIDE_ID + INTEGER + COMMA +
-                COLUMN_TIME + LONG + COMMA +
+                COLUMN_TIME + " TIMESTAMP" + COMMA +
                 COLUMN_ACC_X + FLOAT + COMMA +
                 COLUMN_ACC_Y + FLOAT + COMMA +
                 COLUMN_ACC_Z + FLOAT + COMMA +
@@ -74,27 +98,37 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         db.execSQL(db2querry);
     }
 
-    //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        deleteDataBase(db);
-        onCreate(db);
+    public String getTable() {
+        return this.TABLE;
     }
 
-    public void closeDataBase() {
+    public void setTable() {
+        this.TABLE = TABLE_DEFAULT;
+    }
+
+    public void setTable(String table) {
+        this.TABLE = table;
+    }
+
+    public void eraseTable(String table) {
+        //Alle opgeslagen metingen worden gewist; _id telt verder.
         SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen()) {
-            db.close();
-        }
+        db.delete(table, null, null);
     }
 
-    public void resetDataBase(SQLiteDatabase db) {
-        db.delete(TABLE, null, null);
+    public void resetTable(String table) {
+        //Alle opgeslagen elementen worden gewist; _id begint weer vanaf 0.
+        deleteTable(table);
+        createTable(this.getWritableDatabase(), table);
     }
 
-    public void deleteDataBase(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+    public void deleteTable(String table) {
+        //De tabel wordt verwijderd uit de database.
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + table);
     }
+
+    // Row
 
     public void addPoint(dbRow point) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -121,7 +155,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         db.close();
     }
 
-    public LinkedList getRows(Cursor cursor) {
+    public LinkedList getList(Cursor cursor) {
 
         LinkedList list = new LinkedList();
 
@@ -167,7 +201,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     // Prefabricated functions
 
     public LinkedList getAllDataPoints() {
-        LinkedList list = getRows(getAll());
+        LinkedList list = getList(getAll());
 
         return list;
     }
@@ -196,7 +230,33 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     public Cursor getGreatest(String column) {
         //SELECT * FROM TABLE WHERE COLUMN = (SELECT MAX(COLUMN) FROM TABLE)
-        String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")";
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    @Deprecated
+    public Cursor getGreatestAfter(String column, long millisec) {
+        //FIXME KLopt niet.
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")" +
+                " AND " + COLUMN_TIME + " > " + millisec;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    @Deprecated
+    public Cursor getGreatestThisRide(String column, int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")" +
+                " AND " + COLUMN_RIDE_ID + " = " + rideID;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
@@ -214,7 +274,29 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     }
 
     public Cursor getAllAfter(long millisec) {
-        String searchQuery = "SELECT * FROM " + TABLE + " WHERE " + COLUMN_TIME + " > " + millisec;
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + COLUMN_TIME + " > " + millisec;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getAllBetween(long millisec1, long millisec2) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + COLUMN_TIME + " > " + millisec1 +
+                " AND " + COLUMN_TIME + " < " + millisec2;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getAllThisRide(int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + COLUMN_RIDE_ID + " = " + rideID;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
