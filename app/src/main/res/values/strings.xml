@@ -3,7 +3,7 @@
 
     // strings voor homescreen
     <string name="title_activity_homescreen">Mushroom</string>
-    <string name="optionalbutton">Achievements</string>
+    <string name="optionalbutton">Mijlpalen</string>
     <string name="challenges">Challenges</string>
     <string name="settings">MAP</string>
 
@@ -17,13 +17,17 @@
 
     <string name="title_activity_challenges">Challenges</string>
     <string name="challengestitle">Challenges</string>
-    <string name="rideActivityButton">Ride modus</string>
+    <string name="rideActivityButton">Rit modus</string>
     <string name="gethighestacceleration">Get highest acceleration</string>
     <string name="challenge2">Get speed over 20 km/h</string>
     <string name="challenge3">Drive only north for 1 km</string>
     <string name="getstartedch">Start challenge</string>
     <string name="title_activity_main_dbactivity">MainDBactivity</string>
     <string name="title_activity_data_base_handler">DataBaseHandler</string>
+    <string name="ranglijsten">Ranglijsten</string>
+    <string name="persoonlijkestatistieken">Persoonlijke statistieken</string>
+    <string name="persoonlijkeinstellingen">Persoonlijke instellingen</string>
+    <string name="vrienden">Vrienden</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_record_acceleration">recordAcceleration</string>
@@ -45,7 +49,7 @@
     <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
     <string name="title_activity_ride">RideActivity</string>
     <string name="titelRideActivity">ride modus</string>
-    <string name="title_activity_achievements">Achievements</string>
+    <string name="title_activity_achievements">Mijlpalen</string>
 
     // Strings voor punten
     <string name="punten1">1 Punt.</string>
