@@ -72,8 +72,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
-        deleteTable(TABLE_DEFAULT);
-        onCreate(db);
+        //deleteTable(TABLE_DEFAULT);
+        //onCreate(db);
     }
 
     public void closeDataBase() {
@@ -237,6 +237,18 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return greatestRideId;
     }
 
+    public dbRow getFirstEntryRide(int rideId){
+        dbRow row = getRow(getFirstThisRide(rideId));
+
+        return row;
+    }
+
+    public dbRow getLastEntryRide(int rideId){
+        dbRow row = getRow(getLastThisRide(rideId));
+
+        return row;
+    }
+
 
     // Searchquery
 
@@ -323,6 +335,28 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public Cursor getAllThisRide(int rideID) {
         String searchQuery = "SELECT * FROM " + TABLE +
                 " WHERE " + COLUMN_RIDE_ID + " = " + rideID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getFirstThisRide(int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE
+                + " WHERE " + COLUMN_RIDE_ID + " = " + rideID
+                + " ORDER BY " + COLUMN_TIME + " ASC LIMIT 1";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getLastThisRide(int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE
+                + " WHERE " + COLUMN_RIDE_ID + " = " + rideID
+                + " ORDER BY " + COLUMN_TIME + " DESC LIMIT 1";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);

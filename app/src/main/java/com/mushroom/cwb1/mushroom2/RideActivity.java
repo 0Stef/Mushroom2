@@ -10,6 +10,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +20,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.support.v4.app.FragmentActivity;
-
-import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -28,10 +27,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,14 +39,29 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     private GoogleMap mMap;
 
-    TextView currentSpeed;
-    TextView averageSpeed;
-    TextView maximumSpeed;
-    TextView currentAcceleration;
-    TextView averageAcceleration;
-    TextView maximumAcceleration;
-    TextView elapsedTime;
-    TextView distance;
+    TextView textCurrentSpeed;
+    TextView textAverageSpeed;
+    TextView textMaximumSpeed;
+    TextView textCurrentAcceleration;
+    TextView textAverageAcceleration;
+    TextView textMaximumAcceleration;
+    TextView textElapsedTime;
+    TextView textDistance;
+
+    private Boolean firstLocationSet = false;
+    private Location previousLocation;
+    private long elapsedTime;
+    private float distance;
+
+    private boolean eerstekeer = true;
+    private long startTime = 0L;
+
+    private android.os.Handler customHandler = new android.os.Handler();
+
+    long timeInMilliseconds = 0L;
+    long timeSwapBuff = 0L;
+    long updatedTime = 0L;
+
 
 
     TextView snelheid;
@@ -66,7 +78,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private LocationListener locationListener;
 
 
-    private int current_ride_id;
+    private int currentRideId;
 
 
     private long time;
@@ -81,8 +93,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private List<LatLng> gpsPoints;
     private Polyline route;
 
-    private SimpleDateFormat sdf;
-    private DecimalFormat df;
+    private SimpleDateFormat dateF;
+    private SimpleDateFormat timeF;
+    private DecimalFormat decimalF;
 
     TextView punten;
 
@@ -107,7 +120,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         punten = (TextView) findViewById(R.id.punten);
 
-        currentSpeed = (TextView) findViewById(R.id.currentSpeed);
+        textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
+        textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
+        textDistance = (TextView) findViewById(R.id.distance);
 
 
         snelheid = (TextView) findViewById(R.id.snelheid);
@@ -130,11 +145,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
+        elapsedTime = 0;
+        distance = 0;
 
-        sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
-        sdf.setTimeZone(TimeZone.getDefault());
+        dateF = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
+        dateF.setTimeZone(TimeZone.getDefault());
 
-        df = new DecimalFormat("##.00");
+        timeF = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
+        timeF.setTimeZone(TimeZone.getDefault());
+
+        decimalF = new DecimalFormat("0.0");
 
     }
 
@@ -146,6 +166,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void startrecording(View view){
 
+        //TODO zet een scherm met wacht op signaal vn gps
+
         //startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
         startrecordingbutton.setVisibility(View.INVISIBLE);
         //pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
@@ -154,19 +176,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
 
+        textAverageSpeed.setText("wachten op gps signaal");
 
-        int previous_ride_id = handler.getGreatestRideId();
-        current_ride_id = previous_ride_id + 1;
-
-
-
-
+        final int previousRideId = handler.getGreatestRideId();
+        currentRideId = previousRideId + 1;
 
 
         Sensor mAcceleration;
         Sensor mMagneticfield;
-
-        //TODO sensor updatefrequentie verlagen -> niet mogelijk
 
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
             mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -191,9 +208,26 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
 
+                if (firstLocationSet == true) {
+
+                    float distanceToPrev = location.distanceTo(previousLocation);
+                    long timeToPrev = location.getTime() - previousLocation.getTime();
+
+                    elapsedTime = elapsedTime + timeToPrev;
+                    distance = distance + distanceToPrev;
+
+
+                }
+
+                if (eerstekeer == true) {
+                    startTime = SystemClock.uptimeMillis();
+                    customHandler.postDelayed(updateTimerThread, 0);
+                    eerstekeer = false;
+                }
+
                 time = location.getTime();
                 Date dateUnformatted = new Date(time);
-                String date = sdf.format(dateUnformatted);
+                String date = dateF.format(dateUnformatted);
 
                 float speed = location.getSpeed();
                 double altitude = location.getAltitude();
@@ -213,20 +247,30 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 route.setPoints(gpsPoints);
 
                 //TODO zoom zodat alles in beeld is zie http://stackoverflow.com/questions/5114710/android-setting-zoom-level-in-google-maps-to-include-all-marker-points
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 20.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
 
                 float distanceToPrev = 15f;
                 long timeToPrev = 1000;
 
 
-                dbRow punt = new dbRow(current_ride_id,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz,distanceToPrev,timeToPrev);
+                dbRow punt = new dbRow(currentRideId,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz,distanceToPrev,timeToPrev);
                 handler.addPoint(punt);
 
                 List<dbRow> list = handler.getAllDataPoints();
                 for (dbRow point : list) {
-                    punten.setText("Punt "+point.get_id()+" en ride id "+point.getRide_id()+" op "+sdf.format(point.getMillisec())+" coordinaten "+point.getLongitude()+","+point.getLatitude()+" tijd nr vorig punt "+point.getTimetopreviouspoint());
+                    punten.setText("Punt "+point.get_id()+" en ride id "+point.getRide_id()+" op "+ dateF.format(point.getMillisec())+" coordinaten "+point.getLongitude()+","+point.getLatitude()+" tijd nr vorig punt "+point.getTimetopreviouspoint());
                 }
 
+
+                long voorlopigetijd = handler.getLastEntryRide(currentRideId).getMillisec() - handler.getFirstEntryRide(currentRideId).getMillisec();
+
+                textDistance.setText(handler.getFirstEntryRide(currentRideId).toString()+"\n "+handler.getLastEntryRide(currentRideId).toString()+"\n"+previousLocation+"\n"+location.toString());
+
+                textCurrentSpeed.setText(Long.toString(elapsedTime)+"\n"+Long.toString(voorlopigetijd));
+
+
+                previousLocation = location;
+                firstLocationSet = true;
 
             }
 
@@ -262,13 +306,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // Deze requestLocationUpdates() moet bij klik op start opgeroepen worden
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
         // kan op netwerk locatie zoeken en op GPS of op beiede, voor fiets is GPS het interessantst
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+        //TODO mag weg na testperiode
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
     }
 
     public void pauserecording(View view){
+
+
 
         //startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
         startrecordingbutton.setVisibility(View.VISIBLE);
@@ -279,6 +327,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
+
+        firstLocationSet = false;
 
         //TODO zoom veranderen zodat hele rit in beeld is
 
@@ -305,6 +355,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
+
+
+
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -318,6 +371,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     }
+
+
+
 
 
 
@@ -336,18 +392,38 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             magnfx = event.values[0];
             magnfy = event.values[1];
             magnfz = event.values[2];
-            magneticField.setText("Magnetisch veld is: " + df.format(magnfx) + " x " + magnfy + " y " + magnfz + " z ");
+            magneticField.setText("Magnetisch veld is: " + decimalF.format(magnfx) + " x " + magnfy + " y " + magnfz + " z ");
         }
 
         if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
             accx = event.values[0];
             accy = event.values[1];
             accz = event.values[2]-10;
-            accceleration.setText("Versnelling: " + df.format(accx) + " x " + accy + " y " + accz + " z ");
+            accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
         }
 
     }
 
+
+    private Runnable updateTimerThread = new Runnable() {
+
+        public void run() {
+
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+
+            int secs = (int) (updatedTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedTime % 1000);
+            textAverageSpeed.setText("" + mins + ":"
+                    + String.format("%02d", secs) + ":"
+                    + String.format("%03d", milliseconds));
+            customHandler.postDelayed(this, 0);
+        }
+
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

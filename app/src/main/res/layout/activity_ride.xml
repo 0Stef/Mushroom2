@@ -153,8 +153,27 @@
         android:text="Current Speed"
         android:id="@+id/currentSpeed"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/distance"
+        android:layout_alignEnd="@+id/distance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Average Speed"
+        android:id="@+id/averageSpeed"
+        android:layout_below="@id/currentSpeed"
+        android:layout_alignRight="@+id/distance"
+        android:layout_alignEnd="@+id/distance" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance"
+        android:id="@+id/distance"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>
