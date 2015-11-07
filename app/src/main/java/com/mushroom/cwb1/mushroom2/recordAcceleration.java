@@ -98,11 +98,11 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
 
 
-        dbRow HighestRow = handler.getRow(handler.getGreatest("Accelerometer_xValue"));
+        dbRow HighestRow = handler.getRow(handler.getGreatest(hander.COLUMN_ACC_X));
         float showgreatestvalue = HighestRow.getAccelerometer_xValue();
         result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
 
-
+        //float showgreatestvalue = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X)).getAccelerometer_xValue();
     }
 
     @Override
