@@ -21,6 +21,9 @@ public class dbRow {
     private float Magnetic_yValue;
     private float Magnetic_zValue;
 
+    private float distancetopreviouspoint;
+    private long timetopreviouspoint;
+
     public dbRow() {
         //Nothing here.
     }
@@ -28,7 +31,7 @@ public class dbRow {
     public dbRow(int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
                  float velocity, double longitude, double latitude, float altitude,
-                 float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue) {
+                 float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue, float distancetopreviouspoint, long timetopreviouspoint) {
 
         this.ride_id = ride_id;
         this.millisec = millisec;
@@ -45,6 +48,10 @@ public class dbRow {
         this.Magnetic_xValue = Magnetic_xValue;
         this.Magnetic_yValue = Magnetic_yValue;
         this.Magnetic_zValue = Magnetic_zValue;
+
+        this.distancetopreviouspoint = distancetopreviouspoint;
+        this.timetopreviouspoint = timetopreviouspoint;
+
     }
 
     // General
@@ -183,6 +190,20 @@ public class dbRow {
     public float getMagnetic_zValue() {
         return Magnetic_zValue;
     }
+
+    // time and disctance to previous point
+
+    public void setDistancetopreviouspoint (float distancetopreviouspoint){
+        this.distancetopreviouspoint = distancetopreviouspoint;
+    }
+
+    public float getDistancetopreviouspoint (){
+        return distancetopreviouspoint;
+    }
+
+    public void setTimetopreviouspoint (long timetopreviouspoint){this.timetopreviouspoint=timetopreviouspoint;}
+
+    public long getTimetopreviouspoint (){return timetopreviouspoint;}
 
     // Other
 

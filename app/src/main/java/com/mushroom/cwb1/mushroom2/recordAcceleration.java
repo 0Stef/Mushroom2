@@ -78,7 +78,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             float versnellingz = event.values[2] - g;
             acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
 
-            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f);
+            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f,0f,1000000);
             handler.addPoint(point);
 
 
@@ -98,7 +98,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
 
 
-        dbRow HighestRow = handler.getRow(handler.getGreatest(hander.COLUMN_ACC_X));
+        dbRow HighestRow = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X));
         float showgreatestvalue = HighestRow.getAccelerometer_xValue();
         result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
 

@@ -50,6 +50,10 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public static final String COLUMN_MAGN_Y = "Magnetic_yValue";
     public static final String COLUMN_MAGN_Z = "Magnetic_zValue";
 
+    // Distance and time to previous point
+    public static final String COLUMN_DIST_TO_PREV = "DistanceToPreviousPoint";
+    public static final String COLUMN_TIME_TO_PREV = "TimeToPreviousPoint";
+
 
 
 
@@ -96,7 +100,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
                 COLUMN_GPS_VEL + FLOAT + COMMA +
                 COLUMN_GPS_LONG + DOUBLE + COMMA +
                 COLUMN_GPS_LAT + DOUBLE + COMMA +
-                COLUMN_GPS_ALT + FLOAT  + STOP_COLUMNS ;
+                COLUMN_GPS_ALT + FLOAT + COMMA +
+                COLUMN_DIST_TO_PREV + FLOAT + COMMA +
+                COLUMN_TIME_TO_PREV + LONG + STOP_COLUMNS ;
         db.execSQL(db2querry);
     }
 
@@ -156,6 +162,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         values.put(COLUMN_MAGN_Y, point.getMagnetic_yValue());
         values.put(COLUMN_MAGN_Z, point.getMagnetic_zValue());
 
+        values.put(COLUMN_DIST_TO_PREV, point.getDistancetopreviouspoint());
+        values.put(COLUMN_TIME_TO_PREV, point.getTimetopreviouspoint());
+
         db.insert(TABLE, null, values);
 
         db.close();
@@ -201,6 +210,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
         row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
 
+        row.setDistancetopreviouspoint(cursor.getFloat(cursor.getColumnIndex(COLUMN_DIST_TO_PREV)));
+        row.setTimetopreviouspoint(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME_TO_PREV)));
+
         return row;
     }
 
@@ -217,6 +229,14 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         return row;
     }
+
+    public int getGreatestRideId(){
+        dbRow row = getGreatestValue(COLUMN_RIDE_ID);
+        int greatestRideId = row.getRide_id();
+
+        return greatestRideId;
+    }
+
 
     // Searchquery
 
@@ -309,4 +329,5 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         return cursor;
     }
+
 }
