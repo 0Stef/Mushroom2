@@ -1,7 +1,5 @@
 package com.mushroom.cwb1.mushroom2;
 
-package cwb1.mushroom.com.mushroom;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -52,6 +50,9 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public static final String COLUMN_MAGN_Y = "Magnetic_yValue";
     public static final String COLUMN_MAGN_Z = "Magnetic_zValue";
 
+
+
+
     // Database
 
     public DataBaseHandler2(Context context) {
@@ -81,6 +82,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     // Table
 
     public void createTable(SQLiteDatabase db, String table) {
+        table = check(table);
         String db2querry = CREATE + table + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
                 COLUMN_RIDE_ID + INTEGER + COMMA +
@@ -107,25 +109,29 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     }
 
     public void setTable(String table) {
-        this.TABLE = table;
+        this.TABLE = check(table);
     }
 
     public void eraseTable(String table) {
         //Alle opgeslagen metingen worden gewist; _id telt verder.
         SQLiteDatabase db = this.getReadableDatabase();
-        db.delete(table, null, null);
+        db.delete(check(table), null, null);
     }
 
     public void resetTable(String table) {
         //Alle opgeslagen elementen worden gewist; _id begint weer vanaf 0.
         deleteTable(table);
-        createTable(this.getWritableDatabase(), table);
+        createTable(this.getWritableDatabase(), check(table));
     }
 
     public void deleteTable(String table) {
         //De tabel wordt verwijderd uit de database.
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + table);
+        db.execSQL("DROP TABLE IF EXISTS " + check(table));
+    }
+
+    private String check(String table) {
+        return table.replaceAll(" ", "_");
     }
 
     // Row
