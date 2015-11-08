@@ -96,6 +96,10 @@
             android:name=".achievements"
             android:label="@string/title_activity_achievements" >
         </activity>
+        <activity
+            android:name=".UserClassHandler"
+            android:label="@string/title_activity_user_class_handler" >
+        </activity>
     </application>
 
 </manifest>
