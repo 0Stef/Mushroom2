@@ -114,5 +114,6 @@
     <string name="achievemnt31">Niveauverschil van 25 meter.</string>
     <string name="achievemnt32">Niveauverschil van 50 meter.</string>
     <string name="achievemnt33">Niveauverschil van 100 meter.</string>
+    <string name="title_activity_user_class_handler">UserClassHandler</string>
 
 </resources>
