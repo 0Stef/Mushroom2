@@ -52,6 +52,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private Location previousLocation;
     private long elapsedTime;
     private float distance;
+    private float maxSpeed = 0f;
+    private float maxAcceleration = 0f;
 
     private boolean eerstekeer = true;
     private long startTime = 0L;
@@ -102,6 +104,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     DataBaseHandler2 handler;
 
     Button startrecordingbutton;
+    Button resumerecordingbutton;
     Button pauserecordingbutton;
     Button stoprecordingbutton;
 
@@ -118,25 +121,24 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
 
-        punten = (TextView) findViewById(R.id.punten);
+
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
         textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
+        textMaximumSpeed = (TextView) findViewById(R.id.maximumSpeed);
+        textCurrentAcceleration = (TextView) findViewById(R.id.currentAcceleration);
+        textAverageAcceleration = (TextView) findViewById(R.id.averageAcceleration);
+        textMaximumAcceleration = (TextView) findViewById(R.id.maximumAcceleration);
         textDistance = (TextView) findViewById(R.id.distance);
 
 
-        snelheid = (TextView) findViewById(R.id.snelheid);
-        hoogte = (TextView) findViewById(R.id.hoogte);
-        tijd = (TextView) findViewById(R.id.tijd);
-        breedtegraad = (TextView) findViewById(R.id.breedtegraad);
-        lengtegraad = (TextView) findViewById(R.id.lengtegraad);
-        magneticField = (TextView) findViewById(R.id.magneticfield);
-        accceleration = (TextView) findViewById(R.id.acceleration);
 
         startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+        resumerecordingbutton = (Button) findViewById(R.id.resumerecordingbutton);
         pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
         stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         startrecordingbutton.setVisibility(View.VISIBLE);
+        resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
 
@@ -168,11 +170,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         //TODO zet een scherm met wacht op signaal vn gps
 
-        //startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+
         startrecordingbutton.setVisibility(View.INVISIBLE);
-        //pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+        resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.VISIBLE);
-        //stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
 
@@ -219,7 +220,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 }
 
-                if (eerstekeer == true) {
+                if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
                     customHandler.postDelayed(updateTimerThread, 0);
                     eerstekeer = false;
@@ -229,16 +230,30 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 Date dateUnformatted = new Date(time);
                 String date = dateF.format(dateUnformatted);
 
-                float speed = location.getSpeed();
-                double altitude = location.getAltitude();
+                float msTokmu = 3.6f;
+                float speed = location.getSpeed()*msTokmu;
+
+                if (maxSpeed < speed ){
+                    maxSpeed = speed;
+                    textMaximumSpeed.setText(Float.toString(maxSpeed));
+                }
+                //double altitude = location.getAltitude();
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
-                tijd.setText("Datum : " + date);
-                snelheid.setText("Snelheid : " + speed * 3.6);
-                hoogte.setText("Hoogte : " + altitude);
-                breedtegraad.setText("Breedtegraad : " + latitude);
-                lengtegraad.setText("Lengtegraad : " + longitude);
+
+                textCurrentSpeed.setText(Float.toString(speed));
+                //textAverageSpeed.setText();
+
+                if (maxAcceleration < accx ){
+                    maxSpeed = accx;
+                    textMaximumSpeed.setText(Float.toString(maxAcceleration));
+                }
+
+                textCurrentAcceleration.setText(Float.toString(accx));
+                //textAverageAcceleration.setText("");
+
+                textDistance.setText(Float.toString(distance));
 
                 lastPoint = new LatLng(latitude,longitude);
 
@@ -247,19 +262,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 route.setPoints(gpsPoints);
 
                 //TODO zoom zodat alles in beeld is zie http://stackoverflow.com/questions/5114710/android-setting-zoom-level-in-google-maps-to-include-all-marker-points
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 14.0f));
 
                 float distanceToPrev = 15f;
-                long timeToPrev = 1000;
+                long timeToPrev = 1000l;
 
 
                 dbRow punt = new dbRow(currentRideId,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz,distanceToPrev,timeToPrev);
                 handler.addPoint(punt);
-
-                List<dbRow> list = handler.getAllDataPoints();
-                for (dbRow point : list) {
-                    punten.setText("Punt "+point.get_id()+" en ride id "+point.getRide_id()+" op "+ dateF.format(point.getMillisec())+" coordinaten "+point.getLongitude()+","+point.getLatitude()+" tijd nr vorig punt "+point.getTimetopreviouspoint());
-                }
 
 
                 long voorlopigetijd = handler.getLastEntryRide(currentRideId).getMillisec() - handler.getFirstEntryRide(currentRideId).getMillisec();
@@ -318,11 +328,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-        //startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
-        startrecordingbutton.setVisibility(View.VISIBLE);
-        //pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+
+        startrecordingbutton.setVisibility(View.INVISIBLE);
+        resumerecordingbutton.setVisibility(View.VISIBLE);
         pauserecordingbutton.setVisibility(View.INVISIBLE);
-        //stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
         mSensorManager.unregisterListener(this);
@@ -338,16 +347,19 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void resumerecording(View view){
 
+        startrecordingbutton.setVisibility(View.INVISIBLE);
+        resumerecordingbutton.setVisibility(View.INVISIBLE);
+        pauserecordingbutton.setVisibility(View.VISIBLE);
+        stoprecordingbutton.setVisibility(View.VISIBLE);
 
     }
 
     public void stoprecording(View view){
 
-        //startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
+
         startrecordingbutton.setVisibility(View.VISIBLE);
-        //pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
+        resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.INVISIBLE);
-        //stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
 
 
@@ -392,14 +404,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             magnfx = event.values[0];
             magnfy = event.values[1];
             magnfz = event.values[2];
-            magneticField.setText("Magnetisch veld is: " + decimalF.format(magnfx) + " x " + magnfy + " y " + magnfz + " z ");
+            //magneticField.setText("Magnetisch veld is: " + decimalF.format(magnfx) + " x " + magnfy + " y " + magnfz + " z ");
         }
 
         if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
             accx = event.values[0];
             accy = event.values[1];
             accz = event.values[2]-10;
-            accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
+            //accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
         }
 
     }
@@ -488,7 +500,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             punten.setText("longitude != 0");
         }
         else {
-            LatLng defaultPointLatLng = new LatLng(50.7f,4.21f);
+            LatLng defaultPointLatLng = new LatLng(51.0015,4.58550);
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 10.0f));
             //punten.setText("longitude = 0");
         }

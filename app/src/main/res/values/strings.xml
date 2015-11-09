@@ -115,4 +115,10 @@
     <string name="achievemnt32">Niveauverschil van 50 meter.</string>
     <string name="achievemnt33">Niveauverschil van 100 meter.</string>
 
+
+    <string name="rideStandaardmeetwaarde">0,0</string>
+    <string name="eenheidSnelheid">km/h</string>
+    <string name="eenheidVersnelling">m/s\u00B2</string>
+    <string name="eenheidAfstand">km</string>
+
 </resources>
