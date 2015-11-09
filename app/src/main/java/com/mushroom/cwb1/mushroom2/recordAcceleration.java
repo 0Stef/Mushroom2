@@ -19,7 +19,7 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
     private SensorManager mSensorManager;
 
 
-    DataBaseHandler2 handler;
+//    DataBaseHandler2 handler;
 
 
 
@@ -32,8 +32,8 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
 
 
 
-        handler = new DataBaseHandler2(getApplicationContext());
-        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+//        handler = new DataBaseHandler2(getApplicationContext());
+//        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
 
         acceleration = (TextView) findViewById(R.id.acceleration);
@@ -82,8 +82,8 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             double versnellingtot = Math.sqrt(Math.pow(versnellingx,2) + Math.pow(versnellingy,2) + Math.pow(versnellingz,2))-0.4;
 //            acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
             acceleration.setText("Versnelling:" + versnellingtot);
-            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f,0f,1000000);
-            handler.addPoint(point);
+//            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f,0f,1000000);
+//            handler.addPoint(point);
 
             if (versnellingtot>3){
                 mSensorManager.unregisterListener(this);
@@ -106,9 +106,9 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
 
 
-        dbRow HighestRow = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X));
-        float showgreatestvalue = HighestRow.getAccelerometer_xValue();
-        result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
+//        dbRow HighestRow = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X));
+//        float showgreatestvalue = HighestRow.getAccelerometer_xValue();
+//        result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
 
         //float showgreatestvalue = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X)).getAccelerometer_xValue();
     }

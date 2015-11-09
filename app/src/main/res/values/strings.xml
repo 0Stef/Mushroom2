@@ -116,4 +116,7 @@
     <string name="achievemnt33">Niveauverschil van 100 meter.</string>
     <string name="title_activity_user_class_handler">UserClassHandler</string>
 
+    <string name="title_activity_wifi_scanner">wifiScanner</string>
+    <string name="wifispot">Aantal gevonden Wifi-hotspots: </string>
+
 </resources>
