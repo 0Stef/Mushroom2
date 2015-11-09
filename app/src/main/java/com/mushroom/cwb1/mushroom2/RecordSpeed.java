@@ -34,6 +34,7 @@ public class RecordSpeed extends AppCompatActivity {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
 
+
             public void onLocationChanged(Location location) {
                 float speed = location.getSpeed();
                 double speedkmh = speed*3.6;

@@ -18,7 +18,7 @@
     <string name="title_activity_challenges">Challenges</string>
     <string name="challengestitle">Challenges</string>
     <string name="rideActivityButton">Rit modus</string>
-    <string name="gethighestacceleration">Get highest acceleration</string>
+    <string name="getacceleration3">Get an acceleration of 3 m/s²</string>
     <string name="challenge2">Get speed over 20 km/h</string>
     <string name="challenge3">Drive only north for 1 km</string>
     <string name="getstartedch">Start challenge</string>
@@ -114,6 +114,10 @@
     <string name="achievemnt31">Niveauverschil van 25 meter.</string>
     <string name="achievemnt32">Niveauverschil van 50 meter.</string>
     <string name="achievemnt33">Niveauverschil van 100 meter.</string>
+    <string name="title_activity_user_class_handler">UserClassHandler</string>
+
+    <string name="title_activity_wifi_scanner">wifiScanner</string>
+    <string name="wifispot">Aantal gevonden Wifi-hotspots: </string>
 
 
     <string name="rideStandaardmeetwaarde">0,0</string>

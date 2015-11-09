@@ -14,13 +14,12 @@ import android.widget.TextView;
 public class recordAcceleration extends AppCompatActivity implements SensorEventListener {
     TextView acceleration;
     TextView result_acceleration;
+    TextView succes;
+
     private SensorManager mSensorManager;
 
-    private Sensor mAcceleration;
 
-
-
-    DataBaseHandler2 handler;
+//    DataBaseHandler2 handler;
 
 
 
@@ -33,15 +32,19 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
 
 
 
-        handler = new DataBaseHandler2(getApplicationContext());
-        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+//        handler = new DataBaseHandler2(getApplicationContext());
+//        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
 
         acceleration = (TextView) findViewById(R.id.acceleration);
-
+        succes = (TextView) findViewById(R.id.succes);
+        succes.setVisibility(View.INVISIBLE);
     }
 
     public void clickStart(View view){
+        Sensor mAcceleration;
+
+        succes.setVisibility(View.INVISIBLE);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
@@ -76,11 +79,16 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
             float versnellingx = event.values[0];
             float versnellingy = event.values[1];
             float versnellingz = event.values[2] - g;
-            acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
+            double versnellingtot = Math.sqrt(Math.pow(versnellingx,2) + Math.pow(versnellingy,2) + Math.pow(versnellingz,2))-0.4;
+//            acceleration.setText("Versnelling: " + versnellingx + " x " + versnellingy + " y " + versnellingz + " z ");
+            acceleration.setText("Versnelling:" + versnellingtot);
+//            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f,0f,1000000);
+//            handler.addPoint(point);
 
-            dbRow point = new dbRow(10,22222,versnellingx,versnellingy,versnellingz,0.0f,0.0d,0.0d,0.0f,0.0f,0.0f,0.0f,0f,1000000);
-            handler.addPoint(point);
-
+            if (versnellingtot>3){
+                mSensorManager.unregisterListener(this);
+                succes.setVisibility(View.VISIBLE);
+            }
 
         }
     }
@@ -98,9 +106,9 @@ public class recordAcceleration extends AppCompatActivity implements SensorEvent
         result_acceleration = (TextView) findViewById(R.id.acceleration_result_text);
 
 
-        dbRow HighestRow = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X));
-        float showgreatestvalue = HighestRow.getAccelerometer_xValue();
-        result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
+//        dbRow HighestRow = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X));
+//        float showgreatestvalue = HighestRow.getAccelerometer_xValue();
+//        result_acceleration.setText("Your highest acceleration is: " + showgreatestvalue+" m/s\u00B2");
 
         //float showgreatestvalue = handler.getRow(handler.getGreatest(handler.COLUMN_ACC_X)).getAccelerometer_xValue();
     }

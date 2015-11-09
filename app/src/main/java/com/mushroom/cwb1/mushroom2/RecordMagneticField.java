@@ -23,6 +23,7 @@ public class RecordMagneticField extends AppCompatActivity implements SensorEven
         setContentView(R.layout.activity_record_magnetic_field);
     }
 
+    @Deprecated
     public void clickStart(View view){
 //        Sensor mMagneticField;
 //        magnetic_field = (TextView) findViewById(R.id.magnetic_field);
@@ -66,6 +67,7 @@ public class RecordMagneticField extends AppCompatActivity implements SensorEven
         // Do something here if sensor accuracy changes.
     }
 
+    @Deprecated
     public final void onSensorChanged(SensorEvent event) {
 
         if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
