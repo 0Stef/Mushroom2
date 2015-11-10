@@ -123,6 +123,7 @@
     <string name="rideStandaardmeetwaarde">0,0</string>
     <string name="eenheidSnelheid">km/h</string>
     <string name="eenheidVersnelling">m/s\u00B2</string>
-    <string name="eenheidAfstand">km</string>
+    <string name="eenheidAfstand">m</string>
+    <string name="eenheidTijd">s</string>
 
 </resources>

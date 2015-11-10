@@ -50,10 +50,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
-    private long elapsedTime;
-    private float distance;
+    float distanceToPrev = 0f;
+    long timeToPrev = 0l;
+    private long elapsedTime = 0l;
+    private float distance= 0f;
     private float maxSpeed = 0f;
     private float maxAcceleration = 0f;
+    private float averageSpeed = 0f;
+    private float averageAcceleration = 0f;
 
     private boolean eerstekeer = true;
     private long startTime = 0L;
@@ -65,14 +69,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     long updatedTime = 0L;
 
 
-
-    TextView snelheid;
-    TextView hoogte;
-    TextView tijd;
-    TextView breedtegraad;
-    TextView lengtegraad;
-    TextView magneticField;
-    TextView accceleration;
 
     private SensorManager mSensorManager;
 
@@ -130,6 +126,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         textAverageAcceleration = (TextView) findViewById(R.id.averageAcceleration);
         textMaximumAcceleration = (TextView) findViewById(R.id.maximumAcceleration);
         textDistance = (TextView) findViewById(R.id.distance);
+        textElapsedTime = (TextView) findViewById(R.id.elapsedTime);
 
 
 
@@ -177,7 +174,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
 
-        textAverageSpeed.setText("wachten op gps signaal");
+        textDistance.setText("wachten op gps signaal");
 
         final int previousRideId = handler.getGreatestRideId();
         currentRideId = previousRideId + 1;
@@ -211,14 +208,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 if (firstLocationSet == true) {
 
-                    float distanceToPrev = location.distanceTo(previousLocation);
-                    long timeToPrev = location.getTime() - previousLocation.getTime();
+                    distanceToPrev = location.distanceTo(previousLocation);
+                    timeToPrev = location.getTime() - previousLocation.getTime();
 
-                    elapsedTime = elapsedTime + timeToPrev;
-                    distance = distance + distanceToPrev;
-
-
-                }
+                    }
 
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
@@ -235,25 +228,40 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 if (maxSpeed < speed ){
                     maxSpeed = speed;
-                    textMaximumSpeed.setText(Float.toString(maxSpeed));
+                    textMaximumSpeed.setText(decimalF.format(maxSpeed));
                 }
                 //double altitude = location.getAltitude();
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
 
-                textCurrentSpeed.setText(Float.toString(speed));
-                //textAverageSpeed.setText();
 
-                if (maxAcceleration < accx ){
-                    maxSpeed = accx;
-                    textMaximumSpeed.setText(Float.toString(maxAcceleration));
+
+
+                if (elapsedTime != 0 || timeToPrev != 0){
+                    averageSpeed = (averageSpeed*elapsedTime + speed*timeToPrev)/(elapsedTime+timeToPrev);
+                    averageAcceleration = (averageAcceleration*elapsedTime + accx*timeToPrev)/(elapsedTime+timeToPrev);
                 }
 
-                textCurrentAcceleration.setText(Float.toString(accx));
-                //textAverageAcceleration.setText("");
+                textCurrentSpeed.setText(decimalF.format(speed));
+                textAverageSpeed.setText(decimalF.format(averageSpeed));
 
-                textDistance.setText(Float.toString(distance));
+
+
+                if (maxAcceleration < accx ){
+                    maxAcceleration = accx;
+                    textMaximumAcceleration.setText(decimalF.format(maxAcceleration));
+                }
+
+                textCurrentAcceleration.setText(decimalF.format(accx));
+                textAverageAcceleration.setText(decimalF.format(averageAcceleration));
+
+
+                elapsedTime = elapsedTime + timeToPrev;
+                distance = distance + distanceToPrev;
+
+                textDistance.setText(decimalF.format(distance));
+                textElapsedTime.setText(decimalF.format(elapsedTime/1000));
 
                 lastPoint = new LatLng(latitude,longitude);
 
@@ -262,21 +270,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 route.setPoints(gpsPoints);
 
                 //TODO zoom zodat alles in beeld is zie http://stackoverflow.com/questions/5114710/android-setting-zoom-level-in-google-maps-to-include-all-marker-points
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 14.0f));
-
-                float distanceToPrev = 15f;
-                long timeToPrev = 1000l;
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
 
 
                 dbRow punt = new dbRow(currentRideId,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz,distanceToPrev,timeToPrev);
                 handler.addPoint(punt);
 
 
-                long voorlopigetijd = handler.getLastEntryRide(currentRideId).getMillisec() - handler.getFirstEntryRide(currentRideId).getMillisec();
+                //long voorlopigetijd = handler.getLastEntryRide(currentRideId).getMillisec() - handler.getFirstEntryRide(currentRideId).getMillisec();
 
-                textDistance.setText(handler.getFirstEntryRide(currentRideId).toString()+"\n "+handler.getLastEntryRide(currentRideId).toString()+"\n"+previousLocation+"\n"+location.toString());
+                //textDistance.setText(handler.getFirstEntryRide(currentRideId).toString()+"\n "+handler.getLastEntryRide(currentRideId).toString()+"\n"+previousLocation+"\n"+location.toString());
 
-                textCurrentSpeed.setText(Long.toString(elapsedTime)+"\n"+Long.toString(voorlopigetijd));
+                //textCurrentSpeed.setText(Long.toString(elapsedTime)+"\n"+Long.toString(voorlopigetijd));
 
 
                 previousLocation = location;
@@ -319,7 +324,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         //TODO mag weg na testperiode
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
     }
@@ -421,18 +426,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         public void run() {
 
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-
-            updatedTime = timeSwapBuff + timeInMilliseconds;
-
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
-            secs = secs % 60;
-            int milliseconds = (int) (updatedTime % 1000);
-            textAverageSpeed.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
-            customHandler.postDelayed(this, 0);
+//            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+//
+//            updatedTime = timeSwapBuff + timeInMilliseconds;
+//
+//            int secs = (int) (updatedTime / 1000);
+//            int mins = secs / 60;
+//            secs = secs % 60;
+//            int milliseconds = (int) (updatedTime % 1000);
+//            textAverageSpeed.setText("" + mins + ":"
+//                    + String.format("%02d", secs) + ":"
+//                    + String.format("%03d", milliseconds));
+//            customHandler.postDelayed(this, 0);
         }
 
     };
