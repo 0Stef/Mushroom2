@@ -72,8 +72,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
-        //deleteTable(TABLE_DEFAULT);
-        //onCreate(db);
+        deleteTable(TABLE_DEFAULT);
+        onCreate(db);
     }
 
     public void closeDataBase() {

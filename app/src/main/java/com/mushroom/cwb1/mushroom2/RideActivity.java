@@ -1,6 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -58,6 +59,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float maxAcceleration = 0f;
     private float averageSpeed = 0f;
     private float averageAcceleration = 0f;
+    private float speed = 0f;
 
     private boolean eerstekeer = true;
     private long startTime = 0L;
@@ -206,7 +208,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
 
-                if (firstLocationSet == true) {
+                if (firstLocationSet) {
 
                     distanceToPrev = location.distanceTo(previousLocation);
                     timeToPrev = location.getTime() - previousLocation.getTime();
@@ -224,7 +226,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 String date = dateF.format(dateUnformatted);
 
                 float msTokmu = 3.6f;
-                float speed = location.getSpeed()*msTokmu;
+                speed = location.getSpeed()*msTokmu;
 
                 if (maxSpeed < speed ){
                     maxSpeed = speed;
@@ -286,6 +288,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 previousLocation = location;
                 firstLocationSet = true;
+
 
             }
 
@@ -512,5 +515,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+//    public void randomChallenge(View view){
+//        TextView challengetime;
+//        challengetime =(TextView)findViewById(R.id.challengetime);
+//        Long eltime =0l;
+//        Long previousTime = 0l;
+//
+//        while(eltime<30000){
+//            if(speed>=20) {
+//                if (previousTime != timeToPrev) {
+//                    eltime += timeToPrev;
+//                    challengetime.setText("Tijd: " + eltime);
+//                    previousTime = timeToPrev;
+//                }
+//            }
+//            else{
+//                eltime = 0l;
+//            }
+//            Thread.sleep(1000);
+//        }
+//    }
 
 }
