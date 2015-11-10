@@ -24,6 +24,7 @@ public class User {
 
     private int nb_won_challenges;
     private int nb_days_biked;
+    private int total_points;
 
 
     private int drive_1_km;
@@ -81,7 +82,7 @@ public class User {
                 long first_login, long last_login, long total_distance, long total_time,
                 float highest_speed, float average_speed, float highest_acceleration,
                 double highest_altitude, double lowest_altitude, double highest_altitude_diff,
-                int nb_won_challenges, int nb_days_biked, int drive_1_km, int drive_5_km, int drive_10_km,
+                int nb_won_challenges, int nb_days_biked, int total_points, int drive_1_km, int drive_5_km, int drive_10_km,
                 int drive_50_km, int drive_100_km, int drive_250_km, int drive_500_km, int drive_1000_km, int drive_5000_km,
                 int topspeed_30, int topspeed_35, int topspeed_40, int topspeed_45, int topspeed_50,
                 int nb_challenge_1, int nb_challenge_5, int nb_challenge_10, int nb_challenge_50, int nb_challenge_200,
@@ -106,6 +107,7 @@ public class User {
         this.highest_altitude_diff = highest_altitude_diff;
         this.nb_won_challenges = nb_won_challenges;
         this.nb_days_biked = nb_days_biked;
+        this.total_points = total_points;
 
         this.drive_1_km = drive_1_km;
         this.drive_5_km = drive_5_km;
@@ -461,8 +463,28 @@ public class User {
     public void setBiked_days_31(int biked_days_31){
         this.biked_days_31 = biked_days_31;
     }
-    public void setBiked_days_100(int biked_days_100){
-        this.biked_days_100 = biked_days_100;
+    public void setBiked_days_100(int biked_days_100){this.biked_days_100 = biked_days_100;}
+
+    public int getBelow_seelvl(){return below_seelvl;}
+    public int getAbove_1000m(){return above_1000m;}
+    public int getAlt_diff_10m(){return alt_diff_10m;}
+    public int getAlt_diff_25m(){return alt_diff_25m;}
+    public int getAlt_diff_50m(){return alt_diff_50m;}
+    public int getAlt_diff_100m(){return alt_diff_100m;}
+
+    public void setBelow_seelvl(int below_seelvl){this.below_seelvl = below_seelvl;}
+    public void setAbove_1000m(int above_1000m){this.above_1000m = above_1000m;}
+    public void setAlt_diff_10m(int alt_diff_10m){this.alt_diff_10m = alt_diff_10m;}
+    public void setAlt_diff_25m(int alt_diff_25m){this.alt_diff_25m = alt_diff_25m;}
+    public void setAlt_diff_50m(int alt_diff_50m){this.alt_diff_50m = alt_diff_50m;}
+    public void setAlt_diff_100m(int alt_diff_100m){this.alt_diff_100m = alt_diff_100m;}
+
+    public int getTotal_points() {
+        return total_points;
+    }
+
+    public void setTotal_points(int total_points) {
+        this.total_points = total_points;
     }
 }
 
