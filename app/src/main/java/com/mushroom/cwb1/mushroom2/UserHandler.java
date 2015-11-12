@@ -245,7 +245,7 @@ public class UserHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    private ContentValues getContentValues(User user) {
+    public ContentValues getContentValues(User user) {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_USER_NAME, user.getUser_name());
