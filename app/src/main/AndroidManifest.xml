@@ -113,6 +113,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mushroom.cwb1.mushroom2.Challenges" />
         </activity>
+        <activity
+            android:name=".Persoonlijke_statistieken"
+            android:label="@string/title_activity_persoonlijke_statistieken"
+            android:parentActivityName=".Homescreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
+        </activity>
     </application>
 
 </manifest>

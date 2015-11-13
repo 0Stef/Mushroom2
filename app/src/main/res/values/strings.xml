@@ -126,4 +126,7 @@
     <string name="eenheidAfstand">m</string>
     <string name="eenheidTijd">s</string>
 
+    // Activity Persoonlijke statistieken
+    <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
+
 </resources>
