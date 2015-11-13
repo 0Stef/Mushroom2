@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 
 public class UserHandler extends SQLiteOpenHelper {
@@ -20,27 +24,27 @@ public class UserHandler extends SQLiteOpenHelper {
     private static final String LONG = " INTEGER";
     private static final String INTEGER = " INTEGER";
     private static final String DOUBLE = " REAL";
-    private static final String STRING = " TEXT ";
+    private static final String STRING = " TEXT";
     private static final String COMMA = ", ";
 
-    //Algemene data
+        //Algemene data
     public static final String USER_TABLE = "userinfo";
     public static final String COLUMN_ID = "_id";
 
 
-    //User
+        //User
     public static final String COLUMN_USER_NAME = "user_name";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_COUNTRY = "country";
     public static final String COLUMN_CITY = "city";
 
 
-    //Login
+        //Login
     public static final String COLUMN_FIRST_LOGIN = "first_login";
     public static final String COLUMN_LAST_LOGIN = "last_login";
 
 
-    //Information
+        //Information
     public static final String COLUMN_TOTAL_DISTANCE = "total_distance";
     public static final String COLUMN_TOTAL_TIME = "total_time";
 
@@ -48,7 +52,7 @@ public class UserHandler extends SQLiteOpenHelper {
     public static final String COLUMN_AVERAGE_SPEED = "average_speed";
     public static final String COLUMN_HIGHEST_ACCELERATION = "highest_acceleration";
 
-    public static final String COLUMN_HIGHEST_ALTITUDE = "highest altitude";
+    public static final String COLUMN_HIGHEST_ALTITUDE = "highest_altitude";
     public static final String COLUMN_LOWEST_ALTITUDE = "lowest_altitude";
     public static final String COLUMN_HIGHEST_ALTITUDE_DIFF = "highest_altitude_diff";
 
@@ -57,22 +61,22 @@ public class UserHandler extends SQLiteOpenHelper {
     public static final String COLUMN_TOTAL_POINTS = "points";
 
 
-    // achievements
-    public static final String COLUMN_DRIVE_1_KM = "Drive_1_km";
-    public static final String COLUMN_DRIVE_5_KM = "Drive_5_km";
-    public static final String COLUMN_DRIVE_10_KM = "Drive_10_km";
-    public static final String COLUMN_DRIVE_50_KM = "Drive_50_km";
-    public static final String COLUMN_DRIVE_100_KM = "Drive_100_km";
-    public static final String COLUMN_DRIVE_250_KM = "Drive_250_km";
-    public static final String COLUMN_DRIVE_500_KM = "Drive_500_km";
-    public static final String COLUMN_DRIVE_1000_KM = "Drive_1000_km";
-    public static final String COLUMN_DRIVE_5000_KM = "Drive_5000_km";
+    //Achievements
+    public static final String COLUMN_DRIVE_1_KM = "drive_1_km";
+    public static final String COLUMN_DRIVE_5_KM = "drive_5_km";
+    public static final String COLUMN_DRIVE_10_KM = "drive_10_km";
+    public static final String COLUMN_DRIVE_50_KM = "drive_50_km";
+    public static final String COLUMN_DRIVE_100_KM = "drive_100_km";
+    public static final String COLUMN_DRIVE_250_KM = "drive_250_km";
+    public static final String COLUMN_DRIVE_500_KM = "drive_500_km";
+    public static final String COLUMN_DRIVE_1000_KM = "drive_1000_km";
+    public static final String COLUMN_DRIVE_5000_KM = "drive_5000_km";
 
-    public static final String COLUMN_TOPSPEED_30 = "TOPSPEED_30 ";
-    public static final String COLUMN_TOPSPEED_35 = "TOPSPEED_35 ";
-    public static final String COLUMN_TOPSPEED_40 = "TOPSPEED_40 ";
-    public static final String COLUMN_TOPSPEED_45 = "TOPSPEED_45 ";
-    public static final String COLUMN_TOPSPEED_50 = "TOPSPEED_50 ";
+    public static final String COLUMN_TOPSPEED_30 = "topspeed_30 ";
+    public static final String COLUMN_TOPSPEED_35 = "topspeed_35 ";
+    public static final String COLUMN_TOPSPEED_40 = "topspeed_40 ";
+    public static final String COLUMN_TOPSPEED_45 = "topspeed_45 ";
+    public static final String COLUMN_TOPSPEED_50 = "topspeed_50 ";
 
     public static final String COLUMN_NB_CHALLENGES_1 = "nb_challenges_1";
     public static final String COLUMN_NB_CHALLENGES_5 = "nb_challenges_5";
@@ -97,7 +101,6 @@ public class UserHandler extends SQLiteOpenHelper {
     public static final String COLUMN_ALT_DIFF_100 = "alt_diff_100";
 
 
-
     // Database
 
     public UserHandler(Context context) {
@@ -109,8 +112,6 @@ public class UserHandler extends SQLiteOpenHelper {
         String querry = CREATE + USER_TABLE + START_COLUMNS +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
                 COLUMN_USER_NAME + STRING + COMMA +
-                COLUMN_COUNTRY + STRING + COMMA +
-                COLUMN_CITY + STRING + COMMA +
                 COLUMN_PASSWORD + STRING + COMMA +
                 COLUMN_LAST_LOGIN + LONG + COMMA +
                 COLUMN_FIRST_LOGIN + LONG + COMMA +
@@ -120,11 +121,13 @@ public class UserHandler extends SQLiteOpenHelper {
                 COLUMN_HIGHEST_ACCELERATION + FLOAT + COMMA +
                 COLUMN_AVERAGE_SPEED + FLOAT + COMMA +
                 COLUMN_TOTAL_TIME + LONG + COMMA +
+                COLUMN_TOTAL_POINTS + INTEGER + COMMA +
                 COLUMN_HIGHEST_ALTITUDE + DOUBLE + COMMA +
                 COLUMN_LOWEST_ALTITUDE + DOUBLE + COMMA +
                 COLUMN_HIGHEST_ALTITUDE_DIFF + DOUBLE + COMMA +
                 COLUMN_NB_DAYS_BIKED + INTEGER + COMMA +
-                COLUMN_TOTAL_POINTS + INTEGER + COMMA +
+                COLUMN_COUNTRY + STRING + COMMA +
+                COLUMN_CITY + STRING + COMMA +
 
                 COLUMN_DRIVE_1_KM + INTEGER + COMMA +
                 COLUMN_DRIVE_5_KM + INTEGER + COMMA +
@@ -162,7 +165,7 @@ public class UserHandler extends SQLiteOpenHelper {
                 COLUMN_ALT_DIFF_10 + INTEGER + COMMA +
                 COLUMN_ALT_DIFF_25 + INTEGER + COMMA +
                 COLUMN_ALT_DIFF_50 + INTEGER + COMMA +
-                COLUMN_ALT_DIFF_100 + INTEGER + COMMA +
+                COLUMN_ALT_DIFF_100 + INTEGER +
                 STOP_COLUMNS;
         db.execSQL(querry);
     }
@@ -217,12 +220,11 @@ public class UserHandler extends SQLiteOpenHelper {
 
         ContentValues values = getContentValues(user);
         String userName = user.getUser_name();
-        db.update(USER_TABLE, values, COLUMN_USER_NAME + " = " + userName, null);
+        db.update(USER_TABLE, values, COLUMN_USER_NAME + " = " + "'" + userName + "'", null);
 
         db.close();
     }
 
-    @Deprecated
     public void overWrite(String userName, String column, Object object) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -240,12 +242,12 @@ public class UserHandler extends SQLiteOpenHelper {
             values.put(column, (Integer) object);
         }
 
-        db.update(USER_TABLE, values, COLUMN_USER_NAME + " = " + userName, null);
+        db.update(USER_TABLE, values, COLUMN_USER_NAME + " = " + "'" + userName + "'", null);
 
         db.close();
     }
 
-    public ContentValues getContentValues(User user) {
+    private ContentValues getContentValues(User user) {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_USER_NAME, user.getUser_name());
@@ -256,8 +258,8 @@ public class UserHandler extends SQLiteOpenHelper {
         values.put(COLUMN_FIRST_LOGIN, user.getFirst_login());
         values.put(COLUMN_LAST_LOGIN, user.getLast_login());
 
-        values.put(COLUMN_TOTAL_DISTANCE,user.getTotal_distance());
-        values.put(COLUMN_TOTAL_TIME,user.getTotal_time());
+        values.put(COLUMN_TOTAL_DISTANCE, user.getTotal_distance());
+        values.put(COLUMN_TOTAL_TIME, user.getTotal_time());
 
         values.put(COLUMN_HIGHEST_SPEED, user.getHighest_speed());
         values.put(COLUMN_AVERAGE_SPEED, user.getAverage_speed());
@@ -309,7 +311,6 @@ public class UserHandler extends SQLiteOpenHelper {
         values.put(COLUMN_ALT_DIFF_50,user.getAlt_diff_50m());
         values.put(COLUMN_ALT_DIFF_100,user.getAlt_diff_100m());
 
-
         return values;
     }
 
@@ -337,7 +338,7 @@ public class UserHandler extends SQLiteOpenHelper {
         }
     }
 
-    private User setUser(Cursor cursor) {
+    public User setUser(Cursor cursor) {
         User user = new User();
 
         user.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
@@ -345,24 +346,22 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));
         user.setCountry(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)));
         user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));
-
         user.setFirst_login(cursor.getLong(cursor.getColumnIndex(COLUMN_FIRST_LOGIN)));
         user.setLast_login(cursor.getLong(cursor.getColumnIndex(COLUMN_LAST_LOGIN)));
 
         user.setTotal_distance(cursor.getFloat(cursor.getColumnIndex(COLUMN_TOTAL_DISTANCE)));
         user.setTotal_time(cursor.getLong(cursor.getColumnIndex(COLUMN_TOTAL_TIME)));
+        user.setTotal_points(cursor.getInt(cursor.getColumnIndex(COLUMN_TOTAL_POINTS)));
 
         user.setHighest_speed(cursor.getFloat(cursor.getColumnIndex(COLUMN_HIGHEST_SPEED)));
         user.setAverage_speed(cursor.getFloat(cursor.getColumnIndex(COLUMN_AVERAGE_SPEED)));
         user.setHighest_acceleration(cursor.getFloat(cursor.getColumnIndex(COLUMN_HIGHEST_ACCELERATION)));
-
         user.setHighest_altitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_HIGHEST_ALTITUDE)));
         user.setLowest_altitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_LOWEST_ALTITUDE)));
         user.setHighest_altitude_diff(cursor.getDouble(cursor.getColumnIndex(COLUMN_HIGHEST_ALTITUDE_DIFF)));
 
         user.setNb_won_challenges(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_WON_CHALLENGES)));
         user.setNb_days_biked(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_DAYS_BIKED)));
-        user.setTotal_points(cursor.getInt(cursor.getColumnIndex(COLUMN_TOTAL_POINTS)));
 
         user.setDrive_1_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_1_KM)));
         user.setDrive_5_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_5_KM)));
@@ -374,11 +373,11 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setDrive_1000_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_1000_KM)));
         user.setDrive_5000_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_5000_KM)));
 
-        user.setTopspeed_30(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_30)));
-        user.setTopspeed_35(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_35)));
-        user.setTopspeed_40(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_40)));
-        user.setTopspeed_45(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_45)));
-        user.setTopspeed_50(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_50)));
+//        user.setTopspeed_30(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_30)));
+//        user.setTopspeed_35(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_35)));
+//        user.setTopspeed_40(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_40)));
+//        user.setTopspeed_45(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_45)));
+//        user.setTopspeed_50(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_50)));
 
         user.setNb_challenge_1(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_CHALLENGES_1)));
         user.setNb_challenge_5(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_CHALLENGES_5)));
@@ -402,7 +401,6 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setAlt_diff_50m(cursor.getInt(cursor.getColumnIndex(COLUMN_ALT_DIFF_50)));
         user.setAlt_diff_100m(cursor.getInt(cursor.getColumnIndex(COLUMN_ALT_DIFF_100)));
 
-
         return user;
     }
 
@@ -416,6 +414,11 @@ public class UserHandler extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+    public boolean isExistingUser(String userName) {
+        Cursor cursor = getUser(userName);
+        return cursor.moveToFirst();
     }
 
     public void updateHighestFloat(DataBaseHandler2 handler, String userName, String searchColumn, String updateColumn) {
@@ -450,9 +453,18 @@ public class UserHandler extends SQLiteOpenHelper {
 
     // Cursor
 
+    public Cursor getAll() {
+        String searchQuery = "SELECT * FROM " + USER_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
     public Cursor getUser(String userName) {
         String searchQuery = "SELECT * FROM " + USER_TABLE
-                + " WHERE " + COLUMN_USER_NAME + " = " + userName;
+                + " WHERE " + COLUMN_USER_NAME + " = " + "'" + userName + "'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
@@ -468,5 +480,47 @@ public class UserHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(searchQuery, null);
 
         return cursor;
+    }
+
+    // Json
+
+    public JSONArray createJsonDatabase() throws JSONException {
+        JSONArray array = new JSONArray();
+
+        LinkedList<User> list = getList(getAll());
+        for (User user : list) {
+            JSONObject object = createJsonObject(user);
+            array.put(object);
+        }
+
+        return array;
+    }
+
+    private JSONObject createJsonObject(User user) throws JSONException {
+        JSONObject object = new JSONObject();
+
+        object.put(COLUMN_USER_NAME, user.getUser_name());
+        object.put(COLUMN_PASSWORD, user.getPassword());
+        object.put(COLUMN_COUNTRY, user.getCountry());
+        object.put(COLUMN_CITY, user.getCity());
+
+        object.put(COLUMN_FIRST_LOGIN, user.getFirst_login());
+        object.put(COLUMN_LAST_LOGIN, user.getLast_login());
+
+        object.put(COLUMN_TOTAL_DISTANCE, user.getTotal_distance());
+        object.put(COLUMN_TOTAL_TIME, user.getTotal_time());
+
+        object.put(COLUMN_HIGHEST_SPEED, user.getHighest_speed());
+        object.put(COLUMN_AVERAGE_SPEED, user.getAverage_speed());
+        object.put(COLUMN_HIGHEST_ACCELERATION, user.getHighest_acceleration());
+
+        object.put(COLUMN_HIGHEST_ALTITUDE, user.getHighest_altitude());
+        object.put(COLUMN_LOWEST_ALTITUDE, user.getLowest_altitude());
+        object.put(COLUMN_HIGHEST_ALTITUDE_DIFF, user.getHighest_altitude_diff());
+
+        object.put(COLUMN_NB_WON_CHALLENGES, user.getNb_won_challenges());
+        object.put(COLUMN_NB_DAYS_BIKED, user.getNb_days_biked());
+
+        return object;
     }
 }
