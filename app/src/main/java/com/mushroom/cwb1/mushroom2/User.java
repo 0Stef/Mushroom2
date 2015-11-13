@@ -141,7 +141,7 @@ public class User {
         this.biked_days_100 = biked_days_100;
 
         this.below_seelvl = below_seelvl;
-        this.above_1000m = above_1000m;;
+        this.above_1000m = above_1000m;
         this.alt_diff_10m = alt_diff_10m;
         this.alt_diff_25m = alt_diff_25m;
         this.alt_diff_50m = alt_diff_50m;
@@ -353,7 +353,7 @@ public class User {
     public int getTopspeed_30(){
         return topspeed_30;
     }
-    public void setTopspeed_30(int topspeed_30){
+    public void setTopspeed_30(int topspeed_30) {
         this.topspeed_30 = topspeed_30;
     }
 

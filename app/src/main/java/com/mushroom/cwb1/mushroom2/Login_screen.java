@@ -7,9 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Login_screen extends AppCompatActivity {
+
+    EditText username;
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +24,30 @@ public class Login_screen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         Button loginbutton = (Button)findViewById(R.id.button);
+        Button registerbutton = (Button)findViewById(R.id.registerbutton);
+        username = (EditText)findViewById(R.id.editText);
+        password = (EditText)findViewById(R.id.editText2);
+
 
 
         loginbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), Homescreen.class);
-                        startActivity(i);
+                        UserHandler userHandler = new UserHandler(getApplicationContext());
+                        if (userHandler.isRightPassword(username.getText().toString(),password.getText().toString())){
+                            Intent i = new Intent(getApplicationContext(), Homescreen.class);
+                            startActivity(i);
+                        }
+
+                    }
+                }
+        );
+
+        registerbutton.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        Intent start_register = new Intent(getApplicationContext(),Register.class);
+                        startActivity(start_register);
                     }
                 }
         );

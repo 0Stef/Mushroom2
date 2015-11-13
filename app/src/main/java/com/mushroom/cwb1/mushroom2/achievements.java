@@ -10,9 +10,8 @@ import android.widget.ProgressBar;
 
 public class achievements extends AppCompatActivity {
 
-
     UserHandler handler;
-    User user;
+
     ProgressBar progress_1_km;
     ProgressBar progress_5_km;
     ProgressBar progress_10_km;
@@ -52,6 +51,11 @@ public class achievements extends AppCompatActivity {
     ProgressBar progress_alt_diff_100;
 
 
+    User user;
+
+
+
+
 
 
     @Override
@@ -61,6 +65,7 @@ public class achievements extends AppCompatActivity {
 
         //handler = new UserHandler(getApplicationContext());
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+        //User user = handler.getUserInformation(username);
 
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
         progress_5_km = (ProgressBar) findViewById(R.id.progress_5_km);

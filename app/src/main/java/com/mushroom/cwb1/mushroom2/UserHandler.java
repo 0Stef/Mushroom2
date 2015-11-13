@@ -62,21 +62,21 @@ public class UserHandler extends SQLiteOpenHelper {
 
 
     //Achievements
-    public static final String COLUMN_DRIVE_1_KM = "drive_1_km";
-    public static final String COLUMN_DRIVE_5_KM = "drive_5_km";
-    public static final String COLUMN_DRIVE_10_KM = "drive_10_km";
-    public static final String COLUMN_DRIVE_50_KM = "drive_50_km";
-    public static final String COLUMN_DRIVE_100_KM = "drive_100_km";
-    public static final String COLUMN_DRIVE_250_KM = "drive_250_km";
-    public static final String COLUMN_DRIVE_500_KM = "drive_500_km";
-    public static final String COLUMN_DRIVE_1000_KM = "drive_1000_km";
-    public static final String COLUMN_DRIVE_5000_KM = "drive_5000_km";
+    public static final String COLUMN_DRIVE_1_KM = "Drive_1_km";
+    public static final String COLUMN_DRIVE_5_KM = "Drive_5_km";
+    public static final String COLUMN_DRIVE_10_KM = "Drive_10_km";
+    public static final String COLUMN_DRIVE_50_KM = "Drive_50_km";
+    public static final String COLUMN_DRIVE_100_KM = "Drive_100_km";
+    public static final String COLUMN_DRIVE_250_KM = "Drive_250_km";
+    public static final String COLUMN_DRIVE_500_KM = "Drive_500_km";
+    public static final String COLUMN_DRIVE_1000_KM = "Drive_1000_km";
+    public static final String COLUMN_DRIVE_5000_KM = "Drive_5000_km";
 
-    public static final String COLUMN_TOPSPEED_30 = "topspeed_30 ";
-    public static final String COLUMN_TOPSPEED_35 = "topspeed_35 ";
-    public static final String COLUMN_TOPSPEED_40 = "topspeed_40 ";
-    public static final String COLUMN_TOPSPEED_45 = "topspeed_45 ";
-    public static final String COLUMN_TOPSPEED_50 = "topspeed_50 ";
+    public static final String COLUMN_TOPSPEED_30 = "topspeed_30";
+    public static final String COLUMN_TOPSPEED_35 = "topspeed_30";
+    public static final String COLUMN_TOPSPEED_40 = "topspeed_40";
+    public static final String COLUMN_TOPSPEED_45 = "topspeed_45";
+    public static final String COLUMN_TOPSPEED_50 = "topspeed_50";
 
     public static final String COLUMN_NB_CHALLENGES_1 = "nb_challenges_1";
     public static final String COLUMN_NB_CHALLENGES_5 = "nb_challenges_5";
@@ -173,8 +173,8 @@ public class UserHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Zolang DATABASE_VERSION niet manueel wordt verhoogd, zal dit niet automatisch gebeuren.
-        //deleteTable();
-        //onCreate(db);
+        deleteTable();
+        onCreate(db);
     }
 
     public void closeDataBase() {
@@ -363,6 +363,8 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setNb_won_challenges(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_WON_CHALLENGES)));
         user.setNb_days_biked(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_DAYS_BIKED)));
 
+        //FIXME Wenen?
+
         user.setDrive_1_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_1_KM)));
         user.setDrive_5_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_5_KM)));
         user.setDrive_10_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_10_KM)));
@@ -373,11 +375,11 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setDrive_1000_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_1000_KM)));
         user.setDrive_5000_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_5000_KM)));
 
-//        user.setTopspeed_30(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_30)));
-//        user.setTopspeed_35(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_35)));
-//        user.setTopspeed_40(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_40)));
-//        user.setTopspeed_45(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_45)));
-//        user.setTopspeed_50(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_50)));
+        user.setTopspeed_30(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_30)));
+        user.setTopspeed_35(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_35)));
+        user.setTopspeed_40(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_40)));
+        user.setTopspeed_45(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_45)));
+        user.setTopspeed_50(cursor.getInt(cursor.getColumnIndex(COLUMN_TOPSPEED_50)));
 
         user.setNb_challenge_1(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_CHALLENGES_1)));
         user.setNb_challenge_5(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_CHALLENGES_5)));
