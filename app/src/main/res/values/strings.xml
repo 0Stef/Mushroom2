@@ -132,4 +132,7 @@
     <string name="register_city">Enter your city</string>
     <string name="registeract_register">Register!</string>
 
+    // Activity Persoonlijke statistieken
+    <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
+
 </resources>
