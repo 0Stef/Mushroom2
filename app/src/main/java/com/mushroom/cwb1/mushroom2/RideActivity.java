@@ -48,18 +48,23 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView textMaximumAcceleration;
     TextView textElapsedTime;
     TextView textDistance;
+    TextView challengetime;
+    TextView Succes;
+    TextView currtemp;
+    TextView starttemp;
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
     float distanceToPrev = 0f;
     long timeToPrev = 0l;
     private long elapsedTime = 0l;
-    private float distance= 0f;
+    private float distance = 0f;
     private float maxSpeed = 0f;
     private float maxAcceleration = 0f;
     private float averageSpeed = 0f;
     private float averageAcceleration = 0f;
     private float speed = 0f;
+    private float temperature = 0f;
 
     private boolean eerstekeer = true;
     private long startTime = 0L;
@@ -69,7 +74,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
-
 
 
     private SensorManager mSensorManager;
@@ -107,7 +111,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +122,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
 
-
-
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
         textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
         textMaximumSpeed = (TextView) findViewById(R.id.maximumSpeed);
@@ -129,6 +130,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         textMaximumAcceleration = (TextView) findViewById(R.id.maximumAcceleration);
         textDistance = (TextView) findViewById(R.id.distance);
         textElapsedTime = (TextView) findViewById(R.id.elapsedTime);
+        Succes = (TextView) findViewById(R.id.succes);
+        challengetime = (TextView) findViewById(R.id.challengetime);
+        starttemp = (TextView) findViewById(R.id.starttemp);
+        currtemp = (TextView) findViewById(R.id.currtemp);
+        Succes.setVisibility(View.INVISIBLE);
+        challengetime.setVisibility(View.INVISIBLE);
+        starttemp.setVisibility(View.INVISIBLE);
+        currtemp.setVisibility(View.INVISIBLE);
 
 
 
@@ -143,7 +152,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
 
 
         elapsedTime = 0;
@@ -165,7 +173,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         setUpMapIfNeeded();
     }
 
-    public void startrecording(View view){
+    public void startrecording(View view) {
 
         //TODO zet een scherm met wacht op signaal vn gps
 
@@ -184,20 +192,27 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         Sensor mAcceleration;
         Sensor mMagneticfield;
+        Sensor mTemperature;
 
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            mSensorManager.registerListener(this,mAcceleration,1000000);
-        }
-        else{
+            mSensorManager.registerListener(this, mAcceleration, 1000000);
+        } else {
             //TODO iets verzinnen als sensor niet aanwezig is
         }
 
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null){
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
             mMagneticfield = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-            mSensorManager.registerListener(this,mMagneticfield,1000000);
+            mSensorManager.registerListener(this, mMagneticfield, 1000000);
+        } else {
         }
-        else{
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
+            mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+            mSensorManager.registerListener(this, mTemperature, 1000000);
+        } else if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null) {
+            mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+            mSensorManager.registerListener(this, mTemperature, 1000000);
         }
 
         // Acquire a reference to the system Location Manager
@@ -213,7 +228,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     distanceToPrev = location.distanceTo(previousLocation);
                     timeToPrev = location.getTime() - previousLocation.getTime();
 
-                    }
+                }
 
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
@@ -226,9 +241,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 String date = dateF.format(dateUnformatted);
 
                 float msTokmu = 3.6f;
-                speed = location.getSpeed()*msTokmu;
+                speed = location.getSpeed() * msTokmu;
 
-                if (maxSpeed < speed ){
+                if (maxSpeed < speed) {
                     maxSpeed = speed;
                     textMaximumSpeed.setText(decimalF.format(maxSpeed));
                 }
@@ -237,20 +252,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 double longitude = location.getLongitude();
 
 
-
-
-
-                if (elapsedTime != 0 || timeToPrev != 0){
-                    averageSpeed = (averageSpeed*elapsedTime + speed*timeToPrev)/(elapsedTime+timeToPrev);
-                    averageAcceleration = (averageAcceleration*elapsedTime + accx*timeToPrev)/(elapsedTime+timeToPrev);
+                if (elapsedTime != 0 || timeToPrev != 0) {
+                    averageSpeed = (averageSpeed * elapsedTime + speed * timeToPrev) / (elapsedTime + timeToPrev);
+                    averageAcceleration = (averageAcceleration * elapsedTime + accx * timeToPrev) / (elapsedTime + timeToPrev);
                 }
 
                 textCurrentSpeed.setText(decimalF.format(speed));
                 textAverageSpeed.setText(decimalF.format(averageSpeed));
 
 
-
-                if (maxAcceleration < accx ){
+                if (maxAcceleration < accx) {
                     maxAcceleration = accx;
                     textMaximumAcceleration.setText(decimalF.format(maxAcceleration));
                 }
@@ -263,9 +274,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 distance = distance + distanceToPrev;
 
                 textDistance.setText(decimalF.format(distance));
-                textElapsedTime.setText(decimalF.format(elapsedTime/1000));
+                textElapsedTime.setText(decimalF.format(elapsedTime / 1000));
 
-                lastPoint = new LatLng(latitude,longitude);
+                lastPoint = new LatLng(latitude, longitude);
 
                 gpsPoints = route.getPoints();
                 gpsPoints.add(lastPoint);
@@ -275,7 +286,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
 
 
-                dbRow punt = new dbRow(currentRideId,time,accx,accy,accz,speed,longitude,latitude,0f,magnfx,magnfy,magnfz,distanceToPrev,timeToPrev);
+                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, 0f, magnfx, magnfy, magnfz, distanceToPrev, timeToPrev);
                 handler.addPoint(punt);
 
 
@@ -318,8 +329,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         };
 
 
-
-
 // Register the listener with the Location Manager to receive location updates
         // Deze requestLocationUpdates() moet bij klik op start opgeroepen worden
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
@@ -332,9 +341,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void pauserecording(View view){
-
-
+    public void pauserecording(View view) {
 
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
@@ -350,10 +357,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //TODO zoom veranderen zodat hele rit in beeld is
 
 
-
     }
 
-    public void resumerecording(View view){
+    public void resumerecording(View view) {
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
         resumerecordingbutton.setVisibility(View.INVISIBLE);
@@ -362,7 +368,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void stoprecording(View view){
+    public void stoprecording(View view) {
 
 
         startrecordingbutton.setVisibility(View.VISIBLE);
@@ -375,9 +381,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
-
-
-
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -388,14 +391,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //TODO zoom veranderen zodat hele rit in beeld is
 
 
-
-
     }
-
-
-
-
-
 
 
     @Override
@@ -405,21 +401,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     @Override
-    public final void onSensorChanged(SensorEvent event){
+    public final void onSensorChanged(SensorEvent event) {
 
 
-        if(event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD) {
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             magnfx = event.values[0];
             magnfy = event.values[1];
             magnfz = event.values[2];
             //magneticField.setText("Magnetisch veld is: " + decimalF.format(magnfx) + " x " + magnfy + " y " + magnfz + " z ");
         }
 
-        if(event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             accx = event.values[0];
             accy = event.values[1];
-            accz = event.values[2]-10;
+            accz = event.values[2] - 10;
             //accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
+        }
+
+        if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE){
+            temperature = event.values[0];
         }
 
     }
@@ -481,7 +481,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
-
     private void setUpMap() {
 
         //mPolylineOptions.width(5).color(Color.BLUE);
@@ -492,48 +491,121 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         route = mMap.addPolyline(mPolylineOptions);
 
 
-
         //TODO fixen laatste punt  uit db
 
         //dbRow LastPoint = handler.getGreatestValue(handler.COLUMN_TIME);
         //punten.setText("lastpoint voor setup" + LastPoint.toString());
 
         //dbRow LastPoint = new dbRow(10,22222,1f,1f,1f,0.0f,0.0d,0.0d,0.0f,51.0081564f,4.58057f,0.0f,0f,1000000);
-        dbRow LastPoint = new dbRow(10,22222,1f,1f,1f,0.0f,0.0d,0.0d,0.0f,0f,0f,0.0f,0f,1000000);
+        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f, 0f, 1000000);
 
 
-        if (LastPoint.getLongitude()!= 0.0f) {
+        if (LastPoint.getLongitude() != 0.0f) {
             LatLng lastPointLatLng = new LatLng(LastPoint.getLatitude(), LastPoint.getLongitude());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPointLatLng, 10.0f));
             punten.setText("longitude != 0");
-        }
-        else {
-            LatLng defaultPointLatLng = new LatLng(51.0015,4.58550);
+        } else {
+            LatLng defaultPointLatLng = new LatLng(51.0015, 4.58550);
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 10.0f));
             //punten.setText("longitude = 0");
         }
 
     }
 
-//    public void randomChallenge(View view){
-//        TextView challengetime;
-//        challengetime =(TextView)findViewById(R.id.challengetime);
-//        Long eltime =0l;
-//        Long previousTime = 0l;
-//
-//        while(eltime<30000){
-//            if(speed>=20) {
-//                if (previousTime != timeToPrev) {
-//                    eltime += timeToPrev;
-//                    challengetime.setText("Tijd: " + eltime);
-//                    previousTime = timeToPrev;
-//                }
-//            }
-//            else{
-//                eltime = 0l;
-//            }
-//            Thread.sleep(1000);
-//        }
-//    }
 
+    Long eltime = 0l;
+
+    public void keeptime(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                challengetime.post(new Runnable() {
+                    public void run() {
+                        challengetime = (TextView) findViewById(R.id.challengetime);
+                        challengetime.setVisibility(View.VISIBLE);
+                    }
+                });
+                try {
+                    long gestart = SystemClock.uptimeMillis();
+                    while (eltime < 30000) {
+                        if (speed >= 20) {
+                            eltime = (SystemClock.uptimeMillis() - gestart);
+                            challengetime.post(new Runnable() {
+                                public void run() {
+                                    challengetime.setText("Tijd: " + eltime / 1000 + "s");
+                                }
+                            });
+                        } else {
+                            eltime = 0l;
+                            gestart = SystemClock.uptimeMillis();
+                        }
+                        Thread.sleep(500);
+                    }
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                } catch (InterruptedException e) {
+
+                }
+            }
+        }).start();
+    }
+
+
+    double acct;
+
+    public void keepacceleration(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                challengetime.post(new Runnable() {
+                    public void run() {
+                        challengetime = (TextView) findViewById(R.id.challengetime);
+                        challengetime.setVisibility(View.VISIBLE);
+                    }
+                });
+                try {
+                    long gestart = SystemClock.uptimeMillis();
+                    while (eltime < 5000) {
+                        acct = Math.sqrt(Math.pow(accx, 2) + Math.pow(accy, 2) + Math.pow(accz, 2));
+                        if (acct >= 3) {
+                            eltime = (SystemClock.uptimeMillis() - gestart);
+                            challengetime.post(new Runnable() {
+                                public void run() {
+                                    challengetime.setText("Tijd: " + eltime / 1000 + "s");
+                                }
+                            });
+                        } else {
+                            eltime = 0l;
+                            gestart = SystemClock.uptimeMillis();
+                        }
+                        Thread.sleep(500);
+                    }
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                } catch (InterruptedException e) {
+
+                }
+            }
+        }).start();
+    }
+
+    public void temperaturedifference(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                float starttemp = temperature;
+                try {
+                    while (Math.abs(temperature - starttemp) < 1) {
+                        Thread.sleep(5000);
+                    }
+                }catch (InterruptedException e){
+
+                }
+            }
+        }).start();
+    }
 }
+
