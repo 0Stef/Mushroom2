@@ -596,14 +596,36 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     public void temperaturedifference(View view) {
         new Thread(new Runnable() {
             public void run() {
-                float starttemp = temperature;
+                final float starttemperatuur = temperature;
+                currtemp.post(new Runnable() {
+                    public void run() {
+                        currtemp.setText("Huidige temperatuur: " + temperature + "°C");
+                        currtemp.setVisibility(View.VISIBLE);
+                    }
+                });
+                starttemp.post(new Runnable() {
+                    public void run() {
+                        starttemp.setText("Starttemperatuur: " + starttemperatuur + "°C");
+                        starttemp.setVisibility(View.VISIBLE);
+                    }
+                });
                 try {
-                    while (Math.abs(temperature - starttemp) < 1) {
+                    while (Math.abs(temperature - starttemperatuur) < 1) {
+                        currtemp.post(new Runnable() {
+                            public void run() {
+                                currtemp.setText("Huidige temperatuur: " + temperature + "°C");
+                            }
+                        });
                         Thread.sleep(5000);
                     }
                 }catch (InterruptedException e){
 
                 }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         }).start();
     }
