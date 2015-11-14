@@ -222,7 +222,7 @@
             android:layout_below="@id/currentAcceleration"
             android:text="@string/getstartedch"
             android:layout_marginTop="10dp"
-            android:onClick="randomChallenge"
+            android:onClick="temperaturedifference"
             android:id="@+id/challengebutton"
             />
         <TextView
@@ -230,7 +230,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/challengebutton"
             android:id="@+id/challengetime"
+            android:text="Tijd: 0s"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/challengebutton"
+            android:id="@+id/starttemp"
+            android:text="Test"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/starttemp"
+            android:id="@+id/currtemp"
+            android:text="Test"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/succes"
+            android:layout_below="@id/challengetime"
+            android:textSize="40sp"
+            android:id="@+id/succes"
+            android:layout_marginTop="15dp"/>
 
 
 
