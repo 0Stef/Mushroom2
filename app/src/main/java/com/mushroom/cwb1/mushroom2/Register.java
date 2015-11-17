@@ -68,13 +68,14 @@ public class Register extends AppCompatActivity {
         DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
 
         User user = new User();
-        user.setUser_name(userNameField.getText().toString());
+        user.setUser_name(userNameField.getText().toString().replaceAll(" ", "_"));
         user.setPassword(passWordField.getText().toString());
         user.setCountry(countryField.getText().toString());
         user.setCity(cityField.getText().toString());
 
         userHandler.addUser(user);
         dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
+        System.out.println("    -   Created new user");
 
         userHandler = null;
         dbHandler = null;

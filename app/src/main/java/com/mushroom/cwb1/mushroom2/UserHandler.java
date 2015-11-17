@@ -37,6 +37,7 @@ public class UserHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_COUNTRY = "country";
     public static final String COLUMN_CITY = "city";
+    public static final String COLUMN_USER_ID = "user_id";
 
 
         //Login
@@ -73,7 +74,7 @@ public class UserHandler extends SQLiteOpenHelper {
     public static final String COLUMN_DRIVE_5000_KM = "Drive_5000_km";
 
     public static final String COLUMN_TOPSPEED_30 = "topspeed_30";
-    public static final String COLUMN_TOPSPEED_35 = "topspeed_30";
+    public static final String COLUMN_TOPSPEED_35 = "topspeed_35";
     public static final String COLUMN_TOPSPEED_40 = "topspeed_40";
     public static final String COLUMN_TOPSPEED_45 = "topspeed_45";
     public static final String COLUMN_TOPSPEED_50 = "topspeed_50";
@@ -113,6 +114,7 @@ public class UserHandler extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA +
                 COLUMN_USER_NAME + STRING + COMMA +
                 COLUMN_PASSWORD + STRING + COMMA +
+                COLUMN_USER_ID + STRING + COMMA +
                 COLUMN_LAST_LOGIN + LONG + COMMA +
                 COLUMN_FIRST_LOGIN + LONG + COMMA +
                 COLUMN_TOTAL_DISTANCE + FLOAT + COMMA +
@@ -254,6 +256,7 @@ public class UserHandler extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD, user.getPassword());
         values.put(COLUMN_COUNTRY, user.getCountry());
         values.put(COLUMN_CITY, user.getCity());
+        values.put(COLUMN_USER_ID,user.getUser_id());
 
         values.put(COLUMN_FIRST_LOGIN, user.getFirst_login());
         values.put(COLUMN_LAST_LOGIN, user.getLast_login());
@@ -344,6 +347,7 @@ public class UserHandler extends SQLiteOpenHelper {
         user.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
         user.setUser_name(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
         user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));
+        user.setUser_id(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
         user.setCountry(cursor.getString(cursor.getColumnIndex(COLUMN_COUNTRY)));
         user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));
         user.setFirst_login(cursor.getLong(cursor.getColumnIndex(COLUMN_FIRST_LOGIN)));
@@ -449,8 +453,8 @@ public class UserHandler extends SQLiteOpenHelper {
 
     // Prefabricated functions
 
-    public User getUserInformation(String userName) {
-        return getRow(getUser(userName));
+    public User getUserInformation(String username) {
+        return getRow(getUser(username));
     }
 
     // Cursor
@@ -505,6 +509,7 @@ public class UserHandler extends SQLiteOpenHelper {
         object.put(COLUMN_PASSWORD, user.getPassword());
         object.put(COLUMN_COUNTRY, user.getCountry());
         object.put(COLUMN_CITY, user.getCity());
+        object.put(COLUMN_USER_ID, user.getUser_id());
 
         object.put(COLUMN_FIRST_LOGIN, user.getFirst_login());
         object.put(COLUMN_LAST_LOGIN, user.getLast_login());
