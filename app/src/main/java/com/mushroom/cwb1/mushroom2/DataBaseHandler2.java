@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
 
 import java.util.LinkedList;
 
@@ -13,6 +14,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "GeneralDatabase2.db";
     private String TABLE;
+    private Location location;
 
 
     private static final String CREATE = "CREATE TABLE ";
@@ -25,36 +27,30 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     private static final String COMMA = ", ";
 
 
-    // Algemene data
+        // Algemene data
     public static final String TABLE_DEFAULT = "rides";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_RIDE_ID = "ride_id";
     public static final String COLUMN_TIME = "time";
 
 
-    // Accelerometer data
-    public static final String COLUMN_ACC_X = "Accelerometer_xValue";
-    public static final String COLUMN_ACC_Y = "Accelerometer_yValue";
-    public static final String COLUMN_ACC_Z = "Accelerometer_zValue";
+        // Accelerometer data
+    public static final String COLUMN_ACC_X = "accelerometer_xValue";
+    public static final String COLUMN_ACC_Y = "accelerometer_yValue";
+    public static final String COLUMN_ACC_Z = "accelerometer_zValue";
 
 
-    // Gps data
+        // Gps data
     public static final String COLUMN_GPS_VEL  = "velocity";
     public static final String COLUMN_GPS_LONG = "longitude";
     public static final String COLUMN_GPS_LAT = "latitude";
-    public static final String COLUMN_GPS_ALT= "altitude";
+    public static final String COLUMN_GPS_ALT = "altitude";
 
 
-    // Magneticfield data
-    public static final String COLUMN_MAGN_X = "Magnetic_xValue";
-    public static final String COLUMN_MAGN_Y = "Magnetic_yValue";
-    public static final String COLUMN_MAGN_Z = "Magnetic_zValue";
-
-    // Distance and time to previous point
-    public static final String COLUMN_DIST_TO_PREV = "DistanceToPreviousPoint";
-    public static final String COLUMN_TIME_TO_PREV = "TimeToPreviousPoint";
-
-
+        // Magneticfield data
+    public static final String COLUMN_MAGN_X = "magnetic_xValue";
+    public static final String COLUMN_MAGN_Y = "magnetic_yValue";
+    public static final String COLUMN_MAGN_Z = "magnetic_zValue";
 
 
     // Database
@@ -62,6 +58,8 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     public DataBaseHandler2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         TABLE = TABLE_DEFAULT;
+
+        location = new Location(DATABASE_NAME);
     }
 
     @Override
@@ -100,9 +98,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
                 COLUMN_GPS_VEL + FLOAT + COMMA +
                 COLUMN_GPS_LONG + DOUBLE + COMMA +
                 COLUMN_GPS_LAT + DOUBLE + COMMA +
-                COLUMN_GPS_ALT + FLOAT + COMMA +
-                COLUMN_DIST_TO_PREV + FLOAT + COMMA +
-                COLUMN_TIME_TO_PREV + LONG + STOP_COLUMNS ;
+                COLUMN_GPS_ALT + FLOAT  + STOP_COLUMNS ;
         db.execSQL(db2querry);
     }
 
@@ -151,7 +147,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         values.put(COLUMN_TIME, point.getMillisec());
         values.put(COLUMN_ACC_X, point.getAccelerometer_xValue());
         values.put(COLUMN_ACC_Y, point.getAccelerometer_yValue());
-        values.put(COLUMN_ACC_Z, point.getAccelerometer_xValue());
+        values.put(COLUMN_ACC_Z, point.getAccelerometer_zValue());
 
         values.put(COLUMN_GPS_ALT, point.getAltitude());
         values.put(COLUMN_GPS_LAT, point.getLatitude());
@@ -162,12 +158,23 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         values.put(COLUMN_MAGN_Y, point.getMagnetic_yValue());
         values.put(COLUMN_MAGN_Z, point.getMagnetic_zValue());
 
-        values.put(COLUMN_DIST_TO_PREV, point.getDistancetopreviouspoint());
-        values.put(COLUMN_TIME_TO_PREV, point.getTimetopreviouspoint());
-
         db.insert(TABLE, null, values);
 
         db.close();
+    }
+
+    public void pause(dbRow point) {
+        int rideID = point.getRide_id();
+        point.setRide_id(-rideID);
+
+        this.addPoint(point);
+    }
+
+    public void unPause(dbRow point) {
+        int rideID = point.getRide_id();
+        point.setRide_id(-rideID);
+
+        this.addPoint(point);
     }
 
     public LinkedList getList(Cursor cursor) {
@@ -210,10 +217,86 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         row.setLongitude(cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG)));
         row.setAltitude(cursor.getFloat(cursor.getColumnIndex(COLUMN_GPS_ALT)));
 
-        row.setDistancetopreviouspoint(cursor.getFloat(cursor.getColumnIndex(COLUMN_DIST_TO_PREV)));
-        row.setTimetopreviouspoint(cursor.getLong(cursor.getColumnIndex(COLUMN_TIME_TO_PREV)));
+        row.setMagnetic_xValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_X)));
+        row.setMagnetic_yValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Y)));
+        row.setMagnetic_zValue(cursor.getFloat(cursor.getColumnIndex(COLUMN_ACC_Z)));
 
         return row;
+    }
+
+    public int getDistance(Cursor cursor) {
+        int totalDistance = 0;
+
+        double startLatitude;
+        double startLongitude;
+        int startRideID;
+
+        double endLatitude;
+        double endLongitude;
+        int endRideID;
+
+        if (cursor.moveToFirst()) {
+            startLatitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT));
+            startLongitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG));
+            startRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+            while (cursor.moveToNext()) {
+                endLatitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT));
+                endLongitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG));
+                endRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+                if (isSameRide(startRideID, endRideID) && !isPaused(startRideID, endRideID)) {
+                        float[] distance = new float[1];
+                        location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, distance);
+
+                        totalDistance += distance[0];
+                }
+
+                startLatitude = endLatitude;
+                startLongitude = endLongitude;
+                startRideID = endRideID;
+            }
+        }
+
+        return totalDistance;
+    }
+
+    public long getTime(Cursor cursor) {
+        long totalTime = 0l;
+
+        long startTime;
+        int startRideID;
+
+        long endTime;
+        int endRideID;
+
+        if (cursor.moveToFirst()) {
+            startTime = cursor.getLong(cursor.getColumnIndex(COLUMN_TIME));
+            startRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+            while (cursor.moveToNext()) {
+                endTime = cursor.getLong(cursor.getColumnIndex(COLUMN_TIME));
+                endRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+                if (isSameRide(startRideID, endRideID) && !isPaused(startRideID, endRideID)) {
+                    long deltaTime = endTime - startTime;
+                    totalTime += deltaTime;
+                }
+
+                startTime = endTime;
+                startRideID = endRideID;
+            }
+        }
+
+        return totalTime;
+    }
+
+    private boolean isSameRide(int startRideID, int endRideID) {
+        return (startRideID == endRideID || startRideID == -endRideID);
+    }
+
+    private boolean isPaused(int startRideID, int endRideID) {
+        return (startRideID < 0 && endRideID < 0);
     }
 
     // Prefabricated functions
@@ -230,25 +313,27 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return row;
     }
 
-    public int getGreatestRideId(){
-        dbRow row = getGreatestValue(COLUMN_RIDE_ID);
-        int greatestRideId = row.getRide_id();
+    public int getGreatestRideID() {
+        dbRow row = getRow(getGreatest(COLUMN_RIDE_ID));
 
-        return greatestRideId;
+        return row.getRide_id();
     }
 
-    public dbRow getFirstEntryRide(int rideId){
-        dbRow row = getRow(getFirstThisRide(rideId));
+    public dbRow getFirstEntryRide(int rideID){
+        dbRow row = getRow(getFirstThisRide(rideID));
 
         return row;
     }
 
-    public dbRow getLastEntryRide(int rideId){
-        dbRow row = getRow(getLastThisRide(rideId));
+    public dbRow getLastEntryRide(int rideID){
+        dbRow row = getRow(getLastThisRide(rideID));
 
         return row;
     }
 
+    public long getTimeThisRide(int rideID) {
+        return getTime(getAllThisRide(rideID));
+    }
 
     // Searchquery
 
@@ -277,12 +362,10 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
-    @Deprecated
     public Cursor getGreatestAfter(String column, long millisec) {
-        //FIXME KLopt niet.
         String searchQuery = "SELECT * FROM " + TABLE +
-                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")" +
-                " AND " + COLUMN_TIME + " > " + millisec;
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
+                    " WHERE " + COLUMN_TIME + " > " + millisec + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
@@ -290,11 +373,10 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
-    @Deprecated
     public Cursor getGreatestThisRide(String column, int rideID) {
         String searchQuery = "SELECT * FROM " + TABLE +
-                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE + ")" +
-                " AND " + COLUMN_RIDE_ID + " = " + rideID;
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
+                    " WHERE " + COLUMN_RIDE_ID + " = " + rideID + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
@@ -334,7 +416,24 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     public Cursor getAllThisRide(int rideID) {
         String searchQuery = "SELECT * FROM " + TABLE +
-                " WHERE " + COLUMN_RIDE_ID + " = " + rideID;
+                " WHERE " + COLUMN_RIDE_ID + " = " + rideID +
+                " OR " + COLUMN_RIDE_ID + " = " + -rideID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getLast() {
+        Cursor cursor = getLast(1);
+
+        return cursor;
+    }
+
+    public Cursor getLast(int x) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " ORDER BY " + COLUMN_ID + " DESC LIMIT " + x;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
@@ -363,5 +462,4 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
         return cursor;
     }
-
 }
