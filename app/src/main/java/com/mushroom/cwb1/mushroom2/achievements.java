@@ -11,8 +11,9 @@ import android.widget.ProgressBar;
 public class achievements extends AppCompatActivity {
 
 
+
     UserHandler handler;
-    User user;
+
     ProgressBar progress_1_km;
     ProgressBar progress_5_km;
     ProgressBar progress_10_km;
@@ -52,6 +53,11 @@ public class achievements extends AppCompatActivity {
     ProgressBar progress_alt_diff_100;
 
 
+    User user;
+
+
+
+
 
 
     @Override
@@ -59,8 +65,9 @@ public class achievements extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
-        //handler = new UserHandler(getApplicationContext());
-        //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+        handler = new UserHandler(getApplicationContext());
+        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+        User user = handler.getUserInformation(Login_screen.currentUser);
 
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
         progress_5_km = (ProgressBar) findViewById(R.id.progress_5_km);
@@ -165,12 +172,12 @@ public class achievements extends AppCompatActivity {
             progress_topspeed_50.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
         // moet dit erbij??
-//        progress_topspeed_30.setProgress((int) ((user.getHighest_speed()/30.0)*100));
-//        progress_topspeed_35.setProgress((int) ((user.getHighest_speed()/35.0)*100));
-//        progress_topspeed_40.setProgress((int) ((user.getHighest_speed()/40.0)*100));
-//        progress_topspeed_45.setProgress((int) ((user.getHighest_speed()/45.0)*100));
-//        progress_topspeed_50.setProgress((int) ((user.getHighest_speed()/50.0)*100));
-//
+        progress_topspeed_30.setProgress((int) ((user.getHighest_speed()/30.0)*100));
+        progress_topspeed_35.setProgress((int) ((user.getHighest_speed()/35.0)*100));
+        progress_topspeed_40.setProgress((int) ((user.getHighest_speed()/40.0)*100));
+        progress_topspeed_45.setProgress((int) ((user.getHighest_speed()/45.0)*100));
+        progress_topspeed_50.setProgress((int) ((user.getHighest_speed()/50.0)*100));
+
 
         if (user.getNb_challenge_1() == 1){
             progress_nb_challenge_1.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
@@ -247,9 +254,11 @@ public class achievements extends AppCompatActivity {
             progress_alt_diff_100.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
-
-
-
+        progress_above_1000.setProgress((int) ((user.getAbove_1000m()/1000.0)*100));
+        progress_alt_diff_10.setProgress((int) (user.getHighest_altitude_diff()/10.0)*100);
+        progress_alt_diff_25.setProgress((int) (user.getHighest_altitude_diff()/25.0)*100);
+        progress_alt_diff_50.setProgress((int) (user.getHighest_altitude_diff()/50.0)*100);
+        progress_alt_diff_100.setProgress((int) (user.getHighest_altitude_diff()/100.0)*100);
 
     }
 
