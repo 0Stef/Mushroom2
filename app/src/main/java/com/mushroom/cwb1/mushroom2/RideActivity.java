@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -654,7 +655,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void driveCircle(View view){
-
+        Array
     }
 }
 
+//Loction location = new Location("iets");
+
+//Array[Float] array = new Array[]
+
+//distance = array[0]
+//location.distanceBetween();
