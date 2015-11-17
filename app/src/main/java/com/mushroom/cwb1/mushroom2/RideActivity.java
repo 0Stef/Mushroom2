@@ -656,6 +656,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void driveCircle(View view){
         Array
+                
     }
 }
 
