@@ -109,6 +109,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button resumerecordingbutton;
     Button pauserecordingbutton;
     Button stoprecordingbutton;
+    Button challengebutton;
 
 
     @Override
@@ -145,10 +146,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         resumerecordingbutton = (Button) findViewById(R.id.resumerecordingbutton);
         pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
         stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
+        challengebutton = (Button) findViewById(R.id.challengebutton);
         startrecordingbutton.setVisibility(View.VISIBLE);
         resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
+        challengebutton.setVisibility(View.INVISIBLE);
 
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -182,6 +185,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
+        challengebutton.setVisibility(View.VISIBLE);
 
 
         textDistance.setText("wachten op gps signaal");
@@ -365,7 +369,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
-
+        //TODO de metingen worden nog niet opnieuw gestart
     }
 
     public void stoprecording(View view) {
@@ -375,6 +379,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
+        challengebutton.setVisibility(View.INVISIBLE);
 
 
         mSensorManager.unregisterListener(this);
@@ -421,7 +426,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE){
             temperature = event.values[0];
         }
-
     }
 
 
@@ -515,7 +519,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     Long eltime = 0l;
 
-    public void keeptime(View view) {
+    public void keepSpeed(View view) {
         new Thread(new Runnable() {
             public void run() {
                 challengetime.post(new Runnable() {
@@ -555,7 +559,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     double acct;
 
-    public void keepacceleration(View view) {
+    public void keepAcceleration(View view) {
         new Thread(new Runnable() {
             public void run() {
                 challengetime.post(new Runnable() {
@@ -593,7 +597,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
-    public void temperaturedifference(View view) {
+    public void temperatureDifference(View view) {
         new Thread(new Runnable() {
             public void run() {
                 final float starttemperatuur = temperature;
@@ -628,6 +632,29 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 });
             }
         }).start();
+    }
+
+    public void averageSpeed(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (elapsedTime < 5 * 60000 || averageSpeed < 15) {
+                        Thread.sleep(1000);
+                    }
+                }catch (InterruptedException e){
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void driveCircle(View view){
+
     }
 }
 
