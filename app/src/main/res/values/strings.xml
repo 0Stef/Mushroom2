@@ -129,4 +129,14 @@
     // Activity Persoonlijke statistieken
     <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
 
+
+
+
+    <string name="edit_message">Put data in server</string>
+    <string name="edit_message_2">Send data to others</string>
+    <string name="button_put">Put</string>
+    <string name="button_get">Get</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_message">messageActivity</string>
+
 </resources>

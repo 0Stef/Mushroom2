@@ -191,7 +191,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         textDistance.setText("wachten op gps signaal");
 
-        final int previousRideId = handler.getGreatestRideId();
+        final int previousRideId = handler.getGreatestRideID();
         currentRideId = previousRideId + 1;
 
 
@@ -358,7 +358,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
         firstLocationSet = false;
-
+  
         //TODO zoom veranderen zodat hele rit in beeld is
 
 
@@ -654,9 +654,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
-    public void driveCircle(View view){
-        Array
-    }
+   // public void driveCircle(View view){
+   //        Array
+   // }
 }
 
 //Loction location = new Location("iets");

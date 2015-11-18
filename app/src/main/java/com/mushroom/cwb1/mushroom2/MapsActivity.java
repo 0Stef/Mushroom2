@@ -1,8 +1,13 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,12 +15,126 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
+    TextView textView_1;
+    EditText edit_1;
 
 
+    String dataToPut;
+
+
+
+    /**
+     * create a method bundled with the button of getting message
+     * @param view
+     */
+    public void getMessage(View view){
+        //set your own group number and session ID http://daddi.cs.kuleuven.be/peno3/data/{group number}/{session ID}
+        new GetAsyncTask().execute("http://mushroom.16mb.com/select-db.php");
+    }
+
+    /**
+     * create a method bundled with the button of putting message
+     * @param view
+     */
+    public void putMessage(View view){
+        textView_1.setText("");
+        String message = edit_1.getText().toString();
+        dataToPut = message;
+        new PutAsyncTask().execute("http://mushroom.16mb.com/register_get_id.php");
+    }
+
+    /*****************************can be reused in your app*****************************
+     * a method to get data from the server
+     * @param URL
+     * @return
+     */
+
+    public String getDataFromServer(String URL){
+        String result="";
+        try {
+            java.net.URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+
+            String output;
+            while ((output = br.readLine()) != null) {
+                result += output;
+            }
+            conn.disconnect();
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+        return result;
+    };
+
+    /*****************************can be reused in your app*******************************
+     * a method to update or add data to the server
+     * @param URL
+     * @return
+     */
+
+    public String putDataToServer(String URL){
+        String status="Put the data to server successfully!";
+        try {
+
+            URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //conn.setRequestProperty("Content-Type", "application/json");
+
+            //String input = dataToPut;
+            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+
+            //Read the acknowledgement message after putting data to server
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+            String output;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+            }
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +142,8 @@ public class MapsActivity extends FragmentActivity {
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
 
+        edit_1 = (EditText) findViewById(R.id.edit_message_1);
+        textView_1 = (TextView) findViewById(R.id.show_message_1);
     }
 
 
@@ -82,6 +203,39 @@ public class MapsActivity extends FragmentActivity {
                 .color(Color.BLUE);
         mMap.addPolyline(line);
 
+    }
+
+
+    /*****************************can be reused in your app*******************************
+     * an inner class to call the method getDataFromServer() in an UI thread
+     */
+
+    class GetAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return getDataFromServer(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            textView_1.setText(result);
+        }
+    }
+
+
+    /*****************************can be reused in your app*******************************
+     * an inner class to call the method putDataToServer() in an UI thread
+     */
+    class PutAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return putDataToServer(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            textView_1.setText(result);
+        }
     }
 
 
