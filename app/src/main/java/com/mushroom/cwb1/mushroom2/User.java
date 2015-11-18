@@ -3,6 +3,7 @@ package com.mushroom.cwb1.mushroom2;
 public class User {
 
     private int _id;
+    private int user_id;
     private String user_name;
     private String password;
     private  String country;
@@ -78,7 +79,7 @@ public class User {
         this.city = city;
     }
 
-    public User(String user_name, String password, String country, String city,
+    public User(String user_name, String password, int user_id, String country, String city,
                 long first_login, long last_login, long total_distance, long total_time,
                 float highest_speed, float average_speed, float highest_acceleration,
                 double highest_altitude, double lowest_altitude, double highest_altitude_diff,
@@ -92,6 +93,7 @@ public class User {
 
         this.user_name = user_name;
         this.password = password;
+        this.user_id = user_id;
         this.country = country;
         this.city = city;
         this.first_login = first_login;
@@ -141,7 +143,7 @@ public class User {
         this.biked_days_100 = biked_days_100;
 
         this.below_seelvl = below_seelvl;
-        this.above_1000m = above_1000m;;
+        this.above_1000m = above_1000m;
         this.alt_diff_10m = alt_diff_10m;
         this.alt_diff_25m = alt_diff_25m;
         this.alt_diff_50m = alt_diff_50m;
@@ -171,6 +173,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setUser_id(int user_id) { this.user_id = user_id;}
+
+    public int getUser_id(){ return user_id;}
 
     public String getCountry() {
         return country;
@@ -353,7 +359,7 @@ public class User {
     public int getTopspeed_30(){
         return topspeed_30;
     }
-    public void setTopspeed_30(int topspeed_30){
+    public void setTopspeed_30(int topspeed_30) {
         this.topspeed_30 = topspeed_30;
     }
 
