@@ -425,12 +425,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         float current_ride_dist = distance;
 
         user.setTotal_distance(total_prev_dist + current_ride_dist);
-
         user.setHighest_speed(maxSpeed);
 
-
-
-        //userhandler.overWrite(currentUser,userhandler.COLUMN_TOTAL_DISTANCE,)
         userhandler.overWrite(user);
 
 
