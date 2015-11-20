@@ -10,8 +10,6 @@ import android.widget.ProgressBar;
 
 public class achievements extends AppCompatActivity {
 
-
-
     UserHandler handler;
 
     ProgressBar progress_1_km;
@@ -45,18 +43,16 @@ public class achievements extends AppCompatActivity {
     ProgressBar progress_days_biked_31;
     ProgressBar progress_days_biked_100;
 
-    ProgressBar progress_below_seelvl;
-    ProgressBar progress_above_1000;
+
     ProgressBar progress_alt_diff_10;
     ProgressBar progress_alt_diff_25;
     ProgressBar progress_alt_diff_50;
     ProgressBar progress_alt_diff_100;
 
+    ProgressBar progress_start_the_game;
+    ProgressBar progress_get_all_achievements;
 
-
-public String currentUser;
-
-
+    public String currentUser;
 
 
     @Override
@@ -100,12 +96,14 @@ public String currentUser;
         progress_days_biked_31  = (ProgressBar) findViewById(R.id.progress_days_biked_31);
         progress_days_biked_100  = (ProgressBar) findViewById(R.id.progress_days_biked_100);
 
-        progress_below_seelvl = (ProgressBar) findViewById(R.id.progress_below_seelvl);
-        progress_above_1000 = (ProgressBar) findViewById(R.id.progress_above_1000);
         progress_alt_diff_10 = (ProgressBar) findViewById(R.id.progress_alt_diff_10);
         progress_alt_diff_25 = (ProgressBar) findViewById(R.id.progress_alt_diff_25);
         progress_alt_diff_50 = (ProgressBar) findViewById(R.id.progress_alt_diff_50);
         progress_alt_diff_100 = (ProgressBar) findViewById(R.id.progress_alt_diff_100);
+
+        progress_start_the_game = (ProgressBar) findViewById(R.id.progress_start_the_game);
+        progress_get_all_achievements = (ProgressBar) findViewById(R.id.progress_get_all_achievements);
+
 
         //EXAMPLE
         //progress_1_km.setProgress((int)(999.9/10.0));
@@ -235,12 +233,6 @@ public String currentUser;
         progress_days_biked_31.setProgress((int) ((user.getNb_days_biked()/31.0)*100));
         progress_days_biked_100.setProgress((int) ((user.getNb_days_biked()/100.0)*100));
 
-        if (user.getBelow_seelvl() == 1){
-            progress_below_seelvl.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
-        }
-        if (user.getAbove_1000m() == 1){
-            progress_above_1000.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
-        }
         if (user.getAlt_diff_10m() == 1){
             progress_alt_diff_10.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
@@ -254,11 +246,21 @@ public String currentUser;
             progress_alt_diff_100.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
-        progress_above_1000.setProgress((int) ((user.getAbove_1000m()/1000.0)*100));
         progress_alt_diff_10.setProgress((int) (user.getHighest_altitude_diff()/10.0)*100);
         progress_alt_diff_25.setProgress((int) (user.getHighest_altitude_diff()/25.0)*100);
         progress_alt_diff_50.setProgress((int) (user.getHighest_altitude_diff()/50.0)*100);
         progress_alt_diff_100.setProgress((int) (user.getHighest_altitude_diff()/100.0)*100);
+
+        if (user.getStart_the_game() == 1){
+            progress_start_the_game.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+        }
+
+        if (user.getGet_all_achievements() == 1){
+            progress_get_all_achievements.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+        }
+
+        progress_start_the_game.setProgress((int) (user.getStart_the_game()/1.0)*100);
+        progress_get_all_achievements.setProgress((int) (user.getGet_all_achievements()/1.0)*100);
 
     }
 

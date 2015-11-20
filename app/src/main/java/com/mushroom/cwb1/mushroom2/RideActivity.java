@@ -1,7 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -116,6 +116,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView punten;
 
     DataBaseHandler2 handler;
+    UserHandler userhandler;
 
     Button startrecordingbutton;
     Button resumerecordingbutton;
@@ -123,16 +124,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
+    public String currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+        currentUser = getIntent().getStringExtra("username");
+
         setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
-        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+        //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+
+
+
+
+
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -184,6 +194,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(null);
     }
 
     public void startrecording(View view) {
@@ -402,6 +417,23 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
+
+
+        userhandler = new UserHandler(getApplicationContext());
+        User user =userhandler.getUserInformation(currentUser);
+
+        float total_prev_dist = user.getTotal_distance();
+        float current_ride_dist = distance;
+
+        user.setTotal_distance(total_prev_dist + current_ride_dist);
+
+        //userhandler.overWrite(currentUser,userhandler.COLUMN_TOTAL_DISTANCE,)
+        userhandler.overWrite(user);
+
+
+
+
+
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -457,6 +489,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         }
     }
+
 
 
     private Runnable updateTimerThread = new Runnable() {
@@ -545,6 +578,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }
 
     }
+
+
+
 
 
     Long eltime = 0l;

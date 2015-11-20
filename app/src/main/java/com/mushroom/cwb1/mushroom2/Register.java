@@ -39,8 +39,6 @@ public class Register extends AppCompatActivity {
         );
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,9 +67,10 @@ public class Register extends AppCompatActivity {
 
         User user = new User();
         String userName = userNameField.getText().toString().replaceAll(" ", "_");
+        String passWord = passWordField.getText().toString().replaceAll(" ", "_");
 
         user.setUser_name(userName);
-        user.setPassword(passWordField.getText().toString());
+        user.setPassword(passWord);
         user.setCountry(countryField.getText().toString());
         user.setCity(cityField.getText().toString());
 
@@ -79,10 +78,11 @@ public class Register extends AppCompatActivity {
             userHandler.addUser(user);
             dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
 
-            System.out.println("    -   Created new user: " + userName);
+            System.out.println("    -   Created new user: " + userName + ", " + passWord);
+            finish();
+        } else {
+            userNameField.setText("User already exists.");
+            System.out.println("    -   User already exists.");
         }
-
-        userHandler = null;
-        dbHandler = null;
     }
 }
