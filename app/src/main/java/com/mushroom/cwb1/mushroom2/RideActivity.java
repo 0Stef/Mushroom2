@@ -68,6 +68,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float temperature = 0f;
     private double latitude;
     private double longitude;
+    private double altitude;
     private float afstand = 0f;
     private float afwijking = 0f;
     private float[] results;
@@ -735,6 +736,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     }
                 }catch (InterruptedException e){
 
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+
     public void altitudeDifferenceEasy(View view) {
         new Thread(new Runnable() {
             public void run() {
@@ -771,15 +783,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         }).start();
     }
-}                }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
-        }).start();
-    }
+
 
     public void getSpeed(View view){
         new Thread(new Runnable() {
