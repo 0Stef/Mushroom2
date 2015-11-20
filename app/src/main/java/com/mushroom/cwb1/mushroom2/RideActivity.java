@@ -52,6 +52,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView Succes;
     TextView challenge2;
     TextView challenge1;
+    //TextView challenge3;
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
@@ -67,6 +68,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float temperature = 0f;
     private double latitude;
     private double longitude;
+    private double altitude;
     private float afstand = 0f;
     private float afwijking = 0f;
     private float[] results;
@@ -143,6 +145,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Succes.setVisibility(View.INVISIBLE);
         challenge1.setVisibility(View.INVISIBLE);
         challenge2.setVisibility(View.INVISIBLE);
+        //challenge3.setVisibility(View.INVISIBLE);
 
 
 
@@ -255,7 +258,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     maxSpeed = speed;
                     textMaximumSpeed.setText(decimalF.format(maxSpeed));
                 }
-                //double altitude = location.getAltitude();
+                altitude = location.getAltitude();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
@@ -684,6 +687,44 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         afwijking = results[0];
                     }
                 }catch (InterruptedException e){
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+
+    public void altitudeDifferenceEasy(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                final double starthoogte = altitude;
+                challenge2.post(new Runnable() {
+                    public void run() {
+                        challenge2.setText("Huidige hoogte" + starthoogte + "m");
+                        challenge2.setVisibility(View.VISIBLE);
+                    }
+                });
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText("Starthoogte" + starthoogte + "m");
+                        challenge1.setVisibility(View.VISIBLE);
+                    }
+                });
+                try {
+                    while ((altitude - starthoogte) <= 10) {
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Huidige hoogte" + altitude + "m");
+                            }
+                        });
+                        Thread.sleep(2500);
+                    }
+                } catch (InterruptedException e) {
 
                 }
                 Succes.post(new Runnable() {
