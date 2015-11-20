@@ -110,7 +110,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView punten;
 
     DataBaseHandler2 handler;
-    UserHandler userhandler;
 
     Button startrecordingbutton;
     Button resumerecordingbutton;
@@ -118,25 +117,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
-    public String currentUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
-        currentUser = getIntent().getStringExtra("username");
-
         setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
-
-
-
-
-
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -400,20 +390,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
-
-
-        userhandler = new UserHandler(getApplicationContext());
-        userhandler.onUpgrade(userhandler.getWritableDatabase(), 0, 0);
-        User user =userhandler.getUserInformation(currentUser);
-
-        float total_prev_dist = user.getTotal_distance();
-        float current_ride_dist = distance;
-
-        user.setTotal_distance(total_prev_dist + current_ride_dist);
-
-
-
-
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -455,7 +431,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             temperature = event.values[0];
         }
     }
-
 
 
     private Runnable updateTimerThread = new Runnable() {
@@ -544,9 +519,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }
 
     }
-
-
-
 
 
     Long eltime = 0l;
@@ -685,6 +657,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
+
+
     public void driveCircle(View view){
         final double startbreedte = latitude;
         final double startlengte = longitude;
@@ -724,4 +698,40 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+    public void altitudeDifferenceEasy(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                final double starthoogte = altitude;
+                challenge2.post(new Runnable() {
+                    public void run() {
+                        challenge2.setText("Huidige hoogte" + starthoogte + "m");
+                        challenge2.setVisibility(View.VISIBLE);
+                    }
+                });
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText("Starthoogte" + starthoogte + "m");
+                        challenge1.setVisibility(View.VISIBLE);
+                    }
+                });
+                try {
+                    while ((altitude - starthoogte) <= 10) {
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Huidige hoogte" + altitude + "m");
+                            }
+                        });
+                        Thread.sleep(2500);
+                    }
+                } catch (InterruptedException e) {
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
 }
