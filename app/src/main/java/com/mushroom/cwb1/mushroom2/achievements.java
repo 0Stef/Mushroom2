@@ -62,7 +62,6 @@ public class achievements extends AppCompatActivity {
         currentUser = getIntent().getStringExtra("username");
 
         handler = new UserHandler(getApplicationContext());
-        handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
         User user = handler.getUserInformation(currentUser);
 
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
@@ -110,9 +109,50 @@ public class achievements extends AppCompatActivity {
         //progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
 
         //TODO verder uitwerken
-        if (user.getTotal_distance() >= 100){
+        if (user.getTotal_distance() >= 1000.0){
             user.setDrive_1_km(1);
         }
+        if (user.getTotal_distance() >= 5000.0){
+            user.setDrive_1_km(1);
+        }
+        if (user.getTotal_distance() >= 50000.0){
+            user.setDrive_1_km(1);
+        }
+        if (user.getTotal_distance() >= 100000.0){
+            user.setDrive_1_km(1);
+        }
+        if (user.getTotal_distance() >= 250000.0){
+            user.setDrive_1_km(1);
+        }
+
+        if (user.getTotal_distance() >= 500000.0){
+            user.setDrive_1_km(1);
+        }
+        if (user.getTotal_distance() >= 1000000.0){
+            user.setDrive_1_km(1);
+        }
+        if (user.getTotal_distance() >= 5000000.0){
+            user.setDrive_1_km(1);
+        }
+
+        if (user.getHighest_speed() >=30.0){
+            user.setTopspeed_30(1);
+        }
+        if (user.getHighest_speed() >=35.0){
+            user.setTopspeed_30(1);
+        }
+        if (user.getHighest_speed() >=40.0){
+            user.setTopspeed_30(1);
+        }
+        if (user.getHighest_speed() >=45.0){
+            user.setTopspeed_30(1);
+        }
+        if (user.getHighest_speed() >=50.0){
+            user.setTopspeed_30(1);
+        }
+
+
+
 
         // DISTANCE ACHIEVEMENTS
 
@@ -144,15 +184,15 @@ public class achievements extends AppCompatActivity {
             progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
-        progress_1_km.setProgress((int) (user.getTotal_distance()/1.0));
-        progress_5_km.setProgress((int) (user.getTotal_distance()/10.0));
-        progress_10_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_50_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_100_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_250_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_500_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_1000_km.setProgress((int)(user.getTotal_distance()/10.0));
-        progress_5000_km.setProgress((int)(user.getTotal_distance()/10.0));
+        progress_1_km.setProgress((int) (user.getTotal_distance()));
+        progress_5_km.setProgress((int) (user.getTotal_distance()/5000.0)*100);
+        progress_10_km.setProgress((int)(user.getTotal_distance()/10000.0)*100);
+        progress_50_km.setProgress((int)(user.getTotal_distance()/50000.0)*100);
+        progress_100_km.setProgress((int)(user.getTotal_distance()/100000.0)*100);
+        progress_250_km.setProgress((int)(user.getTotal_distance()/250000.0)*100);
+        progress_500_km.setProgress((int)(user.getTotal_distance()/500000.0)*100);
+        progress_1000_km.setProgress((int)(user.getTotal_distance()/1000000.0)*100);
+        progress_5000_km.setProgress((int)(user.getTotal_distance()/5000000.0)*100);
 
         if (user.getTopspeed_30() == 1){
             progress_topspeed_30.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
@@ -169,7 +209,7 @@ public class achievements extends AppCompatActivity {
         if (user.getTopspeed_50() == 1){
             progress_topspeed_50.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
-        // moet dit erbij??
+
         progress_topspeed_30.setProgress((int) ((user.getHighest_speed()/30.0)*100));
         progress_topspeed_35.setProgress((int) ((user.getHighest_speed()/35.0)*100));
         progress_topspeed_40.setProgress((int) ((user.getHighest_speed()/40.0)*100));
