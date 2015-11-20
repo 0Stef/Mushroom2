@@ -135,8 +135,11 @@
 
     // Activity Persoonlijke statistieken
     <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
-
-
+    <string name="laatste_rit">Laatste rit.</string>
+    <string name="Snelheid">Snelheid.</string>
+    <string name="AccelerometerX">Accelerometer x-waarden.</string>
+    <string name="AccelerometerY">Accelerometer y-waarden.</string>
+    <string name="AccelerometerZ">Accelerometer z-waarden.</string>
 
 
     <string name="edit_message">Put data in server</string>
