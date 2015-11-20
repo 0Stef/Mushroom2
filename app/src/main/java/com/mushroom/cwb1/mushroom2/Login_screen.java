@@ -15,7 +15,7 @@ public class Login_screen extends AppCompatActivity {
     EditText username;
     EditText password;
 
-    public static String currentUser;
+    public String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class Login_screen extends AppCompatActivity {
 
                         if (userHandler.isRightPassword(userName, passWord)) {
                             Intent i = new Intent(getApplicationContext(), Homescreen.class);
+                            i.putExtra("username", currentUser);
                             startActivity(i);
                         }
                     }

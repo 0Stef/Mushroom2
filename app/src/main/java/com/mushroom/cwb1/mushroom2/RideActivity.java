@@ -110,6 +110,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView punten;
 
     DataBaseHandler2 handler;
+    UserHandler userhandler;
 
     Button startrecordingbutton;
     Button resumerecordingbutton;
@@ -117,16 +118,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
+    public String currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+        currentUser = getIntent().getStringExtra("username");
+
         setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+
+
+
+
+
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -390,6 +400,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
+
+
+        userhandler = new UserHandler(getApplicationContext());
+        userhandler.onUpgrade(userhandler.getWritableDatabase(), 0, 0);
+        User user =userhandler.getUserInformation(currentUser);
+
+        float total_prev_dist = user.getTotal_distance();
+        float current_ride_dist = distance;
+
+        user.setTotal_distance(total_prev_dist + current_ride_dist);
+
+
+
+
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -431,6 +455,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             temperature = event.values[0];
         }
     }
+
 
 
     private Runnable updateTimerThread = new Runnable() {
@@ -519,6 +544,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }
 
     }
+
+
+
 
 
     Long eltime = 0l;
@@ -694,4 +722,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         }).start();
     }
+
+
 }
