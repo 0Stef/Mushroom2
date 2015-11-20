@@ -19,7 +19,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_marginTop="100dp"
@@ -29,7 +28,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_below="@+id/editText"
@@ -64,6 +62,14 @@
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/registerbutton"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
