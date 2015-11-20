@@ -34,34 +34,10 @@ public class Login_screen extends AppCompatActivity {
         loginbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        String userName = usernameEdit.getText().toString();
-                        String passWord = passwordEdit.getText().toString();
-
-                        if (!userName.equals("")) {
-                            if (userHandler.isRightPassword(userName, passWord)) {
-                                Intent i = new Intent(getApplicationContext(), Homescreen.class);
-                                i.putExtra("username", userName);
-                                startActivity(i);
-
-                                System.out.println("    -   User is logged in: " + userName);
-                            } else {
-                                passwordEdit.setText("Incorrect password.");
-                                System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
-                            }
-                        } else {
-                            System.out.println("    -   Empty username");
-                        }
-
-                        debug(userName, passWord);
+                        login();
                     }
                 }
         );
-
-
-//                        Intent start_homescreen = new Intent(getApplicationContext(),Homescreen.class);
-//                        startActivity(start_homescreen);
-//
-//                    }
 
 
         registerbutton.setOnClickListener(
@@ -74,14 +50,41 @@ public class Login_screen extends AppCompatActivity {
         );
     }
 
+    public void login() {
+        String userName = usernameEdit.getText().toString();
+        String passWord = passwordEdit.getText().toString();
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_homescreen, menu);
-            return true;
+        if (!userName.isEmpty()) {
+
+            if (userHandler.isExistingUser(userName)) {
+
+                if (userHandler.isRightPassword(userName, passWord)) {
+                    Intent i = new Intent(getApplicationContext(), Homescreen.class);
+                    i.putExtra("username", userName);
+                    startActivity(i);
+
+                    System.out.println("    -   User is logged in: " + userName);
+                } else {
+                    passwordEdit.setText("Incorrect password.");
+                    System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
+                }
+
+            } else {
+                System.out.println("    -   Not existing username");
+            }
+        } else {
+            System.out.println("    -   Empty username");
         }
 
+        debug(userName, passWord);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

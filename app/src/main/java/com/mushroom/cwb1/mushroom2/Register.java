@@ -67,9 +67,10 @@ public class Register extends AppCompatActivity {
 
         User user = new User();
         String userName = userNameField.getText().toString().replaceAll(" ", "_");
+        String passWord = passWordField.getText().toString().replaceAll(" ", "_");
 
         user.setUser_name(userName);
-        user.setPassword(passWordField.getText().toString());
+        user.setPassword(passWord);
         user.setCountry(countryField.getText().toString());
         user.setCity(cityField.getText().toString());
 
@@ -77,7 +78,7 @@ public class Register extends AppCompatActivity {
             userHandler.addUser(user);
             dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
 
-            System.out.println("    -   Created new user: " + userName);
+            System.out.println("    -   Created new user: " + userName + ", " + passWord);
             finish();
         } else {
             userNameField.setText("User already exists.");
