@@ -116,7 +116,7 @@ public class Login_screen extends AppCompatActivity {
             User user = new User();
             userHandler.overWrite(user);
         }
-        if (command.equals("?")) {
+        if (command.equals("list")) {
             System.out.println("");
             System.out.println("");
 

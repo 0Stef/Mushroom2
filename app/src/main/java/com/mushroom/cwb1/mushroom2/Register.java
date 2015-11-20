@@ -39,8 +39,6 @@ public class Register extends AppCompatActivity {
         );
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -80,9 +78,10 @@ public class Register extends AppCompatActivity {
             dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
 
             System.out.println("    -   Created new user: " + userName);
+            finish();
+        } else {
+            userNameField.setText("User already exists.");
+            System.out.println("    -   User already exists.");
         }
-
-        userHandler = null;
-        dbHandler = null;
     }
 }
