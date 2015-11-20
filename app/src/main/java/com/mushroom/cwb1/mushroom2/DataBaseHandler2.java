@@ -62,6 +62,13 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         location = new Location(DATABASE_NAME);
     }
 
+    public DataBaseHandler2(Context context, String userName) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        setTable(userName);
+
+        location = new Location(DATABASE_NAME);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db){
         createTable(db, TABLE_DEFAULT);
