@@ -657,6 +657,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
+
+
     public void driveCircle(View view){
         final double startbreedte = latitude;
         final double startlengte = longitude;
