@@ -1,7 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,7 +12,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +27,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -110,6 +108,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView punten;
 
     DataBaseHandler2 handler;
+    UserHandler userhandler;
 
     Button startrecordingbutton;
     Button resumerecordingbutton;
@@ -117,16 +116,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
+    public String currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+        currentUser = getIntent().getStringExtra("username");
+
         setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
+
+
+
+
+
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -178,6 +186,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(null);
     }
 
     public void startrecording(View view) {
@@ -390,6 +403,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
+
+
+        userhandler = new UserHandler(getApplicationContext());
+        userhandler.onUpgrade(userhandler.getWritableDatabase(), 0, 0);
+        User user =userhandler.getUserInformation(currentUser);
+
+        float total_prev_dist = user.getTotal_distance();
+        float current_ride_dist = distance;
+
+        user.setTotal_distance(total_prev_dist + current_ride_dist);
+
+
+
+
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -431,6 +458,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             temperature = event.values[0];
         }
     }
+
 
 
     private Runnable updateTimerThread = new Runnable() {
@@ -519,6 +547,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }
 
     }
+
+
+
 
 
     Long eltime = 0l;
@@ -694,4 +725,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         }).start();
     }
+
+
 }

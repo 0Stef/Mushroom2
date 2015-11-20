@@ -53,9 +53,8 @@ public class achievements extends AppCompatActivity {
     ProgressBar progress_alt_diff_100;
 
 
-    User user;
 
-
+public String currentUser;
 
 
 
@@ -64,10 +63,11 @@ public class achievements extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
+        currentUser = getIntent().getStringExtra("username");
 
         handler = new UserHandler(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
-        User user = handler.getUserInformation(Login_screen.currentUser);
+        User user = handler.getUserInformation(currentUser);
 
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
         progress_5_km = (ProgressBar) findViewById(R.id.progress_5_km);
@@ -112,9 +112,9 @@ public class achievements extends AppCompatActivity {
         //progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
 
         //TODO verder uitwerken
-/*        if (user.getTotal_distance() >= 1000){
+        if (user.getTotal_distance() >= 100){
             user.setDrive_1_km(1);
-        }*/
+        }
 
         // DISTANCE ACHIEVEMENTS
 
@@ -146,7 +146,7 @@ public class achievements extends AppCompatActivity {
             progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
-        progress_1_km.setProgress((int) (user.getTotal_distance()/10.0));
+        progress_1_km.setProgress((int) (user.getTotal_distance()/1.0));
         progress_5_km.setProgress((int) (user.getTotal_distance()/10.0));
         progress_10_km.setProgress((int)(user.getTotal_distance()/10.0));
         progress_50_km.setProgress((int)(user.getTotal_distance()/10.0));
