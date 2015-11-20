@@ -1,6 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,10 +28,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -734,7 +735,43 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     }
                 }catch (InterruptedException e){
 
+    public void altitudeDifferenceEasy(View view) {
+        new Thread(new Runnable() {
+            public void run() {
+                final double starthoogte = altitude;
+                challenge2.post(new Runnable() {
+                    public void run() {
+                        challenge2.setText("Huidige hoogte" + starthoogte + "m");
+                        challenge2.setVisibility(View.VISIBLE);
+                    }
+                });
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText("Starthoogte" + starthoogte + "m");
+                        challenge1.setVisibility(View.VISIBLE);
+                    }
+                });
+                try {
+                    while ((altitude - starthoogte) <= 10) {
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Huidige hoogte" + altitude + "m");
+                            }
+                        });
+                        Thread.sleep(2500);
+                    }
+                } catch (InterruptedException e) {
+
                 }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+}                }
                 Succes.post(new Runnable() {
                     public void run() {
                         Succes.setVisibility(View.VISIBLE);
