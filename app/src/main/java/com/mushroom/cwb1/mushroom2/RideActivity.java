@@ -1,7 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -29,10 +28,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class RideActivity extends AppCompatActivity implements SensorEventListener {
@@ -68,6 +70,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float afstand = 0f;
     private float afwijking = 0f;
     private float[] results;
+    private float richting;
+    private String windrichting;
+    private Random r;
 
 
     private boolean eerstekeer = true;
@@ -108,7 +113,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView punten;
 
     DataBaseHandler2 handler;
-    UserHandler userhandler;
 
     Button startrecordingbutton;
     Button resumerecordingbutton;
@@ -116,25 +120,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
-    public String currentUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
-        currentUser = getIntent().getStringExtra("username");
-
         setUpMapIfNeeded();
 
         handler = new DataBaseHandler2(getApplicationContext());
         handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
-
-
-
-
-
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -188,11 +183,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         setUpMapIfNeeded();
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(null);
-    }
-
     public void startrecording(View view) {
 
         //TODO zet een scherm met wacht op signaal vn gps
@@ -214,6 +204,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Sensor mAcceleration;
         Sensor mMagneticfield;
         Sensor mTemperature;
+        Sensor mOrientation;
 
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -234,6 +225,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null) {
             mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
             mSensorManager.registerListener(this, mTemperature, 1000000);
+        }
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
+            mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+            mSensorManager.registerListener(this, mOrientation, 1000000);
         }
 
         // Acquire a reference to the system Location Manager
@@ -403,20 +399,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.removeUpdates(locationListener);
 
 
-
-
-        userhandler = new UserHandler(getApplicationContext());
-        userhandler.onUpgrade(userhandler.getWritableDatabase(), 0, 0);
-        User user =userhandler.getUserInformation(currentUser);
-
-        float total_prev_dist = user.getTotal_distance();
-        float current_ride_dist = distance;
-
-        user.setTotal_distance(total_prev_dist + current_ride_dist);
-
-
-
-
         //TODO kiezen tss linked en arraylist
         gpsPoints = new LinkedList<>();
 
@@ -451,14 +433,27 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             accx = event.values[0];
             accy = event.values[1];
             accz = event.values[2] - 10;
+            acct = Math.sqrt(Math.pow(accx, 2) + Math.pow(accy, 2) + Math.pow(accz, 2));
             //accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
         }
 
         if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE){
             temperature = event.values[0];
         }
-    }
 
+        if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
+            richting = event.values[0];
+            if (richting <= 45 || richting > 315) {
+                windrichting = "Noorden ";
+            } else if (richting > 45 && richting <= 135) {
+                windrichting = "Oosten ";
+            } else if (richting > 135 && richting <= 225) {
+                windrichting = "Zuiden ";
+            } else if (richting > 225 && richting <= 315) {
+                windrichting = "Westen ";
+            }
+        }
+    }
 
 
     private Runnable updateTimerThread = new Runnable() {
@@ -549,9 +544,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
-
-
-
     Long eltime = 0l;
 
     public void keepSpeed(View view) {
@@ -606,7 +598,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 try {
                     long gestart = SystemClock.uptimeMillis();
                     while (eltime < 5000) {
-                        acct = Math.sqrt(Math.pow(accx, 2) + Math.pow(accy, 2) + Math.pow(accz, 2));
                         if (acct >= 3) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
@@ -696,9 +687,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Location.distanceBetween(startbreedte, startlengte, latitude, longitude, results);
         afwijking = results[0];
         final float startafstand = distance;
+        afstand = 0f;
 
         challenge1.setText("Afgelegde weg: 0m");
         challenge1.setVisibility(View.VISIBLE);
+        challenge2.setText("Afstand tot vertrekpunt: 0m");
+        challenge2.setVisibility(View.VISIBLE);
 
         new Thread(new Runnable() {
             public void run() {
@@ -713,6 +707,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         });
                         Location.distanceBetween(startbreedte, startlengte, latitude, longitude, results);
                         afwijking = results[0];
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Afstand tot vertrekpunt: " + afwijking + "m");
+                            }
+                        });
                     }
                 }catch (InterruptedException e){
 
@@ -726,5 +725,83 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
+    public void getAcceleration(View view){
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (acct < 3) {
+                        Thread.sleep(500);
+                    }
+                }catch (InterruptedException e){
 
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void getSpeed(View view){
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (speed < 20) {
+                        Thread.sleep(500);
+                    }
+                }catch (InterruptedException e){
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void driveDirection(View view){
+        afstand = 0f;
+        challenge1.setText("Windrichting: " + windrichting + "Afwijking: " + richting);
+        challenge1.setVisibility(View.VISIBLE);
+        challenge2.setText("Afstand: " + afstand + "m");
+        challenge2.setVisibility(View.VISIBLE);
+
+        String[] windrichtingen = {"Noorden ", "Oosten ", "Zuiden ", "Westen "};
+
+        int idx = r.nextInt(windrichtingen.length);
+        final String zoekrichting = (windrichtingen[idx]);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    float startafstand = distance;
+                    while (afstand<1000) {
+                        if (windrichting.equals(zoekrichting)){
+                            afstand = distance - startafstand;
+                        }
+                        else {
+                            startafstand = distance;
+                        }
+                        challenge1.post(new Runnable() {
+                            public void run() {
+                                challenge1.setText("Windrichting: " + windrichting + "Afwijking: " + richting);
+                            }
+                        });
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Afstand: " + afstand + "m");
+                            }
+                        });
+                        Thread.sleep(500);
+                    }
+                }catch (InterruptedException e){
+
+                }
+            }
+        }).start();
+    }
 }
