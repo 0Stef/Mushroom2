@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class RideActivity extends AppCompatActivity implements SensorEventListener {
@@ -67,9 +68,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float temperature = 0f;
     private double latitude;
     private double longitude;
+    private double altitude;
     private float afstand = 0f;
     private float afwijking = 0f;
     private float[] results;
+    private float richting;
+    private String windrichting;
+    private Random r;
 
 
     private boolean eerstekeer = true;
@@ -201,6 +206,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Sensor mAcceleration;
         Sensor mMagneticfield;
         Sensor mTemperature;
+        Sensor mOrientation;
 
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -221,6 +227,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null) {
             mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
             mSensorManager.registerListener(this, mTemperature, 1000000);
+        }
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
+            mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+            mSensorManager.registerListener(this, mOrientation, 1000000);
         }
 
         // Acquire a reference to the system Location Manager
@@ -424,11 +435,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             accx = event.values[0];
             accy = event.values[1];
             accz = event.values[2] - 10;
+            acct = Math.sqrt(Math.pow(accx, 2) + Math.pow(accy, 2) + Math.pow(accz, 2));
             //accceleration.setText("Versnelling: " + decimalF.format(accx) + " x " + accy + " y " + accz + " z ");
         }
 
         if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE){
             temperature = event.values[0];
+        }
+
+        if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
+            richting = event.values[0];
+            if (richting <= 45 || richting > 315) {
+                windrichting = "Noorden ";
+            } else if (richting > 45 && richting <= 135) {
+                windrichting = "Oosten ";
+            } else if (richting > 135 && richting <= 225) {
+                windrichting = "Zuiden ";
+            } else if (richting > 225 && richting <= 315) {
+                windrichting = "Westen ";
+            }
         }
     }
 
@@ -575,7 +600,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 try {
                     long gestart = SystemClock.uptimeMillis();
                     while (eltime < 5000) {
-                        acct = Math.sqrt(Math.pow(accx, 2) + Math.pow(accy, 2) + Math.pow(accz, 2));
                         if (acct >= 3) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
@@ -657,8 +681,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
-
-
     public void driveCircle(View view){
         final double startbreedte = latitude;
         final double startlengte = longitude;
@@ -667,9 +689,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Location.distanceBetween(startbreedte, startlengte, latitude, longitude, results);
         afwijking = results[0];
         final float startafstand = distance;
+        afstand = 0f;
 
         challenge1.setText("Afgelegde weg: 0m");
         challenge1.setVisibility(View.VISIBLE);
+        challenge2.setText("Afstand tot vertrekpunt: 0m");
+        challenge2.setVisibility(View.VISIBLE);
 
         new Thread(new Runnable() {
             public void run() {
@@ -684,6 +709,30 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         });
                         Location.distanceBetween(startbreedte, startlengte, latitude, longitude, results);
                         afwijking = results[0];
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Afstand tot vertrekpunt: " + afwijking + "m");
+                            }
+                        });
+                    }
+                }catch (InterruptedException e){
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void getAcceleration(View view){
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (acct < 3) {
+                        Thread.sleep(500);
                     }
                 }catch (InterruptedException e){
 
@@ -731,6 +780,68 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         Succes.setVisibility(View.VISIBLE);
                     }
                 });
+            }
+        }).start();
+    }
+
+
+    public void getSpeed(View view){
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (speed < 20) {
+                        Thread.sleep(500);
+                    }
+                }catch (InterruptedException e){
+
+                }
+                Succes.post(new Runnable() {
+                    public void run() {
+                        Succes.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void driveDirection(View view){
+        afstand = 0f;
+        challenge1.setText("Windrichting: " + windrichting + "Afwijking: " + richting);
+        challenge1.setVisibility(View.VISIBLE);
+        challenge2.setText("Afstand: " + afstand + "m");
+        challenge2.setVisibility(View.VISIBLE);
+
+        String[] windrichtingen = {"Noorden ", "Oosten ", "Zuiden ", "Westen "};
+
+        int idx = r.nextInt(windrichtingen.length);
+        final String zoekrichting = (windrichtingen[idx]);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    float startafstand = distance;
+                    while (afstand<1000) {
+                        if (windrichting.equals(zoekrichting)){
+                            afstand = distance - startafstand;
+                        }
+                        else {
+                            startafstand = distance;
+                        }
+                        challenge1.post(new Runnable() {
+                            public void run() {
+                                challenge1.setText("Windrichting: " + windrichting + "Afwijking: " + richting);
+                            }
+                        });
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText("Afstand: " + afstand + "m");
+                            }
+                        });
+                        Thread.sleep(500);
+                    }
+                }catch (InterruptedException e){
+
+                }
             }
         }).start();
     }
