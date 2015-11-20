@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity {
         textView_1.setText("");
         String message = edit_1.getText().toString();
         dataToPut = message;
-        new PutAsyncTask().execute("http://mushroom.16mb.com/register_get_id.php");
+        new PutAsyncTask().execute("http://mushroom.16mb.com/sql/register_get_id.php");
     }
 
     /*****************************can be reused in your app*****************************
