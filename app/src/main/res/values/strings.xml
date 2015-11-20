@@ -79,6 +79,7 @@
     <string name="punten744000">744000 Punten.</string>
     <string name="punten1000000">1000000 Punten.</string>
     <string name="punten2400000">2400000 Punten.</string>
+    <string name="punten100000000">10000000 Punten.</string>
 
     // Strings voor Achievements
     <string name="achievemnt1">Rijd 1 kilometer.</string>
@@ -108,8 +109,8 @@
     <string name="achievemnt25">14 dagen lang gefietst.</string>
     <string name="achievemnt26">31 dagen lang gefietst.</string>
     <string name="achievemnt27">100 dagen lang gefietst.</string>
-    <string name="achievemnt28">Onder zeeniveau.</string>
-    <string name="achievemnt29">Boven 1000 meter hoogte.</string>
+    <string name="achievemnt28">Het spel opgestart.</string>
+    <string name="achievemnt29">Alle mijlpalen behaald.</string>
     <string name="achievemnt30">Niveauverschil van 10 meter.</string>
     <string name="achievemnt31">Niveauverschil van 25 meter.</string>
     <string name="achievemnt32">Niveauverschil van 50 meter.</string>

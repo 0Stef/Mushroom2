@@ -817,14 +817,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/punten100"
                 />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/progress_below_seelvl"
+                android:id="@+id/progress_start_the_game"
                 android:progress="50"
                 android:progressTint="#FFBF6A"
                 />
@@ -846,14 +846,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/punten100000000"
                 />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/progress_above_1000"
+                android:id="@+id/progress_get_all_achievements"
                 android:progress="50"
                 android:progressTint="#FFBF6A"
                 />
