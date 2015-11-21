@@ -164,7 +164,6 @@ public class User {
     public int get_id() {
         return _id;
     }
-
     public void set_id(int _id) {
         this._id = _id;
     }
@@ -172,7 +171,6 @@ public class User {
     public String getUser_name() {
         return user_name;
     }
-
     public void setUser_name(String user_name) {
         this.user_name = user_name;
     }
@@ -180,7 +178,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -189,7 +186,6 @@ public class User {
     public String getCountry() {
         return country;
     }
-
     public void setCountry(String country) {
         this.country = country;
     }
@@ -197,7 +193,6 @@ public class User {
     public String getCity() {
         return city;
     }
-
     public void setCity(String city) {
         this.city = city;
     }
@@ -211,7 +206,6 @@ public class User {
     public long getFirst_login() {
         return first_login;
     }
-
     public void setFirst_login(long first_login) {
         this.first_login = first_login;
     }
@@ -219,7 +213,6 @@ public class User {
     public long getLast_login() {
         return last_login;
     }
-
     public void setLast_login(long last_login) {
         this.last_login = last_login;
     }
@@ -227,7 +220,6 @@ public class User {
     public float getTotal_distance() {
         return total_distance;
     }
-
     public void setTotal_distance(float total_distance) {
         this.total_distance = total_distance;
     }
@@ -235,7 +227,6 @@ public class User {
     public long getTotal_time() {
         return total_time;
     }
-
     public void setTotal_time(long total_time) {
         this.total_time = total_time;
     }
@@ -243,7 +234,6 @@ public class User {
     public float getHighest_speed() {
         return highest_speed;
     }
-
     public void setHighest_speed(float highest_speed) {
         this.highest_speed = highest_speed;
     }
@@ -252,7 +242,6 @@ public class User {
     public float getHighest_acceleration() {
         return highest_acceleration;
     }
-
     public void setHighest_acceleration(float highest_acceleration) {
         this.highest_acceleration = highest_acceleration;
     }
@@ -261,7 +250,6 @@ public class User {
     public double getHighest_altitude_diff() {
         return highest_altitude_diff;
     }
-
     public void setHighest_altitude_diff(double highest_altitude_diff) {
         this.highest_altitude_diff = highest_altitude_diff;
     }
@@ -269,7 +257,6 @@ public class User {
     public int getNb_won_challenges() {
         return nb_won_challenges;
     }
-
     public void setNb_won_challenges(int nb_won_challenges) {
         this.nb_won_challenges = nb_won_challenges;
     }
@@ -277,7 +264,6 @@ public class User {
     public int getNb_days_biked() {
         return nb_days_biked;
     }
-
     public void setNb_days_biked(int nb_days_biked) {
         this.nb_days_biked = nb_days_biked;
     }
@@ -286,7 +272,6 @@ public class User {
     public int getDrive_1_km() {
         return drive_1_km;
     }
-
     public void setDrive_1_km(int drive_1_km) {
         this.drive_1_km = drive_1_km;
     }
@@ -294,7 +279,6 @@ public class User {
     public int getDrive_5_km() {
         return drive_5_km;
     }
-
     public void setDrive_5_km(int drive_5_km) {
         this.drive_5_km = drive_5_km;
     }
@@ -383,6 +367,7 @@ public class User {
         this.topspeed_50 = topspeed_50;
     }
 
+
     public int getNb_challenge_1(){
         return nb_challenge_1;
     }
@@ -463,35 +448,42 @@ public class User {
     }
     public void setBiked_days_100(int biked_days_100){this.biked_days_100 = biked_days_100;}
 
+    public int getAlt_diff_10m() {
+        return alt_diff_10m;
+    }
+    public int getAlt_diff_25m() {
+        return alt_diff_25m;
+    }
+    public int getAlt_diff_50m() {
+        return alt_diff_50m;
+    }
+    public int getAlt_diff_100m() {
+        return alt_diff_100m;
+    }
 
-    public int getAlt_diff_10m(){return alt_diff_10m;}
-    public int getAlt_diff_25m(){return alt_diff_25m;}
-    public int getAlt_diff_50m(){return alt_diff_50m;}
-    public int getAlt_diff_100m(){return alt_diff_100m;}
-
-
-    public void setAlt_diff_10m(int alt_diff_10m){this.alt_diff_10m = alt_diff_10m;}
-    public void setAlt_diff_25m(int alt_diff_25m){this.alt_diff_25m = alt_diff_25m;}
-    public void setAlt_diff_50m(int alt_diff_50m){this.alt_diff_50m = alt_diff_50m;}
-    public void setAlt_diff_100m(int alt_diff_100m){this.alt_diff_100m = alt_diff_100m;}
+    public void setAlt_diff_10m(int alt_diff_10m) {
+        this.alt_diff_10m = alt_diff_10m;
+    }
+    public void setAlt_diff_25m(int alt_diff_25m) {
+        this.alt_diff_25m = alt_diff_25m;
+    }
+    public void setAlt_diff_50m(int alt_diff_50m) {
+        this.alt_diff_50m = alt_diff_50m;
+    }
+    public void setAlt_diff_100m(int alt_diff_100m) {
+        this.alt_diff_100m = alt_diff_100m;
+    }
 
     public int getTotal_points() {
         return total_points;
     }
-
     public void setTotal_points(int total_points) {
         this.total_points = total_points;
-    }
-
-    @Override
-    public String toString() {
-        return "User: " + getUser_name() + " " + getPassword();
     }
 
     public int getDaily_points() {
         return daily_points;
     }
-
     public void setDaily_points(int daily_points) {
         this.daily_points = daily_points;
     }
@@ -499,7 +491,6 @@ public class User {
     public int getWeekly_points() {
         return weekly_points;
     }
-
     public void setWeekly_points(int weekly_points) {
         this.weekly_points = weekly_points;
     }
@@ -507,7 +498,6 @@ public class User {
     public int getStart_the_game() {
         return start_the_game;
     }
-
     public void setStart_the_game(int start_the_game) {
         this.start_the_game = start_the_game;
     }
@@ -515,9 +505,13 @@ public class User {
     public int getGet_all_achievements() {
         return get_all_achievements;
     }
-
     public void setGet_all_achievements(int get_all_achievements) {
         this.get_all_achievements = get_all_achievements;
+    }
+
+    @Override
+    public String toString() {
+        return "User: " + getUser_name() + ", " + getPassword();
     }
 }
 

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Calendar;
+
 public class Register extends AppCompatActivity {
 
     private EditText userNameField;
@@ -74,15 +76,26 @@ public class Register extends AppCompatActivity {
         user.setCountry(countryField.getText().toString());
         user.setCity(cityField.getText().toString());
 
-        if (!userHandler.isExistingUser(userName)) {
-            userHandler.addUser(user);
-            dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
+        Calendar calendar = Calendar.getInstance();
+        long millisec = calendar.getTimeInMillis();
+        user.setFirst_login(millisec);
 
-            System.out.println("    -   Created new user: " + userName + ", " + passWord);
-            finish();
+        if (!userName.isEmpty()) {
+            if (!passWord.isEmpty()) {
+                if (!userHandler.isExistingUser(userName)) {
+                    userHandler.addUser(user);
+                    dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
+                    System.out.println("    -   Created new user: " + userName + ", " + passWord);
+                    finish();
+                } else {
+                    userNameField.setText("Username already exists.");
+                    System.out.println("    -   User already exists.");
+                }
+            } else {
+                passWordField.setText("Password is needed.");
+            }
         } else {
-            userNameField.setText("User already exists.");
-            System.out.println("    -   User already exists.");
+            userNameField.setText("Username is needed.");
         }
     }
 }
