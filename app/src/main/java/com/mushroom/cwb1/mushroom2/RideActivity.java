@@ -978,21 +978,22 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challengebutton.setVisibility(View.INVISIBLE);
 
         int challengenr = r.nextInt(10);
+        int moeilijkheidsgraad=1;
 
         if (challengenr == 1){
             getSpeed();
         } else if (challengenr == 2 && accs){
             getAcceleration();
         } else if (challengenr == 3){
-            keepSpeed();
+            keepSpeed(moeilijkheidsgraad);
         } else if (challengenr == 4 && accs){
-            keepAcceleration();
+            keepAcceleration(moeilijkheidsgraad);
         } else if (challengenr == 5){
             averageSpeed();
         } else if (challengenr == 6 && accs){
             averageAcceleration();
         } else if (challengenr == 7 && temps){
-            temperatureDifference();
+            temperatureDifference(moeilijkheidsgraad);
         } else if (challengenr == 8){
             driveCircle();
         } else if (challengenr == 9 && magns && orients){
