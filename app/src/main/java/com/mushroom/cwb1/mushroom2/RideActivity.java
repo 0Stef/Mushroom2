@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView Succes;
     TextView challenge2;
     TextView challenge1;
+    TextView uitleg;
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
@@ -75,7 +77,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private float[] results;
     private float richting;
     private String windrichting;
+    private String zoekrichting;
     private Random r = new Random();
+
+    private boolean temps = false;
+    private boolean accs = false;
+    private boolean magns = false;
+    private boolean orients = false;
+
 
 
     private boolean eerstekeer = true;
@@ -156,9 +165,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         Succes = (TextView) findViewById(R.id.succes);
         challenge1 = (TextView) findViewById(R.id.challenge1);
         challenge2 = (TextView) findViewById(R.id.challenge2);
+        uitleg = (TextView) findViewById(R.id.uitleg);
         Succes.setVisibility(View.INVISIBLE);
         challenge1.setVisibility(View.INVISIBLE);
         challenge2.setVisibility(View.INVISIBLE);
+        uitleg.setVisibility(View.INVISIBLE);
 
 
 
@@ -210,7 +221,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         resumerecordingbutton.setVisibility(View.INVISIBLE);
         pauserecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
-        challengebutton.setVisibility(View.VISIBLE);
 
 
         textDistance.setText("wachten op gps signaal");
@@ -227,6 +237,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
             mSensorManager.registerListener(this, mAcceleration, 1000000);
+            accs = true;
         } else {
             //TODO iets verzinnen als sensor niet aanwezig is
         }
@@ -234,20 +245,24 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
             mMagneticfield = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
             mSensorManager.registerListener(this, mMagneticfield, 1000000);
+            magns = true;
         } else {
         }
 
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
             mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
             mSensorManager.registerListener(this, mTemperature, 1000000);
+            temps = true;
         } else if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null) {
             mTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
             mSensorManager.registerListener(this, mTemperature, 1000000);
+            temps = true;
         }
 
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
             mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
             mSensorManager.registerListener(this, mOrientation, 1000000);
+            orients = true;
         }
 
         // Acquire a reference to the system Location Manager
@@ -257,7 +272,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-
                 if (firstLocationSet) {
 
                     distanceToPrev = location.distanceTo(previousLocation);
@@ -268,6 +282,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
                     customHandler.postDelayed(updateTimerThread, 0);
+                    challengebutton.setVisibility(View.VISIBLE);
                     eerstekeer = false;
                 }
 
@@ -586,6 +601,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Long eltime = 0l;
 
     public void keepSpeed() {
+        uitleg.setText("Hou 30 seconden een snelheid van 20 km/u aan");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
@@ -626,6 +643,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     double acct;
 
     public void keepAcceleration() {
+        uitleg.setText("Hou 5 seconden een versnelling van 3 m/s² aan");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
@@ -663,6 +682,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void temperatureDifference() {
+        uitleg.setText("Vind een plaats met een temperatuurverschil van 1°C");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 final float starttemperatuur = temperature;
@@ -700,6 +721,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void averageSpeed() {
+        uitleg.setText("Haal deze rit (minstens 5 minuten) een gemiddelde snelheid van 15 km/u");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -719,6 +742,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void averageAcceleration() {
+        uitleg.setText("Haal deze rit (minstens 5 minuten) een gemiddelde versnelling van 1 m/s²");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -738,6 +763,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void driveCircle(){
+        uitleg.setText("Rij een rondje van minstens 500 m");
+        uitleg.setVisibility(View.VISIBLE);
         final double startbreedte = latitude;
         final double startlengte = longitude;
         results = new float[1];
@@ -784,10 +811,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void getAcceleration(){
+        uitleg.setText("Haal een versnelling van 5 m/s²");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (acct < 3) {
+                    while (acct < 5) {
                         Thread.sleep(500);
                     }
                 }catch (InterruptedException e){
@@ -804,6 +833,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     public void altitudeDifferenceEasy() {
+        uitleg.setText("Maak een klim van 10 m hoog");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 final double starthoogte = altitude;
@@ -842,6 +873,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     public void getSpeed(){
+        uitleg.setText("Haal een snelheid van 20 km/u");
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -861,6 +894,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void driveDirection(){
+        String[] windrichtingen = {"Noorden ", "Oosten ", "Zuiden ", "Westen "};
+        int idx = r.nextInt(windrichtingen.length);
+        zoekrichting = (windrichtingen[idx]);
+
+        uitleg.setText("Rij 1 km naar het " + zoekrichting);
+        uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 afstand = 0f;
@@ -876,11 +915,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         challenge2.setVisibility(View.VISIBLE);
                     }
                 });
-
-                String[] windrichtingen = {"Noorden ", "Oosten ", "Zuiden ", "Westen "};
-
-                int idx = r.nextInt(windrichtingen.length);
-                final String zoekrichting = (windrichtingen[idx]);
 
                 try {
                     float startafstand = distance;
@@ -916,10 +950,30 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void randomChallenge(View view){
-//        [] challenges = {"Noorden ", "Oosten ", "Zuiden ", "Westen "};
-//        ArrayList challenges = new ArrayList();
-//        challenges.add(driveCircle())
-//        challenges = {driveDirection(), keepSpeed(), keepAcceleration(), getSpeed(), getAcceleration(),
-//                driveCircle(), averageSpeed(), averageAcceleration(), altitudeDifferenceEasy(), temperatureDifference()};
+        challengebutton.setVisibility(View.INVISIBLE);
+
+        int challengenr = r.nextInt(10);
+
+        if (challengenr == 1){
+            getSpeed();
+        } else if (challengenr == 2 && accs){
+            getAcceleration();
+        } else if (challengenr == 3){
+            keepSpeed();
+        } else if (challengenr == 4 && accs){
+            keepAcceleration();
+        } else if (challengenr == 5){
+            averageSpeed();
+        } else if (challengenr == 6 && accs){
+            averageAcceleration();
+        } else if (challengenr == 7 && temps){
+            temperatureDifference();
+        } else if (challengenr == 8){
+            driveCircle();
+        } else if (challengenr == 9 && magns && orients){
+            driveDirection();
+        } else if (challengenr == 10){
+            altitudeDifferenceEasy();
+        }
     }
 }

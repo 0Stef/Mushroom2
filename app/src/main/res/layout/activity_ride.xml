@@ -222,9 +222,18 @@
             android:layout_below="@id/currentAcceleration"
             android:text="@string/getstartedch"
             android:layout_marginTop="10dp"
-            android:onClick="driveDirection"
+            android:onClick="randomChallenge"
             android:id="@+id/challengebutton"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/uitleg"
+            android:layout_below="@id/currentAcceleration"
+            android:layout_marginTop="20dp"
+            android:text="Test"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
