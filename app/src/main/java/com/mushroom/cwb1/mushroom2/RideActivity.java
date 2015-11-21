@@ -980,25 +980,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         int challengenr = r.nextInt(10);
         int moeilijkheidsgraad=1;
 
-        if (challengenr == 1){
+        if (challengenr == 0){
             getSpeed();
-        } else if (challengenr == 2 && accs){
+        } else if (challengenr == 1 && accs){
             getAcceleration();
-        } else if (challengenr == 3){
+        } else if (challengenr == 2){
             keepSpeed(moeilijkheidsgraad);
-        } else if (challengenr == 4 && accs){
+        } else if (challengenr == 3 && accs){
             keepAcceleration(moeilijkheidsgraad);
-        } else if (challengenr == 5){
+        } else if (challengenr == 4){
             averageSpeed();
-        } else if (challengenr == 6 && accs){
+        } else if (challengenr == 5 && accs){
             averageAcceleration();
-        } else if (challengenr == 7 && temps){
+        } else if (challengenr == 6 && temps){
             temperatureDifference(moeilijkheidsgraad);
-        } else if (challengenr == 8){
+        } else if (challengenr == 7){
             driveCircle();
-        } else if (challengenr == 9 && magns && orients){
+        } else if (challengenr == 8 && magns && orients){
             driveDirection();
-        } else if (challengenr == 10){
+        } else if (challengenr == 9){
             altitudeDifferenceEasy();
         }
     }
