@@ -600,9 +600,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     Long eltime = 0l;
 
-    public void keepSpeed() {
-        uitleg.setText("Hou 30 seconden een snelheid van 20 km/u aan");
+    public void keepSpeed(int moeilijkheidsgraad) {
+        final int snelheid;
+        if (moeilijkheidsgraad == 1){
+            snelheid = 20;
+        } else if (moeilijkheidsgraad == 2){
+            snelheid = 25;
+        }else {
+            snelheid = 35;
+        }
+        uitleg.setText("Hou 30 seconden een snelheid van " + snelheid + " km/u aan");
         uitleg.setVisibility(View.VISIBLE);
+
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
@@ -614,7 +623,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 try {
                     long gestart = SystemClock.uptimeMillis();
                     while (eltime < 30000) {
-                        if (speed >= 20) {
+                        if (speed >= snelheid) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
                                 public void run() {
@@ -642,8 +651,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     double acct;
 
-    public void keepAcceleration() {
-        uitleg.setText("Hou 5 seconden een versnelling van 3 m/s² aan");
+    public void keepAcceleration(int moeilijkheidsgraad) {
+        final int versnelling;
+        if (moeilijkheidsgraad == 1){
+            versnelling = 2;
+        } else if (moeilijkheidsgraad == 2) {
+            versnelling = 3;
+        }else {
+            versnelling = 5;
+        }
+        uitleg.setText("Hou 5 seconden een versnelling van " + versnelling + " m/s² aan");
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -656,7 +673,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 try {
                     long gestart = SystemClock.uptimeMillis();
                     while (eltime < 5000) {
-                        if (acct >= 3) {
+                        if (acct >= versnelling) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
                                 public void run() {
@@ -681,8 +698,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
-    public void temperatureDifference() {
-        uitleg.setText("Vind een plaats met een temperatuurverschil van 1°C");
+    public void temperatureDifference(int moeilijkheidsgraad) {
+        final int temperatuurverschil;
+        if (moeilijkheidsgraad == 1){
+            temperatuurverschil = 1;
+        } else if (moeilijkheidsgraad == 2){
+            temperatuurverschil = 2;
+        }else {
+            temperatuurverschil = 4;
+        }
+        uitleg.setText("Vind een plaats met een temperatuurverschil van " + temperatuurverschil + " °C");
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
