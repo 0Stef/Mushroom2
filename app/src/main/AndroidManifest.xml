@@ -98,6 +98,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:name=".RideActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_ride" >
         </activity>
         <activity
@@ -127,7 +128,8 @@
         </activity>
         <activity
             android:name=".Register"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:parentActivityName=".Login_screen">
         </activity>
     </application>
 

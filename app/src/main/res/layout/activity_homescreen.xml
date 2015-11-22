@@ -7,84 +7,103 @@
     tools:context="cwb1.mushroom.com.Homescreen"
     >
 
-    <Button
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings"
-        android:id="@+id/button4"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/rideActivityButton"
-        android:id="@+id/rideActivityButton"
-        android:layout_below="@+id/button4"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/challenges"
-        android:id="@+id/button3"
-        android:layout_below="@+id/rideActivityButton"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings"
+                android:id="@+id/button4"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/optionalbutton"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button3"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rideActivityButton"
+                android:id="@+id/rideActivityButton"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/ranglijsten"
-        android:id="@+id/ranglijsten"
-        android:layout_below="@+id/button2"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/challenges"
+                android:id="@+id/button3"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/persoonlijkestatistieken"
-        android:id="@+id/persoonlijkestatistieken"
-        android:layout_below="@+id/ranglijsten"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/optionalbutton"
+                android:id="@+id/button2"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/persoonlijkeinstellingen"
-        android:id="@+id/persoonlijkeinstellingen"
-        android:layout_below="@+id/persoonlijkestatistieken"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ranglijsten"
+                android:id="@+id/ranglijsten"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/vrienden"
-        android:id="@+id/vrienden"
-        android:layout_below="@+id/persoonlijkeinstellingen"
-        android:background="#FFBF6A"
-        android:layout_marginBottom="10dp"
-        />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/persoonlijkestatistieken"
+                android:id="@+id/persoonlijkestatistieken"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/persoonlijkeinstellingen"
+                android:id="@+id/persoonlijkeinstellingen"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vrienden"
+                android:id="@+id/vrienden"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:id="@+id/logout"
+                android:background="@color/red"
+                android:textColor="@color/white"
+                android:layout_marginBottom="10dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

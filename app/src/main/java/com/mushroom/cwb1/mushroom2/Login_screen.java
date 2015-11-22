@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.LinkedList;
 
@@ -17,6 +18,7 @@ public class Login_screen extends AppCompatActivity {
     private UserHandler userHandler;
     private EditText usernameEdit;
     private EditText passwordEdit;
+    private TextView wrongPasswordEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class Login_screen extends AppCompatActivity {
         Button registerbutton = (Button) findViewById(R.id.registerbutton);
         usernameEdit = (EditText) findViewById(R.id.editText);
         passwordEdit = (EditText) findViewById(R.id.editText2);
+        wrongPasswordEdit = (TextView) findViewById(R.id.wrong_password);
 
 
         loginbutton.setOnClickListener(
@@ -64,16 +67,19 @@ public class Login_screen extends AppCompatActivity {
                     startActivity(i);
 
                     System.out.println("    -   User is logged in: " + userName);
+                    wrongPasswordEdit.setText("");
                 } else {
-                    passwordEdit.setText("Incorrect password.");
+                    wrongPasswordEdit.setText("Foutief wachtwoord!");
                     System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
                 }
 
             } else {
                 System.out.println("    -   Not existing username");
+                wrongPasswordEdit.setText("Foutieve gebruikersnaam!");
             }
         } else {
             System.out.println("    -   Empty username");
+            wrongPasswordEdit.setText("Vul gebruikersnaam in.");
         }
 
         debug(userName, passWord);

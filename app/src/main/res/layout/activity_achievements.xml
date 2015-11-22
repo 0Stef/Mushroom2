@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_1_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -72,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_5_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -101,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_10_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -130,7 +127,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_50_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -159,7 +155,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_100_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -188,7 +183,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_250_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -216,8 +210,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_500_km"
-                android:progress="50"
-                android:progressTint="#FFBF6A"
+                android:progress="0"
                 />
 
             <View
@@ -246,7 +239,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_1000_km"
                 android:progress="0"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -275,7 +267,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_5000_km"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -304,7 +295,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_topspeed_30"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -333,7 +323,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_topspeed_35"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -362,7 +351,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_topspeed_40"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -391,7 +379,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_topspeed_45"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -420,7 +407,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_topspeed_50"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -449,7 +435,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_1"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -478,7 +463,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_5"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -507,7 +491,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_10"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -536,7 +519,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_50"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -565,7 +547,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_200"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -594,7 +575,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_nb_challenge_500"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -623,7 +603,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_1"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -652,7 +631,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_2"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -681,7 +659,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_5"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -710,7 +687,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_7"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -739,7 +715,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_14"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -768,7 +743,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_31"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -797,7 +771,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_days_biked_100"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -828,7 +801,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_alt_diff_10"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -857,7 +829,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_alt_diff_25"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -886,7 +857,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_alt_diff_50"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -915,7 +885,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_alt_diff_100"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -943,7 +912,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_start_the_game"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View
@@ -972,7 +940,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progress_get_all_achievements"
                 android:progress="50"
-                android:progressTint="#FFBF6A"
                 />
 
             <View

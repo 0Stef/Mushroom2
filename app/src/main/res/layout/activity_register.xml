@@ -87,12 +87,13 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/registeract_register"
         android:id="@+id/registeract_register"
         android:layout_below="@+id/editText_register_city"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/orangeApp"/>
 
 
 </RelativeLayout>

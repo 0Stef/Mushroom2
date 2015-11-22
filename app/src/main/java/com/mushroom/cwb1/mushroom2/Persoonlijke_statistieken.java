@@ -8,13 +8,11 @@ import android.view.MenuItem;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.highlight.Highlight;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,6 +20,7 @@ import java.util.LinkedList;
 public class Persoonlijke_statistieken extends AppCompatActivity {
 
     private int nbRide;
+    private int Distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +33,19 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         ArrayList<String> xVal = new ArrayList<String>();
         ArrayList<Entry> yVelocity = new ArrayList<Entry>();
+        ArrayList<Entry> yDistance = new ArrayList<Entry>();
         ArrayList<Entry> yAccelerometerX = new ArrayList<Entry>();
         ArrayList<Entry> yAccelerometerY = new ArrayList<Entry>();
         ArrayList<Entry> yAccelerometerZ = new ArrayList<Entry>();
 
         if (list.size() != 0){
+            Distance = 0;
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
                 xVal.add("" + index);
+                Distance += row.getDistancetopreviouspoint();
                 yVelocity.add(new Entry(row.getVelocity(), index));
+                yDistance.add(new Entry(Distance, index));
                 yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
                 yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
                 yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
@@ -75,6 +78,34 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chVelocity.setData(dataVelocity);
         chVelocity.invalidate();
         chVelocity.animateY(3000);
+
+        // Distance chart
+        LineChart chDistance = (LineChart) findViewById(R.id.chDistance);
+        chDistance.setDescription("");
+        chDistance.setDrawGridBackground(false);
+        chDistance.setNoDataText("Geen afstandswaarden!");
+        Legend lDistance = chDistance.getLegend();
+        lDistance.setEnabled(false);
+        YAxis y12Distance = chDistance.getAxisRight();
+        y12Distance.setEnabled(false);
+        XAxis x1Distance = chDistance.getXAxis();
+        x1Distance.setDrawGridLines(false);
+        x1Distance.setPosition(XAxis.XAxisPosition.BOTTOM);
+        YAxis y1Distance = chDistance.getAxisLeft();
+        y1Distance.setDrawGridLines(false);
+
+        LineDataSet setDistance = new LineDataSet(yDistance, "");
+        setDistance.setDrawCubic(true);
+        setDistance.setDrawFilled(true);
+        setDistance.setDrawValues(false);
+        setDistance.setDrawCircles(false);
+        setDistance.setColor(Color.rgb(255, 100, 0));
+        setDistance.setFillColor(Color.rgb(255, 191, 106));
+        setDistance.setCircleColor(Color.rgb(255, 100, 0));
+        LineData dataDistance = new LineData(xVal, setDistance);
+        chDistance.setData(dataDistance);
+        chDistance.invalidate();
+        chDistance.animateY(3000);
 
         // AccelerometerX
         LineChart chAccelerometerX = (LineChart) findViewById(R.id.chAccelerometerX);

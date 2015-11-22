@@ -69,46 +69,76 @@ public class achievements extends AppCompatActivity {
 
 
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
+        progress_1_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_5_km = (ProgressBar) findViewById(R.id.progress_5_km);
+        progress_5_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_10_km = (ProgressBar) findViewById(R.id.progress_10_km);
+        progress_10_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_50_km = (ProgressBar) findViewById(R.id.progress_50_km);
+        progress_50_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_100_km = (ProgressBar) findViewById(R.id.progress_100_km);
+        progress_100_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_250_km = (ProgressBar) findViewById(R.id.progress_250_km);
+        progress_250_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_500_km = (ProgressBar) findViewById(R.id.progress_500_km);
+        progress_500_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_1000_km = (ProgressBar) findViewById(R.id.progress_1000_km);
+        progress_1000_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_5000_km = (ProgressBar) findViewById(R.id.progress_5000_km);
+        progress_5000_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         progress_topspeed_30 = (ProgressBar) findViewById(R.id.progress_topspeed_30);
+        progress_topspeed_30.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_topspeed_35 = (ProgressBar) findViewById(R.id.progress_topspeed_35);
+        progress_topspeed_35.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_topspeed_40 = (ProgressBar) findViewById(R.id.progress_topspeed_40);
+        progress_topspeed_40.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_topspeed_45 = (ProgressBar) findViewById(R.id.progress_topspeed_45);
+        progress_topspeed_45.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_topspeed_50 = (ProgressBar) findViewById(R.id.progress_topspeed_50);
+        progress_topspeed_50.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         progress_nb_challenge_1 = (ProgressBar) findViewById(R.id.progress_nb_challenge_1);
+        progress_nb_challenge_1.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_nb_challenge_5 = (ProgressBar) findViewById(R.id.progress_nb_challenge_5);
+        progress_nb_challenge_5.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_nb_challenge_10 = (ProgressBar) findViewById(R.id.progress_nb_challenge_10);
+        progress_nb_challenge_10.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_nb_challenge_50 = (ProgressBar) findViewById(R.id.progress_nb_challenge_50);
+        progress_nb_challenge_50.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_nb_challenge_200 = (ProgressBar) findViewById(R.id.progress_nb_challenge_200);
+        progress_nb_challenge_200.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_nb_challenge_500 = (ProgressBar) findViewById(R.id.progress_nb_challenge_500);
+        progress_nb_challenge_500.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         progress_days_biked_1  = (ProgressBar) findViewById(R.id.progress_days_biked_1);
+        progress_days_biked_1.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_2  = (ProgressBar) findViewById(R.id.progress_days_biked_2);
+        progress_days_biked_2.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_5  = (ProgressBar) findViewById(R.id.progress_days_biked_5);
+        progress_days_biked_5.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_7  = (ProgressBar) findViewById(R.id.progress_days_biked_7);
+        progress_days_biked_7.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_14  = (ProgressBar) findViewById(R.id.progress_days_biked_14);
+        progress_days_biked_14.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_31  = (ProgressBar) findViewById(R.id.progress_days_biked_31);
+        progress_days_biked_31.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_days_biked_100  = (ProgressBar) findViewById(R.id.progress_days_biked_100);
+        progress_days_biked_100.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         progress_alt_diff_10 = (ProgressBar) findViewById(R.id.progress_alt_diff_10);
+        progress_alt_diff_10.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_alt_diff_25 = (ProgressBar) findViewById(R.id.progress_alt_diff_25);
+        progress_alt_diff_25.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_alt_diff_50 = (ProgressBar) findViewById(R.id.progress_alt_diff_50);
+        progress_alt_diff_50.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_alt_diff_100 = (ProgressBar) findViewById(R.id.progress_alt_diff_100);
+        progress_alt_diff_100.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         progress_start_the_game = (ProgressBar) findViewById(R.id.progress_start_the_game);
+        progress_start_the_game.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
         progress_get_all_achievements = (ProgressBar) findViewById(R.id.progress_get_all_achievements);
-
-
-
+        progress_get_all_achievements.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
         //TODO verder uitwerken
         //TOTAL DISTANCE

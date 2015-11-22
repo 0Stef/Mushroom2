@@ -3,6 +3,7 @@ package com.mushroom.cwb1.mushroom2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,6 +82,22 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
+        Button  LogOutButton = (Button)findViewById(R.id.logout);
+
+        LogOutButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), Login_screen.class);
+                        startActivity(i);
+
+                    }
+                }
+        );
+
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @Override
