@@ -222,7 +222,7 @@
             android:layout_below="@id/currentAcceleration"
             android:text="@string/getstartedch"
             android:layout_marginTop="10dp"
-            android:onClick="randomChallenge"
+            android:onClick="challengeButton"
             android:id="@+id/challengebutton"
             />
 
