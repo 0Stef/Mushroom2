@@ -13,8 +13,9 @@
     <string name="mail">Enter your username</string>
     <string name="password">Enter your password</string>
     <string name="loginbutton">Log in</string>
+    <string name="Wrong_password">Foutief wachtwoord!</string>
 
-
+    //Homescreen
     <string name="title_activity_challenges">Challenges</string>
     <string name="challengestitle">Challenges</string>
     <string name="rideActivityButton">Rit modus</string>
@@ -28,6 +29,7 @@
     <string name="persoonlijkestatistieken">Persoonlijke statistieken</string>
     <string name="persoonlijkeinstellingen">Persoonlijke instellingen</string>
     <string name="vrienden">Vrienden</string>
+    <string name="logout">Uitloggen</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_record_acceleration">recordAcceleration</string>
@@ -140,6 +142,8 @@
     <string name="AccelerometerX">Accelerometer x-waarden.</string>
     <string name="AccelerometerY">Accelerometer y-waarden.</string>
     <string name="AccelerometerZ">Accelerometer z-waarden.</string>
+    <string name="Globaal">Globaal.</string>
+    <string name="Afstand">Afstand.</string>
 
 
     <string name="edit_message">Put data in server</string>

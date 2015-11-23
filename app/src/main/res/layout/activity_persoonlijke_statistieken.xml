@@ -24,6 +24,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Globaal"
+                android:textColor="@color/orangeApp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/laatste_rit"
                 android:textColor="@color/orangeApp"
                 />
@@ -43,6 +57,25 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chVelocity"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="2dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Afstand"
+                />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chDistance"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="2dp"/>

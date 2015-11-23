@@ -10,19 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Calendar;
 import java.util.LinkedList;
 
 
 public class Login_screen extends AppCompatActivity {
 
     private UserHandler userHandler;
-
-    private Button loginbutton;
-    private Button registerbutton;
     private EditText usernameEdit;
     private EditText passwordEdit;
-    private TextView debugView;
+    private TextView wrongPasswordEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +27,12 @@ public class Login_screen extends AppCompatActivity {
 
         userHandler = new UserHandler(getApplicationContext());
 
-        loginbutton = (Button) findViewById(R.id.button);
-        registerbutton = (Button) findViewById(R.id.registerbutton);
+        Button loginbutton = (Button) findViewById(R.id.button);
+        Button registerbutton = (Button) findViewById(R.id.registerbutton);
         usernameEdit = (EditText) findViewById(R.id.editText);
         passwordEdit = (EditText) findViewById(R.id.editText2);
-        debugView = (TextView) findViewById(R.id.textView4);
+        wrongPasswordEdit = (TextView) findViewById(R.id.wrong_password);
 
-        usernameEdit.setSingleLine();
-        passwordEdit.setSingleLine();
 
         loginbutton.setOnClickListener(
                 new Button.OnClickListener() {
@@ -48,52 +42,47 @@ public class Login_screen extends AppCompatActivity {
                 }
         );
 
+
         registerbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        register();
+                        Intent start_register = new Intent(getApplicationContext(), Register.class);
+                        startActivity(start_register);
                     }
                 }
         );
     }
 
     public void login() {
-        String userName = usernameEdit.getText().toString().replaceAll(" ", "_");
-        String passWord = passwordEdit.getText().toString().replaceAll(" ", "_");
+        String userName = usernameEdit.getText().toString();
+        String passWord = passwordEdit.getText().toString();
 
         if (!userName.isEmpty()) {
-            if (userHandler.isExistingUser(userName)) {
-                if (userHandler.isRightPassword(userName, passWord)) {
-                    Calendar calendar = Calendar.getInstance();
-                    long millisec = calendar.getTimeInMillis();
-                    userHandler.overWrite(userName, userHandler.COLUMN_LAST_LOGIN, millisec);
 
+            if (userHandler.isExistingUser(userName)) {
+
+                if (userHandler.isRightPassword(userName, passWord)) {
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
                     i.putExtra("username", userName);
                     startActivity(i);
+
                     System.out.println("    -   User is logged in: " + userName);
-                    finish();
+                    wrongPasswordEdit.setText("");
                 } else {
-                    passwordEdit.setText("Incorrect password.");
+                    wrongPasswordEdit.setText("Foutief wachtwoord!");
                     System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
                 }
+
             } else {
-                if (debug(userName, passWord)) {
-                    usernameEdit.setText("");
-                    System.out.println("    -   Cmd");
-                } else {
-                    usernameEdit.setText("Username does not exist.");
-                    System.out.println("    -   Not existing username");
-                }
+                System.out.println("    -   Not existing username");
+                wrongPasswordEdit.setText("Foutieve gebruikersnaam!");
             }
         } else {
             System.out.println("    -   Empty username");
+            wrongPasswordEdit.setText("Vul gebruikersnaam in.");
         }
-    }
 
-    public void register() {
-        Intent start_register = new Intent(getApplicationContext(), Register.class);
-        startActivity(start_register);
+        debug(userName, passWord);
     }
 
     @Override
@@ -118,39 +107,37 @@ public class Login_screen extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
-    private boolean debug(String command, String parameter) {
-        if (command.equals("reset_app")) {
-            DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
-            LinkedList<User> list = userHandler.getList(userHandler.getAll());
-            for (User user : list) {
-                dbHandler.deleteTable(user.getUser_name());
-            }
-            dbHandler.resetTable(dbHandler.TABLE_DEFAULT);
+    private void debug(String command, String parameter) {
+        if (command.equals("reset userhandler")) {
             userHandler.resetTable();
-            return true;
         }
-        if (command.equals("get_userlist") || command.equals("list") || command.equals("lst")) {
+        if (command.equals("reset databasehandler")) {
+            DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
+            dbHandler.resetTable(parameter);
+        }
+        if (command.equals("get userlist")) {
             LinkedList<User> list = userHandler.getList(userHandler.getAll());
-            debugView.append("\n");
-            debugView.append("List: \n");
             for (User user : list) {
-                debugView.append("  - " + user.toString() + "\n");
+                System.out.println("    -   " + user.toString());
             }
-            return true;
         }
-        if (command.equals("cmd") || command.equals("?")) {
-            debugView.append("\n");
-            debugView.append("Commands:\n");
-            debugView.append("  - reset app\n");
-            debugView.append("  - get userlist\n");
-            debugView.append("  - cls\n");
-            return true;
+        if (command.equals("delete user")) {
+            User user = new User();
+            userHandler.overWrite(user);
         }
-        if (command.equals("cls")){
-            debugView.setText("");
-            return true;
+        if (command.equals("list")) {
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("    Commands:");
+            System.out.println("        reset userhandler");
+            System.out.println("        reset databasehandler & parameter");
+            System.out.println("        get userlist");
+            System.out.println("        delete user");
+
+            System.out.println("");
+            System.out.println("");
         }
-        return false;
     }
 }
 
