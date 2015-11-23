@@ -19,7 +19,6 @@ public class Register extends AppCompatActivity {
 
     private Button registerButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,8 @@ public class Register extends AppCompatActivity {
         registerButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                       registerUser();
+                        resetHints();
+                        registerUser();
                     }
                 }
         );
@@ -63,6 +63,13 @@ public class Register extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void resetHints() {
+        userNameField.setHint("");
+        passWordField.setHint("");
+        countryField.setHint("");
+        cityField.setHint("");
+    }
+
     public void registerUser() {
         UserHandler userHandler = new UserHandler(getApplicationContext());
         DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
@@ -88,14 +95,20 @@ public class Register extends AppCompatActivity {
                     System.out.println("    -   Created new user: " + userName + ", " + passWord);
                     finish();
                 } else {
-                    userNameField.setText("Username already exists.");
+                    userNameField.setText("");
+                    userNameField.setHint("Username already exists.");
+                    userNameField.requestFocus();
                     System.out.println("    -   User already exists.");
                 }
             } else {
-                passWordField.setText("Password is needed.");
+                passWordField.setText("");
+                passWordField.setHint("Password is needed.");
+                passWordField.requestFocus();
             }
         } else {
-            userNameField.setText("Username is needed.");
+            userNameField.setText("");
+            userNameField.setHint("Username is needed.");
+            userNameField.requestFocus();
         }
     }
 }
