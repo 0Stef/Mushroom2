@@ -25,6 +25,7 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -36,6 +37,7 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Challenges.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -46,7 +48,7 @@ public class Homescreen extends AppCompatActivity {
         Achievementsbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), achievements.class);
+                        Intent i = new Intent(getApplicationContext(), Achievements.class);
                         i.putExtra("username", currentUser);
                         startActivity(i);
                     }
@@ -71,6 +73,7 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Persoonlijke_statistieken.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -82,6 +85,7 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Login_screen.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }

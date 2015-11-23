@@ -19,6 +19,7 @@ import java.util.LinkedList;
 
 public class Persoonlijke_statistieken extends AppCompatActivity {
 
+    private String currentUser;
     private int nbRide;
     private int Distance;
 
@@ -27,7 +28,9 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persoonlijke_statistieken);
 
-        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext());
+        currentUser = getIntent().getStringExtra("username");
+
+        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         nbRide=handler.getGreatestRideID();
         LinkedList list = handler.getList(handler.getAllThisRide(nbRide));
 
