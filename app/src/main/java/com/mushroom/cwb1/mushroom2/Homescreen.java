@@ -48,7 +48,7 @@ public class Homescreen extends AppCompatActivity {
         Achievementsbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), Achievements.class);
+                        Intent i = new Intent(getApplicationContext(), achievements.class);
                         i.putExtra("username", currentUser);
                         startActivity(i);
                     }
@@ -85,8 +85,9 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Login_screen.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
+                        finish();
+                        System.out.println("    -   User is logged out: " + currentUser);
                     }
                 }
         );

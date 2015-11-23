@@ -69,10 +69,7 @@ public class Login_screen extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
                 if (userHandler.isRightPassword(userName, passWord)) {
-                    Calendar calendar = Calendar.getInstance();
-                    long millisec = calendar.getTimeInMillis();
-                    userHandler.overWrite(userName, userHandler.COLUMN_LAST_LOGIN, millisec);
-
+                    checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
                     i.putExtra("username", userName);
                     startActivity(i);
@@ -104,15 +101,37 @@ public class Login_screen extends AppCompatActivity {
         }
     }
 
+    public void register() {
+        Intent start_register = new Intent(getApplicationContext(), Register.class);
+        startActivity(start_register);
+    }
+
     private void reset() {
         usernameEdit.setHint("");
         passwordEdit.setHint("");
         registerbutton.setBackgroundColor(Color.parseColor("#2d95ff"));
     }
 
-    public void register() {
-        Intent start_register = new Intent(getApplicationContext(), Register.class);
-        startActivity(start_register);
+    private void checkDay(String userName) {
+        User user = userHandler.getUserInformation(userName);
+
+        Calendar calendar = Calendar.getInstance();
+        long millisec = calendar.getTimeInMillis();
+
+        long lastMillisec = user.getLast_login();
+        Calendar lastCalendar = Calendar.getInstance();
+        lastCalendar.setTimeInMillis(lastMillisec);
+
+        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
+                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
+
+        if (!sameDay) {
+            int nb = user.getNb_days_biked();
+            user.setNb_days_biked(nb + 1);
+        }
+        user.setLast_login(millisec);
+
+        userHandler.overWrite(user);
     }
 
     @Override

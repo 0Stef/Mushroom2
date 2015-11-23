@@ -406,7 +406,6 @@ public class achievements extends AppCompatActivity {
         progress_get_all_achievements.setProgress((int) (user.getGet_all_achievements()/1.0f)*100);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
