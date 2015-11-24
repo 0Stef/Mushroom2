@@ -33,6 +33,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         nbRide=handler.getGreatestRideID();
         LinkedList list = handler.getList(handler.getAllThisRide(nbRide));
+        ArrayList<Integer> distanceList = handler.getDistanceList(handler.getAllThisRide(nbRide));
 
         ArrayList<String> xVal = new ArrayList<String>();
         ArrayList<Entry> yVelocity = new ArrayList<Entry>();
@@ -42,16 +43,21 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         ArrayList<Entry> yAccelerometerZ = new ArrayList<Entry>();
 
         if (list.size() != 0){
-            Distance = 0;
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
                 xVal.add("" + index);
-                Distance += row.getDistancetopreviouspoint();
-                yVelocity.add(new Entry(row.getVelocity(), index));
-                yDistance.add(new Entry(Distance, index));
-                yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
-                yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
-                yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
+                yDistance.add(new Entry(distanceList.get(index), index));
+                if (row.get_id() >= 0) {
+                    yVelocity.add(new Entry(row.getVelocity(), index));
+                    yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
+                    yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
+                    yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
+                } else {
+                    yVelocity.add(new Entry(row.getVelocity(), index));
+                    yAccelerometerX.add(new Entry(0f, index));
+                    yAccelerometerY.add(new Entry(0f, index));
+                    yAccelerometerZ.add(new Entry(0f, index));
+                }
             }
         }
         // Velocity chart

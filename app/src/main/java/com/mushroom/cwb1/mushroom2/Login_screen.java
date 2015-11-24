@@ -76,6 +76,7 @@ public class Login_screen extends AppCompatActivity {
                     System.out.println("    -   User is logged in: " + userName);
                     finish();
                 } else {
+
                     passwordEdit.setText("");
                     passwordEdit.setHint("Incorrect password.");
                     passwordEdit.requestFocus();

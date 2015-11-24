@@ -191,20 +191,6 @@ public class dbRow {
         return Magnetic_zValue;
     }
 
-    // time and disctance to previous point
-
-    public void setDistancetopreviouspoint (float distancetopreviouspoint){
-        this.distancetopreviouspoint = distancetopreviouspoint;
-    }
-
-    public float getDistancetopreviouspoint (){
-        return distancetopreviouspoint;
-    }
-
-    public void setTimetopreviouspoint (long timetopreviouspoint){this.timetopreviouspoint=timetopreviouspoint;}
-
-    public long getTimetopreviouspoint (){return timetopreviouspoint;}
-
     // Other
 
     @Override

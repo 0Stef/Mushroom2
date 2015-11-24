@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 
+import java.util.Calendar;
+
 public class achievements extends AppCompatActivity {
 
     UserHandler handler;
@@ -446,6 +448,23 @@ public class achievements extends AppCompatActivity {
             progress_get_all_achievements.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
+    }
+
+    private void checkDay(String userName) {
+        Calendar calendar = Calendar.getInstance();
+
+        User user = handler.getUserInformation(userName);
+        long lastMillisec = user.getLast_login();
+        Calendar lastCalendar = Calendar.getInstance();
+        lastCalendar.setTimeInMillis(lastMillisec);
+
+        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
+                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
+
+        if (!sameDay) {
+            int nb = user.getNb_days_biked();
+            handler.overWrite(userName, handler.COLUMN_NB_DAYS_BIKED, nb+1);
+        }
     }
 
     @Override
