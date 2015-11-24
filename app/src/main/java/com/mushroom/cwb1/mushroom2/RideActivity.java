@@ -96,6 +96,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     private android.os.Handler customHandler = new android.os.Handler();
 
+
+    //TODO timer met running weergeven
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -301,7 +303,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     maxSpeed = speed;
                     textMaximumSpeed.setText(decimalF.format(maxSpeed));
                 }
-                //double altitude = location.getAltitude();
+                double altitude = location.getAltitude();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
@@ -340,7 +342,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
 
 
-                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, 0f, magnfx, magnfy, magnfz, distanceToPrev, timeToPrev);
+                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz, distanceToPrev, timeToPrev);
                 handler.addPoint(punt);
 
 
@@ -912,7 +914,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
-    public void altitudeDifferenceEasy(int moeilijkheidsgraad) {
+    public void altitudeDifference(int moeilijkheidsgraad) {
         final int doel;
         if (moeilijkheidsgraad == 1){
             doel = 10;
@@ -926,23 +928,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 final double starthoogte = altitude;
-                challenge2.post(new Runnable() {
-                    public void run() {
-                        challenge2.setText("Huidige hoogte" + starthoogte + "m");
-                        challenge2.setVisibility(View.VISIBLE);
-                    }
-                });
+                double huidigHoogteVerschil = 0d;
+                final double finalHuidigHoogteVerschil = huidigHoogteVerschil;
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText("Starthoogte" + starthoogte + "m");
+                        challenge1.setText("Huidig hoogtevershil" + finalHuidigHoogteVerschil + "m");
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
                 try {
-                    while ((altitude - starthoogte) <= doel) {
-                        challenge2.post(new Runnable() {
+                    huidigHoogteVerschil = altitude - starthoogte;
+                    while ((huidigHoogteVerschil) <= doel) {
+                        challenge1.post(new Runnable() {
                             public void run() {
-                                challenge2.setText("Huidige hoogte" + altitude + "m");
+                                challenge1.setText("Huidig hoogtevershil" + finalHuidigHoogteVerschil + "m");
                             }
                         });
                         Thread.sleep(2500);
@@ -1082,7 +1081,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (challengenr == 8 && magns && orients){
             driveDirection(moeilijkheidsgraad);
         } else if (challengenr == 9){
-            altitudeDifferenceEasy(moeilijkheidsgraad);
+            altitudeDifference(moeilijkheidsgraad);
         } else randomChallenge();
     }
 }

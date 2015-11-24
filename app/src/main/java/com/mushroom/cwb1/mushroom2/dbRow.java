@@ -15,7 +15,7 @@ public class dbRow {
     private float velocity;
     private double longitude;
     private double latitude;
-    private float altitude;
+    private double altitude;
 
     private float Magnetic_xValue;
     private float Magnetic_yValue;
@@ -30,7 +30,7 @@ public class dbRow {
 
     public dbRow(int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
-                 float velocity, double longitude, double latitude, float altitude,
+                 float velocity, double longitude, double latitude, double altitude,
                  float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue, float distancetopreviouspoint, long timetopreviouspoint) {
 
         this.ride_id = ride_id;
@@ -155,7 +155,7 @@ public class dbRow {
         this.altitude = altitude;
     }
 
-    public float getAltitude() {
+    public double getAltitude() {
         return altitude;
     }
 
