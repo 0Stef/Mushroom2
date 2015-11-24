@@ -3,7 +3,6 @@ package com.mushroom.cwb1.mushroom2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +25,8 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
-
                     }
                 }
         );
@@ -38,8 +37,8 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Challenges.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
-
                     }
                 }
         );
@@ -52,7 +51,6 @@ public class Homescreen extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), achievements.class);
                         i.putExtra("username", currentUser);
                         startActivity(i);
-
                     }
                 }
         );
@@ -65,7 +63,6 @@ public class Homescreen extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), RideActivity.class);
                         i.putExtra("username", currentUser);
                         startActivity(i);
-
                     }
                 }
         );
@@ -76,8 +73,8 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Persoonlijke_statistieken.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
-
                     }
                 }
         );
@@ -89,15 +86,16 @@ public class Homescreen extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Login_screen.class);
                         startActivity(i);
-
+                        finish();
+                        System.out.println("    -   User is logged out: " + currentUser);
                     }
                 }
         );
-
     }
 
     @Override
     public void onBackPressed() {
+        System.out.println("    -   I don't think so!");
     }
 
     @Override
@@ -106,7 +104,6 @@ public class Homescreen extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_homescreen, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -40,19 +41,20 @@ public class MapsActivity extends FragmentActivity {
      * create a method bundled with the button of getting message
      * @param view
      */
+
+    /*
     public void getMessage(View view){
         //set your own group number and session ID http://daddi.cs.kuleuven.be/peno3/data/{group number}/{session ID}
         new GetAsyncTask().execute("http://mushroom.16mb.com/select-db.php");
-    }
+    }*/
 
     /**
      * create a method bundled with the button of putting message
      * @param view
      */
     public void putMessage(View view){
-        textView_1.setText("");
-        String message = edit_1.getText().toString();
-        dataToPut = message;
+        textView_1.setText("...");
+        dataToPut = edit_1.getText().toString();
         new PutAsyncTask().execute("http://mushroom.16mb.com/android/register_check_username.php");
     }
 
@@ -95,7 +97,7 @@ public class MapsActivity extends FragmentActivity {
      * @param URL
      * @return
      */
-
+/*
     public String putDataToServer(String URL){
         String status="Put the data to server successfully!";
         try {
@@ -134,7 +136,54 @@ public class MapsActivity extends FragmentActivity {
             e.printStackTrace();
         }
         return status;
+    }*/
+
+
+
+
+    public ArrayList<String> putDataToServer(String URL){
+        ArrayList<String> status =  new ArrayList<>();
+        status.add("test");
+        try {
+
+            URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //conn.setRequestProperty("Content-Type", "application/json");
+
+            //String input = dataToPut;
+            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+
+            //Read the acknowledgement message after putting data to server
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+            String output;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                status.add(output);
+            }
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +193,7 @@ public class MapsActivity extends FragmentActivity {
 
         edit_1 = (EditText) findViewById(R.id.edit_message_1);
         textView_1 = (TextView) findViewById(R.id.show_message_1);
+
     }
 
 
@@ -210,15 +260,18 @@ public class MapsActivity extends FragmentActivity {
      * an inner class to call the method getDataFromServer() in an UI thread
      */
 
-    class GetAsyncTask extends AsyncTask<String, Void, String> {
+    class PutAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
+
         @Override
-        protected String doInBackground(String... urls) {
-            return getDataFromServer(urls[0]);
+        protected ArrayList<String> doInBackground(String... urls) {
+            return putDataToServer(urls[0]);
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
-        protected void onPostExecute(String result) {
-            textView_1.setText(result);
+        protected void onPostExecute(ArrayList<String> result) {
+            textView_1.setText(result.get(0)+" - "+result.get(1));
+
+
         }
     }
 
@@ -226,9 +279,10 @@ public class MapsActivity extends FragmentActivity {
     /*****************************can be reused in your app*******************************
      * an inner class to call the method putDataToServer() in an UI thread
      */
+    /*
     class PutAsyncTask extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... urls) {
+        protected ArrayList<String> doInBackground(String... urls) {
             return putDataToServer(urls[0]);
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -236,7 +290,9 @@ public class MapsActivity extends FragmentActivity {
         protected void onPostExecute(String result) {
             textView_1.setText(result);
         }
-    }
+    }*/
+
+
 
 
 

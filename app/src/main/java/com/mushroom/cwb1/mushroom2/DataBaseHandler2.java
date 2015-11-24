@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DataBaseHandler2 extends SQLiteOpenHelper {
@@ -105,7 +106,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
                 COLUMN_GPS_VEL + FLOAT + COMMA +
                 COLUMN_GPS_LONG + DOUBLE + COMMA +
                 COLUMN_GPS_LAT + DOUBLE + COMMA +
-                COLUMN_GPS_ALT + FLOAT  + STOP_COLUMNS ;
+                COLUMN_GPS_ALT + DOUBLE  + STOP_COLUMNS ;
         db.execSQL(db2querry);
     }
 
@@ -268,6 +269,48 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return totalDistance;
     }
 
+    public ArrayList<Integer> getDistanceList(Cursor cursor) {
+        int totalDistance = 0;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        double startLatitude;
+        double startLongitude;
+        int startRideID;
+
+        double endLatitude;
+        double endLongitude;
+        int endRideID;
+
+        if (cursor.moveToFirst()) {
+            startLatitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT));
+            startLongitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG));
+            startRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+            list.add(totalDistance);
+
+            while (cursor.moveToNext()) {
+                endLatitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LAT));
+                endLongitude = cursor.getDouble(cursor.getColumnIndex(COLUMN_GPS_LONG));
+                endRideID = cursor.getInt(cursor.getColumnIndex(COLUMN_RIDE_ID));
+
+                if (isSameRide(startRideID, endRideID) && !isPaused(startRideID, endRideID)) {
+                    float[] distance = new float[1];
+                    location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, distance);
+
+                    totalDistance += distance[0];
+                }
+
+                list.add(totalDistance);
+
+                startLatitude = endLatitude;
+                startLongitude = endLongitude;
+                startRideID = endRideID;
+            }
+        }
+
+        return list;
+    }
+
     public long getTime(Cursor cursor) {
         long totalTime = 0l;
 
@@ -384,6 +427,17 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         String searchQuery = "SELECT * FROM " + TABLE +
                 " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
                     " WHERE " + COLUMN_RIDE_ID + " = " + rideID + ")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getLowestThisRide(String column, int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MIN(" + column + ") FROM " + TABLE +
+                " WHERE " + COLUMN_RIDE_ID + " = " + rideID + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
