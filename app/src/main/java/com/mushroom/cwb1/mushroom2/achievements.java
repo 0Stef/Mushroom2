@@ -56,6 +56,8 @@ public class achievements extends AppCompatActivity {
 
     public String currentUser;
 
+    private int nb_compl_achievements;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class achievements extends AppCompatActivity {
 
         System.out.println(user.getTotal_distance());
         System.out.println(user.getHighest_speed());
+        nb_compl_achievements = 0;
 
 
         //Creating the progressbars
@@ -250,39 +253,50 @@ public class achievements extends AppCompatActivity {
 
         user.setStart_the_game(1);
 
-//        if ((user.getDrive_1_km() ==1) || (user.getDrive_5_km() == 1) || (user.getDrive_10_km() == 1) || (user.getDrive_50_km() == 1) || (user.getDrive_100_km() == 1) || (user.getDrive_250_km() == 1) ||
-//                (user.getDrive_500_km() == 1) || (user.getDrive_1000_km() ==1) || (user.getDrive_5000_km() == 1) || (user.getTopspeed_30() == 1) || (user.getTopspeed_35() == 1) || (user.getTopspeed_40() == 1) ||
-//                (user.getTopspeed_45() == 1) || (user.getTopspeed_50() == 1) || (user.getNb_challenge_1() == 1) || (user.getNb_challenge_5() == 1) || (user.getNb_challenge_10() == 1) || (user.getNb_challenge_50() == 1) ||
-//                (user.getNb_challenge_1() == 1) ||
+
+
+//        if ((user.getDrive_1_km() ==1) && (user.getDrive_5_km() == 1) && (user.getDrive_10_km() == 1) && (user.getDrive_50_km() == 1) && (user.getDrive_100_km() == 1) && (user.getDrive_250_km() == 1) &&
+//                (user.getDrive_500_km() == 1) && (user.getDrive_1000_km() ==1) && (user.getDrive_5000_km() == 1) && (user.getTopspeed_30() == 1) && (user.getTopspeed_35() == 1) && (user.getTopspeed_40() == 1) &&
+//                (user.getTopspeed_45() == 1) && (user.getTopspeed_50() == 1) && (user.getNb_challenge_1() == 1) && (user.getNb_challenge_5() == 1) && (user.getNb_challenge_10() == 1) && (user.getNb_challenge_50() == 1) &&
+//                (user.getNb_challenge_1() == 1) &&
 
 
         // DISTANCE ACHIEVEMENTS
         if (user.getDrive_1_km() == 1 ){
             progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_5_km() == 1 ){
             progress_5_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_10_km() == 1 ){
             progress_10_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_50_km() == 1 ){
             progress_50_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_100_km() == 1 ){
             progress_100_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_250_km() == 1 ){
             progress_250_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_500_km() == 1 ){
             progress_500_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_1000_km() == 1 ){
             progress_1000_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getDrive_5000_km() == 1 ){
             progress_5000_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
 
         progress_1_km.setProgress((int) (user.getTotal_distance()/10.0f));
@@ -298,18 +312,23 @@ public class achievements extends AppCompatActivity {
         //SPEED ACHIEVEMENTS
         if (user.getTopspeed_30() == 1){
             progress_topspeed_30.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getTopspeed_35() == 1){
             progress_topspeed_35.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getTopspeed_40() == 1){
             progress_topspeed_40.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getTopspeed_45() == 1){
             progress_topspeed_45.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getTopspeed_50() == 1){
             progress_topspeed_50.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
 
         progress_topspeed_30.setProgress((int) ((user.getHighest_speed()/30.0f)*100));
@@ -321,21 +340,27 @@ public class achievements extends AppCompatActivity {
         //NB CHALLENGES ACHIEVEMENTS
         if (user.getNb_challenge_1() == 1){
             progress_nb_challenge_1.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getNb_challenge_5() == 1){
             progress_nb_challenge_5.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getNb_challenge_10() == 1){
             progress_nb_challenge_10.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getNb_challenge_50() == 1){
             progress_nb_challenge_50.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getNb_challenge_200() == 1){
             progress_nb_challenge_200.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getNb_challenge_500() == 1){
             progress_nb_challenge_500.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
 
         progress_nb_challenge_1.setProgress((int) ((user.getNb_won_challenges()/1.0f)*100));
@@ -348,24 +373,31 @@ public class achievements extends AppCompatActivity {
         //DAYS BIKED ACHIEVEMENT
         if (user.getBiked_days_1() == 1){
             progress_days_biked_1.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_2() == 1){
             progress_days_biked_2.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_5() == 1){
             progress_days_biked_5.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_7() == 1){
             progress_days_biked_7.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_14() == 1){
             progress_days_biked_14.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_31() == 1){
             progress_days_biked_31.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getBiked_days_100() == 1){
             progress_days_biked_100.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
 
         progress_days_biked_1.setProgress((int) ((user.getNb_days_biked()/1.0f)*100));
@@ -379,15 +411,19 @@ public class achievements extends AppCompatActivity {
         //ALT ACHIEVEMENTS
         if (user.getAlt_diff_10m() == 1){
             progress_alt_diff_10.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getAlt_diff_25m() == 1){
             progress_alt_diff_25.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getAlt_diff_50m() == 1){
             progress_alt_diff_50.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
         if (user.getAlt_diff_100m() == 1){
             progress_alt_diff_100.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
 
         progress_alt_diff_10.setProgress((int) (user.getHighest_altitude_diff()/10.0f)*100);
@@ -398,14 +434,20 @@ public class achievements extends AppCompatActivity {
         //OTHER
         if (user.getStart_the_game() == 1){
             progress_start_the_game.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+            nb_compl_achievements++;
         }
+
+
+        progress_start_the_game.setProgress((int) (user.getStart_the_game()/1.0f)*100);
+
+        progress_get_all_achievements.setProgress((int) (nb_compl_achievements/32.0f)*100);
+        if (nb_compl_achievements == 32)
+            user.setGet_all_achievements(1);
 
         if (user.getGet_all_achievements() == 1){
             progress_get_all_achievements.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         }
 
-        progress_start_the_game.setProgress((int) (user.getStart_the_game()/1.0f)*100);
-        progress_get_all_achievements.setProgress((int) (user.getGet_all_achievements()/1.0f)*100);
     }
 
     private void checkDay(String userName) {

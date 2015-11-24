@@ -106,7 +106,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
                 COLUMN_GPS_VEL + FLOAT + COMMA +
                 COLUMN_GPS_LONG + DOUBLE + COMMA +
                 COLUMN_GPS_LAT + DOUBLE + COMMA +
-                COLUMN_GPS_ALT + FLOAT  + STOP_COLUMNS ;
+                COLUMN_GPS_ALT + DOUBLE  + STOP_COLUMNS ;
         db.execSQL(db2querry);
     }
 
@@ -427,6 +427,17 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         String searchQuery = "SELECT * FROM " + TABLE +
                 " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
                     " WHERE " + COLUMN_RIDE_ID + " = " + rideID + ")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getLowestThisRide(String column, int rideID) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MIN(" + column + ") FROM " + TABLE +
+                " WHERE " + COLUMN_RIDE_ID + " = " + rideID + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
