@@ -153,4 +153,10 @@
     <string name="button_send">Send</string>
     <string name="title_activity_message">messageActivity</string>
 
+    <string-array name="moeilijkheidsgraad">
+        <item>Makkelijk</item>
+        <item>Normaal</item>
+        <item>Moeilijk</item>
+    </string-array>
+
 </resources>
