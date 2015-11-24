@@ -80,6 +80,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private String zoekrichting;
     private Random r = new Random();
 
+
+    private double highest_altitude;
+    private double lowest_altitude;
+
     private boolean temps = false;
     private boolean accs = false;
     private boolean magns = false;
@@ -434,15 +438,34 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
+// userhandler schrijven van de eigenschappen van de user.
+
         userhandler = new UserHandler(getApplicationContext());
         User user =userhandler.getUserInformation(currentUser);
 
+
+
+        // TOTAL DISTANCE
         float total_prev_dist = user.getTotal_distance();
         float current_ride_dist = distance;
-
         user.setTotal_distance(total_prev_dist + current_ride_dist);
-        user.setHighest_speed(maxSpeed);
 
+        // HIGHEST SPEED
+        float highest_prev_speed = user.getHighest_speed();
+        float current_highest_speed = maxSpeed;
+        if (current_highest_speed >= highest_prev_speed)
+            user.setHighest_speed(maxSpeed);
+
+        // HIGHEST ALTITUDE DIFFERENCE
+        highest_altitude = handler.getRow(handler.getGreatestThisRide(handler.COLUMN_GPS_ALT,currentRideId)).getAltitude();
+        lowest_altitude = handler.getRow(handler.getLowestThisRide(handler.COLUMN_GPS_ALT,currentRideId)).getAltitude();
+
+        double prev_highest_alt_diff = user.getHighest_altitude_diff();
+        double current_highest_alt_diff = highest_altitude - lowest_altitude;
+        if (current_highest_alt_diff >= prev_highest_alt_diff)
+            user.setHighest_altitude_diff(current_highest_alt_diff);
+
+        // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
 
 
