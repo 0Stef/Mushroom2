@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Mushroom</string>
+    
+    //Login screen
+    <string name="login_enter_username">Enter your username</string>
+    <string name="login_enter_password">Enter your password</string>
 
     // strings voor homescreen
     <string name="title_activity_homescreen">Mushroom</string>

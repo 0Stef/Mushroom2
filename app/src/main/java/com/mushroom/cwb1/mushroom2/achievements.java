@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 
+import java.util.Calendar;
+
 public class achievements extends AppCompatActivity {
 
     UserHandler handler;
@@ -404,6 +406,23 @@ public class achievements extends AppCompatActivity {
 
         progress_start_the_game.setProgress((int) (user.getStart_the_game()/1.0f)*100);
         progress_get_all_achievements.setProgress((int) (user.getGet_all_achievements()/1.0f)*100);
+    }
+
+    private void checkDay(String userName) {
+        Calendar calendar = Calendar.getInstance();
+
+        User user = handler.getUserInformation(userName);
+        long lastMillisec = user.getLast_login();
+        Calendar lastCalendar = Calendar.getInstance();
+        lastCalendar.setTimeInMillis(lastMillisec);
+
+        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
+                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
+
+        if (!sameDay) {
+            int nb = user.getNb_days_biked();
+            handler.overWrite(userName, handler.COLUMN_NB_DAYS_BIKED, nb+1);
+        }
     }
 
     @Override

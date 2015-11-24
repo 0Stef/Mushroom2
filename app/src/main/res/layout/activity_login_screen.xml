@@ -46,8 +46,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="98dp"
         android:singleLine="true"
-        android:password="true"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        />
 
     <TextView
         android:layout_width="wrap_content"
