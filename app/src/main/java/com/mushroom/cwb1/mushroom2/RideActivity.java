@@ -1102,7 +1102,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (challengenr == 8 && magns && orients){
             driveDirection(moeilijkheid);
         } else if (challengenr == 9){
-            altitudeDifference(moeilijkheidsgraad);
+            altitudeDifference(moeilijkheid);
         } else randomChallenge();
     }
 }
