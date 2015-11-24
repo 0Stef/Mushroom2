@@ -25,6 +25,7 @@ public class Login_screen extends AppCompatActivity {
     private EditText usernameEdit;
     private EditText passwordEdit;
     private TextView debugView;
+    private TextView statusView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class Login_screen extends AppCompatActivity {
         usernameEdit = (EditText) findViewById(R.id.editText);
         passwordEdit = (EditText) findViewById(R.id.editText2);
         debugView = (TextView) findViewById(R.id.debugView);
+        statusView = (TextView) findViewById(R.id.wrong_password);
 
         usernameEdit.setSingleLine();
         passwordEdit.setSingleLine();
@@ -76,7 +78,6 @@ public class Login_screen extends AppCompatActivity {
                     System.out.println("    -   User is logged in: " + userName);
                     finish();
                 } else {
-
                     passwordEdit.setText("");
                     passwordEdit.setHint("Incorrect password.");
                     passwordEdit.requestFocus();
@@ -88,11 +89,20 @@ public class Login_screen extends AppCompatActivity {
                     usernameEdit.requestFocus();
                     System.out.println("    -   Cmd");
                 } else {
-                    usernameEdit.setText("");
-                    usernameEdit.setHint("Username does not exist.");
-                    registerbutton.setBackgroundColor(Color.RED);
-                    registerbutton.requestFocus();
-                    System.out.println("    -   Not existing username");
+//                    DialogFragment prompt = new ServerDialogFragment(userName);
+//                    prompt.show(getFragmentManager(), "serverPrompt");
+
+                    if (checkServer(userName)) {
+                        statusView.setText("Your account was found!");
+                        passwordEdit.requestFocus();
+                    } else {
+                        usernameEdit.setText("");
+                        usernameEdit.setHint("Username does not exist.");
+                        registerbutton.setBackgroundColor(Color.RED);
+                        registerbutton.requestFocus();
+                        System.out.println("    -   Not existing username");
+                    }
+
                 }
             }
         } else {
@@ -134,6 +144,43 @@ public class Login_screen extends AppCompatActivity {
 
         userHandler.overWrite(user);
     }
+
+    private boolean checkServer(String userName) {
+        //Deze functie moet teruggeven of de gebruikersnaam bestaat of niet.
+        //En de gebruikersgegevens installeren op de lokale opslag.
+
+        return true;
+    }
+
+    /*public class ServerDialogFragment extends DialogFragment {
+        private String userName;
+
+        public ServerDialogFragment(String userName) {
+            this.userName = userName;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Do you want to check")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (checkServer(userName)) {
+                                usernameEdit.setText(userName);
+
+                            } else {
+                                notFound();
+                            }
+                        }
+                    })
+                    .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            notFound();
+                        }
+                    });
+            return builder.create();
+        }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -269,7 +269,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return totalDistance;
     }
 
-    public ArrayList getDistanceList(Cursor cursor) {
+    public ArrayList<Integer> getDistanceList(Cursor cursor) {
         int totalDistance = 0;
         ArrayList<Integer> list = new ArrayList<Integer>();
 

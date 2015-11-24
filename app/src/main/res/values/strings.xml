@@ -9,15 +9,15 @@
     <string name="title_activity_homescreen">Mushroom</string>
     <string name="optionalbutton">Mijlpalen</string>
     <string name="challenges">Challenges</string>
-    <string name="settings">MAP</string>
+    <string name="settings">Map</string>
 
-    <string name="title_activity_login_screen">Login_screen</string>
+    <string name="title_activity_login_screen">Login screen</string>
     <string name="action_settings">Settings</string>
     <string name="title">Mushroom</string>
     <string name="mail">Enter your username</string>
     <string name="password">Enter your password</string>
     <string name="loginbutton">Log in</string>
-    <string name="Wrong_password">Foutief wachtwoord!</string>
+    <string name="Wrong_password">Wrong password!</string>
 
     //Homescreen
     <string name="title_activity_challenges">Challenges</string>
@@ -30,65 +30,67 @@
     <string name="title_activity_main_dbactivity">MainDBactivity</string>
     <string name="title_activity_data_base_handler">DataBaseHandler</string>
     <string name="ranglijsten">Ranglijsten</string>
-    <string name="persoonlijkestatistieken">Persoonlijke statistieken</string>
+    <string name="persoonlijkestatistieken">Personal statistics</string>
+    //todo
     <string name="persoonlijkeinstellingen">Persoonlijke instellingen</string>
-    <string name="vrienden">Vrienden</string>
-    <string name="logout">Uitloggen</string>
+    <string name="vrienden">Friends</string>
+    <string name="logout">Log out</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_record_acceleration">recordAcceleration</string>
     <string name="button_stop">Stop</string>
-    <string name="Versnelling">Versnelling: </string>
+    <string name="Versnelling">Acceleration: </string>
     <string name="acceleration_result_text"></string>
     <string name="button_start">Start</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_record_speed">RecordSpeed</string>
-    <string name="snelheid">Snelheid: </string>
+    <string name="snelheid">Speed: </string>
     <string name="succes">Succes!</string>
 
     <string name="title_activity_record_magnetic_field">RecordMagneticField</string>
     <string name="Windrichting">Windrichting: </string>
-    <string name="noord">Noorden</string>
-    <string name="oost">Oosten</string>
-    <string name="zuid">Zuiden</string>
-    <string name="west">Westen</string>
+    <string name="noord">North</string>
+    <string name="oost">East</string>
+    <string name="zuid">South</string>
+    <string name="west">West</string>
     <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
     <string name="title_activity_ride">RideActivity</string>
     <string name="titelRideActivity">ride modus</string>
+    //todo
     <string name="title_activity_achievements">Mijlpalen</string>
 
     // Strings voor punten
-    <string name="punten1">1 Punt.</string>
-    <string name="punten5">5 Punten.</string>
-    <string name="punten10">10 Punten.</string>
-    <string name="punten50">50 Punten.</string>
-    <string name="punten100">100 Punten.</string>
-    <string name="punten200">200 Punten.</string>
-    <string name="punten300">300 Punten.</string>
-    <string name="punten400">400 Punten.</string>
-    <string name="punten500">500 Punten.</string>
-    <string name="punten600">600 Punten.</string>
-    <string name="punten700">700 Punten.</string>
-    <string name="punten1000">1000 Punten.</string>
-    <string name="punten2000">2000 Punten.</string>
-    <string name="punten2400">2400 Punten.</string>
-    <string name="punten4800">4800 Punten.</string>
-    <string name="punten8000">8000 Punten.</string>
-    <string name="punten10000">10000 Punten.</string>
-    <string name="punten20000">20000 Punten.</string>
-    <string name="punten40000">40000 Punten.</string>
-    <string name="punten100000">100000 Punten.</string>
-    <string name="punten120000">120000 Punten.</string>
-    <string name="punten168000">168000 Punten.</string>
-    <string name="punten336000">336000 Punten.</string>
-    <string name="punten400000">400000 Punten.</string>
-    <string name="punten744000">744000 Punten.</string>
-    <string name="punten1000000">1000000 Punten.</string>
-    <string name="punten2400000">2400000 Punten.</string>
-    <string name="punten100000000">10000000 Punten.</string>
+    <string name="punten1">1 Point.</string>
+    <string name="punten5">5 Points.</string>
+    <string name="punten10">10 Points.</string>
+    <string name="punten50">50 Points.</string>
+    <string name="punten100">100 Points.</string>
+    <string name="punten200">200 Points.</string>
+    <string name="punten300">300 Points.</string>
+    <string name="punten400">400 Points.</string>
+    <string name="punten500">500 Points.</string>
+    <string name="punten600">600 Points.</string>
+    <string name="punten700">700 Points.</string>
+    <string name="punten1000">1000 Points.</string>
+    <string name="punten2000">2000 Points.</string>
+    <string name="punten2400">2400 Points.</string>
+    <string name="punten4800">4800 Points.</string>
+    <string name="punten8000">8000 Points.</string>
+    <string name="punten10000">10000 Points.</string>
+    <string name="punten20000">20000 Points.</string>
+    <string name="punten40000">40000 Points.</string>
+    <string name="punten100000">100000 Points.</string>
+    <string name="punten120000">120000 Points.</string>
+    <string name="punten168000">168000 Points.</string>
+    <string name="punten336000">336000 Points.</string>
+    <string name="punten400000">400000 Points.</string>
+    <string name="punten744000">744000 Points.</string>
+    <string name="punten1000000">1000000 Points.</string>
+    <string name="punten2400000">2400000 Points.</string>
+    <string name="punten100000000">10000000 Points.</string>
 
     // Strings voor Achievements
-    <string name="achievemnt1">Rijd 1 kilometer.</string>
+    <string name="achievemnt1">Drive 1 kilometer.</string>
     <string name="achievemnt2">Rijd 5 kilometer.</string>
     <string name="achievemnt3">Rijd 10 kilometer.</string>
     <string name="achievemnt4">Rijd 50 kilometer.</string>
