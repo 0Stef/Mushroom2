@@ -377,7 +377,7 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setNb_won_challenges(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_WON_CHALLENGES)));
         user.setNb_days_biked(cursor.getInt(cursor.getColumnIndex(COLUMN_NB_DAYS_BIKED)));
 
-        //FIXME Wenen?
+        //Wenen?
 
         user.setDrive_1_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_1_KM)));
         user.setDrive_5_km(cursor.getInt(cursor.getColumnIndex(COLUMN_DRIVE_5_KM)));

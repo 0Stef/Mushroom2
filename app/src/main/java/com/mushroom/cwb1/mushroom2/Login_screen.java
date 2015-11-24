@@ -157,7 +157,7 @@ public class Login_screen extends AppCompatActivity {
     }
 
     private boolean debug(String command, String parameter) {
-        if (command.equals("reset_app") || command.equals("reset")) {
+        if (command.equals("reset_app") || command.equals("reset") || command.equals("rst")) {
             DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
             LinkedList<User> list = userHandler.getList(userHandler.getAll());
             for (User user : list) {
@@ -176,15 +176,15 @@ public class Login_screen extends AppCompatActivity {
             }
             return true;
         }
-        if (command.equals("cmd") || command.equals("?")) {
+        if (command.equals("cmd") || command.equals("?") || command.equals("help")) {
             debugView.append("\n");
             debugView.append("Commands:\n");
             debugView.append("  - reset app\n");
             debugView.append("  - get userlist\n");
-            debugView.append("  - cls\n");
+            debugView.append("  - clear screen\n");
             return true;
         }
-        if (command.equals("cls")){
+        if (command.equals("clear screen") || command.equals("cls")){
             debugView.setText("");
             return true;
         }
