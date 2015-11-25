@@ -223,7 +223,7 @@
             android:layout_below="@id/elapsedTime"
             android:text="@string/getstartedch"
             android:layout_marginTop="10dp"
-            android:onClick="altitudeDifference"
+            android:onClick="challengeButton"
             android:id="@+id/challengebutton"
             />
 

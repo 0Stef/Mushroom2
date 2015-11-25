@@ -317,7 +317,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     maxSpeed = speed;
                     textMaximumSpeed.setText(decimalF.format(maxSpeed));
                 }
-                double altitude = location.getAltitude();
+                altitude = location.getAltitude();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
