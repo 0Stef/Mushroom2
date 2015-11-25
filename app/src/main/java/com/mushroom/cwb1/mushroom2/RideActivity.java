@@ -942,20 +942,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 final double starthoogte = altitude;
-                double huidigHoogteVerschil = 0d;
-                final double finalHuidigHoogteVerschil = huidigHoogteVerschil;
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText("Huidig hoogtevershil" + finalHuidigHoogteVerschil + "m");
+                        challenge1.setText("Huidig hoogtevershil: 0 m");
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
                 try {
-                    huidigHoogteVerschil = altitude - starthoogte;
-                    while ((huidigHoogteVerschil) <= doel) {
+                    while (altitude - starthoogte <= doel) {
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText("Huidig hoogtevershil" + finalHuidigHoogteVerschil + "m");
+                                challenge1.setText("Huidig hoogtevershil: " + (altitude - starthoogte) + " m");
                             }
                         });
                         Thread.sleep(2500);
