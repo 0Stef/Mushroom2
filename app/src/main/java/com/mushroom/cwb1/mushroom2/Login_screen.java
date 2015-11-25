@@ -2,6 +2,7 @@ package com.mushroom.cwb1.mushroom2;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -12,8 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
 
 
 public class Login_screen extends AppCompatActivity {
@@ -26,6 +37,8 @@ public class Login_screen extends AppCompatActivity {
     private EditText passwordEdit;
     private TextView debugView;
     private TextView statusView;
+    private String dataToPut;
+    private static ArrayList<String> serverCheckResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +62,13 @@ public class Login_screen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         reset();
-                        login();
+                        try {
+                            login();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
         );
@@ -64,7 +83,7 @@ public class Login_screen extends AppCompatActivity {
         );
     }
 
-    public void login() {
+    public void login() throws ExecutionException, InterruptedException {
         String userName = usernameEdit.getText().toString().replaceAll(" ", "_");
         String passWord = passwordEdit.getText().toString().replaceAll(" ", "_");
 
@@ -145,11 +164,171 @@ public class Login_screen extends AppCompatActivity {
         userHandler.overWrite(user);
     }
 
-    private boolean checkServer(String userName) {
+    private boolean checkServer(String userName) throws ExecutionException, InterruptedException {
         //Deze functie moet teruggeven of de gebruikersnaam bestaat of niet.
         //En de gebruikersgegevens installeren op de lokale opslag.
 
+        System.out.println("--- checkServer start ---");
+
+        dataToPut = userName;
+        serverCheckResult =  new ArrayList<>();
+        ArrayList<String> serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/login_check_user.php").get();
+
+        System.out.println("--- checkServer after async ---");
+
+        System.out.println("checkserver.size = "+serverCheckResult.size());
+
+
+        if (serverCheckResult.get(0).equals("no results")) {
+            System.out.println("--- checkServer no results ---");
+            return false;
+        }
+        else if (serverCheckResult.size() == 104){
+
+            User newuser;
+            String user_name;
+            String password;
+            String country;
+            String city;
+            String first_name;
+            String last_name;
+
+
+            long first_login;
+            long last_login;
+
+            float total_distance;
+            long total_time;
+
+            float highest_speed;
+            float highest_acceleration;
+
+            double highest_altitude_diff;
+
+            int nb_won_challenges;
+            int nb_days_biked;
+            int total_points;
+            int daily_points;
+            int weekly_points;
+
+            int drive_1_km;
+            int drive_5_km;
+            int drive_10_km;
+            int drive_50_km;
+            int drive_100_km;
+            int drive_250_km;
+            int drive_500_km;
+            int drive_1000_km;
+            int drive_5000_km;
+
+            int topspeed_30;
+            int topspeed_35;
+            int topspeed_40;
+            int topspeed_45;
+            int topspeed_50;
+
+            int nb_challenge_1;
+            int nb_challenge_5;
+            int nb_challenge_10;
+            int nb_challenge_50;
+            int nb_challenge_200;
+            int nb_challenge_500;
+
+            int biked_days_1;
+            int biked_days_2;
+            int biked_days_5;
+            int biked_days_7;
+            int biked_days_14;
+            int biked_days_31;
+            int biked_days_100;
+
+
+            int alt_diff_10m;
+            int alt_diff_25m;
+            int alt_diff_50m;
+            int alt_diff_100m;
+
+            int start_the_game;
+            int get_all_achievements;
+
+
+
+            System.out.println("begin for");
+        for(int l=1; l<serverCheckResult.size(); l++){
+            System.out.println(l+" "+serverCheckResult.get(l));
+
+        }
+            System.out.println("einde for");
+
+            //newuser = new User();
+            //userHandler.addUser(newuser);
+
+
         return true;
+        } else {
+            System.out.println("checkserver niet gelukt geeft false terug");
+            return false;
+        }
+
+    }
+
+
+    public ArrayList<String> putDataToServer(String URL){
+        ArrayList<String> status =  new ArrayList<>();
+        try {
+
+            java.net.URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //conn.setRequestProperty("Content-Type", "application/json");
+
+            //String input = dataToPut;
+            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+
+            //Read the acknowledgement message after putting data to server
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+            String output;
+            //System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                //System.out.println(output);
+                status.add(output);
+            }
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    class PutAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            return putDataToServer(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            //textView_1.setText(result.get(0)+" - "+result.get(1));
+            //super.onPostExecute(result);
+            serverCheckResult = result;
+            //debugView.setText("post exec"+result.get(0));
+
+        }
     }
 
     /*public class ServerDialogFragment extends DialogFragment {

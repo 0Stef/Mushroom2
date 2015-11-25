@@ -16,10 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +36,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 
-public class RideActivity extends AppCompatActivity implements SensorEventListener, AdapterView.OnItemSelectedListener {
+public class RideActivity extends AppCompatActivity implements SensorEventListener {
 
     private GoogleMap mMap;
 
@@ -55,7 +52,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView challenge2;
     TextView challenge1;
     TextView uitleg;
-    TextView wachten;
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
@@ -79,7 +75,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private String windrichting;
     private String zoekrichting;
     private Random r = new Random();
-    private int moeilijkheid;
 
 
     private double highest_altitude;
@@ -140,8 +135,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button stoprecordingbutton;
     Button challengebutton;
 
-    Spinner moeilijkheidsgraad;
-
     public String currentUser;
 
 
@@ -175,7 +168,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challenge1 = (TextView) findViewById(R.id.challenge1);
         challenge2 = (TextView) findViewById(R.id.challenge2);
         uitleg = (TextView) findViewById(R.id.uitleg);
-        wachten = (TextView) findViewById(R.id.wachten);
         Succes.setVisibility(View.INVISIBLE);
         challenge1.setVisibility(View.INVISIBLE);
         challenge2.setVisibility(View.INVISIBLE);
@@ -194,13 +186,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
 
-        moeilijkheidsgraad = (Spinner) findViewById(R.id.moeilijkheidsgraad);
-        moeilijkheidsgraad.setVisibility(View.INVISIBLE);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.moeilijkheidsgraad, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        moeilijkheidsgraad.setAdapter(adapter);
-        moeilijkheidsgraad.setOnItemSelectedListener(this);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -240,8 +225,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
 
-        wachten.setText("wachten op gps signaal");
-        wachten.setVisibility(View.VISIBLE);
+        textDistance.setText("wachten op gps signaal");
 
         final int previousRideId = handler.getGreatestRideID();
         currentRideId = previousRideId + 1;
@@ -301,8 +285,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     startTime = SystemClock.uptimeMillis();
                     customHandler.postDelayed(updateTimerThread, 0);
                     challengebutton.setVisibility(View.VISIBLE);
-                    moeilijkheidsgraad.setVisibility(View.VISIBLE);
-                    wachten.setVisibility(View.INVISIBLE);
                     eerstekeer = false;
                 }
 
@@ -406,7 +388,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         //TODO mag weg na testperiode
-        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
     }
@@ -907,7 +889,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             doel = 15;
         }
-        uitleg.setText("Haal een versnelling van " + doel + " m/s²");
+        uitleg.setText("Haal een versnelling van 5 m/s²");
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -1063,43 +1045,36 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }).start();
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        moeilijkheid = pos + 1;
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        moeilijkheid = 1;
-    }
-
     public void challengeButton(View view){
-        challengebutton.setVisibility(View.INVISIBLE);
-        moeilijkheidsgraad.setVisibility(View.INVISIBLE);
         randomChallenge();
     }
 
     public void randomChallenge(){
+        challengebutton.setVisibility(View.INVISIBLE);
+
         int challengenr = r.nextInt(10);
+        int moeilijkheidsgraad=1;
 
         if (challengenr == 0){
-            getSpeed(moeilijkheid);
+            getSpeed(moeilijkheidsgraad);
         } else if (challengenr == 1 && accs){
-            getAcceleration(moeilijkheid);
+            getAcceleration(moeilijkheidsgraad);
         } else if (challengenr == 2){
-            keepSpeed(moeilijkheid);
+            keepSpeed(moeilijkheidsgraad);
         } else if (challengenr == 3 && accs){
-            keepAcceleration(moeilijkheid);
+            keepAcceleration(moeilijkheidsgraad);
         } else if (challengenr == 4){
-            averageSpeed(moeilijkheid);
+            averageSpeed(moeilijkheidsgraad);
         } else if (challengenr == 5 && accs){
-            averageAcceleration(moeilijkheid);
+            averageAcceleration(moeilijkheidsgraad);
         } else if (challengenr == 6 && temps){
-            temperatureDifference(moeilijkheid);
+            temperatureDifference(moeilijkheidsgraad);
         } else if (challengenr == 7){
-            driveCircle(moeilijkheid);
+            driveCircle(moeilijkheidsgraad);
         } else if (challengenr == 8 && magns && orients){
-            driveDirection(moeilijkheid);
+            driveDirection(moeilijkheidsgraad);
         } else if (challengenr == 9){
-            altitudeDifference(moeilijkheid);
+            altitudeDifference(moeilijkheidsgraad);
         } else randomChallenge();
     }
 }

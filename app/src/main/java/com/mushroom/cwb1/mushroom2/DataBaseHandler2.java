@@ -381,6 +381,12 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return row;
     }
 
+    public dbRow getLastPoint(){
+        dbRow row = getRow(getLast());
+
+        return row;
+    }
+
     public long getTimeThisRide(int rideID) {
         return getTime(getAllThisRide(rideID));
     }

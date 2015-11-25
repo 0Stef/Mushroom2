@@ -82,6 +82,61 @@ public class User {
         this.city = city;
     }
 
+    public User(String user_name, String password, String country, String city, String first_name, String last_name, long first_login, long last_login, float total_distance, long total_time, float highest_speed, float highest_acceleration, double highest_altitude_diff, int nb_won_challenges, int nb_days_biked, int total_points, int daily_points, int weekly_points, int drive_1_km, int drive_5_km, int drive_10_km, int drive_50_km, int drive_100_km, int drive_250_km, int drive_500_km, int drive_1000_km, int drive_5000_km, int topspeed_30, int topspeed_35, int topspeed_40, int topspeed_45, int topspeed_50, int nb_challenge_1, int nb_challenge_5, int nb_challenge_10, int nb_challenge_50, int nb_challenge_200, int nb_challenge_500, int biked_days_1, int biked_days_2, int biked_days_5, int biked_days_7, int biked_days_14, int biked_days_31, int biked_days_100, int alt_diff_10m, int alt_diff_25m, int alt_diff_50m, int alt_diff_100m, int start_the_game, int get_all_achievements) {
+        this.user_name = user_name;
+        this.password = password;
+        this.country = country;
+        this.city = city;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.first_login = first_login;
+        this.last_login = last_login;
+        this.total_distance = total_distance;
+        this.total_time = total_time;
+        this.highest_speed = highest_speed;
+        this.highest_acceleration = highest_acceleration;
+        this.highest_altitude_diff = highest_altitude_diff;
+        this.nb_won_challenges = nb_won_challenges;
+        this.nb_days_biked = nb_days_biked;
+        this.total_points = total_points;
+        this.daily_points = daily_points;
+        this.weekly_points = weekly_points;
+        this.drive_1_km = drive_1_km;
+        this.drive_5_km = drive_5_km;
+        this.drive_10_km = drive_10_km;
+        this.drive_50_km = drive_50_km;
+        this.drive_100_km = drive_100_km;
+        this.drive_250_km = drive_250_km;
+        this.drive_500_km = drive_500_km;
+        this.drive_1000_km = drive_1000_km;
+        this.drive_5000_km = drive_5000_km;
+        this.topspeed_30 = topspeed_30;
+        this.topspeed_35 = topspeed_35;
+        this.topspeed_40 = topspeed_40;
+        this.topspeed_45 = topspeed_45;
+        this.topspeed_50 = topspeed_50;
+        this.nb_challenge_1 = nb_challenge_1;
+        this.nb_challenge_5 = nb_challenge_5;
+        this.nb_challenge_10 = nb_challenge_10;
+        this.nb_challenge_50 = nb_challenge_50;
+        this.nb_challenge_200 = nb_challenge_200;
+        this.nb_challenge_500 = nb_challenge_500;
+        this.biked_days_1 = biked_days_1;
+        this.biked_days_2 = biked_days_2;
+        this.biked_days_5 = biked_days_5;
+        this.biked_days_7 = biked_days_7;
+        this.biked_days_14 = biked_days_14;
+        this.biked_days_31 = biked_days_31;
+        this.biked_days_100 = biked_days_100;
+        this.alt_diff_10m = alt_diff_10m;
+        this.alt_diff_25m = alt_diff_25m;
+        this.alt_diff_50m = alt_diff_50m;
+        this.alt_diff_100m = alt_diff_100m;
+        this.start_the_game = start_the_game;
+        this.get_all_achievements = get_all_achievements;
+    }
+
+
 //        // TODO last name first name
 //        // TODO average speed weg
 //        // TODO highest lowest weg
