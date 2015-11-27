@@ -10,8 +10,6 @@ public class Ranking extends AppCompatActivity {
 
     public String currentUser;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +32,7 @@ public class Ranking extends AppCompatActivity {
         TextView points13 = (TextView)findViewById(R.id.points13);
         TextView points14 = (TextView)findViewById(R.id.points14);
         TextView points15 = (TextView)findViewById(R.id.points15);
+        TextView pointsOwn = (TextView)findViewById(R.id.ownpoints);
 
         TextView name1 = (TextView)findViewById(R.id.name1);
         TextView name2 = (TextView)findViewById(R.id.name2);
@@ -50,10 +49,10 @@ public class Ranking extends AppCompatActivity {
         TextView name13 = (TextView)findViewById(R.id.name13);
         TextView name14 = (TextView)findViewById(R.id.name14);
         TextView name15 = (TextView)findViewById(R.id.name15);
+        TextView nameOwn = (TextView)findViewById(R.id.ownname);
+
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,9 +74,27 @@ public class Ranking extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        // jdjdjd
 
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

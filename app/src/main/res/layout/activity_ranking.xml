@@ -375,7 +375,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="eigen_punten"
-                android:id="@+id/textView5"
+                android:id="@+id/ownpoints"
                 android:layout_alignTop="@+id/ownname"
                 android:layout_alignRight="@+id/points15"
                 android:layout_alignEnd="@+id/points15" />

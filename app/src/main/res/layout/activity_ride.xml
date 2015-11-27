@@ -279,21 +279,11 @@
             android:id="@+id/succes"
             android:layout_marginTop="15dp"/>
 
-
-
-
-
-
-
-
-
-
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -306,58 +296,20 @@
         android:padding="10dp"
         android:onClick="startrecording" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
         android:layout_height="wrap_content"
-        >
+        android:layout_width="match_parent"
+        android:text="Stop"
+        android:id="@+id/stoprecordingbutton"
+        android:textSize="15sp"
+        android:background="#ff0046"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:onClick="stoprecording" />
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+</RelativeLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Resume"
-                android:id="@+id/resumerecordingbutton"
-                android:textSize="15sp"
-                android:background="#14ff2d"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:onClick="resumerecording"
-                />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pause"
-                android:id="@+id/pauserecordingbutton"
-                android:textSize="15sp"
-                android:background="#ffc600"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:onClick="pauserecording" />
-
-        </RelativeLayout>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Stop"
-            android:id="@+id/stoprecordingbutton"
-            android:textSize="15sp"
-            android:background="#ff0046"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:onClick="stoprecording"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-    </RelativeLayout>
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
