@@ -23,7 +23,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 
@@ -111,6 +113,7 @@ public class Login_screen extends AppCompatActivity {
 //                    DialogFragment prompt = new ServerDialogFragment(userName);
 //                    prompt.show(getFragmentManager(), "serverPrompt");
 
+                    //TODO checkServer 3 waarden laten returnen een voor als naam bestaat, niet bestaat maar ook als er een fout optreedt
                     if (checkServer(userName)) {
                         statusView.setText("Your account was found!");
                         passwordEdit.requestFocus();
@@ -168,100 +171,112 @@ public class Login_screen extends AppCompatActivity {
         //Deze functie moet teruggeven of de gebruikersnaam bestaat of niet.
         //En de gebruikersgegevens installeren op de lokale opslag.
 
-        System.out.println("--- checkServer start ---");
 
         dataToPut = userName;
         serverCheckResult =  new ArrayList<>();
         ArrayList<String> serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/login_check_user.php").get();
 
-        System.out.println("--- checkServer after async ---");
-
         System.out.println("checkserver.size = "+serverCheckResult.size());
 
 
         if (serverCheckResult.get(0).equals("no results")) {
-            System.out.println("--- checkServer no results ---");
+            System.out.println("--- checkServer no results ---"+serverCheckResult.get(0));
             return false;
         }
-        else if (serverCheckResult.size() == 104){
-
-            User newuser;
-            String user_name;
-            String password;
-            String country;
-            String city;
-            String first_name;
-            String last_name;
+        else if (serverCheckResult.size() == 52){
 
 
-            long first_login;
-            long last_login;
-
-            float total_distance;
-            long total_time;
-
-            float highest_speed;
-            float highest_acceleration;
-
-            double highest_altitude_diff;
-
-            int nb_won_challenges;
-            int nb_days_biked;
-            int total_points;
-            int daily_points;
-            int weekly_points;
-
-            int drive_1_km;
-            int drive_5_km;
-            int drive_10_km;
-            int drive_50_km;
-            int drive_100_km;
-            int drive_250_km;
-            int drive_500_km;
-            int drive_1000_km;
-            int drive_5000_km;
-
-            int topspeed_30;
-            int topspeed_35;
-            int topspeed_40;
-            int topspeed_45;
-            int topspeed_50;
-
-            int nb_challenge_1;
-            int nb_challenge_5;
-            int nb_challenge_10;
-            int nb_challenge_50;
-            int nb_challenge_200;
-            int nb_challenge_500;
-
-            int biked_days_1;
-            int biked_days_2;
-            int biked_days_5;
-            int biked_days_7;
-            int biked_days_14;
-            int biked_days_31;
-            int biked_days_100;
-
-
-            int alt_diff_10m;
-            int alt_diff_25m;
-            int alt_diff_50m;
-            int alt_diff_100m;
-
-            int start_the_game;
-            int get_all_achievements;
-
-
+            Map<String ,String> variabelenMap = new HashMap<String,String>();
 
             System.out.println("begin for");
-        for(int l=1; l<serverCheckResult.size(); l++){
-            System.out.println(l+" "+serverCheckResult.get(l));
+
+
+        for(int l=1; l<52; l++){
+            System.out.println(l + " - " + serverCheckResult.get(l));
+
+
+
+            String rawString = serverCheckResult.get(l);
+
+
+            String[] splitString = rawString.split("=");
+
+            variabelenMap.put(splitString[0],splitString[1]);
+
+            System.out.println("map" + variabelenMap.get(splitString[0]));
 
         }
             System.out.println("einde for");
 
-            //newuser = new User();
-            //userHandler.addUser(newuser);
+
+            String user_name = variabelenMap.get("username");
+            String password = variabelenMap.get("password");
+            String country = variabelenMap.get("country");
+            String city = variabelenMap.get("city");
+            String first_name = variabelenMap.get("first_name");
+            String last_name = variabelenMap.get("last_name");
+
+            long first_login = Long.parseLong(variabelenMap.get("first_login"));
+            long last_login = Long.parseLong(variabelenMap.get("last_login"));
+
+            float total_distance = Float.parseFloat(variabelenMap.get("total_distance"));
+            long total_time = Long.parseLong(variabelenMap.get("total_time"));
+
+            float highest_speed = Float.parseFloat(variabelenMap.get("highest_speed"));
+            float highest_acceleration = Float.parseFloat(variabelenMap.get("highest_acceleration"));
+
+            double highest_altitude_diff = Double.parseDouble(variabelenMap.get("highest_altitude_diff"));
+
+            int nb_won_challenges = Integer.parseInt(variabelenMap.get("nb_won_challenges"));
+            int nb_days_biked = Integer.parseInt(variabelenMap.get("nb_days_biked"));
+            int total_points = Integer.parseInt(variabelenMap.get("total_points"));
+            int daily_points = Integer.parseInt(variabelenMap.get("daily_points"));
+            int weekly_points = Integer.parseInt(variabelenMap.get("weekly_points"));
+
+            int drive_1_km = Integer.parseInt(variabelenMap.get("drive_1_km"));
+            int drive_5_km = Integer.parseInt(variabelenMap.get("drive_5_km"));
+            int drive_10_km = Integer.parseInt(variabelenMap.get("drive_10_km"));
+            int drive_50_km = Integer.parseInt(variabelenMap.get("drive_50_km"));
+            int drive_100_km = Integer.parseInt(variabelenMap.get("drive_100_km"));
+            int drive_250_km = Integer.parseInt(variabelenMap.get("drive_250_km"));
+            int drive_500_km = Integer.parseInt(variabelenMap.get("drive_500_km"));
+            int drive_1000_km = Integer.parseInt(variabelenMap.get("drive_1000_km"));
+            int drive_5000_km = Integer.parseInt(variabelenMap.get("drive_5000_km"));
+
+            int topspeed_30 = Integer.parseInt(variabelenMap.get("topspeed_30"));
+            int topspeed_35 = Integer.parseInt(variabelenMap.get("topspeed_35"));
+            int topspeed_40 = Integer.parseInt(variabelenMap.get("topspeed_40"));
+            int topspeed_45 = Integer.parseInt(variabelenMap.get("topspeed_45"));
+            int topspeed_50 = Integer.parseInt(variabelenMap.get("topspeed_50"));
+
+            int nb_challenge_1 = Integer.parseInt(variabelenMap.get("nb_challenge_1"));
+            int nb_challenge_5 = Integer.parseInt(variabelenMap.get("nb_challenge_5"));
+            int nb_challenge_10 = Integer.parseInt(variabelenMap.get("nb_challenge_10"));
+            int nb_challenge_50 = Integer.parseInt(variabelenMap.get("nb_challenge_50"));
+            int nb_challenge_200 = Integer.parseInt(variabelenMap.get("nb_challenge_200"));
+            int nb_challenge_500 = Integer.parseInt(variabelenMap.get("nb_challenge_500"));
+
+            int biked_days_1 = Integer.parseInt(variabelenMap.get("biked_days_1"));
+            int biked_days_2 = Integer.parseInt(variabelenMap.get("biked_days_2"));
+            int biked_days_5 = Integer.parseInt(variabelenMap.get("biked_days_5"));
+            int biked_days_7 = Integer.parseInt(variabelenMap.get("biked_days_7"));
+            int biked_days_14 = Integer.parseInt(variabelenMap.get("biked_days_14"));
+            int biked_days_31 = Integer.parseInt(variabelenMap.get("biked_days_31"));
+            int biked_days_100 = Integer.parseInt(variabelenMap.get("biked_days_100"));
+
+            int alt_diff_10m = Integer.parseInt(variabelenMap.get("alt_diff_10m"));
+            int alt_diff_25m = Integer.parseInt(variabelenMap.get("alt_diff_25m"));
+            int alt_diff_50m = Integer.parseInt(variabelenMap.get("alt_diff_50m"));
+            int alt_diff_100m = Integer.parseInt(variabelenMap.get("alt_diff_100m"));
+
+            int start_the_game = Integer.parseInt(variabelenMap.get("start_the_game"));
+            int get_all_achievements = Integer.parseInt(variabelenMap.get("get_all_achievements"));
+
+
+
+            User newuser = new User(user_name,password,country,city,first_name,last_name,first_login,last_login,total_distance,total_time,highest_speed,highest_acceleration,highest_altitude_diff,nb_won_challenges,nb_days_biked,total_points,daily_points,weekly_points,drive_1_km,drive_5_km,drive_10_km,drive_50_km,drive_100_km,drive_250_km,drive_500_km,drive_1000_km,drive_5000_km,topspeed_30,topspeed_35,topspeed_40,topspeed_45,topspeed_50,nb_challenge_1,nb_challenge_5,nb_challenge_10,nb_challenge_50,nb_challenge_200,nb_challenge_500,biked_days_1,biked_days_2,biked_days_5,biked_days_7,biked_days_14,biked_days_31,biked_days_100,alt_diff_10m,alt_diff_25m,alt_diff_50m,alt_diff_100m,start_the_game,get_all_achievements);
+            userHandler.addUser(newuser);
+            System.out.println("Bestaande user: "+newuser.toString()+" toegevoegd aan lokale db");
 
 
         return true;
