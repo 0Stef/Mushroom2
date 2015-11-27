@@ -75,6 +75,8 @@ public class Ranking extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        // jdjdjd
+
 
         return super.onOptionsItemSelected(item);
     }
