@@ -10,6 +10,8 @@ public class Ranking extends AppCompatActivity {
 
     public String currentUser;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +53,9 @@ public class Ranking extends AppCompatActivity {
         TextView name15 = (TextView)findViewById(R.id.name15);
         TextView nameOwn = (TextView)findViewById(R.id.ownname);
 
-
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,27 +77,9 @@ public class Ranking extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        // jdjdjd
 
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
