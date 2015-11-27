@@ -51,6 +51,7 @@ public class Ranking extends AppCompatActivity {
         TextView name14 = (TextView)findViewById(R.id.name14);
         TextView name15 = (TextView)findViewById(R.id.name15);
 
+
     }
 
 
