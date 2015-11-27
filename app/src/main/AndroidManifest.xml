@@ -55,42 +55,6 @@
                 android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
         </activity>
         <activity
-            android:name=".Challenges"
-            android:label="@string/title_activity_challenges"
-            android:parentActivityName=".Homescreen"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
-        </activity>
-        <activity
-            android:name=".recordAcceleration"
-            android:label="@string/title_activity_record_acceleration"
-            android:parentActivityName=".Challenges"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Challenges" />
-        </activity>
-        <activity
-            android:name=".RecordMagneticField"
-            android:label="@string/title_activity_record_magnetic_field"
-            android:parentActivityName=".Challenges"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Challenges" />
-        </activity>
-        <activity
-            android:name=".RecordSpeed"
-            android:label="@string/title_activity_record_speed"
-            android:parentActivityName=".Challenges"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Challenges" />
-        </activity>
-        <activity
             android:name=".DataBaseHandler2"
             android:label="@string/title_activity_data_base_handler2" >
         </activity>
@@ -106,17 +70,13 @@
             android:label="@string/title_activity_achievements" >
         </activity>
         <activity
-            android:name=".UserClassHandler"
-            android:label="@string/title_activity_user_class_handler" >
-        </activity>
-        <activity
             android:name=".wifiScanner"
             android:label="@string/title_activity_wifi_scanner"
-            android:parentActivityName=".Challenges"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Challenges" />
+                android:value="com.mushroom.cwb1.mushroom2.Challenges"
+                />
         </activity>
         <activity
             android:name=".Persoonlijke_statistieken"

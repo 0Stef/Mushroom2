@@ -73,6 +73,8 @@ public class achievements extends AppCompatActivity {
         System.out.println(user.getHighest_speed());
         nb_compl_achievements = 0;
 
+        System.out.println(user.getNb_won_challenges());
+
 
         //Creating the progressbars
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);

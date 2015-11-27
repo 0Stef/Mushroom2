@@ -31,18 +31,6 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
-        Button ch1button = (Button)findViewById(R.id.button3);
-
-        ch1button.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), Challenges.class);
-                        i.putExtra("username", currentUser);
-                        startActivity(i);
-                    }
-                }
-        );
-
         Button Achievementsbutton = (Button)findViewById(R.id.button2);
 
         Achievementsbutton.setOnClickListener(

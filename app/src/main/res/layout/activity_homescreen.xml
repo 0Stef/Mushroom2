@@ -42,15 +42,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/challenges"
-                android:id="@+id/button3"
-                android:background="#FFBF6A"
-                android:layout_marginBottom="10dp"
-                />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/optionalbutton"
                 android:id="@+id/button2"
                 android:background="#FFBF6A"
@@ -78,32 +69,23 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/persoonlijkeinstellingen"
-                android:id="@+id/persoonlijkeinstellingen"
-                android:background="#FFBF6A"
-                android:layout_marginBottom="10dp"
-                />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/vrienden"
                 android:id="@+id/vrienden"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
                 />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/logout"
-                android:id="@+id/logout"
-                android:background="@color/red"
-                android:textColor="@color/white"
-                android:layout_marginBottom="10dp"
-                />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:id="@+id/logout"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
