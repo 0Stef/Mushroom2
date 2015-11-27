@@ -1,7 +1,9 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,9 @@ public class Register extends AppCompatActivity {
 
         userNameField = (EditText) findViewById(R.id.editText_register_username);
         passWordField = (EditText) findViewById(R.id.editText_register_password);
+        passWordField.setTypeface(Typeface.DEFAULT);
+        passWordField.setTransformationMethod(new PasswordTransformationMethod());
+
         countryField = (EditText) findViewById(R.id.editText_register_country);
         cityField = (EditText) findViewById(R.id.editText_register_city);
 

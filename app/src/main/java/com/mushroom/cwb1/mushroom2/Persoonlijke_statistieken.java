@@ -1,10 +1,13 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -232,7 +235,17 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chAccelerometerZ.invalidate();
         chAccelerometerZ.animateY(3000);
 
-        setUpMapIfNeeded();
+        Button RouteMapping = (Button)findViewById(R.id.RouteMapping);
+
+        RouteMapping.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), RouteMapping.class);
+                        startActivity(i);
+                    }
+                }
+        );
+
     }
 
 
@@ -257,34 +270,5 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
-        }
-    }
 
-
-    private void setUpMap() {
-
-        PolylineOptions mPolylineOptions = new PolylineOptions();
-
-        if (list.size() != 0){
-            for (int index = 1; index < list.size(); index++) {
-                dbRow rowprev = (dbRow) list.get(index-1);
-                dbRow row = (dbRow) list.get(index);
-                mPolylineOptions.add(new LatLng(rowprev.getLatitude(),rowprev.getLongitude()), new LatLng(row.getLatitude(),row.getLongitude()));
-            }
-        }
-        mPolylineOptions.width(5).color(Color.BLUE);
-        mMap.addPolyline(mPolylineOptions);
-        dbRow rowlast = (dbRow) list.get((list.size()-1)/2);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rowlast.getLatitude(),rowlast.getLongitude()), 12.0f));
-    }
 }

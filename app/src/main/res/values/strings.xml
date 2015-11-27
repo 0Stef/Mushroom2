@@ -140,6 +140,11 @@
     <string name="TotalTime">Totale tijd.</string>
     <string name="TotalPoints">Totaal punten.</string>
     <string name="BikedDays">Dagen gefietst.</string>
+    <string name="Route">Route Mapping</string>
+
+    // Activity Ranking
+    <string name="Name">Name</string>
+    <string name="Points">Points</string>
 
     <string name="edit_message">Put data in server</string>
     <string name="edit_message_2">Send data to others</string>
@@ -154,5 +159,6 @@
         <item>Moeilijk</item>
     </string-array>
     <string name="title_activity_ranking">Ranking</string>
+    <string name="title_activity_route_mapping">Map</string>
 
 </resources>

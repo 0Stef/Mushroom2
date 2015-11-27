@@ -245,13 +245,12 @@
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="10dp"/>
 
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_weight="1"
-                android:id="@+id/map"
-                tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RouteMapping"
+                android:background="@color/orangeApp"
+                android:text="@string/Route"/>
 
             </LinearLayout>
     </ScrollView>

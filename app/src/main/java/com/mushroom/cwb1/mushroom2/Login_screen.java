@@ -2,9 +2,11 @@ package com.mushroom.cwb1.mushroom2;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,6 +60,9 @@ public class Login_screen extends AppCompatActivity {
 
         usernameEdit.setSingleLine();
         passwordEdit.setSingleLine();
+        passwordEdit.setTransformationMethod(new PasswordTransformationMethod());
+        passwordEdit.setTypeface(Typeface.DEFAULT);
+
         debugView.setMovementMethod(new ScrollingMovementMethod());
 
         loginbutton.setOnClickListener(
