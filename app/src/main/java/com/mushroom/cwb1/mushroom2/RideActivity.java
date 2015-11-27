@@ -1124,7 +1124,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         userhandler.overWrite(user);
     }
 
-    public void driveDirection(int moeilijkheidsgraad){
+    public void driveDirection(final int moeilijkheidsgraad){
         final int doel;
         if (moeilijkheidsgraad == 1){
             doel = 1;

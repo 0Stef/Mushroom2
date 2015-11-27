@@ -133,7 +133,13 @@
     <string name="AccelerometerZ">Accelerometer z-waarden.</string>
     <string name="Globaal">Globaal.</string>
     <string name="Afstand">Afstand.</string>
-
+    <string name="TotalDistance">Totale afstand.</string>
+    <string name="HighestVelocity">Topsnelheid.</string>
+    <string name="HighestAcceleration">Hoogste acceleratie.</string>
+    <string name="HighestAltitudeDiff">Hoogste hoogteverschil.</string>
+    <string name="TotalTime">Totale tijd.</string>
+    <string name="TotalPoints">Totaal punten.</string>
+    <string name="BikedDays">Dagen gefietst.</string>
 
     <string name="edit_message">Put data in server</string>
     <string name="edit_message_2">Send data to others</string>
