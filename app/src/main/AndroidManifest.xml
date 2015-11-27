@@ -18,8 +18,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -95,11 +93,11 @@
             android:label="@string/title_activity_data_base_handler2" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
             android:name=".RideActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_ride" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_ride"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".achievements"
@@ -129,7 +127,11 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register"
-            android:parentActivityName=".Login_screen">
+            android:parentActivityName=".Login_screen" >
+        </activity>
+        <activity
+            android:name=".Ranking"
+            android:label="@string/title_activity_ranking" >
         </activity>
     </application>
 

@@ -679,26 +679,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
 
                             Succes.setVisibility(View.VISIBLE);
+
                         }
                     });
+
+
                 } catch (InterruptedException e) {
 
                 }
             }
         }).start();
-        userhandler = new UserHandler(getApplicationContext());
-        User user =userhandler.getUserInformation(currentUser);
-        int points;
-        if (moeilijkheidsgraad == 1){
-            points = 100;
-        } else if (moeilijkheidsgraad == 2){
-            points = 400;
-        }else {
-            points = 1000;
-        }
-        user.setTotal_points(user.getTotal_points() + points);
-        user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-        userhandler.overWrite(user);
+
     }
 
 
@@ -1196,6 +1187,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         user.setTotal_points(user.getTotal_points() + points);
         user.setNb_won_challenges(user.getNb_won_challenges() + 1);
         userhandler.overWrite(user);
+
+        // TODO overschrijven naar database
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

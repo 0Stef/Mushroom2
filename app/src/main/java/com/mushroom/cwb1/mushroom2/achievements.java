@@ -350,6 +350,9 @@ public class achievements extends AppCompatActivity {
         }
 
         handler.overWrite(user);
+        // TODO naar de server overschrijven
+
+
 
     }
 

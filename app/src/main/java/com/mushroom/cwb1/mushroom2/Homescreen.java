@@ -55,6 +55,18 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
+        Button rankingbutton  = (Button)findViewById(R.id.ranglijsten);
+
+        rankingbutton.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), Ranking.class);
+                        i.putExtra("username", currentUser);
+                        startActivity(i);
+                    }
+                }
+        );
+
         Button rideActivitybutton = (Button)findViewById(R.id.rideActivityButton);
 
         rideActivitybutton.setOnClickListener(

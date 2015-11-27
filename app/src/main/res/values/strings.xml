@@ -166,5 +166,6 @@
         <item>Normaal</item>
         <item>Moeilijk</item>
     </string-array>
+    <string name="title_activity_ranking">Ranking</string>
 
 </resources>
