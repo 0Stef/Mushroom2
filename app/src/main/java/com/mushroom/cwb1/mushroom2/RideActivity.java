@@ -639,7 +639,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     Long eltime = 0l;
 
-    public void keepSpeed(int moeilijkheidsgraad) {
+    public void keepSpeed(final int moeilijkheidsgraad) {
         final int snelheid;
         if (moeilijkheidsgraad == 1){
             snelheid = 20;
@@ -684,6 +684,19 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     });
 
 
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user =userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1){
+                        points = 100;
+                    } else if (moeilijkheidsgraad == 2){
+                        points = 400;
+                    }else {
+                        points = 1000;
+                    }
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
                 } catch (InterruptedException e) {
 
                 }
@@ -1172,23 +1185,21 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         Succes.setVisibility(View.VISIBLE);
                     }
                 });
+                userhandler = new UserHandler(getApplicationContext());
+                User user =userhandler.getUserInformation(currentUser);
+                int points;
+                if (moeilijkheidsgraad == 1){
+                    points = 100;
+                } else if (moeilijkheidsgraad == 2){
+                    points = 300;
+                }else {
+                    points = 900;
+                }
+                user.setTotal_points(user.getTotal_points() + points);
+                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                userhandler.overWrite(user);
             }
         }).start();
-        userhandler = new UserHandler(getApplicationContext());
-        User user =userhandler.getUserInformation(currentUser);
-        int points;
-        if (moeilijkheidsgraad == 1){
-            points = 100;
-        } else if (moeilijkheidsgraad == 2){
-            points = 300;
-        }else {
-            points = 900;
-        }
-        user.setTotal_points(user.getTotal_points() + points);
-        user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-        userhandler.overWrite(user);
-
-        // TODO overschrijven naar database
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
