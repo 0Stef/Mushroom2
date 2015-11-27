@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -13,6 +14,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.LineData;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,7 +28,9 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
     private String currentUser;
     private int nbRide;
-    private int Distance;
+    private GoogleMap mMap;
+    private Polyline route;
+    private LinkedList list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +39,39 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         currentUser = getIntent().getStringExtra("username");
 
-        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
+        //Last ride statistics
+        UserHandler uHandler = new UserHandler(getApplicationContext());
+        User user = uHandler.getUserInformation(currentUser);
+
+        TextView TotalDistance = (TextView) findViewById(R.id.TotalDistance);
+        TotalDistance.setText("" + user.getTotal_distance());
+
+        TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
+        HighestVelocity.setText("" + user.getHighest_speed());
+
+        TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
+        HighestAcceleration.setText("" + user.getHighest_acceleration());
+
+        TextView HighestAltitudeDiff = (TextView) findViewById(R.id.HighestAltitudeDiff);
+        HighestAltitudeDiff.setText("" + user.getHighest_altitude_diff());
+
+        TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
+        TotalTime.setText("" + user.getTotal_time());
+
+        TextView TotalPoints = (TextView) findViewById(R.id.TotalPoints);
+        TotalPoints.setText("" + user.getTotal_points());
+
+        TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
+        BikedDays.setText("" + user.getNb_days_biked());
+
+
+
+
+
+        //Last ride statistics
+        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext());
         nbRide=handler.getGreatestRideID();
-        LinkedList list = handler.getList(handler.getAllThisRide(nbRide));
+        list = handler.getList(handler.getAllThisRide(nbRide));
         ArrayList<Integer> distanceList = handler.getDistanceList(handler.getAllThisRide(nbRide));
 
         ArrayList<String> xVal = new ArrayList<String>();
@@ -46,18 +85,11 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
                 xVal.add("" + index);
+                yVelocity.add(new Entry(row.getVelocity(), index));
                 yDistance.add(new Entry(distanceList.get(index), index));
-                if (row.get_id() >= 0) {
-                    yVelocity.add(new Entry(row.getVelocity(), index));
-                    yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
-                    yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
-                    yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
-                } else {
-                    yVelocity.add(new Entry(row.getVelocity(), index));
-                    yAccelerometerX.add(new Entry(0f, index));
-                    yAccelerometerY.add(new Entry(0f, index));
-                    yAccelerometerZ.add(new Entry(0f, index));
-                }
+                yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
+                yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
+                yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
             }
         }
         // Velocity chart
@@ -200,7 +232,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chAccelerometerZ.invalidate();
         chAccelerometerZ.animateY(3000);
 
-
+        setUpMapIfNeeded();
     }
 
 
@@ -224,5 +256,35 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
+
+
+    private void setUpMap() {
+
+        PolylineOptions mPolylineOptions = new PolylineOptions();
+
+        if (list.size() != 0){
+            for (int index = 1; index < list.size(); index++) {
+                dbRow rowprev = (dbRow) list.get(index-1);
+                dbRow row = (dbRow) list.get(index);
+                mPolylineOptions.add(new LatLng(rowprev.getLatitude(),rowprev.getLongitude()), new LatLng(row.getLatitude(),row.getLongitude()));
+            }
+        }
+        mPolylineOptions.width(5).color(Color.BLUE);
+        mMap.addPolyline(mPolylineOptions);
+        dbRow rowlast = (dbRow) list.get((list.size()-1)/2);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rowlast.getLatitude(),rowlast.getLongitude()), 12.0f));
     }
 }

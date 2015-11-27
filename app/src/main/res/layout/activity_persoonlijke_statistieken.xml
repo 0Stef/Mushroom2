@@ -37,6 +37,111 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/TotalDistance"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TotalDistance"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/HighestVelocity"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/HighestVelocity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/HighestAcceleration"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/HighestAcceleration"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/HighestAltitudeDiff"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/HighestAltitudeDiff"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/TotalTime"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TotalTime"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/TotalPoints"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TotalPoints"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/BikedDays"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/BikedDays"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/laatste_rit"
                 android:textColor="@color/orangeApp"
@@ -139,6 +244,14 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="10dp"/>
+
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_weight="1"
+                android:id="@+id/map"
+                tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
 
             </LinearLayout>
     </ScrollView>
