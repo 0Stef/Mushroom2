@@ -34,7 +34,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1"
+                android:text="@string/punten100"
                 />
 
             <ProgressBar
@@ -62,7 +62,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten5"
+                android:text="@string/punten200"
                 />
 
             <ProgressBar
@@ -90,7 +90,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10"
+                android:text="@string/punten300"
                 />
 
             <ProgressBar
@@ -118,7 +118,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100"
+                android:text="@string/punten600"
                 />
 
             <ProgressBar
@@ -146,7 +146,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten200"
+                android:text="@string/punten2000"
                 />
 
             <ProgressBar
@@ -174,7 +174,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000"
+                android:text="@string/punten5000"
                 />
 
             <ProgressBar
@@ -202,7 +202,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2000"
+                android:text="@string/punten20000"
                 />
 
             <ProgressBar
@@ -230,7 +230,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten8000"
+                android:text="@string/punten100000"
                 />
 
             <ProgressBar
@@ -258,7 +258,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten40000"
+                android:text="@string/punten400000"
                 />
 
             <ProgressBar
@@ -286,7 +286,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten300"
+                android:text="@string/punten1000"
                 />
 
             <ProgressBar
@@ -314,7 +314,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten400"
+                android:text="@string/punten2000"
                 />
 
             <ProgressBar
@@ -342,7 +342,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten500"
+                android:text="@string/punten5000"
                 />
 
             <ProgressBar
@@ -370,7 +370,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten600"
+                android:text="@string/punten8000"
                 />
 
             <ProgressBar
@@ -398,7 +398,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten700"
+                android:text="@string/punten10000"
                 />
 
             <ProgressBar
@@ -426,7 +426,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10"
+                android:text="@string/punten500"
                 />
 
             <ProgressBar
@@ -454,7 +454,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten50"
+                android:text="@string/punten1000"
                 />
 
             <ProgressBar
@@ -482,7 +482,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100"
+                android:text="@string/punten10000"
                 />
 
             <ProgressBar
@@ -510,7 +510,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000"
+                android:text="@string/punten40000"
                 />
 
             <ProgressBar
@@ -538,7 +538,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten8000"
+                android:text="@string/punten400000"
                 />
 
             <ProgressBar
@@ -566,7 +566,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten40000"
+                android:text="@string/punten744000"
                 />
 
             <ProgressBar
@@ -594,7 +594,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2400"
+                android:text="@string/punten100"
                 />
 
             <ProgressBar
@@ -622,7 +622,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten4800"
+                android:text="@string/punten200"
                 />
 
             <ProgressBar
@@ -650,7 +650,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten120000"
+                android:text="@string/punten2500"
                 />
 
             <ProgressBar
@@ -678,7 +678,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten168000"
+                android:text="@string/punten5000"
                 />
 
             <ProgressBar
@@ -706,8 +706,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten336000"
-                />
+                android:text="@string/punten8000"
+            />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
@@ -734,7 +734,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten744000"
+                android:text="@string/punten10000"
                 />
 
             <ProgressBar
@@ -762,7 +762,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2400000"
+                android:text="@string/punten40000"
                 />
 
             <ProgressBar
@@ -792,7 +792,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten20000"
+                android:text="@string/punten1000"
                 />
 
             <ProgressBar
@@ -820,7 +820,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100000"
+                android:text="@string/punten2500"
                 />
 
             <ProgressBar
@@ -848,7 +848,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten400000"
+                android:text="@string/punten5000"
                 />
 
             <ProgressBar
@@ -876,7 +876,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000000"
+                android:text="@string/punten10000"
                 />
 
             <ProgressBar
@@ -903,7 +903,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100"
+                android:text="@string/punten10"
                 />
 
             <ProgressBar

@@ -488,4 +488,41 @@ public class achievements extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void set_achievement_points(String username) {
+        handler = new UserHandler(getApplicationContext());
+        User user = handler.getUserInformation(username);
+
+        if (user.getDrive_1_km() == 1) {
+            setpoints(user,100);
+        }
+
+        if (user.getTopspeed_30() == 1) {
+            setpoints(user,1000);
+        }
+        if (user.getNb_challenge_1() == 1){
+            setpoints(user,500);
+        }
+        if (user.getBiked_days_1() == 1){
+            setpoints(user,100);
+        }
+        if (user.getAlt_diff_10m() == 1){
+            setpoints(user,1000);
+        }
+        if (user.getStart_the_game() == 1){
+            setpoints(user,10);
+        }
+        if (user.getGet_all_achievements() == 1){
+            setpoints(user,10000000);
+        }
+    }
+
+    private void setpoints(User user, int points){
+        user.setTotal_points(user.getTotal_points() + points);
+        user.setWeekly_points(user.getWeekly_points() + points);
+        user.setDaily_points(user.getDaily_points() + points);
+    }
 }
+
+
