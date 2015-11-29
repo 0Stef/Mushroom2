@@ -105,7 +105,7 @@ public class Login_screen extends AppCompatActivity {
                     finish();
                 } else {
                     passwordEdit.setText("");
-                    passwordEdit.setHint("Incorrect password.");
+                    passwordEdit.setHint(R.string.login_text_incorrect);
                     passwordEdit.requestFocus();
                     System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
                 }
@@ -120,11 +120,11 @@ public class Login_screen extends AppCompatActivity {
 
                     //TODO checkServer 3 waarden laten returnen een voor als naam bestaat, niet bestaat maar ook als er een fout optreedt
                     if (checkServer(userName)) {
-                        statusView.setText("Your account was found!");
+                        statusView.setText(R.string.login_text_found);
                         passwordEdit.requestFocus();
                     } else {
                         usernameEdit.setText("");
-                        usernameEdit.setHint("Username does not exist.");
+                        usernameEdit.setHint(R.string.login_text_exist);
                         registerbutton.setBackgroundColor(Color.RED);
                         registerbutton.requestFocus();
                         System.out.println("    -   Not existing username");
@@ -133,7 +133,7 @@ public class Login_screen extends AppCompatActivity {
                 }
             }
         } else {
-            usernameEdit.setHint("Username is needed.");
+            usernameEdit.setHint(R.string.login_text_needed);
             usernameEdit.requestFocus();
             System.out.println("    -   Empty username");
         }

@@ -101,25 +101,19 @@ public class Register extends AppCompatActivity {
                     finish();
                 } else {
                     userNameField.setText("");
-                    userNameField.setHint("Username already exists.");
+                    userNameField.setHint(R.string.register_text_exists);
                     userNameField.requestFocus();
                     System.out.println("    -   User already exists.");
                 }
             } else {
                 passWordField.setText("");
-                passWordField.setHint("Password is needed.");
+                passWordField.setHint(R.string.register_text_pass_needed);
                 passWordField.requestFocus();
             }
         } else {
             userNameField.setText("");
-            userNameField.setHint("Username is needed.");
+            userNameField.setHint(R.string.register_text_user_needed);
             userNameField.requestFocus();
         }
     }
-
-
-
-
-
-
 }

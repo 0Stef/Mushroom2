@@ -27,14 +27,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt1"
+                android:text="@string/achievement_1"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100"
+                android:text="@string/point_1"
                 />
 
             <ProgressBar
@@ -55,14 +55,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt2"
+                android:text="@string/achievement_2"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten200"
+                android:text="@string/point_5"
                 />
 
             <ProgressBar
@@ -83,14 +83,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt3"
+                android:text="@string/achievement_3"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten300"
+                android:text="@string/point_10"
                 />
 
             <ProgressBar
@@ -111,14 +111,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt4"
+                android:text="@string/achievement_4"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten600"
+                android:text="@string/point_100"
                 />
 
             <ProgressBar
@@ -139,14 +139,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt5"
+                android:text="@string/achievement_5"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2000"
+                android:text="@string/point_200"
                 />
 
             <ProgressBar
@@ -167,14 +167,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt6"
+                android:text="@string/achievement_6"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten5000"
+                android:text="@string/point_1000"
                 />
 
             <ProgressBar
@@ -195,14 +195,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt7"
+                android:text="@string/achievement_7"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten20000"
+                android:text="@string/point_2000"
                 />
 
             <ProgressBar
@@ -223,14 +223,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt8"
+                android:text="@string/achievement_8"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100000"
+                android:text="@string/point_8000"
                 />
 
             <ProgressBar
@@ -251,14 +251,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt9"
+                android:text="@string/achievement_9"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten400000"
+                android:text="@string/point_40000"
                 />
 
             <ProgressBar
@@ -279,14 +279,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt10"
+                android:text="@string/achievement_10"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000"
+                android:text="@string/point_300"
                 />
 
             <ProgressBar
@@ -307,14 +307,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt11"
+                android:text="@string/achievement_11"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2000"
+                android:text="@string/point_400"
                 />
 
             <ProgressBar
@@ -335,14 +335,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt12"
+                android:text="@string/achievement_12"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten5000"
+                android:text="@string/point_500"
                 />
 
             <ProgressBar
@@ -363,14 +363,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt13"
+                android:text="@string/achievement_13"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten8000"
+                android:text="@string/point_600"
                 />
 
             <ProgressBar
@@ -391,14 +391,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt14"
+                android:text="@string/achievement_14"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/point_700"
                 />
 
             <ProgressBar
@@ -419,14 +419,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt15"
+                android:text="@string/achievement_15"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten500"
+                android:text="@string/point_10"
                 />
 
             <ProgressBar
@@ -447,14 +447,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt16"
+                android:text="@string/achievement_16"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000"
+                android:text="@string/point_50"
                 />
 
             <ProgressBar
@@ -475,14 +475,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt17"
+                android:text="@string/achievement_17"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/point_100"
                 />
 
             <ProgressBar
@@ -503,14 +503,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt18"
+                android:text="@string/achievement_18"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten40000"
+                android:text="@string/point_1000"
                 />
 
             <ProgressBar
@@ -531,14 +531,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt19"
+                android:text="@string/achievement_19"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten400000"
+                android:text="@string/point_8000"
                 />
 
             <ProgressBar
@@ -559,14 +559,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt20"
+                android:text="@string/achievement_20"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten744000"
+                android:text="@string/point_40000"
                 />
 
             <ProgressBar
@@ -587,14 +587,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt21"
+                android:text="@string/achievement_21"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100"
+                android:text="@string/point_2400"
                 />
 
             <ProgressBar
@@ -615,14 +615,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt22"
+                android:text="@string/achievement_22"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten200"
+                android:text="@string/point_4800"
                 />
 
             <ProgressBar
@@ -643,14 +643,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt23"
+                android:text="@string/achievement_23"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2500"
+                android:text="@string/point_120000"
                 />
 
             <ProgressBar
@@ -671,14 +671,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt24"
+                android:text="@string/achievement_24"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten5000"
+                android:text="@string/point_168000"
                 />
 
             <ProgressBar
@@ -699,15 +699,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt25"
+                android:text="@string/achievement_25"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten8000"
-            />
+                android:text="@string/point_336000"
+                />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
@@ -727,14 +727,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt26"
+                android:text="@string/achievement_26"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/point_744000"
                 />
 
             <ProgressBar
@@ -755,14 +755,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt27"
+                android:text="@string/achievement_27"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten40000"
+                android:text="@string/point_2400000"
                 />
 
             <ProgressBar
@@ -785,14 +785,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt30"
+                android:text="@string/achievement_30"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten1000"
+                android:text="@string/point_20000"
                 />
 
             <ProgressBar
@@ -813,14 +813,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt31"
+                android:text="@string/achievement_31"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten2500"
+                android:text="@string/point_100000"
                 />
 
             <ProgressBar
@@ -841,14 +841,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt32"
+                android:text="@string/achievement_32"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten5000"
+                android:text="@string/point_400000"
                 />
 
             <ProgressBar
@@ -869,14 +869,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt33"
+                android:text="@string/achievement_33"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10000"
+                android:text="@string/point_1000000"
                 />
 
             <ProgressBar
@@ -891,19 +891,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
+
             <!-- Achievement 28 -->
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt28"
+                android:text="@string/achievement_28"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten10"
+                android:text="@string/point_100"
                 />
 
             <ProgressBar
@@ -924,14 +925,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/achievemnt29"
+                android:text="@string/achievement_29"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/punten100000000"
+                android:text="@string/point_100000000"
                 />
 
             <ProgressBar

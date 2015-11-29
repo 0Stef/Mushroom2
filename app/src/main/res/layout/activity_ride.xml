@@ -18,9 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/currentSpeed"
-            android:layout_marginBottom="@dimen/rideMeetwaardenMarginBottom"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -33,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidSnelheid"
+            android:text="@string/ride_unit_speed"
             android:id="@+id/currentSpeedEenheid"
             android:layout_alignBottom="@+id/averageSpeed"
             android:layout_toRightOf="@+id/currentSpeed"
@@ -42,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/averageSpeed"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -56,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidSnelheid"
+            android:text="@string/ride_unit_speed"
             android:id="@+id/averageSpeedEenheid"
             android:layout_alignBottom="@+id/averageSpeed"
             android:layout_toRightOf="@+id/averageSpeed"
@@ -65,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/maximumSpeed"
             android:textColor="#000000"
             android:textSize="@dimen/rideMeetwaardenGrootte"
@@ -79,7 +78,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidSnelheid"
+            android:text="@string/ride_unit_speed"
             android:id="@+id/maximumSpeedEenheid"
             android:layout_alignBottom="@+id/maximumSpeed"
             android:layout_alignParentRight="true"
@@ -93,22 +92,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/currentAcceleration"
+            android:layout_alignBottom="@+id/averageAcceleration"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/currentSpeed"
             android:textColor="#000000"
             android:textSize="@dimen/rideMeetwaardenGrootte"
             android:textStyle="bold"
-            android:layout_marginBottom="@dimen/rideMeetwaardenMarginBottom"
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidVersnelling"
+            android:text="@string/ride_unit_acceleration"
             android:id="@+id/currentAccelerationEenheid"
             android:layout_alignBottom="@+id/averageAcceleration"
             android:layout_toRightOf="@+id/currentAcceleration"
@@ -117,7 +115,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/averageAcceleration"
             android:layout_below="@id/averageSpeed"
             android:layout_centerHorizontal="true"
@@ -131,7 +129,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidVersnelling"
+            android:text="@string/ride_unit_acceleration"
             android:id="@+id/averageAccelerationEenheid"
             android:layout_alignBottom="@+id/averageAcceleration"
             android:layout_toRightOf="@+id/averageAcceleration"
@@ -140,7 +138,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/maximumAcceleration"
             android:textColor="#000000"
             android:textSize="@dimen/rideMeetwaardenGrootte"
@@ -154,7 +152,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidVersnelling"
+            android:text="@string/ride_unit_acceleration"
             android:id="@+id/maximumAccelerationEenheid"
             android:layout_alignBottom="@+id/maximumAcceleration"
             android:layout_toRightOf="@+id/maximumSpeed"
@@ -168,7 +166,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/distance"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/averageAcceleration"
@@ -183,7 +181,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidAfstand"
+            android:text="@string/ride_unit_distance"
             android:id="@+id/distanceEenheid"
             android:layout_alignBottom="@+id/distance"
             android:layout_toRightOf="@+id/distance"
@@ -197,21 +195,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rideStandaardmeetwaarde"
+            android:text="@string/ride_default_value"
             android:id="@+id/elapsedTime"
-            android:layout_below="@id/currentAcceleration"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/distance"
+            android:layout_marginBottom="@dimen/rideMeetwaardenMarginBottom"
             android:textColor="#000000"
             android:textSize="@dimen/rideMeetwaardenGrootte"
             android:textStyle="bold"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eenheidTijd"
+            android:text="@string/ride_unit_time"
             android:id="@+id/elapsedTimeEenheid"
             android:layout_alignBottom="@+id/elapsedTime"
             android:layout_toRightOf="@+id/elapsedTime"
@@ -221,9 +220,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/elapsedTime"
-            android:text="@string/getstartedch"
+            android:text="@string/challenges_button_start"
             android:layout_marginTop="10dp"
-            android:onClick="challengeButton"
+            android:onClick="altitudeDifference"
             android:id="@+id/challengebutton"
             />
 
@@ -240,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/uitleg"
-            android:layout_below="@id/elapsedTime"
+            android:layout_below="@id/currentAcceleration"
             android:layout_marginTop="20dp"
             android:text="Test"/>
 
@@ -273,7 +272,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/succes"
+            android:text="@string/ride_text_succes"
             android:layout_below="@id/challenge1"
             android:textSize="40sp"
             android:id="@+id/succes"

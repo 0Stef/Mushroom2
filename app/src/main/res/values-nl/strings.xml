@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="acceleration_acceleration">Versnelling:</string>
+    <string name="acceleration_button_start">Start</string>
+    <string name="acceleration_button_stop">Stop</string>
+    <string name="acceleration_result_text">Je bent er geraakt!</string>
+
+    <string name="achievement_1">Rijd 1 kilometer</string>
+    <string name="achievement_10">Behaal een snelheid van 30 km/h.</string>
+    <string name="achievement_11">Behaal een snelheid van 35 km/h.</string>
+    <string name="achievement_12">Behaal een snelheid van 40 km/h.</string>
+    <string name="achievement_13">Behaal een snelheid van 45 km/h.</string>
+    <string name="achievement_14">Behaal een snelheid van 50 km/h.</string>
+    <string name="achievement_29">Alle mijlpalen bereikt.</string>
+
+    <string name="challenges_view_title">Uitdagingen</string>
+    <string name="challenges_button_start">Start uitdaging</string>
+
+    <string name="home_button_challenges">Uitdagingen</string>
+    <string name="home_button_friends">Vrienden</string>
+    <string name="home_button_logout">Uitloggen</string>
+    <string name="home_button_map">Map</string>
+    <string name="home_button_optional">Mijlpalen</string>
+    <string name="home_button_preferences">Persoonlijke instellingen</string>
+    <string name="home_button_ranking">Ranglijsten</string>
+    <string name="home_button_settings">Instellingen</string>
+    <string name="home_button_ride">Rit modus</string>
+    <string name="home_button_statistics">Persoonlijke statistieken</string>
+
+    <string name="login_button_login">INLOGGEN</string>
+    <string name="login_button_password">REGISTREREN</string>
+    <string name="login_text_exist">Deze gebruikersnaam bestaat niet.</string>
+    <string name="login_text_found">Je account werd gevonden!</string>
+    <string name="login_text_incorrect">Wachtwoord is incorrect.</string>
+    <string name="login_text_needed">Een gebruikersnaam is nodig.</string>
+    <string name="login_view_password">Vul je wachtwoord in</string>
+    <string name="login_view_username">Vul je gebruikersnaam in</string>
+
+    <string name="magnetic_east">oosten</string>
+    <string name="magnetic_north">noorden</string>
+    <string name="magnetic_south">zuiden</string>
+    <string name="magnetic_west">westen</string>
+    <string name="magnetic_winddirections">Windrichtingen</string>
+
+    <string name="maps_button_get">Ontvang</string>
+    <string name="maps_button_put">Plaats</string>
+    <string name="maps_button_send">Verzend</string>
+    <string name="maps_edit_message">Verzend data naar de server</string>
+
+    <string name="point_1">1 Punt.</string>
+
+    <string name="register_button_register">Registreer!</string>
+    <string name="register_text_exists">Gebruikersnaam bestaat al.</string>
+    <string name="register_text_pass_needed">Wachtwoord is nodig.</string>
+    <string name="register_text_user_needed">Gebruikersnaam is nodig.</string>
+    <string name="register_view_city">Vul je stad in</string>
+    <string name="register_view_country">Vul je land in</string>
+    <string name="register_view_password">Vul je wachtwoord in</string>
+    <string name="register_view_username">Vul je gebruikersnaam in</string>
+
+    <string name="speed_speed">Snelheid:</string>
+    <string name="speed_succes">Succes!</string>
+
+    <string name="statistics_accelerometer_x">Accelerometer x-waarden.</string>
+    <string name="statistics_accelerometer_y">Accelerometer y-waarden.</string>
+    <string name="statistics_accelerometer_z">Accelerometer z-waarden.</string>
+    <string name="statistics_distance">Afstand.</string>
+    <string name="statistics_global">Globaal.</string>
+    <string name="statistics_last_ride">Laatste rit.</string>
+    <string name="statistics_speed">Snelheid.</string>
+
+    <string name="title_activity_achievements">Mijlpalen</string>
+    <string name="title_activity_challenges">Uitdagingen</string>
+
+    <string name="wifi_nb_found">Aantal gevonden Wifi-hotspots:</string>
+
+    <string name="title_activity_login_screen">Inlog scherm</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
+    <string name="title_activity_record_acceleration">Meet acceleratie</string>
+    <string name="title_activity_register">Registreer</string>
+    <string name="title_activity_record_magnetic_field">Meet magnetisch veld</string>
+    <string name="title_activity_record_speed">Meet snelheid</string>
+    <string name="title_activity_ride">Rit</string>
+    <string name="title_activity_wifi_scanner">Wifi-scanner</string>
+
+    <string name="challenges_view_1">Bereik een versnelling van 3 m/s²</string>
+    <string name="challenges_view_2">Behaal een snelheid van meer dan 20 km/h</string>
+    <string name="challenges_view_3">Rij 1 km naar het noorden</string>
+
+    <string name="achievement_21">Gebruik de app 1 dag.</string>
+    <string name="achievement_22">Gebruik de app 2 dagen.</string>
+    <string name="achievement_23">Gebruik de app 5 dagen.</string>
+    <string name="achievement_24">Gebruik de app 7 dagen.</string>
+    <string name="achievement_25">Gebruik de app 14 dagen.</string>
+    <string name="achievement_26">Gebruik de app 31 dagen.</string>
+    <string name="achievement_27">Gebruik de app 100 dagen.</string>
+    <string name="achievement_28">Start de app.</string>
+    <string name="achievement_15">Win 1 uitdaging.</string>
+    <string name="achievement_16">Win 5 uitdagingen.</string>
+    <string name="achievement_17">Win 10 uitdagingen.</string>
+    <string name="achievement_18">Win 50 uitdagingen.</string>
+    <string name="achievement_19">Win 200 uitdagingen.</string>
+    <string name="achievement_20">Win 500 uitdagingen.</string>
+    <string name="achievement_2">Rij 5 kilometer.</string>
+    <string name="achievement_3">Rij 10 kilometer.</string>
+    <string name="achievement_30">Hoogteverschil van 10 meter.</string>
+    <string name="achievement_4">Rij 50 kilometer.</string>
+    <string name="achievement_5">Rij 100 kilometer.</string>
+    <string name="achievement_6">Rij 250 kilometer.</string>
+    <string name="achievement_7">Rij 500 kilometer.</string>
+    <string name="achievement_8">Rij 1000 kilometer.</string>
+    <string name="achievement_9">Rij 5000 kilometer.</string>
+    <string name="achievement_31">Hoogteverschil van 25 meter.</string>
+    <string name="achievement_32">Hoogteverschil van 50 meter.</string>
+    <string name="achievement_33">Hoogteverschil van 100 meter.</string>
+
+    <string name="point_10">10 Punten.</string>
+    <string name="point_100">100 Punten.</string>
+    <string name="point_1000">1000 Punten.</string>
+    <string name="point_10000">10000 Punten.</string>
+    <string name="point_100000">100000 Punten.</string>
+    <string name="point_1000000">1000000 Punten.</string>
+    <string name="point_100000000">10000000 Punten.</string>
+    <string name="point_120000">120000 Punten.</string>
+    <string name="point_168000">168000 Punten.</string>
+    <string name="point_200">200 Punten.</string>
+    <string name="point_2000">2000 Punten.</string>
+    <string name="point_20000">20000 Punten.</string>
+    <string name="point_2400">2400 Punten.</string>
+    <string name="point_2400000">2400000 Punten.</string>
+    <string name="point_300">300 Punten.</string>
+    <string name="point_336000">336000 Punten.</string>
+    <string name="point_400">400 Punten.</string>
+    <string name="point_40000">40000 Punten.</string>
+    <string name="point_400000">400000 Punten.</string>
+    <string name="point_4800">4800 Punten.</string>
+    <string name="point_5">5 Punten.</string>
+    <string name="point_50">50 Punten.</string>
+    <string name="point_500">500 Punten.</string>
+    <string name="point_600">600 Punten.</string>
+    <string name="point_700">700 Punten.</string>
+    <string name="point_744000">744000 Punten.</string>
+    <string name="point_8000">8000 Punten.</string>
+
+    <string name="statistics_not_found_distance">Geen afstandswaarden!</string>
+    <string name="statistics_not_found_velocity">Geen snelheidswaarden!</string>
+    <string name="statistics_not_found_accelerometer">Geen accelerometerwaarden!</string>
+    <string name="ride_text_succes">Succes!</string>
+    <string name="speed_button_start">Start</string>
+    <string name="speed_button_stop">Stop</string>
+    <string name="statistics_days_biked">Dagen gefietst.</string>
+    <string name="statistics_highest_acceleration">Hoogste acceleratie.</string>
+    <string name="statistics_highest_altitude_diff">Hoogste hoogteverschil.</string>
+    <string name="statistics_highest_speed">Topsnelheid.</string>
+    <string name="statistics_total_distance">Totale afstand.</string>
+    <string name="statistics_total_points">Totaal punten.</string>
+    <string name="statistics_total_time">Totale tijd.</string>
+    <string name="statistics_route">Route Mapping.</string>
+    <string name="title_activity_ranking">Ranglijsten</string>
+    <string name="ranking_name">Naam</string>
+    <string name="ranking_points">Punten</string>
+    <string name="title_activity_route_mapping">Mapping</string>
+</resources>

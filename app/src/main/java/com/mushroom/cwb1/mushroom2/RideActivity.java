@@ -197,7 +197,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         moeilijkheidsgraad = (Spinner) findViewById(R.id.moeilijkheidsgraad);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.moeilijkheidsgraad, android.R.layout.simple_spinner_item);
+                R.array.ride_difficulty, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         moeilijkheidsgraad.setAdapter(adapter);
         moeilijkheidsgraad.setOnItemSelectedListener(this);
