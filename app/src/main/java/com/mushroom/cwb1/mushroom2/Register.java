@@ -21,10 +21,16 @@ public class Register extends AppCompatActivity {
 
     private Button registerButton;
 
+    private UserHandler userHandler;
+    private DataBaseHandler2 dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        userHandler = new UserHandler(getApplicationContext());
+        dbHandler = new DataBaseHandler2(getApplicationContext());
 
         userNameField = (EditText) findViewById(R.id.editText_register_username);
         passWordField = (EditText) findViewById(R.id.editText_register_password);
@@ -76,9 +82,6 @@ public class Register extends AppCompatActivity {
     }
 
     public void registerUser() {
-        UserHandler userHandler = new UserHandler(getApplicationContext());
-        DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
-
         User user = new User();
         String userName = userNameField.getText().toString().replaceAll(" ", "_");
         String passWord = passWordField.getText().toString().replaceAll(" ", "_");
@@ -95,8 +98,8 @@ public class Register extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (!passWord.isEmpty()) {
                 if (!userHandler.isExistingUser(userName)) {
-                    userHandler.addUser(user);
-                    dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
+                    createLocalUser(user);
+                    createServerUser(user);
                     System.out.println("    -   Created new user: " + userName + ", " + passWord);
                     finish();
                 } else {
@@ -115,5 +118,14 @@ public class Register extends AppCompatActivity {
             userNameField.setHint(R.string.register_text_user_needed);
             userNameField.requestFocus();
         }
+    }
+
+    public void createLocalUser(User user) {
+        userHandler.addUser(user);
+        dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
+    }
+
+    public void createServerUser(User user) {
+        //Have fun!
     }
 }
