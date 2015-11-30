@@ -26,7 +26,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -35,6 +34,7 @@ public class Login_screen extends AppCompatActivity {
 
     private UserHandler userHandler;
     private DataBaseHandler2 dbHandler;
+    private Debug debug;
 
     private Button loginbutton;
     private Button registerbutton;
@@ -51,14 +51,16 @@ public class Login_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        userHandler = new UserHandler(getApplicationContext());
-
         loginbutton = (Button) findViewById(R.id.button);
         registerbutton = (Button) findViewById(R.id.registerbutton);
         usernameEdit = (EditText) findViewById(R.id.editText);
         passwordEdit = (EditText) findViewById(R.id.editText2);
         debugView = (TextView) findViewById(R.id.debugView);
         statusView = (TextView) findViewById(R.id.wrong_password);
+
+        userHandler = new UserHandler(getApplicationContext());
+        dbHandler = new DataBaseHandler2(getApplicationContext());
+        debug = new Debug(getApplicationContext(), debugView);
 
         usernameEdit.setSingleLine();
         passwordEdit.setSingleLine();
@@ -112,8 +114,9 @@ public class Login_screen extends AppCompatActivity {
                     System.out.println("    -   Incorrect password: " + userName + ", " + passWord);
                 }
             } else {
-                if (debug(userName, passWord)) {
+                if (debug.execute(userName, passWord)) {
                     usernameEdit.setText("");
+                    passwordEdit.setText("");
                     usernameEdit.requestFocus();
                     System.out.println("    -   Cmd");
                 } else {
@@ -364,40 +367,5 @@ public class Login_screen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean debug(String command, String parameter) {
-        if (command.equals("reset_app") || command.equals("reset") || command.equals("rst")) {
-            dbHandler = new DataBaseHandler2(getApplicationContext());
-            LinkedList<User> list = userHandler.getList(userHandler.getAll());
-            for (User user : list) {
-                dbHandler.deleteTable(user.getUser_name());
-            }
-            dbHandler.resetTable(dbHandler.TABLE_DEFAULT);
-            userHandler.resetTable();
-            return true;
-        }
-        if (command.equals("get_userlist") || command.equals("list") || command.equals("lst")) {
-            LinkedList<User> list = userHandler.getList(userHandler.getAll());
-            debugView.append("\n");
-            debugView.append("List: \n");
-            for (User user : list) {
-                debugView.append("  - " + user.toString() + "\n");
-            }
-            return true;
-        }
-        if (command.equals("cmd") || command.equals("?") || command.equals("help")) {
-            debugView.append("\n");
-            debugView.append("Commands:\n");
-            debugView.append("  - reset app\n");
-            debugView.append("  - get userlist\n");
-            debugView.append("  - clear screen\n");
-            return true;
-        }
-        if (command.equals("clear screen") || command.equals("cls")){
-            debugView.setText("");
-            return true;
-        }
-        return false;
     }
 }
