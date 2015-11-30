@@ -65,16 +65,11 @@ public class achievements extends AppCompatActivity {
         setContentView(R.layout.activity_achievements);
         currentUser = getIntent().getStringExtra("username");
 
-
         handler = new UserHandler(getApplicationContext());
         User user = handler.getUserInformation(currentUser);
 
-        System.out.println(user.getTotal_distance());
-        System.out.println(user.getHighest_speed());
         nb_compl_achievements = 0;
-
-        System.out.println(user.getNb_won_challenges());
-
+        checkDay(currentUser);
 
         //Creating the progressbars
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
@@ -353,15 +348,14 @@ public class achievements extends AppCompatActivity {
 
         handler.overWrite(user);
         // TODO naar de server overschrijven
-
-
-
     }
 
-    private void checkDay(String userName) {
-        Calendar calendar = Calendar.getInstance();
-
+    public void checkDay(String userName) {
         User user = handler.getUserInformation(userName);
+
+        Calendar calendar = Calendar.getInstance();
+        long millisec = calendar.getTimeInMillis();
+
         long lastMillisec = user.getLast_login();
         Calendar lastCalendar = Calendar.getInstance();
         lastCalendar.setTimeInMillis(lastMillisec);
@@ -371,8 +365,11 @@ public class achievements extends AppCompatActivity {
 
         if (!sameDay) {
             int nb = user.getNb_days_biked();
-            handler.overWrite(userName, handler.COLUMN_NB_DAYS_BIKED, nb+1);
+            user.setNb_days_biked(nb + 1);
         }
+        user.setLast_login(millisec);
+
+        handler.overWrite(user);
     }
 
     @Override

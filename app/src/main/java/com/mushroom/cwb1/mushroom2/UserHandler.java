@@ -224,6 +224,13 @@ public class UserHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteUser(String userName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(USER_TABLE, COLUMN_USER_NAME + " = " + "'" + userName + "'", null);
+        db.close();
+    }
+
     public void overWrite(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 

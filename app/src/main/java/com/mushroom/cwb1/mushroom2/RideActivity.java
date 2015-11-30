@@ -152,7 +152,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         setUpMapIfNeeded();
 
-        handler = new DataBaseHandler2(getApplicationContext());
+        handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
 

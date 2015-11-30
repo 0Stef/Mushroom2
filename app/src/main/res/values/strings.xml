@@ -12,6 +12,7 @@
     <string name="login_text_found">Your account was found!</string>
     <string name="login_text_exist">Username does not exist.</string>
     <string name="login_text_needed">Username is needed.</string>
+    <string name="login_text_wrong">It appears that something went wrong.</string>
 
 
     //Register

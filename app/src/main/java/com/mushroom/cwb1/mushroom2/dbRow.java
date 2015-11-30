@@ -21,8 +21,6 @@ public class dbRow {
     private float Magnetic_yValue;
     private float Magnetic_zValue;
 
-    private float distancetopreviouspoint;
-    private long timetopreviouspoint;
 
     public dbRow() {
         //Nothing here.
@@ -31,7 +29,7 @@ public class dbRow {
     public dbRow(int ride_id, long millisec,
                  float Accelerometer_xValue, float Accelerometer_yValue, float Accelerometer_zValue,
                  float velocity, double longitude, double latitude, double altitude,
-                 float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue, float distancetopreviouspoint, long timetopreviouspoint) {
+                 float Magnetic_xValue, float Magnetic_yValue, float Magnetic_zValue) {
 
         this.ride_id = ride_id;
         this.millisec = millisec;
@@ -48,10 +46,6 @@ public class dbRow {
         this.Magnetic_xValue = Magnetic_xValue;
         this.Magnetic_yValue = Magnetic_yValue;
         this.Magnetic_zValue = Magnetic_zValue;
-
-        this.distancetopreviouspoint = distancetopreviouspoint;
-        this.timetopreviouspoint = timetopreviouspoint;
-
     }
 
     // General

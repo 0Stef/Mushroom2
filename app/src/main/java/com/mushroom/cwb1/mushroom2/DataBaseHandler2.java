@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -141,7 +142,11 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     }
 
     private String check(String table) {
-        return table.replaceAll(" ", "_");
+        if (table != null) {
+            return table.replaceAll(" ", "_");
+        }
+        Log.e("Null object", "A check occured on a nul object.");
+        return TABLE_DEFAULT;
     }
 
     // Row
