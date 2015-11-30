@@ -204,5 +204,9 @@
 
     //Route mapping
     <string name="title_activity_route_mapping">Mapping</string>
+    <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
