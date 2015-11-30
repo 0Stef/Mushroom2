@@ -19,16 +19,16 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_message" />
+            android:hint="@string/maps_edit_message" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_get"
+            android:text="@string/maps_button_get"
             android:onClick="getMessage"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_put"
+            android:text="@string/maps_button_put"
             android:onClick="putMessage"/>
     </LinearLayout>
 

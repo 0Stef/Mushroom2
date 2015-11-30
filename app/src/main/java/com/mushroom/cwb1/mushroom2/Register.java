@@ -1,7 +1,9 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +21,22 @@ public class Register extends AppCompatActivity {
 
     private Button registerButton;
 
+    private UserHandler userHandler;
+    private DataBaseHandler2 dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        userHandler = new UserHandler(getApplicationContext());
+        dbHandler = new DataBaseHandler2(getApplicationContext());
+
         userNameField = (EditText) findViewById(R.id.editText_register_username);
         passWordField = (EditText) findViewById(R.id.editText_register_password);
+        passWordField.setTypeface(Typeface.DEFAULT);
+        passWordField.setTransformationMethod(new PasswordTransformationMethod());
+
         countryField = (EditText) findViewById(R.id.editText_register_country);
         cityField = (EditText) findViewById(R.id.editText_register_city);
 
@@ -71,9 +82,6 @@ public class Register extends AppCompatActivity {
     }
 
     public void registerUser() {
-        UserHandler userHandler = new UserHandler(getApplicationContext());
-        DataBaseHandler2 dbHandler = new DataBaseHandler2(getApplicationContext());
-
         User user = new User();
         String userName = userNameField.getText().toString().replaceAll(" ", "_");
         String passWord = passWordField.getText().toString().replaceAll(" ", "_");
@@ -90,31 +98,34 @@ public class Register extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (!passWord.isEmpty()) {
                 if (!userHandler.isExistingUser(userName)) {
-                    userHandler.addUser(user);
-                    dbHandler.createTable(dbHandler.getWritableDatabase(), userName);
+                    createLocalUser(user);
+                    createServerUser(user);
                     System.out.println("    -   Created new user: " + userName + ", " + passWord);
                     finish();
                 } else {
                     userNameField.setText("");
-                    userNameField.setHint("Username already exists.");
+                    userNameField.setHint(R.string.register_text_exists);
                     userNameField.requestFocus();
                     System.out.println("    -   User already exists.");
                 }
             } else {
                 passWordField.setText("");
-                passWordField.setHint("Password is needed.");
+                passWordField.setHint(R.string.register_text_pass_needed);
                 passWordField.requestFocus();
             }
         } else {
             userNameField.setText("");
-            userNameField.setHint("Username is needed.");
+            userNameField.setHint(R.string.register_text_user_needed);
             userNameField.requestFocus();
         }
     }
 
+    public void createLocalUser(User user) {
+        userHandler.addUser(user);
+        dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
+    }
 
-
-
-
-
+    public void createServerUser(User user) {
+        //Have fun!
+    }
 }

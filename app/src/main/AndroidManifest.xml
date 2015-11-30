@@ -53,10 +53,6 @@
                 android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
         </activity>
         <activity
-            android:name=".DataBaseHandler2"
-            android:label="@string/title_activity_data_base_handler2" >
-        </activity>
-        <activity
             android:name=".RideActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_ride"
@@ -66,15 +62,9 @@
         <activity
             android:name=".achievements"
             android:label="@string/title_activity_achievements" >
-        </activity>
-        <activity
-            android:name=".wifiScanner"
-            android:label="@string/title_activity_wifi_scanner"
-            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mushroom.cwb1.mushroom2.Challenges"
-                />
+                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
         </activity>
         <activity
             android:name=".Persoonlijke_statistieken"
@@ -92,7 +82,18 @@
         <activity
             android:name=".Ranking"
             android:label="@string/title_activity_ranking" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
+        </activity>
+        <activity
+            android:name=".RouteMapping"
+            android:label="@string/title_activity_route_mapping" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.Persoonlijke_statistieken" />
         </activity>
     </application>
 
 </manifest>
+

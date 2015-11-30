@@ -1,10 +1,13 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -12,14 +15,10 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.LineData;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -96,7 +95,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineChart chVelocity = (LineChart) findViewById(R.id.chVelocity);
         chVelocity.setDescription("");
         chVelocity.setDrawGridBackground(false);
-        chVelocity.setNoDataText("Geen snelheidswaarden!");
+        chVelocity.setNoDataText(getString(R.string.statistics_not_found_velocity));
         Legend l = chVelocity.getLegend();
         l.setEnabled(false);
         YAxis y12 = chVelocity.getAxisRight();
@@ -124,7 +123,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineChart chDistance = (LineChart) findViewById(R.id.chDistance);
         chDistance.setDescription("");
         chDistance.setDrawGridBackground(false);
-        chDistance.setNoDataText("Geen afstandswaarden!");
+        chDistance.setNoDataText(getString(R.string.statistics_not_found_distance));
         Legend lDistance = chDistance.getLegend();
         lDistance.setEnabled(false);
         YAxis y12Distance = chDistance.getAxisRight();
@@ -152,7 +151,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineChart chAccelerometerX = (LineChart) findViewById(R.id.chAccelerometerX);
         chAccelerometerX.setDescription("");
         chAccelerometerX.setDrawGridBackground(false);
-        chAccelerometerX.setNoDataText("Geen accelerometerwaarden!");
+        chAccelerometerX.setNoDataText(getString(R.string.statistics_not_found_accelerometer));
         Legend lAccelerometerX = chAccelerometerX.getLegend();
         lAccelerometerX.setEnabled(false);
         YAxis y12AccelerometerX = chAccelerometerX.getAxisRight();
@@ -180,7 +179,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineChart chAccelerometerY = (LineChart) findViewById(R.id.chAccelerometerY);
         chAccelerometerY.setDescription("");
         chAccelerometerY.setDrawGridBackground(false);
-        chAccelerometerY.setNoDataText("Geen accelerometerwaarden!");
+        chAccelerometerY.setNoDataText(getString(R.string.statistics_not_found_accelerometer));
         Legend lAccelerometerY = chAccelerometerY.getLegend();
         lAccelerometerY.setEnabled(false);
         YAxis y12AccelerometerY = chAccelerometerY.getAxisRight();
@@ -208,7 +207,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineChart chAccelerometerZ = (LineChart) findViewById(R.id.chAccelerometerZ);
         chAccelerometerZ.setDescription("");
         chAccelerometerZ.setDrawGridBackground(false);
-        chAccelerometerZ.setNoDataText("Geen accelerometerwaarden!");
+        chAccelerometerZ.setNoDataText(getString(R.string.statistics_not_found_accelerometer));
         Legend lAccelerometerZ = chAccelerometerZ.getLegend();
         lAccelerometerZ.setEnabled(false);
         YAxis y12AccelerometerZ = chAccelerometerZ.getAxisRight();
@@ -232,7 +231,17 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chAccelerometerZ.invalidate();
         chAccelerometerZ.animateY(3000);
 
-        setUpMapIfNeeded();
+        Button RouteMapping = (Button)findViewById(R.id.RouteMapping);
+
+        RouteMapping.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), RouteMapping.class);
+                        startActivity(i);
+                    }
+                }
+        );
+
     }
 
 
@@ -257,34 +266,5 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
-        }
-    }
 
-
-    private void setUpMap() {
-
-        PolylineOptions mPolylineOptions = new PolylineOptions();
-
-        if (list.size() != 0){
-            for (int index = 1; index < list.size(); index++) {
-                dbRow rowprev = (dbRow) list.get(index-1);
-                dbRow row = (dbRow) list.get(index);
-                mPolylineOptions.add(new LatLng(rowprev.getLatitude(),rowprev.getLongitude()), new LatLng(row.getLatitude(),row.getLongitude()));
-            }
-        }
-        mPolylineOptions.width(5).color(Color.BLUE);
-        mMap.addPolyline(mPolylineOptions);
-        dbRow rowlast = (dbRow) list.get((list.size()-1)/2);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rowlast.getLatitude(),rowlast.getLongitude()), 12.0f));
-    }
 }

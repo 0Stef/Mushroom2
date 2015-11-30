@@ -25,7 +25,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings"
+                android:text="@string/home_button_preferences"
                 android:id="@+id/button4"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
@@ -34,7 +34,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/rideActivityButton"
+                android:text="@string/home_button_ride"
                 android:id="@+id/rideActivityButton"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
@@ -43,7 +43,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/optionalbutton"
+                android:text="@string/home_button_optional"
                 android:id="@+id/button2"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
@@ -52,7 +52,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ranglijsten"
+                android:text="@string/home_button_ranking"
                 android:id="@+id/ranglijsten"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
@@ -61,7 +61,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/persoonlijkestatistieken"
+                android:text="@string/home_button_statistics"
                 android:id="@+id/persoonlijkestatistieken"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
@@ -70,12 +70,11 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/vrienden"
+                android:text="@string/home_button_friends"
                 android:id="@+id/vrienden"
                 android:background="#FFBF6A"
                 android:layout_marginBottom="10dp"
                 />
-
 
         </LinearLayout>
     </ScrollView>
@@ -83,7 +82,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
+        android:text="@string/home_button_logout"
         android:id="@+id/logout"
         android:background="@color/red"
         android:textColor="@color/white"

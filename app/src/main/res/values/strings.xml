@@ -1,158 +1,207 @@
 <resources>
-    <string name="app_name">Mushroom</string>
-    
-    //Login screen
-    <string name="login_enter_username">Enter your username</string>
-    <string name="login_enter_password">Enter your password</string>
+    <string name="app_name" translatable="false">Mushroom</string>
+
+    //Login
     <string name="title_activity_login_screen">Login screen</string>
-    <string name="mail">Enter your username</string>
-    <string name="password">Enter your password</string>
-    <string name="loginbutton">Log in</string>
-    <string name="Wrong_password">Wrong password!</string>
+    <string name="login_view_username">Enter your username</string>
+    <string name="login_view_password">Enter your password</string>
+    <string name="login_button_login">LOG IN</string>
+    <string name="login_button_password">REGISTER</string>
 
-    // strings voor homescreen
-    <string name="title_activity_homescreen">Mushroom</string>
-    <string name="optionalbutton">Achievements</string>
-    <string name="challenges">Challenges</string>
-    <string name="settings">Map</string>
-    <string name="action_settings">Settings</string>
-    <string name="title">Mushroom</string>
-    <string name="rideActivityButton">Ride mode</string>
-    <string name="getstartedch">Start challenge</string>
-    <string name="title_activity_main_dbactivity">MainDBactivity</string>
-    <string name="title_activity_data_base_handler">DataBaseHandler</string>
-    <string name="ranglijsten">Leaderboards</string>
-    <string name="persoonlijkestatistieken">Personal statistics</string>
-
-    //todo
-    <string name="vrienden">Friends</string>
-    <string name="logout">Log out</string>
-
-    <string name="button_stop">Stop</string>
-    <string name="button_start">Start</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="succes">Succes!</string>
-
-    <string name="title_activity_data_base_handler2">DataBaseHandler2</string>
-    <string name="title_activity_ride">RideActivity</string>
-    <string name="titelRideActivity">ride modus</string>
-
-    //todo
-    <string name="title_activity_achievements">Mijlpalen</string>
-
-    // Strings voor punten
-    <string name="punten1">1 Point.</string>
-    <string name="punten5">5 Points.</string>
-    <string name="punten10">10 Points.</string>
-    <string name="punten50">50 Points.</string>
-    <string name="punten100">100 Points.</string>
-    <string name="punten200">200 Points.</string>
-    <string name="punten300">300 Points.</string>
-    <string name="punten400">400 Points.</string>
-    <string name="punten500">500 Points.</string>
-    <string name="punten600">600 Points.</string>
-    <string name="punten700">700 Points.</string>
-    <string name="punten1000">1000 Points.</string>
-    <string name="punten2000">2000 Points.</string>
-    <string name="punten2400">2400 Points.</string>
-    <string name="punten2500">2500 Points.</string>
-    <string name="punten4800">4800 Points.</string>
-    <string name="punten5000">5000 Points.</string>
-    <string name="punten8000">8000 Points.</string>
-    <string name="punten10000">10000 Points.</string>
-    <string name="punten20000">20000 Points.</string>
-    <string name="punten40000">40000 Points.</string>
-    <string name="punten100000">100000 Points.</string>
-    <string name="punten120000">120000 Points.</string>
-    <string name="punten168000">168000 Points.</string>
-    <string name="punten336000">336000 Points.</string>
-    <string name="punten400000">400000 Points.</string>
-    <string name="punten744000">744000 Points.</string>
-    <string name="punten1000000">1000000 Points.</string>
-    <string name="punten2400000">2400000 Points.</string>
-    <string name="punten100000000">10000000 Points.</string>
-
-    // Strings voor Achievements
-    <string name="achievemnt1">Drive 1 kilometer.</string>
-    <string name="achievemnt2">Rijd 5 kilometer.</string>
-    <string name="achievemnt3">Rijd 10 kilometer.</string>
-    <string name="achievemnt4">Rijd 50 kilometer.</string>
-    <string name="achievemnt5">Rijd 100 kilometer.</string>
-    <string name="achievemnt6">Rijd 250 kilometer.</string>
-    <string name="achievemnt7">Rijd 500 kilometer.</string>
-    <string name="achievemnt8">Rijd 1000 kilometer.</string>
-    <string name="achievemnt9">Rijd 5000 kilometer.</string>
-    <string name="achievemnt10">Behaal een topsnelheid van 30km/h.</string>
-    <string name="achievemnt11">Behaal een topsnelheid van 35km/h.</string>
-    <string name="achievemnt12">Behaal een topsnelheid van 40km/h.</string>
-    <string name="achievemnt13">Behaal een topsnelheid van 45km/h.</string>
-    <string name="achievemnt14">Behaal een topsnelheid van 50km/h.</string>
-    <string name="achievemnt15">1 challenge behaald.</string>
-    <string name="achievemnt16">5 challenges behaald.</string>
-    <string name="achievemnt17">10 challenges behaald.</string>
-    <string name="achievemnt18">50 challenges behaald.</string>
-    <string name="achievemnt19">200 challenges behaald.</string>
-    <string name="achievemnt20">500 challenges behaald.</string>
-    <string name="achievemnt21">1 dag lang gefietst.</string>
-    <string name="achievemnt22">2 dagen lang gefietst.</string>
-    <string name="achievemnt23">5 dagen lang gefietst.</string>
-    <string name="achievemnt24">7 dagen lang gefietst.</string>
-    <string name="achievemnt25">14 dagen lang gefietst.</string>
-    <string name="achievemnt26">31 dagen lang gefietst.</string>
-    <string name="achievemnt27">100 dagen lang gefietst.</string>
-    <string name="achievemnt28">Het spel opgestart.</string>
-    <string name="achievemnt29">Alle mijlpalen behaald.</string>
-    <string name="achievemnt30">Niveauverschil van 10 meter.</string>
-    <string name="achievemnt31">Niveauverschil van 25 meter.</string>
-    <string name="achievemnt32">Niveauverschil van 50 meter.</string>
-    <string name="achievemnt33">Niveauverschil van 100 meter.</string>
-    <string name="title_activity_user_class_handler">UserClassHandler</string>
-
-    <string name="title_activity_wifi_scanner">wifiScanner</string>
-    <string name="wifispot">Aantal gevonden Wifi-hotspots: </string>
+    <string name="login_text_incorrect">Incorrect password.</string>
+    <string name="login_text_found">Your account was found!</string>
+    <string name="login_text_exist">Username does not exist.</string>
+    <string name="login_text_needed">Username is needed.</string>
 
 
-    <string name="rideStandaardmeetwaarde">0,0</string>
-    <string name="eenheidSnelheid">km/h</string>
-    <string name="eenheidVersnelling">m/s\u00B2</string>
-    <string name="eenheidAfstand">m</string>
-    <string name="eenheidTijd">s</string>
+    //Register
     <string name="title_activity_register">Register</string>
-    <string name="register_username">Enter your username</string>
-    <string name="register_password">Enter your password</string>
-    <string name="register_country">Enter your country</string>
-    <string name="register_city">Enter your city</string>
-    <string name="registeract_register">Register!</string>
+    <string name="register_view_username">Enter your username</string>
+    <string name="register_view_password">Enter your password</string>
+    <string name="register_view_country">Enter your country</string>
+    <string name="register_view_city">Enter your city</string>
+    <string name="register_button_register">Register!</string>
 
-    // Activity Persoonlijke statistieken
-    <string name="title_activity_persoonlijke_statistieken">Statistieken</string>
-    <string name="laatste_rit">Laatste rit.</string>
-    <string name="Snelheid">Snelheid.</string>
-    <string name="AccelerometerX">Accelerometer x-waarden.</string>
-    <string name="AccelerometerY">Accelerometer y-waarden.</string>
-    <string name="AccelerometerZ">Accelerometer z-waarden.</string>
-    <string name="Globaal">Globaal.</string>
-    <string name="Afstand">Afstand.</string>
-    <string name="TotalDistance">Totale afstand.</string>
-    <string name="HighestVelocity">Topsnelheid.</string>
-    <string name="HighestAcceleration">Hoogste acceleratie.</string>
-    <string name="HighestAltitudeDiff">Hoogste hoogteverschil.</string>
-    <string name="TotalTime">Totale tijd.</string>
-    <string name="TotalPoints">Totaal punten.</string>
-    <string name="BikedDays">Dagen gefietst.</string>
+    <string name="register_text_exists">Username already exists.</string>
+    <string name="register_text_pass_needed">Password is needed.</string>
+    <string name="register_text_user_needed">Username is needed.</string>
 
-    <string name="edit_message">Put data in server</string>
-    <string name="edit_message_2">Send data to others</string>
-    <string name="button_put">Put</string>
-    <string name="button_get">Get</string>
-    <string name="button_send">Send</string>
-    <string name="title_activity_message">messageActivity</string>
 
-    <string-array name="moeilijkheidsgraad">
-        <item>Makkelijk</item>
-        <item>Normaal</item>
-        <item>Moeilijk</item>
+    //Homescreen
+    <string name="title_activity_homescreen" translatable="false">Mushroom</string>
+    <string name="home_button_ride">Ride mode</string>
+    <string name="home_button_optional">Milestones</string>
+    <string name="home_button_ranking">Ranking</string>
+    <string name="home_button_challenges">Challenges</string>
+    <string name="home_button_map">Map</string>
+    <string name="home_button_settings">Settings</string>
+    <string name="home_button_statistics">Personal statistics</string>
+    <string name="home_button_preferences">Personal preferences</string>
+    <string name="home_button_friends">Friends</string>
+    <string name="home_button_logout">Log out</string>
+
+
+    //Challenges
+    <string name="title_activity_challenges">Challenges</string>
+    <string name="challenges_view_title">Challenges</string>
+    <string name="challenges_view_1">Get an acceleration of 3 m/s²</string>
+    <string name="challenges_view_2">Get speed over 20 km/h</string>
+    <string name="challenges_view_3">Continue driving north for 1 km</string>
+    <string name="challenges_button_start">Start challenge</string>
+
+
+    //Record acceleration
+    <string name="title_activity_record_acceleration">recordAcceleration</string>
+    <string name="acceleration_button_start">Start</string>
+    <string name="acceleration_button_stop">Stop</string>
+    <string name="acceleration_acceleration">Acceleration: </string>
+    <string name="acceleration_result_text">You did it!</string>
+
+
+    //Record speed
+    <string name="title_activity_record_speed">RecordSpeed</string>
+    <string name="speed_speed">Speed: </string>
+    <string name="speed_succes">Succes!</string>
+    <string name="speed_button_start">Start</string>
+    <string name="speed_button_stop">Stop</string>
+
+
+    //Record magnetic field
+    <string name="title_activity_record_magnetic_field">RecordMagneticField</string>
+    <string name="magnetic_winddirections">Winddirections: </string>
+    <string name="magnetic_north">North</string>
+    <string name="magnetic_east">East</string>
+    <string name="magnetic_south">South</string>
+    <string name="magnetic_west">West</string>
+
+
+    //Points
+    <string name="point_1">1 Point.</string>
+    <string name="point_5">5 Points.</string>
+    <string name="point_10">10 Points.</string>
+    <string name="point_50">50 Points.</string>
+    <string name="point_100">100 Points.</string>
+    <string name="point_200">200 Points.</string>
+    <string name="point_300">300 Points.</string>
+    <string name="point_400">400 Points.</string>
+    <string name="point_500">500 Points.</string>
+    <string name="point_600">600 Points.</string>
+    <string name="point_700">700 Points.</string>
+    <string name="point_1000">1000 Points.</string>
+    <string name="point_2000">2000 Points.</string>
+    <string name="point_2400">2400 Points.</string>
+    <string name="point_4800">4800 Points.</string>
+    <string name="point_8000">8000 Points.</string>
+    <string name="point_10000">10000 Points.</string>
+    <string name="point_20000">20000 Points.</string>
+    <string name="point_40000">40000 Points.</string>
+    <string name="point_100000">100000 Points.</string>
+    <string name="point_120000">120000 Points.</string>
+    <string name="point_168000">168000 Points.</string>
+    <string name="point_336000">336000 Points.</string>
+    <string name="point_400000">400000 Points.</string>
+    <string name="point_744000">744000 Points.</string>
+    <string name="point_1000000">1000000 Points.</string>
+    <string name="point_2400000">2400000 Points.</string>
+    <string name="point_100000000">10000000 Points.</string>
+
+
+    //Achievements
+    <string name="title_activity_achievements">Achievements</string>
+    <string name="achievement_1">Drive 1 kilometer.</string>
+    <string name="achievement_2">Drive 5 kilometer.</string>
+    <string name="achievement_3">Drive 10 kilometer.</string>
+    <string name="achievement_4">Drive 50 kilometer.</string>
+    <string name="achievement_5">Drive 100 kilometer.</string>
+    <string name="achievement_6">Drive 250 kilometer.</string>
+    <string name="achievement_7">Drive 500 kilometer.</string>
+    <string name="achievement_8">Drive 1000 kilometer.</string>
+    <string name="achievement_9">Drive 5000 kilometer.</string>
+    <string name="achievement_10">Reach a speed of 30 km/h.</string>
+    <string name="achievement_11">Reach a speed of 35 km/h.</string>
+    <string name="achievement_12">Reach a speed of 40 km/h.</string>
+    <string name="achievement_13">Reach a speed of 45 km/h.</string>
+    <string name="achievement_14">Reach a speed of 50 km/h.</string>
+    <string name="achievement_15">Win 1 challenge.</string>
+    <string name="achievement_16">Win 5 challenges.</string>
+    <string name="achievement_17">Win 10 challenges.</string>
+    <string name="achievement_18">Win 50 challenges.</string>
+    <string name="achievement_19">Win 200 challenges.</string>
+    <string name="achievement_20">Win 500 challenges.</string>
+    <string name="achievement_21">Use the app for 1 day.</string>
+    <string name="achievement_22">Use the app for 2 days.</string>
+    <string name="achievement_23">Use the app for 5 days.</string>
+    <string name="achievement_24">Use the app for 7 days.</string>
+    <string name="achievement_25">Use the app for 14 days.</string>
+    <string name="achievement_26">Use the app for 31 days.</string>
+    <string name="achievement_27">Use the app for 100 days.</string>
+    <string name="achievement_28">Start the app.</string>
+    <string name="achievement_29">All milestones achieved.</string>
+    <string name="achievement_30">Height difference of 10 meter.</string>
+    <string name="achievement_31">Height difference of 25 meter.</string>
+    <string name="achievement_32">Height difference of 50 meter.</string>
+    <string name="achievement_33">Height difference of 100 meter.</string>
+
+
+    //Wifi
+    <string name="title_activity_wifi_scanner">wifiScanner</string>
+    <string name="wifi_nb_found">Number of Wifi-hotspots found: </string>
+
+
+    //Ride
+    <string name="title_activity_ride">RideActivity</string>
+    <string name="ride_default_value" translatable="false">0,0</string>
+    <string name="ride_unit_speed" translatable="false">km/h</string>
+    <string name="ride_unit_acceleration" translatable="false">m/s\u00B2</string>
+    <string name="ride_unit_distance" translatable="false">m</string>
+    <string name="ride_unit_time" translatable="false">s</string>
+    <string name="ride_text_succes">Succes!</string>
+
+    <string-array name="ride_difficulty">
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Difficult</item>
     </string-array>
+
+
+    //Personal statistics
+    <string name="title_activity_persoonlijke_statistieken">Statistics</string>
+    <string name="statistics_last_ride">Last ride.</string>
+    <string name="statistics_speed">Speed.</string>
+    <string name="statistics_accelerometer_x">Accelerometer x-values.</string>
+    <string name="statistics_accelerometer_y">Accelerometer y-values.</string>
+    <string name="statistics_accelerometer_z">Accelerometer z-values.</string>
+    <string name="statistics_global">Global.</string>
+    <string name="statistics_distance">Distance.</string>
+
+    <string name="statistics_highest_speed">Highest speed.</string>
+    <string name="statistics_highest_acceleration">Highest acceleration.</string>
+    <string name="statistics_highest_altitude_diff">Highest altitude difference.</string>
+    <string name="statistics_days_biked">Days biked.</string>
+    <string name="statistics_total_time">Total time.</string>
+    <string name="statistics_total_distance">Total distance.</string>
+    <string name="statistics_total_points">Total points.</string>
+    <string name="statistics_route">Route Mapping.</string>
+
+    <string name="statistics_not_found_velocity">No velocityvalues found!</string>
+    <string name="statistics_not_found_distance">No distancevalues found!</string>
+    <string name="statistics_not_found_accelerometer">No accelerometervalues found!</string>
+
+
+    //Maps
+    <string name="title_activity_maps">Map</string>
+    <string name="maps_edit_message">Put data in server</string>
+    <string name="maps_button_put">Put</string>
+    <string name="maps_button_get">Get</string>
+    <string name="maps_button_send">Send</string>
+
+    //Ranking
     <string name="title_activity_ranking">Ranking</string>
+    <string name="ranking_name">Name</string>
+    <string name="ranking_points">Points</string>
+
+
+    //Route mapping
+    <string name="title_activity_route_mapping">Mapping</string>
 
 </resources>

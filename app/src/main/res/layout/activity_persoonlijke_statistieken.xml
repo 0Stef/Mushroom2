@@ -24,7 +24,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/Globaal"
+                android:text="@string/statistics_global"
                 android:textColor="@color/orangeApp"
                 />
 
@@ -38,7 +38,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/TotalDistance"
+                android:text="@string/statistics_distance"
                 />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/HighestVelocity"
+                android:text="@string/statistics_highest_speed"
                 />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/HighestAcceleration"
+                android:text="@string/statistics_highest_acceleration"
                 />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/HighestAltitudeDiff"
+                android:text="@string/statistics_highest_altitude_diff"
                 />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/TotalTime"
+                android:text="@string/statistics_total_time"
                 />
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/TotalPoints"
+                android:text="@string/statistics_total_points"
                 />
 
             <TextView
@@ -128,7 +128,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/BikedDays"
+                android:text="@string/statistics_days_biked"
                 />
 
             <TextView
@@ -143,7 +143,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/laatste_rit"
+                android:text="@string/statistics_last_ride"
                 android:textColor="@color/orangeApp"
                 />
 
@@ -157,7 +157,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Snelheid"
+                android:text="@string/statistics_speed"
                 />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -176,7 +176,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Afstand"
+                android:text="@string/statistics_distance"
                 />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -195,7 +195,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/AccelerometerX"/>
+                android:text="@string/statistics_accelerometer_x"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chAccelerometerX"
@@ -213,7 +213,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/AccelerometerY"/>
+                android:text="@string/statistics_accelerometer_y"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chAccelerometerY"
@@ -231,7 +231,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/AccelerometerZ"/>
+                android:text="@string/statistics_accelerometer_z"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chAccelerometerZ"
@@ -245,13 +245,12 @@
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="10dp"/>
 
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_weight="1"
-                android:id="@+id/map"
-                tools:context="com.mushroom.cwb1.mushroom2.RideActivity"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RouteMapping"
+                android:background="@color/orangeApp"
+                android:text="@string/statistics_route"/>
 
             </LinearLayout>
     </ScrollView>
