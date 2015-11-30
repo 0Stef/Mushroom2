@@ -43,33 +43,33 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         User user = uHandler.getUserInformation(currentUser);
 
         TextView TotalDistance = (TextView) findViewById(R.id.TotalDistance);
-        TotalDistance.setText("" + user.getTotal_distance());
+        TotalDistance.setText(Float.toString(user.getTotal_distance()));
 
         TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
-        HighestVelocity.setText("" + user.getHighest_speed());
+        HighestVelocity.setText(Float.toString(user.getHighest_speed()));
 
         TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
-        HighestAcceleration.setText("" + user.getHighest_acceleration());
+        HighestAcceleration.setText(Float.toString(user.getHighest_acceleration()));
 
         TextView HighestAltitudeDiff = (TextView) findViewById(R.id.HighestAltitudeDiff);
-        HighestAltitudeDiff.setText("" + user.getHighest_altitude_diff());
+        HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff()));
 
         TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
-        TotalTime.setText("" + user.getTotal_time());
+        TotalTime.setText(Double.toString(user.getTotal_time()));
 
         TextView TotalPoints = (TextView) findViewById(R.id.TotalPoints);
-        TotalPoints.setText("" + user.getTotal_points());
+        TotalPoints.setText(Integer.toString(user.getTotal_points()));
 
         TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
-        BikedDays.setText("" + user.getNb_days_biked());
+        BikedDays.setText(Integer.toString(user.getNb_days_biked()));
 
 
 
 
 
         //Last ride statistics
-        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext());
-        nbRide=handler.getGreatestRideID();
+        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
+        nbRide = handler.getGreatestRideID();
         list = handler.getList(handler.getAllThisRide(nbRide));
         ArrayList<Integer> distanceList = handler.getDistanceList(handler.getAllThisRide(nbRide));
 

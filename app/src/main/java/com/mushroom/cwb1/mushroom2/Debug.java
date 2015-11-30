@@ -3,6 +3,7 @@ package com.mushroom.cwb1.mushroom2;
 import android.content.Context;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -30,7 +31,7 @@ public class Debug {
     private double dfltLat = 3000d;
     private double maxDistRI = 30d;
     private double minDistRI = 5d;
-    private double maxDisI = 20d;
+    private double maxDisI = 10d;
     private double minDistI = 0d;
     private float dfltAlt = 30f;
 
@@ -52,6 +53,7 @@ public class Debug {
 
     public boolean execute(String command, String param) {
         if (command.equals("reset") || command.equals("rst")) {
+            System.out.println("    -   Reset");
             if (param.equals("app")) {
                 resetApp();
             } else if (param.equals("default") || param.equals("dflt")) {
@@ -62,12 +64,14 @@ public class Debug {
             return true;
         }
         if (command.equals("delete") || command.equals("dlt")) {
+            System.out.println("    -   Delete");
             if (userHandler.isExistingUser(param)) {
                 deleteUser(param);
             }
             return true;
         }
         if (command.equals("stock") || command.equals("fill")) {
+            System.out.println("    -   Stock");
             String[] params = param.split("_:_");
 
             String userName = "";
@@ -80,18 +84,29 @@ public class Debug {
 
             if (userHandler.isExistingUser(userName)) {
                 createMeasurements(userName, length, amount);
+                update(userName);
+            }
+            return true;
+        }
+        if (command.equals("update") || command.equals("upd")) {
+            System.out.println("    -   Update");
+            if (userHandler.isExistingUser(param)) {
+                update(param);
             }
             return true;
         }
         if (command.equals("get_userlist") || command.equals("list") || command.equals("lst")) {
+            System.out.println("    -   Users");
             getUserList();
             return true;
         }
         if (command.equals("cmd") || command.equals("?") || command.equals("help")) {
+            System.out.println("    -   List");
             showCommands();
             return true;
         }
         if (command.equals("clear screen") || command.equals("cls")){
+            System.out.println("    -   Clear");
             debugView.setText("");
             return true;
         }
@@ -129,6 +144,7 @@ public class Debug {
         debugView.append("  - reset  [app/user]\n");
         debugView.append("  - delete [user]\n");
         debugView.append("  - stock  [user] [length] [amount]\n");
+        debugView.append("  - update [user]\n");
         debugView.append("  - get userlist\n");
         debugView.append("  - clear screen\n");
     }
@@ -137,6 +153,9 @@ public class Debug {
         dbHandler.setTable(userName);
         int rideID = dbHandler.getGreatestRideID();
         long time = dbHandler.getRow(dbHandler.getLast()).getMillisec();
+        if (time == 0l) {
+            time = Calendar.getInstance().getTimeInMillis();
+        }
 
         float accX = dfltAcc;
         float accY = dfltAcc;
@@ -151,7 +170,7 @@ public class Debug {
 
         for (int i = 0; i < amount; i++) {
             rideID++;
-            time += minRidetime + ((long) random.nextLong() * (maxRideTime - minRidetime));
+            time += minRidetime + random.nextFloat() * (maxRideTime - minRidetime);
 
             double distanceR = random.nextDouble() * (maxDistRI - minDistRI) + minDistRI;
             if (random.nextBoolean()) {
@@ -173,7 +192,8 @@ public class Debug {
                 row.setRide_id(rideID);
 
                 //Time
-                long rideTime = random.nextLong() * (maxMeasureTime - minMeasureTime) + minMeasureTime;
+                long rideTime = minMeasureTime + (long) (random.nextFloat() * (maxMeasureTime - minMeasureTime));
+                //System.out.println("        " + rideTime + ", " + time);
                 time += rideTime;
                 row.setMillisec(time);
 
@@ -255,5 +275,30 @@ public class Debug {
                 System.out.println("        -   " + row.toString());
             }
         }
+    }
+
+    private void update(String userName) {
+        dbHandler.setTable(userName);
+        User user = userHandler.getUserInformation(userName);
+
+        user.setTotal_distance(dbHandler.getDistance(dbHandler.getAll()));
+        user.setTotal_time(dbHandler.getTime(dbHandler.getAll()));
+        user.setHighest_speed(dbHandler.getGreatestValue(dbHandler.COLUMN_GPS_VEL).getVelocity());
+
+        float acc = 0f;
+        LinkedList<dbRow> list = dbHandler.getList(dbHandler.getAll());
+        for (dbRow row : list) {
+            float x = row.getAccelerometer_xValue();
+            float y = row.getAccelerometer_yValue();
+            float z = row.getAccelerometer_zValue();
+
+            float c = (float) (Math.pow(x,2d) + Math.pow(y,2d) + Math.pow(z,2d));
+            if (c > acc) {
+                acc = c;
+            }
+        }
+        user.setHighest_acceleration(acc);
+
+        userHandler.overWrite(user);
     }
 }
