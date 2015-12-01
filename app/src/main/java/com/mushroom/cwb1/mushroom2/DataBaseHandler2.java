@@ -57,6 +57,7 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
 
     // Database
 
+    @Deprecated
     public DataBaseHandler2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         TABLE = TABLE_DEFAULT;
@@ -427,6 +428,18 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         String searchQuery = "SELECT * FROM " + TABLE +
                 " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
                     " WHERE " + COLUMN_TIME + " > " + millisec + ")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor getGreatestBetween(String column, long millisec1, long millisec2) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MAX(" + column + ") FROM " + TABLE +
+                    " WHERE " + COLUMN_TIME + " > " + millisec1 +
+                    " AND " + COLUMN_TIME + " < " + millisec2 + ")";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(searchQuery, null);
