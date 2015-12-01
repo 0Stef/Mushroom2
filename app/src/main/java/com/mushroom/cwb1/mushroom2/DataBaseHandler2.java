@@ -469,6 +469,18 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor getLowestBetween(String column, long millisec1, long millisec2) {
+        String searchQuery = "SELECT * FROM " + TABLE +
+                " WHERE " + column + " = (SELECT MIN(" + column + ") FROM " + TABLE +
+                " WHERE " + COLUMN_TIME + " > " + millisec1 +
+                " AND " + COLUMN_TIME + " < " + millisec2 + ")";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(searchQuery, null);
+
+        return cursor;
+    }
+
     public Cursor getAll() {
         String searchQuery = "SELECT * FROM " + TABLE;
 
