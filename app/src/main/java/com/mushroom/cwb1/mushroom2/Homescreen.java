@@ -63,6 +63,21 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
+        Button ChallengesButton = (Button)findViewById(R.id.ChallengesButton);
+
+        rideActivitybutton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), Challenges.class);
+                        i.putExtra("username", currentUser);
+                        startActivity(i);
+                    }
+                }
+        );
+
+
+
+
         Button persoonlijkeActivitybutton = (Button)findViewById(R.id.persoonlijkestatistieken);
 
         persoonlijkeActivitybutton.setOnClickListener(

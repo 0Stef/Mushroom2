@@ -167,10 +167,41 @@
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="statistics_highest_altitude">Hoogste Altitude.</string>
 
+
+    //challenges
     <string-array name="ride_difficulty">
         <item>Makkelijk</item>
         <item>Normaal</item>
         <item>Moeilijk</item>
     </string-array>
+
+    <string name="challenges_uitleg_keepspeed1">Hou 30 seconden een snelheid van</string>
+    <string name="challenges_uitleg_keepspeed2">km/h aan</string>
+    <string name="time">Tijd:</string>
+    <string name="challenges_uitleg_keepacc1">Hou 5 seconden een versnelling van</string>
+    <string name="challenges_uitleg_keepacc2"> m/s² aan</string>
+    <string name="challenges_uitleg_tempdiff1">Vind een plaats met een temperatuurverschil van</string>
+    <string name="challenges_celcius"> °C</string>
+    <string name="challenges_starttemp">Starttemperatuur:</string>
+    <string name="challenges_huidige_temp">Huidige temperatuur: </string>
+    <string name="challenges_uitleg_averagespeed">Haal deze rit (minstens 5 minuten) een gemiddelde snelheid van</string>
+    <string name="challenges_kilometer_uur"> km/h</string>
+    <string name="challenges_uitleg_averageacc">Haal deze rit (minstens 5 minuten) een gemiddelde versnelling van</string>
+    <string name="challenges_meter_seconde"> m/s²</string>
+    <string name="challenges_huidige_versnelling">Huidige versnelling: </string>
+    <string name="challenges_gemiddelde_versnelling">Gemiddelde versnelling: </string>
+    <string name="challenges_uitleg_drivecircle">Rij een rondje van minstens </string>
+    <string name="challenges_afgelegde_weg">Afgelegde weg:</string>
+    <string name="challenges_vertrekpunt">Afstand tot vertrekpunt:</string>
+    <string name="challenges_kilometer">km</string>
+    <string name="challenges_uitleg_getacc">Haal een versnelling van</string>
+    <string name="challenges_uitleg_altitudedifference1">Maak een klim van</string>
+    <string name="challenges_uitleg_altitudedifference2">m hoog</string>
+    <string name="challenges_huidig_hoogteverschil">Huidig hoogtevershil:</string>
+    <string name="challenges_uitleg_getspeed">Haal een snelheid van</string>
+    <string name="challenges_rij">Rij</string>
+    <string name="challenges_uitleg_drivedirection">km naar het</string>
+    <string name="challenges_windrichting">Windrichting:</string>
+    <string name="challenges_afwijkng">Afwijking:</string>
     <string name="statistics_text_day"> Dag(en)</string>
 </resources>

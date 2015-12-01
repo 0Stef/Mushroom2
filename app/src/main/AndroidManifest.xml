@@ -97,6 +97,10 @@
             android:name=".PeopleChallengeHandler"
             android:label="@string/title_activity_people_challenge_handler" >
         </activity>
+        <activity
+            android:name=".Challenges"
+            android:label="@string/title_activity_challenges" >
+        </activity>
     </application>
 
 </manifest>
