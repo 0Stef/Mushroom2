@@ -93,7 +93,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mushroom.cwb1.mushroom2.Persoonlijke_statistieken" />
         </activity>
+        <activity
+            android:name=".PeopleChallengeHandler"
+            android:label="@string/title_activity_people_challenge_handler" >
+        </activity>
     </application>
 
 </manifest>
-

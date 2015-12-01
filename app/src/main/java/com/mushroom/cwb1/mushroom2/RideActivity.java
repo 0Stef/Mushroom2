@@ -358,7 +358,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz, distanceToPrev, timeToPrev);
+                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz);
                 handler.addPoint(punt);
 
 
@@ -575,6 +575,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+
     private void setUpMap() {
 
         //mPolylineOptions.width(5).color(Color.BLUE);
@@ -591,7 +592,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //punten.setText("lastpoint voor setup" + LastPoint.toString());
 
         //dbRow LastPoint = new dbRow(10,22222,1f,1f,1f,0.0f,0.0d,0.0d,0.0f,51.0081564f,4.58057f,0.0f,0f,1000000);
-        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f, 0f, 1000000);
+        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f);
 
 
         if (LastPoint.getLongitude() != 0.0f) {
