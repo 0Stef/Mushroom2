@@ -52,6 +52,16 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/home_button_challenges"
+                android:id="@+id/ChallengesButton"
+                android:background="#FFBF6A"
+                android:layout_marginBottom="10dp"
+                />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/home_button_optional"
                 android:id="@+id/button2"
                 android:background="#FFBF6A"

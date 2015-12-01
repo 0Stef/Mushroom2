@@ -2,20 +2,21 @@ package com.mushroom.cwb1.mushroom2;
 
 
 public class PeopleChallenge {
+
     private String user1;
     private String user2;
-    private int user1_status;
-    private int user2_status;
+    private int status;
     private String challenge_name;
-    private String user1_result;
-    private String user2_result;
+    private float user1_float;
+    private double user1_double;
+
+    private float user2_float;
+    private double user2_double;
+
     private long start;
     private long end;
-    private long user1_ended;
-    private long user2_ended;
+
     private String winner;
-
-
 
     public PeopleChallenge(){
 
@@ -41,21 +42,6 @@ public class PeopleChallenge {
         this.user2 = user2;
     }
 
-    public int getUser1_status() {
-        return user1_status;
-    }
-
-    public void setUser1_status(int user1_status) {
-        this.user1_status = user1_status;
-    }
-
-    public int getUser2_status() {
-        return user2_status;
-    }
-
-    public void setUser2_status(int user2_status) {
-        this.user2_status = user2_status;
-    }
 
     public String getChallenge_name() {
         return challenge_name;
@@ -65,21 +51,7 @@ public class PeopleChallenge {
         this.challenge_name = challenge_name;
     }
 
-    public String getUser1_result() {
-        return user1_result;
-    }
 
-    public void setUser1_result(String user1_result) {
-        this.user1_result = user1_result;
-    }
-
-    public String getUser2_result() {
-        return user2_result;
-    }
-
-    public void setUser2_result(String user2_result) {
-        this.user2_result = user2_result;
-    }
 
     public long getStart() {
         return start;
@@ -97,21 +69,7 @@ public class PeopleChallenge {
         this.end = end;
     }
 
-    public long getUser1_ended() {
-        return user1_ended;
-    }
 
-    public void setUser1_ended(long user1_ended) {
-        this.user1_ended = user1_ended;
-    }
-
-    public long getUser2_ended() {
-        return user2_ended;
-    }
-
-    public void setUser2_ended(long user2_ended) {
-        this.user2_ended = user2_ended;
-    }
 
     public String getWinner() {
         return winner;
@@ -119,6 +77,46 @@ public class PeopleChallenge {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public float getUser1_float() {
+        return user1_float;
+    }
+
+    public void setUser1_float(float user1_float) {
+        this.user1_float = user1_float;
+    }
+
+    public double getUser1_double() {
+        return user1_double;
+    }
+
+    public void setUser1_double(double user1_double) {
+        this.user1_double = user1_double;
+    }
+
+    public float getUser2_float() {
+        return user2_float;
+    }
+
+    public void setUser2_float(float user2_float) {
+        this.user2_float = user2_float;
+    }
+
+    public double getUser2_double() {
+        return user2_double;
+    }
+
+    public void setUser2_double(double user2_double) {
+        this.user2_double = user2_double;
     }
 }
 
