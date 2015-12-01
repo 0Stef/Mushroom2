@@ -161,4 +161,10 @@
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
     <string name="title_activity_route_mapping">Mapping</string>
+
+    <string-array name="ride_difficulty">
+        <item>Makkelijk</item>
+        <item>Normaal</item>
+        <item>Moeilijk</item>
+    </string-array>
 </resources>
