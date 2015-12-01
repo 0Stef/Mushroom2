@@ -41,8 +41,8 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persoonlijke_statistieken);
 
-        //currentUser = getIntent().getStringExtra("username");
-        currentUser = "stephan";
+        currentUser = getIntent().getStringExtra("username");
+
         //Last ride statistics
         UserHandler uHandler = new UserHandler(getApplicationContext());
         User user = uHandler.getUserInformation(currentUser);
@@ -83,14 +83,16 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         ArrayList<Entry> yAccelerometerZ = new ArrayList<Entry>();
         ArrayList<Entry> yAltitude = new ArrayList<Entry>();
 
-        dbRow FirstRow = (dbRow) list.get(0);
-        dbRow LastRow = (dbRow) list.get(list.size() - 1);
-        rIntTotalDistance = distanceList.get(list.size() - 1);
+        rIntTotalDistance = 0;
         rFlHighestVelocity = 0;
         rFlHighestAcceleration = 0;
         rDbHighestAltitude = 0;
-        rLgTotatTime = LastRow.getMillisec() - FirstRow.getMillisec();
+        rLgTotatTime = 0;
         if (list.size() != 0){
+            dbRow FirstRow = (dbRow) list.get(0);
+            dbRow LastRow = (dbRow) list.get(list.size() - 1);
+            rLgTotatTime = LastRow.getMillisec() - FirstRow.getMillisec();
+            rIntTotalDistance = distanceList.get(distanceList.size() - 1);
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
 
