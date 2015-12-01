@@ -172,4 +172,5 @@
         <item>Normaal</item>
         <item>Moeilijk</item>
     </string-array>
+    <string name="statistics_text_day"> Dag(en)</string>
 </resources>

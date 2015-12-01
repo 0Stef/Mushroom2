@@ -194,6 +194,8 @@
     <string name="statistics_not_found_accelerometer">No accelerometervalues found!</string>
     <string name="statistics_not_found_altitude">No altitudevalues found!</string>
 
+    <string name="statistics_text_day"> Day(s)</string>
+
 
 
     //Maps
@@ -213,7 +215,7 @@
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings</string>
 
 

@@ -48,7 +48,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         User user = uHandler.getUserInformation(currentUser);
 
         TextView TotalDistance = (TextView) findViewById(R.id.TotalDistance);
-        TotalDistance.setText(Float.toString(user.getTotal_distance()/1000)+" km");
+        TotalDistance.setText(Float.toString(user.getTotal_distance()/1000f)+" km");
 
         TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
         HighestVelocity.setText(Float.toString(user.getHighest_speed()*3.6f)+" km/h");
@@ -60,13 +60,13 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff())+" m");
 
         TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
-        TotalTime.setText(Double.toString(user.getTotal_time()/3600000)+" h");
+        TotalTime.setText(Double.toString(user.getTotal_time()/3600000f)+" h");
 
         TextView TotalPoints = (TextView) findViewById(R.id.TotalPoints);
         TotalPoints.setText(Integer.toString(user.getTotal_points()));
 
         TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
-        BikedDays.setText(Integer.toString(user.getNb_days_biked())+" Days");
+        BikedDays.setText(Integer.toString(user.getNb_days_biked()) + getString(R.string.statistics_text_day));
 
 
         //Last ride statistics
@@ -117,7 +117,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         }
 
         TextView rTotalDistance = (TextView) findViewById(R.id.rTotalDistance);
-        rTotalDistance.setText(Float.toString(rIntTotalDistance/1000)+" km");
+        rTotalDistance.setText(Float.toString(rIntTotalDistance/1000f)+" km");
 
         TextView rHighestVelocity = (TextView) findViewById(R.id.rHighestVelocity);
         rHighestVelocity.setText(Float.toString(rFlHighestVelocity*3.6f)+" km/h");
@@ -129,7 +129,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rHighestAltitudeDiff.setText(Double.toString(rDbHighestAltitude)+" m");
 
         TextView rTotalTime = (TextView) findViewById(R.id.rTotalTime);
-        rTotalTime.setText(Double.toString(rLgTotatTime/3600000)+" h");
+        rTotalTime.setText(Float.toString(rLgTotatTime/3600000f)+" h");
 
 
         // Velocity chart
