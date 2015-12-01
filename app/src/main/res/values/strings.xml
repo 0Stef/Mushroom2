@@ -53,6 +53,41 @@
     <string name="challenges_view_3">Continue driving north for 1 km</string>
     <string name="challenges_button_start">Start challenge</string>
 
+    <string name="challenges_uitleg_keepspeed1">Keep a speed of</string>
+    <string name="challenges_uitleg_keepspeed2">km/h for 30 seconds</string>
+    <string name="time">Time:</string>
+    <string name="challenges_uitleg_keepacc1">Keep en acceleration of</string>
+    <string name="challenges_uitleg_keepacc2"> m/s² for 5 seconds</string>
+    <string name="challenges_uitleg_tempdiff1">Find a place with a temperature difference of</string>
+    <string name="challenges_celcius">°C</string>
+    <string name="challenges_starttemp">Starting temperature:</string>
+    <string name="challenges_huidige_temp">Current temperature: </string>
+    <string name="challenges_uitleg_averagespeed">This ride (at least five minutes long), get an average speed of</string>
+    <string name="challenges_kilometer_uur"> km/h</string>
+    <string name="challenges_uitleg_averageacc">This ride (at least five minutes long), get an average acceleration of</string>
+    <string name="challenges_meter_seconde"> m/s²</string>
+    <string name="challenges_huidige_versnelling">Current acceleration:</string>
+    <string name="challenges_gemiddelde_versnelling">Average acceleration: </string>
+    <string name="challenges_uitleg_drivecircle">Drive a circle of at least</string>
+    <string name="challenges_afgelegde_weg">Distance travelled:</string>
+    <string name="challenges_vertrekpunt">Distance to starting point:</string>
+    <string name="challenges_kilometer">km</string>
+    <string name="challenges_uitleg_getacc">Get an acceleration of</string>
+    <string name="challenges_uitleg_altitudedifference1">Climb</string>
+    <string name="challenges_uitleg_altitudedifference2">m</string>
+    <string name="challenges_huidig_hoogteverschil">Current hight difference:</string>
+    <string name="challenges_uitleg_getspeed">Get a speed of</string>
+    <string name="challenges_rij">Drive</string>
+    <string name="challenges_uitleg_drivedirection">km to the</string>
+    <string name="challenges_windrichting">Wind direction:</string>
+    <string name="challenges_afwijkng">Deviation:</string>
+
+
+
+
+
+
+
 
     //Record acceleration
     <string name="title_activity_record_acceleration">recordAcceleration</string>
