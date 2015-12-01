@@ -347,6 +347,24 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
         return totalTime;
     }
 
+    public float getHighestAcceleration(Cursor cursor) {
+        float acc = 0f;
+
+        LinkedList<dbRow> list = this.getList(getAll());
+        for (dbRow row : list) {
+            float x = row.getAccelerometer_xValue();
+            float y = row.getAccelerometer_yValue();
+            float z = row.getAccelerometer_zValue();
+
+            float c = (float) (Math.sqrt(Math.pow(x,2d) + Math.pow(y,2d) + Math.pow(z,2d)));
+            if (c > acc) {
+                acc = c;
+            }
+        }
+
+        return acc;
+    }
+
     private boolean isSameRide(int startRideID, int endRideID) {
         return (startRideID == endRideID || startRideID == -endRideID);
     }
