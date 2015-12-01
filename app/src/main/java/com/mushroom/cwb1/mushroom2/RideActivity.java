@@ -602,6 +602,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
+
     private void setUpMap() {
 
         //mPolylineOptions.width(5).color(Color.BLUE);
