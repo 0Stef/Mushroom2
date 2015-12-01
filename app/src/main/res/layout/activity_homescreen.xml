@@ -7,11 +7,20 @@
     tools:context="cwb1.mushroom.com.Homescreen"
     >
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_button_logout"
+        android:id="@+id/logout"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/logout"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         >
@@ -79,14 +88,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/home_button_logout"
-        android:id="@+id/logout"
-        android:background="@color/red"
-        android:textColor="@color/white"
-        android:layout_alignParentBottom="true"
-        />
+
 
 </RelativeLayout>

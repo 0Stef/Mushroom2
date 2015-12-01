@@ -49,7 +49,9 @@ public class Ranking extends AppCompatActivity {
 
 
         try {
+            System.out.println("getRanking() ");
             result = getRanking();
+            System.out.println("getUserRanking(currentUser)");
             userRanking = getUserRanking(currentUser);
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -67,6 +69,7 @@ public class Ranking extends AppCompatActivity {
 
 
     }
+
 
 
     @Override
@@ -89,17 +92,14 @@ public class Ranking extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        // jdjdjd
-
 
         return super.onOptionsItemSelected(item);
     }
 
-
     private ArrayList<String> getRanking() throws ExecutionException, InterruptedException {
         dataToPut = "";
         serverRankingResult = new ArrayList<>();
-        ArrayList<String> serverRankingResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/ranglijst_top.php").get();
+        ArrayList<String> serverRankingResult = new PutAsyncTaskone().execute("http://mushroom.16mb.com/android/ranglijst_top.php").get();
 
         System.out.println("checkserver.size = " + serverRankingResult.size());
 
@@ -120,7 +120,7 @@ public class Ranking extends AppCompatActivity {
         dataToPut = userName;
         String userRank;
         serverRankingResult = new ArrayList<>();
-        ArrayList<String> serverRankingResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/ranglijkst_user_position.php").get();
+        ArrayList<String> serverRankingResult = new PutAsyncTasktwo().execute("http://mushroom.16mb.com/android/ranglijkst_user_position.php").get();
 
         System.out.println("checkserver.size = " + serverRankingResult.size());
 
@@ -130,7 +130,7 @@ public class Ranking extends AppCompatActivity {
             String rawString = serverRankingResult.get(0);
             String[] splitString = rawString.split("=");
             if (splitString[0].equals("error")){
-                userRank = "x";
+                userRank = "-";
             }else{
                userRank = splitString[0];
             }
@@ -138,17 +138,12 @@ public class Ranking extends AppCompatActivity {
             return userRank;
         } else {
 
-            return ".";
+            return "-";
         }
 
     }
 
-
-
-
-
-
-    public ArrayList<String> putDataToServer(String URL){
+    public ArrayList<String> putDataToServerone(String URL){
         ArrayList<String> status =  new ArrayList<>();
         try {
 
@@ -158,9 +153,7 @@ public class Ranking extends AppCompatActivity {
             conn.setRequestMethod("POST");
 
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            //conn.setRequestProperty("Content-Type", "application/json");
 
-            //String input = dataToPut;
             String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
 
 
@@ -188,22 +181,67 @@ public class Ranking extends AppCompatActivity {
         return status;
     }
 
-    class PutAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
+    class PutAsyncTaskone extends AsyncTask<String, Void, ArrayList<String>> {
 
         @Override
         protected ArrayList<String> doInBackground(String... urls) {
-            return putDataToServer(urls[0]);
+            return putDataToServerone(urls[0]);
         }
-        // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(ArrayList<String> result) {
-            //textView_1.setText(result.get(0)+" - "+result.get(1));
-            //super.onPostExecute(result);
             serverRankingResult = result;
-            //debugView.setText("post exec"+result.get(0));
         }
     }
 
+    public ArrayList<String> putDataToServertwo(String URL){
+        ArrayList<String> status =  new ArrayList<>();
+        try {
+
+            java.net.URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+
+            //Read the acknowledgement message after putting data to server
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+            String output;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                status.add(output);
+            }
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    class PutAsyncTasktwo extends AsyncTask<String, Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            return putDataToServertwo(urls[0]);
+        }
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            serverRankingResult = result;
+        }
+    }
 
 
 

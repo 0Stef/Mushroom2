@@ -42,11 +42,13 @@ public class ServerConnection {
         System.out.println("checkserver.size = " + serverCheckResult.size());
 
 
-        if (serverCheckResult.get(0).equals("no results")) {
+        if (serverCheckResult.size()<1){
+            System.out.println("checkserver niet gelukt geeft false terug");
+            return FAILED;
+        } else if (serverCheckResult.get(0).equals("no results")) {
             System.out.println("--- checkServer no results ---" + serverCheckResult.get(0));
             return NO_RESULT;
-        }
-        else if (serverCheckResult.size() == 52){
+        } else if (serverCheckResult.size() == 52){
             Map<String ,String> variabelenMap = new HashMap<String,String>();
 
             System.out.println("begin for");

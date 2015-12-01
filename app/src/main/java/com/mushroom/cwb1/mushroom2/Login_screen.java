@@ -86,8 +86,8 @@ public class Login_screen extends AppCompatActivity {
     }
 
     public void login() throws ExecutionException, InterruptedException {
-        String userName = usernameEdit.getText().toString().replaceAll(" ", "_");
-        String passWord = passwordEdit.getText().toString().replaceAll(" ", "_");
+        String userName = usernameEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
+        String passWord = passwordEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
 
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
@@ -111,7 +111,6 @@ public class Login_screen extends AppCompatActivity {
                     usernameEdit.requestFocus();
                     //System.out.print("    -   Cmd");
                 } else {
-                    //TODO checkServer 3 waarden laten returnen een voor als naam bestaat, niet bestaat maar ook als er een fout optreedt
                     String result = conn.checkServer(userName);
                     if (result.equals(conn.ADDED)) {
                         statusView.setText(R.string.login_text_found);

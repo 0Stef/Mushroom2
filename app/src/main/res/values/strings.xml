@@ -22,10 +22,13 @@
     <string name="register_view_country">Enter your country</string>
     <string name="register_view_city">Enter your city</string>
     <string name="register_button_register">Register!</string>
+    <string name="register_view_firstname">Enter your first name</string>
+    <string name="register_view_lastname">Enter your last name</string>
 
     <string name="register_text_exists">Username already exists.</string>
     <string name="register_text_pass_needed">Password is needed.</string>
     <string name="register_text_user_needed">Username is needed.</string>
+
 
 
     //Homescreen
@@ -174,6 +177,7 @@
     <string name="statistics_accelerometer_z">Accelerometer z-values.</string>
     <string name="statistics_global">Global.</string>
     <string name="statistics_distance">Distance.</string>
+    <string name="statistics_altitude">Altitude</string>
 
     <string name="statistics_highest_speed">Highest speed.</string>
     <string name="statistics_highest_acceleration">Highest acceleration.</string>
@@ -183,10 +187,15 @@
     <string name="statistics_total_distance">Total distance.</string>
     <string name="statistics_total_points">Total points.</string>
     <string name="statistics_route">Route Mapping.</string>
+    <string name="statistics_highest_altitude">Highest Altitude.</string>
 
     <string name="statistics_not_found_velocity">No velocityvalues found!</string>
     <string name="statistics_not_found_distance">No distancevalues found!</string>
     <string name="statistics_not_found_accelerometer">No accelerometervalues found!</string>
+    <string name="statistics_not_found_altitude">No altitudevalues found!</string>
+
+    <string name="statistics_text_day"> Day(s)</string>
+
 
 
     //Maps
@@ -206,7 +215,8 @@
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings</string>
+
 
 </resources>

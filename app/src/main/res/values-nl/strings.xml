@@ -53,10 +53,12 @@
     <string name="register_text_exists">Gebruikersnaam bestaat al.</string>
     <string name="register_text_pass_needed">Wachtwoord is nodig.</string>
     <string name="register_text_user_needed">Gebruikersnaam is nodig.</string>
-    <string name="register_view_city">Vul je stad in</string>
-    <string name="register_view_country">Vul je land in</string>
-    <string name="register_view_password">Vul je wachtwoord in</string>
-    <string name="register_view_username">Vul je gebruikersnaam in</string>
+    <string name="register_view_city">Vul uw stad in</string>
+    <string name="register_view_country">Vul uw land in</string>
+    <string name="register_view_password">Vul uw wachtwoord in</string>
+    <string name="register_view_username">Vul uw gebruikersnaam in</string>
+    <string name="register_view_firstname">Vul uw voornaam in</string>
+    <string name="register_view_lastname">Vul uw familienaam in</string>
 
     <string name="speed_speed">Snelheid:</string>
     <string name="speed_succes">Succes!</string>
@@ -146,6 +148,8 @@
     <string name="statistics_not_found_distance">Geen afstandswaarden!</string>
     <string name="statistics_not_found_velocity">Geen snelheidswaarden!</string>
     <string name="statistics_not_found_accelerometer">Geen accelerometerwaarden!</string>
+    <string name="statistics_not_found_altitude">Geen altitudewaarden!</string>
+    <string name="statistics_altitude">Altitude</string>
     <string name="ride_text_succes">Succes!</string>
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
@@ -161,10 +165,12 @@
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
     <string name="title_activity_route_mapping">Mapping</string>
+    <string name="statistics_highest_altitude">Hoogste Altitude.</string>
 
     <string-array name="ride_difficulty">
         <item>Makkelijk</item>
         <item>Normaal</item>
         <item>Moeilijk</item>
     </string-array>
+    <string name="statistics_text_day"> Dag(en)</string>
 </resources>

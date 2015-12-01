@@ -30,6 +30,11 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
     private GoogleMap mMap;
     private Polyline route;
     private LinkedList list;
+    private int rIntTotalDistance;
+    private float rFlHighestVelocity;
+    private float rFlHighestAcceleration;
+    private double rDbHighestAltitude;
+    private long rLgTotatTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,28 +48,25 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         User user = uHandler.getUserInformation(currentUser);
 
         TextView TotalDistance = (TextView) findViewById(R.id.TotalDistance);
-        TotalDistance.setText(Float.toString(user.getTotal_distance()));
+        TotalDistance.setText(Float.toString(user.getTotal_distance()/1000f)+" km");
 
         TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
-        HighestVelocity.setText(Float.toString(user.getHighest_speed()));
+        HighestVelocity.setText(Float.toString(user.getHighest_speed()*3.6f)+" km/h");
 
         TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
-        HighestAcceleration.setText(Float.toString(user.getHighest_acceleration()));
+        HighestAcceleration.setText(Float.toString(user.getHighest_acceleration())+" m/s²");
 
         TextView HighestAltitudeDiff = (TextView) findViewById(R.id.HighestAltitudeDiff);
-        HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff()));
+        HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff())+" m");
 
         TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
-        TotalTime.setText(Double.toString(user.getTotal_time()));
+        TotalTime.setText(Double.toString(user.getTotal_time()/3600000f)+" h");
 
         TextView TotalPoints = (TextView) findViewById(R.id.TotalPoints);
         TotalPoints.setText(Integer.toString(user.getTotal_points()));
 
         TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
-        BikedDays.setText(Integer.toString(user.getNb_days_biked()));
-
-
-
+        BikedDays.setText(Integer.toString(user.getNb_days_biked()) + getString(R.string.statistics_text_day));
 
 
         //Last ride statistics
@@ -79,18 +81,57 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         ArrayList<Entry> yAccelerometerX = new ArrayList<Entry>();
         ArrayList<Entry> yAccelerometerY = new ArrayList<Entry>();
         ArrayList<Entry> yAccelerometerZ = new ArrayList<Entry>();
+        ArrayList<Entry> yAltitude = new ArrayList<Entry>();
 
+        rIntTotalDistance = 0;
+        rFlHighestVelocity = 0;
+        rFlHighestAcceleration = 0;
+        rDbHighestAltitude = 0;
+        rLgTotatTime = 0;
         if (list.size() != 0){
+            dbRow FirstRow = (dbRow) list.get(0);
+            dbRow LastRow = (dbRow) list.get(list.size() - 1);
+            rLgTotatTime = LastRow.getMillisec() - FirstRow.getMillisec();
+            rIntTotalDistance = distanceList.get(distanceList.size() - 1);
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
+
+                //Genaral Ride Data
+                if (row.getVelocity() > rFlHighestVelocity) {
+                    rFlHighestVelocity = row.getVelocity();
+                }
+                if (row.getAltitude() > rDbHighestAltitude) {
+                    rDbHighestAltitude = row.getAltitude();
+                }
+
+                //Chart Data
                 xVal.add("" + index);
                 yVelocity.add(new Entry(row.getVelocity(), index));
                 yDistance.add(new Entry(distanceList.get(index), index));
                 yAccelerometerX.add(new Entry(row.getAccelerometer_xValue(), index));
                 yAccelerometerY.add(new Entry(row.getAccelerometer_yValue(), index));
                 yAccelerometerZ.add(new Entry(row.getAccelerometer_zValue(), index));
+                yAltitude.add(new Entry((float) row.getAltitude(), index));
+
             }
         }
+
+        TextView rTotalDistance = (TextView) findViewById(R.id.rTotalDistance);
+        rTotalDistance.setText(Float.toString(rIntTotalDistance/1000f)+" km");
+
+        TextView rHighestVelocity = (TextView) findViewById(R.id.rHighestVelocity);
+        rHighestVelocity.setText(Float.toString(rFlHighestVelocity*3.6f)+" km/h");
+
+        TextView rHighestAcceleration = (TextView) findViewById(R.id.rHighestAcceleration);
+        rHighestAcceleration.setText(Float.toString(rFlHighestAcceleration)+" m/s²");
+
+        TextView rHighestAltitudeDiff = (TextView) findViewById(R.id.rHighestAltitudeDiff);
+        rHighestAltitudeDiff.setText(Double.toString(rDbHighestAltitude)+" m");
+
+        TextView rTotalTime = (TextView) findViewById(R.id.rTotalTime);
+        rTotalTime.setText(Float.toString(rLgTotatTime/3600000f)+" h");
+
+
         // Velocity chart
         LineChart chVelocity = (LineChart) findViewById(R.id.chVelocity);
         chVelocity.setDescription("");
@@ -146,6 +187,34 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chDistance.setData(dataDistance);
         chDistance.invalidate();
         chDistance.animateY(3000);
+
+        // Altitude chart
+        LineChart chAltitude = (LineChart) findViewById(R.id.chAltitude);
+        chAltitude.setDescription("");
+        chAltitude.setDrawGridBackground(false);
+        chAltitude.setNoDataText(getString(R.string.statistics_not_found_altitude));
+        Legend lAltitude = chAltitude.getLegend();
+        lAltitude.setEnabled(false);
+        YAxis y12Altitude = chAltitude.getAxisRight();
+        y12Altitude.setEnabled(false);
+        XAxis x1Altitude= chAltitude.getXAxis();
+        x1Altitude.setDrawGridLines(false);
+        x1Altitude.setPosition(XAxis.XAxisPosition.BOTTOM);
+        YAxis y1Altitude = chAltitude.getAxisLeft();
+        y1Altitude.setDrawGridLines(false);
+
+        LineDataSet setAltitude = new LineDataSet(yAltitude, "");
+        setAltitude.setDrawCubic(true);
+        setAltitude.setDrawFilled(true);
+        setAltitude.setDrawValues(false);
+        setAltitude.setDrawCircles(false);
+        setAltitude.setColor(Color.rgb(255, 100, 0));
+        setAltitude.setFillColor(Color.rgb(255, 191, 106));
+        setAltitude.setCircleColor(Color.rgb(255, 100, 0));
+        LineData dataAltitude = new LineData(xVal, setAltitude);
+        chAltitude.setData(dataAltitude);
+        chAltitude.invalidate();
+        chAltitude.animateY(3000);
 
         // AccelerometerX
         LineChart chAccelerometerX = (LineChart) findViewById(R.id.chAccelerometerX);
@@ -237,6 +306,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), RouteMapping.class);
+                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
