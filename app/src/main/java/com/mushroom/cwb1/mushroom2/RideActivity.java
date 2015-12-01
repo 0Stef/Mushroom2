@@ -148,7 +148,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
-        currentUser = getIntent().getStringExtra("username");
+        currentUser = ServerConnection.getActiveUser();
 
         setUpMapIfNeeded();
 

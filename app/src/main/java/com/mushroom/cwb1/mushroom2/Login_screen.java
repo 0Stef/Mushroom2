@@ -94,7 +94,7 @@ public class Login_screen extends AppCompatActivity {
                 if (userHandler.isRightPassword(userName, passWord)) {
                     checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
-                    i.putExtra("username", userName);
+                    conn.setActiveUser(userName);
                     startActivity(i);
                     System.out.println("    -   User is logged in: " + userName);
                     finish();

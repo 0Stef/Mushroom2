@@ -1,6 +1,7 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -20,6 +21,7 @@ public class ServerConnection {
 
     private UserHandler userHandler;
     private DataBaseHandler2 dbHandler;
+    private static Context context;
 
     private String dataToPut;
     private static ArrayList<String> serverCheckResult;
@@ -32,6 +34,22 @@ public class ServerConnection {
     public ServerConnection(Context context) {
         userHandler = new UserHandler(context);
         dbHandler = new DataBaseHandler2(context);
+        this.context = context;
+    }
+
+    public static String getActiveUser() {
+        SharedPreferences settings = context.getSharedPreferences(context.getString(R.string.app_save_file), 0);
+        String userName = settings.getString(context.getString(R.string.app_user_name), null);
+
+        return userName;
+    }
+
+    public static void setActiveUser(String userName) {
+        SharedPreferences settings = context.getSharedPreferences(context.getString(R.string.app_save_file), 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(context.getString(R.string.app_user_name), userName);
+
+        editor.commit();
     }
 
     public String checkServer(String userName) throws ExecutionException, InterruptedException {

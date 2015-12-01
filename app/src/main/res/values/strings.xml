@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Mushroom</string>
+    <string name="app_save_file" translatable="false">saved_file</string>
+    <string name="app_user_name" translatable="false">saved_user</string>
 
     //Login
     <string name="title_activity_login_screen">Login screen</string>

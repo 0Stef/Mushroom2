@@ -63,7 +63,7 @@ public class achievements extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
-        currentUser = getIntent().getStringExtra("username");
+        currentUser = ServerConnection.getActiveUser();
 
         handler = new UserHandler(getApplicationContext());
         User user = handler.getUserInformation(currentUser);

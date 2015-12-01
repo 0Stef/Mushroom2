@@ -356,13 +356,17 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
             float y = row.getAccelerometer_yValue();
             float z = row.getAccelerometer_zValue();
 
-            float c = (float) (Math.sqrt(Math.pow(x,2d) + Math.pow(y,2d) + Math.pow(z,2d)));
+            float c = calculateAcceleration(x, y, z);
             if (c > acc) {
                 acc = c;
             }
         }
 
         return acc;
+    }
+
+    public float calculateAcceleration(float x, float y, float z) {
+        return (float) (Math.sqrt(Math.pow(x,2d) + Math.pow(y,2d) + Math.pow(z,2d)));
     }
 
     private boolean isSameRide(int startRideID, int endRideID) {

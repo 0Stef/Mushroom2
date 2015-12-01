@@ -41,7 +41,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persoonlijke_statistieken);
 
-        currentUser = getIntent().getStringExtra("username");
+        currentUser = ServerConnection.getActiveUser();
 
         //Last ride statistics
         UserHandler uHandler = new UserHandler(getApplicationContext());
@@ -336,5 +336,4 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

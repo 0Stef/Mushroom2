@@ -39,7 +39,7 @@ public class Ranking extends AppCompatActivity {
         UserHandler uHandler = new UserHandler(getApplicationContext());
         User user = uHandler.getUserInformation(currentUser);
 
-        currentUser = getIntent().getStringExtra("username");
+        currentUser = ServerConnection.getActiveUser();
         listView = (ListView) findViewById(R.id.listView);
 
         TextView ownNameTextview = (TextView) findViewById(R.id.ownname);

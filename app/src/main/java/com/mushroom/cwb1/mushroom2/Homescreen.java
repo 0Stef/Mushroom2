@@ -17,7 +17,7 @@ public class Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
-        currentUser = getIntent().getStringExtra("username");
+        currentUser = ServerConnection.getActiveUser();
 
         Button mpbutton = (Button)findViewById(R.id.button4);
 
@@ -25,7 +25,6 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -37,7 +36,6 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), achievements.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -49,7 +47,6 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener(){
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Ranking.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -61,7 +58,6 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), RideActivity.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -73,7 +69,6 @@ public class Homescreen extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Persoonlijke_statistieken.class);
-                        i.putExtra("username", currentUser);
                         startActivity(i);
                     }
                 }
@@ -87,6 +82,7 @@ public class Homescreen extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), Login_screen.class);
                         startActivity(i);
                         finish();
+                        ServerConnection.setActiveUser(DataBaseHandler2.TABLE_DEFAULT);
                         System.out.println("    -   User is logged out: " + currentUser);
                     }
                 }
