@@ -66,7 +66,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         TotalPoints.setText(Integer.toString(user.getTotal_points()));
 
         TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
-        BikedDays.setText(Integer.toString(user.getNb_days_biked()) + getString(R.string.statistics_text_day));
+        BikedDays.setText(Integer.toString(user.getNb_days_biked()));
 
 
         //Last ride statistics

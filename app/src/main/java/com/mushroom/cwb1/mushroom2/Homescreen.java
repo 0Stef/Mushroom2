@@ -130,6 +130,4 @@ public class Homescreen extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

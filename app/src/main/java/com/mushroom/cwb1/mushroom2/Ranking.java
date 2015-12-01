@@ -46,8 +46,6 @@ public class Ranking extends AppCompatActivity {
         TextView ownPointsTextview = (TextView) findViewById(R.id.ownpoints);
 
 
-
-
         try {
             System.out.println("getRanking() ");
             result = getRanking();

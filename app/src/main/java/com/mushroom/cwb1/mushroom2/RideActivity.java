@@ -158,9 +158,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-
-
-
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
         textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
         textMaximumSpeed = (TextView) findViewById(R.id.maximumSpeed);

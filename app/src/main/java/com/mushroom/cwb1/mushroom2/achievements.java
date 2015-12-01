@@ -71,6 +71,7 @@ public class achievements extends AppCompatActivity {
         nb_compl_achievements = 0;
         checkDay(currentUser);
 
+
         //Creating the progressbars
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
         progress_1_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);

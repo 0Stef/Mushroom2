@@ -183,7 +183,6 @@ public class ServerConnection {
             //String input = dataToPut;
             String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
 
-
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
             os.flush();
