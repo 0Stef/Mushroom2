@@ -146,6 +146,8 @@
     <string name="statistics_not_found_distance">Geen afstandswaarden!</string>
     <string name="statistics_not_found_velocity">Geen snelheidswaarden!</string>
     <string name="statistics_not_found_accelerometer">Geen accelerometerwaarden!</string>
+    <string name="statistics_not_found_altitude">Geen altitudewaarden!</string>
+    <string name="statistics_altitude">Altitude</string>
     <string name="ride_text_succes">Succes!</string>
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
@@ -161,6 +163,7 @@
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
     <string name="title_activity_route_mapping">Mapping</string>
+    <string name="statistics_highest_altitude">Hoogste Altitude.</string>
 
     <string-array name="ride_difficulty">
         <item>Makkelijk</item>

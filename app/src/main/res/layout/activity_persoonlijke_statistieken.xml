@@ -157,6 +157,88 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_distance"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rTotalDistance"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_highest_speed"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rHighestVelocity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_highest_acceleration"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rHighestAcceleration"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_highest_altitude"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rHighestAltitudeDiff"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_total_time"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rTotalTime"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/statistics_speed"
                 />
 
@@ -181,6 +263,25 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chDistance"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="2dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_altitude"
+                />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chAltitude"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="2dp"/>

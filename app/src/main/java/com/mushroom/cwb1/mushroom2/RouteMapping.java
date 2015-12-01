@@ -18,13 +18,16 @@ public class RouteMapping extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LinkedList list;
     private int nbRide;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_mapping);
 
-        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext());
+        //currentUser = getIntent().getStringExtra("username");
+        currentUser = "stephan";
+        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         nbRide=handler.getGreatestRideID();
         list = handler.getList(handler.getAllThisRide(nbRide));
 
