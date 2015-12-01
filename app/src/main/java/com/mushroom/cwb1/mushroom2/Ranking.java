@@ -1,14 +1,33 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Ranking extends AppCompatActivity {
 
     public String currentUser;
+    public String dataToPut;
+    public ArrayList serverRankingResult;
+    public ArrayList result;
+    public String userRanking;
+    ListView listView;
 
 
 
@@ -17,43 +36,37 @@ public class Ranking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
+        UserHandler uHandler = new UserHandler(getApplicationContext());
+        User user = uHandler.getUserInformation(currentUser);
+
         currentUser = getIntent().getStringExtra("username");
+        listView = (ListView) findViewById(R.id.listView);
 
-        TextView points1 = (TextView)findViewById(R.id.points1);
-        TextView points2 = (TextView)findViewById(R.id.points2);
-        TextView points3 = (TextView)findViewById(R.id.points3);
-        TextView points4 = (TextView)findViewById(R.id.points4);
-        TextView points5 = (TextView)findViewById(R.id.points5);
-        TextView points6 = (TextView)findViewById(R.id.points6);
-        TextView points7 = (TextView)findViewById(R.id.points7);
-        TextView points8 = (TextView)findViewById(R.id.points8);
-        TextView points9 = (TextView)findViewById(R.id.points9);
-        TextView points10 = (TextView)findViewById(R.id.points10);
-        TextView points11 = (TextView)findViewById(R.id.points11);
-        TextView points12 = (TextView)findViewById(R.id.points12);
-        TextView points13 = (TextView)findViewById(R.id.points13);
-        TextView points14 = (TextView)findViewById(R.id.points14);
-        TextView points15 = (TextView)findViewById(R.id.points15);
+        TextView ownNameTextview = (TextView) findViewById(R.id.ownname);
+        TextView ownPointsTextview = (TextView) findViewById(R.id.ownpoints);
 
-        TextView name1 = (TextView)findViewById(R.id.name1);
-        TextView name2 = (TextView)findViewById(R.id.name2);
-        TextView name3 = (TextView)findViewById(R.id.name3);
-        TextView name4 = (TextView)findViewById(R.id.name4);
-        TextView name5 = (TextView)findViewById(R.id.name5);
-        TextView name6 = (TextView)findViewById(R.id.name6);
-        TextView name7 = (TextView)findViewById(R.id.name7);
-        TextView name8 = (TextView)findViewById(R.id.name8);
-        TextView name9 = (TextView)findViewById(R.id.name9);
-        TextView name10 = (TextView)findViewById(R.id.name10);
-        TextView name11 = (TextView)findViewById(R.id.name11);
-        TextView name12 = (TextView)findViewById(R.id.name12);
-        TextView name13 = (TextView)findViewById(R.id.name13);
-        TextView name14 = (TextView)findViewById(R.id.name14);
-        TextView name15 = (TextView)findViewById(R.id.name15);
+
+
+
+        try {
+            result = getRanking();
+            userRanking = getUserRanking(currentUser);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,result);
+
+        listView.setAdapter(adapter);
+
+        ownNameTextview.setText(userRanking + " " + currentUser);
+        System.out.println("user points: " + user.getTotal_points());
+        ownPointsTextview.setText(Integer.toString(user.getTotal_points()));
 
 
     }
-
 
 
     @Override
@@ -81,4 +94,118 @@ public class Ranking extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private ArrayList<String> getRanking() throws ExecutionException, InterruptedException {
+        dataToPut = "";
+        serverRankingResult = new ArrayList<>();
+        ArrayList<String> serverRankingResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/ranglijst_top.php").get();
+
+        System.out.println("checkserver.size = " + serverRankingResult.size());
+
+
+        if (serverRankingResult.size() > 0) {
+            System.out.println("checkserver.size = " + serverRankingResult.size());
+            return serverRankingResult;
+        } else {
+            ArrayList<String> failedResult = new ArrayList<>();
+            failedResult.add("Nothing to show...");
+            return failedResult;
+        }
+
+    }
+
+
+    private String getUserRanking(String userName) throws ExecutionException, InterruptedException {
+        dataToPut = userName;
+        String userRank;
+        serverRankingResult = new ArrayList<>();
+        ArrayList<String> serverRankingResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/ranglijkst_user_position.php").get();
+
+        System.out.println("checkserver.size = " + serverRankingResult.size());
+
+
+        if (serverRankingResult.size() > 0) {
+            System.out.println("checkserver.size = " + serverRankingResult.size());
+            String rawString = serverRankingResult.get(0);
+            String[] splitString = rawString.split("=");
+            if (splitString[0].equals("error")){
+                userRank = "x";
+            }else{
+               userRank = splitString[0];
+            }
+
+            return userRank;
+        } else {
+
+            return ".";
+        }
+
+    }
+
+
+
+
+
+
+    public ArrayList<String> putDataToServer(String URL){
+        ArrayList<String> status =  new ArrayList<>();
+        try {
+
+            java.net.URL url = new URL(URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //conn.setRequestProperty("Content-Type", "application/json");
+
+            //String input = dataToPut;
+            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+
+            //Read the acknowledgement message after putting data to server
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+            String output;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                status.add(output);
+            }
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    class PutAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(String... urls) {
+            return putDataToServer(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            //textView_1.setText(result.get(0)+" - "+result.get(1));
+            //super.onPostExecute(result);
+            serverRankingResult = result;
+            //debugView.setText("post exec"+result.get(0));
+        }
+    }
+
+
+
+
+
 }

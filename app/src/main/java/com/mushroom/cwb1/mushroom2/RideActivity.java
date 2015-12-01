@@ -135,8 +135,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     UserHandler userhandler;
 
     Button startrecordingbutton;
-    Button resumerecordingbutton;
-    Button pauserecordingbutton;
     Button stoprecordingbutton;
     Button challengebutton;
 
@@ -184,13 +182,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
         startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
-        resumerecordingbutton = (Button) findViewById(R.id.resumerecordingbutton);
-        pauserecordingbutton = (Button) findViewById(R.id.pauserecordingbutton);
         stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         challengebutton = (Button) findViewById(R.id.challengebutton);
         startrecordingbutton.setVisibility(View.VISIBLE);
-        resumerecordingbutton.setVisibility(View.INVISIBLE);
-        pauserecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
 
@@ -235,8 +229,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
-        resumerecordingbutton.setVisibility(View.INVISIBLE);
-        pauserecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
 
 
@@ -324,16 +316,24 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 if (elapsedTime != 0 || timeToPrev != 0) {
                     averageSpeed = (averageSpeed * elapsedTime + speed * timeToPrev) / (elapsedTime + timeToPrev);
-                    averageAcceleration = (averageAcceleration * elapsedTime + accx * timeToPrev) / (elapsedTime + timeToPrev);
+                    averageAcceleration = (averageAcceleration * elapsedTime + accy * timeToPrev) / (elapsedTime + timeToPrev);
                 }
 
                 textCurrentSpeed.setText(decimalF.format(speed));
                 textAverageSpeed.setText(decimalF.format(averageSpeed));
 
 
-                if (maxAcceleration < accx) {
-                    maxAcceleration = accx;
+                if (maxAcceleration < accy) {
+                    maxAcceleration = accy;
                     textMaximumAcceleration.setText(decimalF.format(maxAcceleration));
+                }
+
+
+                //GPS controle acceleratie
+                if (eerstekeer = false){
+                    float accGps = (location.getSpeed()+previousLocation.getSpeed())/timeToPrev;
+                    System.out.println("gps acc "+Float.toString(accGps)+" accelerometer "+accy);
+
                 }
 
                 textCurrentAcceleration.setText(decimalF.format(accx));
@@ -356,7 +356,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 16.0f));
 
 
-                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz);
+
+
+                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz, distanceToPrev, timeToPrev);
                 handler.addPoint(punt);
 
 
@@ -411,39 +413,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void pauserecording(View view) {
-
-
-        startrecordingbutton.setVisibility(View.INVISIBLE);
-        resumerecordingbutton.setVisibility(View.VISIBLE);
-        pauserecordingbutton.setVisibility(View.INVISIBLE);
-        stoprecordingbutton.setVisibility(View.VISIBLE);
-
-        mSensorManager.unregisterListener(this);
-        locationManager.removeUpdates(locationListener);
-
-        firstLocationSet = false;
-
-        //TODO zoom veranderen zodat hele rit in beeld is
-
-
-    }
-
-    public void resumerecording(View view) {
-
-        startrecordingbutton.setVisibility(View.INVISIBLE);
-        resumerecordingbutton.setVisibility(View.INVISIBLE);
-        pauserecordingbutton.setVisibility(View.VISIBLE);
-        stoprecordingbutton.setVisibility(View.VISIBLE);
-        //TODO de metingen worden nog niet opnieuw gestart
-    }
-
     public void stoprecording(View view) {
 
 
         startrecordingbutton.setVisibility(View.VISIBLE);
-        resumerecordingbutton.setVisibility(View.INVISIBLE);
-        pauserecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
 
@@ -619,7 +592,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //punten.setText("lastpoint voor setup" + LastPoint.toString());
 
         //dbRow LastPoint = new dbRow(10,22222,1f,1f,1f,0.0f,0.0d,0.0d,0.0f,51.0081564f,4.58057f,0.0f,0f,1000000);
-        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f);
+        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f, 0f, 1000000);
 
 
         if (LastPoint.getLongitude() != 0.0f) {

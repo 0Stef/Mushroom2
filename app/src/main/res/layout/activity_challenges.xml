@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/challenges_view_title"
-        android:id="@+id/textView5"
+        android:id="@+id/ownpoints"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -21,7 +21,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/challenges_view_1"
         android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/ownpoints"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="64dp" />
@@ -57,8 +57,8 @@
         android:text="@string/challenges_button_start"
         android:id="@+id/button5"
         android:layout_alignTop="@+id/textView6"
-        android:layout_toRightOf="@+id/textView5"
-        android:layout_toEndOf="@+id/textView5"
+        android:layout_toRightOf="@+id/ownpoints"
+        android:layout_toEndOf="@+id/ownpoints"
         android:onClick="button5"/>
 
     <Button
