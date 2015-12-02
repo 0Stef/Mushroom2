@@ -687,6 +687,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         eltime = 0l;
         uitleg.setText(getString(R.string.challenges_uitleg_keepacc1) + " " + versnelling + " " + getString(R.string.challenges_uitleg_keepacc2));
         uitleg.setVisibility(View.VISIBLE);
+        challenge2.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " m/s²");
+        challenge2.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
@@ -709,6 +711,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                             eltime = 0l;
                             gestart = SystemClock.uptimeMillis();
                         }
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " m/s²");
+                            }
+                        });
                         Thread.sleep(500);
                     }
                     Succes.post(new Runnable() {
