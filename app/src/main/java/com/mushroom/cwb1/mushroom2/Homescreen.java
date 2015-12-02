@@ -65,7 +65,7 @@ public class Homescreen extends AppCompatActivity {
 
         Button ChallengesButton = (Button)findViewById(R.id.ChallengesButton);
 
-        rideActivitybutton.setOnClickListener(
+        ChallengesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Challenges.class);
