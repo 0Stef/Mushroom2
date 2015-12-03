@@ -27,6 +27,9 @@ public class Challenges extends AppCompatActivity {
 
         currentUser = getIntent().getStringExtra("username");
 
+        userhandler = new UserHandler(getApplicationContext());
+        User user = userhandler.getUserInformation(currentUser);
+
 
 
         // TODO lijst verschillende mogelijke tegenstanders
@@ -43,10 +46,7 @@ public class Challenges extends AppCompatActivity {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Highest_Speed");
 
-                        GetHighestSpeedButton.setEnabled(false);
-                        GetHighestAccelerationButton.setEnabled(false);
-                        GetHighestAltitudeDifferenceButton.setEnabled(false);
-                        GetLongestDistanceButton.setEnabled(false);
+                        disable_buttons();
                     }
                 }
         );
@@ -56,10 +56,7 @@ public class Challenges extends AppCompatActivity {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Highest_Acceleration");
 
-                        GetHighestSpeedButton.setEnabled(false);
-                        GetHighestAccelerationButton.setEnabled(false);
-                        GetHighestAltitudeDifferenceButton.setEnabled(false);
-                        GetLongestDistanceButton.setEnabled(false);
+                        disable_buttons();
                     }
                 }
         );
@@ -70,11 +67,7 @@ public class Challenges extends AppCompatActivity {
                         current_challenge.setChallenge_name("Highest_Altitude");
 
 
-                        GetHighestSpeedButton.setEnabled(false);
-                        GetHighestAccelerationButton.setEnabled(false);
-                        GetHighestAltitudeDifferenceButton.setEnabled(false);
-                        GetLongestDistanceButton.setEnabled(false);
-
+                        disable_buttons();
                     }
                 }
         );
@@ -84,15 +77,15 @@ public class Challenges extends AppCompatActivity {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Longest_distance");
 
-                        GetHighestSpeedButton.setEnabled(false);
-                        GetHighestAccelerationButton.setEnabled(false);
-                        GetHighestAltitudeDifferenceButton.setEnabled(false);
-                        GetLongestDistanceButton.setEnabled(false);
+                        disable_buttons();
                     }
                 }
         );
 
+
         update();
+
+
 
         long current_time = Calendar.getInstance().getTimeInMillis();
 
@@ -106,7 +99,7 @@ public class Challenges extends AppCompatActivity {
                 }
             }
 
-            if (current_challenge.getChallenge_name().equals("Highest_Altitude")){
+            else if (current_challenge.getChallenge_name().equals("Highest_Altitude")){
                 if (current_challenge.getUser1_double() > current_challenge.getUser2_double()){
                     current_challenge.setWinner(current_challenge.getUser1());
                 }
@@ -119,6 +112,16 @@ public class Challenges extends AppCompatActivity {
 
         String winner;
         winner  = current_challenge.getWinner();
+
+        if (currentUser.equals(winner)){
+            int prev_points = user.getTotal_points();
+            user.setTotal_points(prev_points + 3000);
+            // ook de challenges tegen andere spelers??
+            user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+
+        }
+
+        userhandler.overWrite(user);
 
 
     }
@@ -175,14 +178,14 @@ public class Challenges extends AppCompatActivity {
 
         if (current_challenge.getChallenge_name().equals("Highest_Acceleration")){
 
-            //highest_acceleration = dbhandler.
+            highest_acceleration = dbhandler.getHighestAcceleration(dbhandler.getAllBetween(current_challenge.getStart(),current_challenge.getEnd()));
 
             if (currentUser.equals(current_challenge.getUser1())){
-                //current_challenge.setUser1_float(highest_acceleration);
+                current_challenge.setUser1_float(highest_acceleration);
             }
 
             else if(currentUser.equals(current_challenge.getUser2())){
-                //current_challenge.setUser2_float(highest_acceleration);
+                current_challenge.setUser2_float(highest_acceleration);
             }
 
         }
@@ -221,4 +224,21 @@ public class Challenges extends AppCompatActivity {
         }
 
     }
+
+    public void disable_buttons(){
+        final Button GetHighestSpeedButton = (Button)findViewById(R.id.button_highest_speed);
+        final Button GetHighestAccelerationButton = (Button)findViewById(R.id.button_highest_acceleration);
+        final Button GetHighestAltitudeDifferenceButton = (Button)findViewById(R.id.button_highest_altitude_difference);
+        final Button GetLongestDistanceButton = (Button)findViewById(R.id.button_longest_distance);
+
+
+        GetHighestSpeedButton.setEnabled(false);
+        GetHighestAccelerationButton.setEnabled(false);
+        GetHighestAltitudeDifferenceButton.setEnabled(false);
+        GetLongestDistanceButton.setEnabled(false);
+
+
+    }
+
+
 }
