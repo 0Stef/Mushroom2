@@ -45,10 +45,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     TextView textCurrentSpeed;
     TextView textAverageSpeed;
-    TextView textMaximumSpeed;
-    TextView textCurrentAcceleration;
-    TextView textAverageAcceleration;
-    TextView textMaximumAcceleration;
+//    TextView textMaximumSpeed;
     TextView textElapsedTime;
     TextView textDistance;
     TextView Succes;
@@ -160,10 +157,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
         textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
-        textMaximumSpeed = (TextView) findViewById(R.id.maximumSpeed);
-        textCurrentAcceleration = (TextView) findViewById(R.id.currentAcceleration);
-        textAverageAcceleration = (TextView) findViewById(R.id.averageAcceleration);
-        textMaximumAcceleration = (TextView) findViewById(R.id.maximumAcceleration);
+//        textMaximumSpeed = (TextView) findViewById(R.id.maximumSpeed);
         textDistance = (TextView) findViewById(R.id.distance);
         textElapsedTime = (TextView) findViewById(R.id.elapsedTime);
         Succes = (TextView) findViewById(R.id.succes);
@@ -302,10 +296,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 float msTokmu = 3.6f;
                 speed = location.getSpeed() * msTokmu;
 
-                if (maxSpeed < speed) {
-                    maxSpeed = speed;
-                    textMaximumSpeed.setText(decimalF.format(maxSpeed));
-                }
+//                if (maxSpeed < speed) {
+//                    maxSpeed = speed;
+//                    textMaximumSpeed.setText(decimalF.format(maxSpeed));
+//                }
                 altitude = location.getAltitude();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
@@ -320,11 +314,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 textAverageSpeed.setText(decimalF.format(averageSpeed));
 
 
-                if (maxAcceleration < accy) {
-                    maxAcceleration = accy;
-                    textMaximumAcceleration.setText(decimalF.format(maxAcceleration));
-                }
-
 
                 //GPS controle acceleratie
                 if (eerstekeer = false){
@@ -333,15 +322,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 }
 
-                textCurrentAcceleration.setText(decimalF.format(accx));
-                textAverageAcceleration.setText(decimalF.format(averageAcceleration));
-
 
                 elapsedTime = elapsedTime + timeToPrev;
                 distance = distance + distanceToPrev;
+                Date elapsed;
+                elapsed = new Date(elapsedTime/1000);
 
                 textDistance.setText(decimalF.format(distance));
-                textElapsedTime.setText(decimalF.format(elapsedTime / 1000));
+                textElapsedTime.setText(timeF.format(elapsed));
 
                 lastPoint = new LatLng(latitude, longitude);
 
@@ -687,6 +675,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         eltime = 0l;
         uitleg.setText(getString(R.string.challenges_expl_keepacc1) + " " + versnelling + " " + getString(R.string.challenges_expl_keepacc2));
         uitleg.setVisibility(View.VISIBLE);
+        challenge2.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " m/s²");
+        challenge2.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
@@ -709,6 +699,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                             eltime = 0l;
                             gestart = SystemClock.uptimeMillis();
                         }
+                        challenge2.post(new Runnable() {
+                            public void run() {
+                                challenge2.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " m/s²");
+                            }
+                        });
                         Thread.sleep(500);
                     }
                     Succes.post(new Runnable() {
