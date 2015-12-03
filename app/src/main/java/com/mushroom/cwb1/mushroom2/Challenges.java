@@ -1,6 +1,5 @@
 package com.mushroom.cwb1.mushroom2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -176,14 +175,14 @@ public class Challenges extends AppCompatActivity {
 
         if (current_challenge.getChallenge_name().equals("Highest_Acceleration")){
 
-            highest_acceleration = dbhandler.get
+            //highest_acceleration = dbhandler.
 
             if (currentUser.equals(current_challenge.getUser1())){
-                current_challenge.setUser1_float(highest_acceleration);
+                //current_challenge.setUser1_float(highest_acceleration);
             }
 
             else if(currentUser.equals(current_challenge.getUser2())){
-                current_challenge.setUser2_float(highest_acceleration);
+                //current_challenge.setUser2_float(highest_acceleration);
             }
 
         }

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
@@ -70,6 +71,8 @@ public class Login_screen extends AppCompatActivity {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -85,7 +88,7 @@ public class Login_screen extends AppCompatActivity {
         );
     }
 
-    public void login() throws ExecutionException, InterruptedException {
+    public void login() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         String userName = usernameEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
         String passWord = passwordEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
 
@@ -111,12 +114,12 @@ public class Login_screen extends AppCompatActivity {
                     usernameEdit.requestFocus();
                     //System.out.print("    -   Cmd");
                 } else {
-                    String result = conn.checkServer(userName);
+                    String result = conn.installUser(userName);
                     if (result.equals(conn.ADDED)) {
                         statusView.setText(R.string.login_text_found);
                         passwordEdit.requestFocus();
                         System.out.println("    -   [Server] User found");
-                    } else if (result.equals(conn.NO_RESULT)) {
+                    } else if (result.equals(conn.NOT_FOUND)) {
                         usernameEdit.setText("");
                         usernameEdit.setHint(R.string.login_text_exist);
                         passwordEdit.setText("");

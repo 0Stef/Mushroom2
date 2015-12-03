@@ -619,14 +619,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             snelheid = 35;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_keepspeed1) + " " + snelheid + " " + getString(R.string.challenges_uitleg_keepspeed2));
+        uitleg.setText(getString(R.string.challenges_expl_keepspeed1) + " " + snelheid + " " + getString(R.string.challenges_expl_keepspeed2));
         uitleg.setVisibility(View.VISIBLE);
 
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.time) + " 0 s");
+                        challenge1.setText(getString(R.string.challenges_time) + " 0 s");
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
@@ -637,7 +637,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
                                 public void run() {
-                                    challenge1.setText(getString(R.string.time) + " " + eltime / 1000 + " s");
+                                    challenge1.setText(getString(R.string.challenges_time) + " " + eltime / 1000 + " s");
                                 }
                             });
                         } else {
@@ -685,13 +685,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             versnelling = 10;
         }
         eltime = 0l;
-        uitleg.setText(getString(R.string.challenges_uitleg_keepacc1) + " " + versnelling + " " + getString(R.string.challenges_uitleg_keepacc2));
+        uitleg.setText(getString(R.string.challenges_expl_keepacc1) + " " + versnelling + " " + getString(R.string.challenges_expl_keepacc2));
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.time) + " 0 s");
+                        challenge1.setText(getString(R.string.challenges_time) + " 0 s");
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
@@ -702,7 +702,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
                                 public void run() {
-                                    challenge1.setText(getString(R.string.time) + " " + eltime / 1000 + " s");
+                                    challenge1.setText(getString(R.string.challenges_time) + " " + eltime / 1000 + " s");
                                 }
                             });
                         } else {
@@ -745,20 +745,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             temperatuurverschil = 4;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_tempdiff1) + " " + temperatuurverschil + " " + getString(R.string.challenges_celcius));
+        uitleg.setText(getString(R.string.challenges_expl_tempdiff1) + " " + temperatuurverschil + " " + getString(R.string.challenges_unit_temperature));
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 final float starttemperatuur = temperature;
                 challenge2.post(new Runnable() {
                     public void run() {
-                        challenge2.setText(getString(R.string.challenges_huidige_temp) + " " + String.valueOf(temperature) + " " + getString(R.string.challenges_celcius));
+                        challenge2.setText(getString(R.string.challenges_curr_temp) + " " + String.valueOf(temperature) + " " + getString(R.string.challenges_unit_temperature));
                         challenge2.setVisibility(View.VISIBLE);
                     }
                 });
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_starttemp) + " " + String.valueOf(starttemperatuur) + " " + getString(R.string.challenges_celcius));
+                        challenge1.setText(getString(R.string.challenges_start_temp) + " " + String.valueOf(starttemperatuur) + " " + getString(R.string.challenges_unit_temperature));
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
@@ -766,7 +766,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     while (Math.abs(temperature - starttemperatuur) < 1) {
                         challenge2.post(new Runnable() {
                             public void run() {
-                                challenge2.setText(getString(R.string.challenges_huidige_temp) + " " + String.valueOf(temperature) + " " + getString(R.string.challenges_celcius));
+                                challenge2.setText(getString(R.string.challenges_curr_temp) + " " + String.valueOf(temperature) + " " + getString(R.string.challenges_unit_temperature));
                             }
                         });
                         Thread.sleep(5000);
@@ -805,7 +805,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             snelheid = 30;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_averagespeed) + " " + snelheid + " " + getString(R.string.challenges_kilometer_uur));
+        uitleg.setText(getString(R.string.challenges_expl_averagespeed) + " " + snelheid + " " + getString(R.string.challenges_unit_velocity));
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -847,11 +847,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             versnelling = 4;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_averageacc) + " " + versnelling + " " + getString(R.string.challenges_meter_seconde));
+        uitleg.setText(getString(R.string.challenges_expl_averageacc) + " " + versnelling + " " + getString(R.string.challenges_unit_acceleration));
         uitleg.setVisibility(View.VISIBLE);
-        challenge1.setText(getString(R.string.challenges_huidige_versnelling) + " " + String.valueOf(acct) + " " + getString(R.string.challenges_meter_seconde));
+        challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + String.valueOf(acct) + " " + getString(R.string.challenges_unit_acceleration));
         challenge1.setVisibility(View.VISIBLE);
-        challenge2.setText(getString(R.string.challenges_gemiddelde_versnelling) + " " + String.valueOf(averageAcceleration) + " " + getString(R.string.challenges_meter_seconde));
+        challenge2.setText(getString(R.string.challenges_average_acceleration) + " " + String.valueOf(averageAcceleration) + " " + getString(R.string.challenges_unit_acceleration));
         challenge2.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -859,12 +859,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     while (elapsedTime < 5 * 60000 || averageAcceleration < versnelling) {
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_huidige_versnelling) + " " + String.valueOf(acct) + " " + getString(R.string.challenges_meter_seconde));
+                                challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + String.valueOf(acct) + " " + getString(R.string.challenges_unit_acceleration));
                             }
                         });
                         challenge2.post(new Runnable() {
                             public void run() {
-                                challenge2.setText(getString(R.string.challenges_gemiddelde_versnelling) + " " + String.valueOf(averageAcceleration) + " " + getString(R.string.challenges_meter_seconde));
+                                challenge2.setText(getString(R.string.challenges_average_acceleration) + " " + String.valueOf(averageAcceleration) + " " + getString(R.string.challenges_unit_acceleration));
                             }
                         });
                         Thread.sleep(1000);
@@ -903,7 +903,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             doel = 3000;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_drivecircle) + " " + doel/1000 + " " + getString(R.string.challenges_kilometer));
+        uitleg.setText(getString(R.string.challenges_expl_drivecircle) + " " + doel/1000 + " " + getString(R.string.challenges_unit_distance));
         uitleg.setVisibility(View.VISIBLE);
         final double startbreedte = latitude;
         final double startlengte = longitude;
@@ -914,9 +914,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         final float startafstand = distance;
         afstand = 0f;
 
-        challenge1.setText(getString(R.string.challenges_afgelegde_weg) + " 0 m");
+        challenge1.setText(getString(R.string.challenges_distance_travelled) + " 0 m");
         challenge1.setVisibility(View.VISIBLE);
-        challenge2.setText(getString(R.string.challenges_vertrekpunt) + " 0 m");
+        challenge2.setText(getString(R.string.challenges_start_point) + " 0 m");
         challenge2.setVisibility(View.VISIBLE);
 
         new Thread(new Runnable() {
@@ -927,14 +927,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         afstand = distance - startafstand;
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_afgelegde_weg) + " " + afstand + " m");
+                                challenge1.setText(getString(R.string.challenges_distance_travelled) + " " + afstand + " m");
                             }
                         });
                         Location.distanceBetween(startbreedte, startlengte, latitude, longitude, results);
                         afwijking = results[0];
                         challenge2.post(new Runnable() {
                             public void run() {
-                                challenge2.setText(getString(R.string.challenges_vertrekpunt) + " " + afwijking + " m");
+                                challenge2.setText(getString(R.string.challenges_start_point) + " " + afwijking + " m");
                             }
                         });
                     }
@@ -974,9 +974,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             doel = 15;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_getacc) + " " + doel + " m/s²");
+        uitleg.setText(getString(R.string.challenges_expl_getacc) + " " + doel + " m/s²");
         uitleg.setVisibility(View.VISIBLE);
-        challenge1.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " " + getString(R.string.challenges_meter_seconde));
+        challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + acct + " " + getString(R.string.challenges_unit_acceleration));
         challenge1.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -984,7 +984,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     while (acct < doel) {
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_huidige_versnelling) + " " + acct + " m/s²");
+                                challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + acct + " m/s²");
                             }
                         });
                         Thread.sleep(500);
@@ -1024,7 +1024,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             doel = 50;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_altitudedifference1) + " " + doel + " " + getString(R.string.challenges_uitleg_altitudedifference2));
+        uitleg.setText(getString(R.string.challenges_expl_altitudedifference1) + " " + doel + " " + getString(R.string.challenges_expl_altitudedifference2));
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
 
@@ -1032,7 +1032,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 final double starthoogte = altitude;
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_huidig_hoogteverschil) + " 0 m");
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " 0 m");
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
@@ -1040,7 +1040,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     while (altitude - starthoogte <= doel) {
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_huidig_hoogteverschil) + " " + (altitude - starthoogte) + " m");
+                                challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
                             }
                         });
                         Thread.sleep(2500);
@@ -1080,7 +1080,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         }else {
             doel = 35;
         }
-        uitleg.setText(getString(R.string.challenges_uitleg_getspeed) + " " + doel + " km/h");
+        uitleg.setText(getString(R.string.challenges_expl_getspeed) + " " + doel + " km/h");
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
@@ -1126,20 +1126,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         int idx = r.nextInt(windrichtingen.length);
         zoekrichting = (windrichtingen[idx]);
 
-        uitleg.setText(getString(R.string.challenges_rij) + " " + doel + " " + getString(R.string.challenges_uitleg_drivedirection) + " " + zoekrichting);
+        uitleg.setText(getString(R.string.challenges_expl_drive) + " " + doel + " " + getString(R.string.challenges_expl_drivedirection) + " " + zoekrichting);
         uitleg.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             public void run() {
                 afstand = 0f;
                 challenge1.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_windrichting) + " " + windrichting + " " + getString(R.string.challenges_afwijkng) + " " + richting);
+                        challenge1.setText(getString(R.string.challenges_winddirection) + " " + windrichting + " " + getString(R.string.challenges_deviation) + " " + richting);
                         challenge1.setVisibility(View.VISIBLE);
                     }
                 });
                 challenge2.post(new Runnable() {
                     public void run() {
-                        challenge2.setText(getString(R.string.challenges_afgelegde_weg) + " " + afstand + " m");
+                        challenge2.setText(getString(R.string.challenges_distance_travelled) + " " + afstand + " m");
                         challenge2.setVisibility(View.VISIBLE);
                     }
                 });
@@ -1156,12 +1156,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         }
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_windrichting) + " " + windrichting + " " + getString(R.string.challenges_afwijkng) + " " + richting);
+                                challenge1.setText(getString(R.string.challenges_winddirection) + " " + windrichting + " " + getString(R.string.challenges_deviation) + " " + richting);
                             }
                         });
                         challenge2.post(new Runnable() {
                             public void run() {
-                                challenge2.setText(getString(R.string.challenges_afgelegde_weg) + " " + afstand + " m");
+                                challenge2.setText(getString(R.string.challenges_distance_travelled) + " " + afstand + " m");
                             }
                         });
                         Thread.sleep(500);

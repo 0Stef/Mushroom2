@@ -1,7 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
@@ -12,14 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
@@ -38,21 +30,15 @@ public class Register extends AppCompatActivity {
 
     private UserHandler userHandler;
     private DataBaseHandler2 dbHandler;
+    private ServerConnection conn;
 
     private static ArrayList<String> serverCheckResult;
-    String userName;
-    String password;
-    String country;
-    String city;
-    String firstName;
-    String lastName;
-
-
-    public static final String NO_RESULT = "something went wrong, please try again";
-    public static final String ADDED = "user added";
-    public static final String FAILED = "server connection failed";
-    public static final String AVAILABLE = "available";
-    public static final String TAKEN = "username taken";
+    private String userName;
+    private String password;
+    private String country;
+    private String city;
+    private String firstName;
+    private String lastName;
 
 
     @Override
@@ -62,6 +48,7 @@ public class Register extends AppCompatActivity {
 
         userHandler = new UserHandler(getApplicationContext());
         dbHandler = new DataBaseHandler2(getApplicationContext());
+        conn = new ServerConnection(getApplicationContext());
 
         userNameField = (EditText) findViewById(R.id.editText_register_username);
         passWordField = (EditText) findViewById(R.id.editText_register_password);
@@ -86,6 +73,8 @@ public class Register extends AppCompatActivity {
                         } catch (ExecutionException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                     }
@@ -122,16 +111,16 @@ public class Register extends AppCompatActivity {
         cityField.setHint("");
     }
 
-    public void registerUser() throws ExecutionException, InterruptedException {
+    public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         User user = new User();
 
-        userName = userNameField.getText().toString().replaceAll("[^a-zA-Z0-9]+", "");
-        password = passWordField.getText().toString().replaceAll("[^a-zA-Z0-9]+", "");
-        city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9]+", "");
-        country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9]+", "");
-        firstName  = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9]+","");
-        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9]+","");
+        userName = userNameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        password = passWordField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
 
         user.setInformation(userName, password, country, city, firstName, lastName);
 
@@ -143,42 +132,43 @@ public class Register extends AppCompatActivity {
             if (!password.isEmpty()) {
                 if (!userHandler.isExistingUser(userName)) {
 
-                    String usernameUnique = usernameServerUnique(userName);
+                    String nameCheck = conn.checkForName(userName);
 
-                    if (usernameUnique.equals(AVAILABLE)) {
+                    if (nameCheck.equals(conn.AVAILABLE)) {
 
-                        String result = createServerUser(user);
+                        String result = conn.createServerUser(user);
+                        if (result.equals(conn.ADDED)) {
+                            createLocalUser(user);
+                        }
                         System.out.println("createServerUser result = " + result);
 
-                        if (result.equals(ADDED)) {
+                        if (result.equals(conn.ADDED)) {
                             System.out.println("    -   [Server] User added");
                             finish();
-                        } else if (result.equals(NO_RESULT)) {
-                            statusField.setText(NO_RESULT);
+                        } else if (result.equals(conn.NOT_FOUND)) {
+                            statusField.setText(conn.NOT_FOUND);
                             statusField.requestFocus();
                             userNameField.setText("");
                             //userNameField.setHint(R.string.regist);
-                        } else if (result.equals(FAILED)) {
-                            statusField.setText(FAILED);
+                        } else if (result.equals(conn.FAILED)) {
+                            statusField.setText(conn.FAILED);
                             statusField.requestFocus();
                             //statusView.setText(R.string.login_text_wrong);
                             System.out.println("    -   [Server] Connection failed");
                         }
 
-
-                    }else if (usernameUnique.equals(TAKEN)){
+                    } else if (nameCheck.equals(conn.TAKEN)){
                         userNameField.setText("");
                         userNameField.setHint(R.string.register_text_exists);
                         userNameField.requestFocus();
                         System.out.println("    -   User already exists.");
 
-                    }else if (usernameUnique.equals(FAILED)){
-                        statusField.setText(FAILED);
+                    } else if (nameCheck.equals(conn.FAILED)){
+                        statusField.setText(conn.FAILED);
                         statusField.requestFocus();
                         //statusView.setText(R.string.login_text_wrong);
                         System.out.println("    -   [Server] Connection failed");
                     }
-
 
                 } else {
                     userNameField.setText("");
@@ -204,7 +194,7 @@ public class Register extends AppCompatActivity {
     }
 
 
-    public String usernameServerUnique(String username) throws ExecutionException, InterruptedException {
+    /*public String usernameServerUnique(String username) throws ExecutionException, InterruptedException {
 
         serverCheckResult =  new ArrayList<>();
         serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/register_check_username.php").get();
@@ -224,7 +214,7 @@ public class Register extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 
@@ -233,7 +223,7 @@ public class Register extends AppCompatActivity {
 
 
 
-    public String createServerUser(User user) throws ExecutionException, InterruptedException {
+    /*public String createServerUser(User user) throws ExecutionException, InterruptedException {
 
         serverCheckResult =  new ArrayList<>();
         serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/register_user.php").get();
@@ -259,9 +249,9 @@ public class Register extends AppCompatActivity {
         }
 
 
-    }
+    }*/
 
-    public ArrayList<String> putDataToServer(String URL){
+    /*public ArrayList<String> putDataToServer(String URL){
         ArrayList<String> status =  new ArrayList<>();
         try {
 
@@ -320,14 +310,5 @@ public class Register extends AppCompatActivity {
             serverCheckResult = result;
             //debugView.setText("post exec"+result.get(0));
         }
-    }
-
-
-
-
-
-
-
-
-
+    }*/
 }

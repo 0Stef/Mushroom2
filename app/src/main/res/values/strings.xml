@@ -23,9 +23,9 @@
     <string name="register_view_password">Enter your password</string>
     <string name="register_view_country">Enter your country</string>
     <string name="register_view_city">Enter your city</string>
-    <string name="register_button_register">Register!</string>
     <string name="register_view_firstname">Enter your first name</string>
     <string name="register_view_lastname">Enter your last name</string>
+    <string name="register_button_register">Register!</string>
 
     <string name="register_text_exists">Username already exists.</string>
     <string name="register_text_pass_needed">Password is needed.</string>
@@ -55,40 +55,36 @@
     <string name="challenges_view_3">Continue driving north for 1 km</string>
     <string name="challenges_button_start">Start challenge</string>
 
-    <string name="challenges_uitleg_keepspeed1">Keep a speed of</string>
-    <string name="challenges_uitleg_keepspeed2">km/h for 30 seconds</string>
-    <string name="time">Time:</string>
-    <string name="challenges_uitleg_keepacc1">Keep en acceleration of</string>
-    <string name="challenges_uitleg_keepacc2"> m/s² for 5 seconds</string>
-    <string name="challenges_uitleg_tempdiff1">Find a place with a temperature difference of</string>
-    <string name="challenges_celcius">°C</string>
-    <string name="challenges_starttemp">Starting temperature:</string>
-    <string name="challenges_huidige_temp">Current temperature: </string>
-    <string name="challenges_uitleg_averagespeed">This ride (at least five minutes long), get an average speed of</string>
-    <string name="challenges_kilometer_uur"> km/h</string>
-    <string name="challenges_uitleg_averageacc">This ride (at least five minutes long), get an average acceleration of</string>
-    <string name="challenges_meter_seconde"> m/s²</string>
-    <string name="challenges_huidige_versnelling">Current acceleration:</string>
-    <string name="challenges_gemiddelde_versnelling">Average acceleration: </string>
-    <string name="challenges_uitleg_drivecircle">Drive a circle of at least</string>
-    <string name="challenges_afgelegde_weg">Distance travelled:</string>
-    <string name="challenges_vertrekpunt">Distance to starting point:</string>
-    <string name="challenges_kilometer">km</string>
-    <string name="challenges_uitleg_getacc">Get an acceleration of</string>
-    <string name="challenges_uitleg_altitudedifference1">Climb</string>
-    <string name="challenges_uitleg_altitudedifference2">m</string>
-    <string name="challenges_huidig_hoogteverschil">Current hight difference:</string>
-    <string name="challenges_uitleg_getspeed">Get a speed of</string>
-    <string name="challenges_rij">Drive</string>
-    <string name="challenges_uitleg_drivedirection">km to the</string>
-    <string name="challenges_windrichting">Wind direction:</string>
-    <string name="challenges_afwijkng">Deviation:</string>
+    <string name="challenges_time">Time:</string>
+    <string name="challenges_start_temp">Starting temperature:</string>
+    <string name="challenges_curr_temp">Current temperature: </string>
+    <string name="challenges_curr_acceleration">Current acceleration:</string>
+    <string name="challenges_average_acceleration">Average acceleration: </string>
+    <string name="challenges_distance_travelled">Distance travelled:</string>
+    <string name="challenges_start_point">Distance to starting point:</string>
+    <string name="challenges_curr_height_diff">Current height difference:</string>
+    <string name="challenges_winddirection">Wind direction:</string>
+    <string name="challenges_deviation">Deviation:</string>
 
+    <string name="challenges_expl_keepspeed1">Keep a speed of</string>
+    <string name="challenges_expl_keepspeed2">km/h for 30 seconds</string>
+    <string name="challenges_expl_keepacc1">Keep en acceleration of</string>
+    <string name="challenges_expl_keepacc2"> m/s² for 5 seconds</string>
+    <string name="challenges_expl_tempdiff1">Find a place with a temperature difference of</string>
+    <string name="challenges_expl_averagespeed">This ride (at least five minutes long), get an average speed of</string>
+    <string name="challenges_expl_averageacc">This ride (at least five minutes long), get an average acceleration of</string>
+    <string name="challenges_expl_drivecircle">Drive a circle of at least</string>
+    <string name="challenges_expl_getacc">Get an acceleration of</string>
+    <string name="challenges_expl_altitudedifference1">Climb</string>
+    <string name="challenges_expl_altitudedifference2">m</string>
+    <string name="challenges_expl_getspeed">Get a speed of</string>
+    <string name="challenges_expl_drive">Drive</string>
+    <string name="challenges_expl_drivedirection">km to the</string>
 
-
-
-
-
+    <string name="challenges_unit_temperature">°C</string>
+    <string name="challenges_unit_velocity"> km/h</string>
+    <string name="challenges_unit_acceleration"> m/s²</string>
+    <string name="challenges_unit_distance">km</string>
 
 
     //Record acceleration
@@ -231,9 +227,6 @@
     <string name="statistics_not_found_accelerometer">No accelerometervalues found!</string>
     <string name="statistics_not_found_altitude">No altitudevalues found!</string>
 
-    <string name="statistics_text_day"> Day(s)</string>
-
-
 
     //Maps
     <string name="title_activity_maps">Map</string>
@@ -241,6 +234,7 @@
     <string name="maps_button_put">Put</string>
     <string name="maps_button_get">Get</string>
     <string name="maps_button_send">Send</string>
+
 
     //Ranking
     <string name="title_activity_ranking">Ranking</string>
@@ -252,8 +246,6 @@
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
 
-    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings</string>
-
 
 </resources>
