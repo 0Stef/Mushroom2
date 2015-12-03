@@ -81,10 +81,10 @@
     <string name="challenges_expl_drive">Drive</string>
     <string name="challenges_expl_drivedirection">km to the</string>
 
-    <string name="challenges_unit_temperature">°C</string>
-    <string name="challenges_unit_velocity"> km/h</string>
-    <string name="challenges_unit_acceleration"> m/s²</string>
-    <string name="challenges_unit_distance">km</string>
+    <string name="challenges_unit_temperature" translatable="false">°C</string>
+    <string name="challenges_unit_velocity" translatable="false"> km/h</string>
+    <string name="challenges_unit_acceleration" translatable="false"> m/s²</string>
+    <string name="challenges_unit_distance" translatable="false">km</string>
 
 
     //Record acceleration
@@ -222,6 +222,7 @@
     <string name="statistics_total_points">Total points.</string>
     <string name="statistics_route">Route Mapping.</string>
     <string name="statistics_highest_altitude">Highest Altitude.</string>
+    <string name="statistics_text_day">Days(s)</string>
 
     <string name="statistics_not_found_velocity">No velocityvalues found!</string>
     <string name="statistics_not_found_distance">No distancevalues found!</string>
@@ -245,7 +246,6 @@
 
     //Route mapping
     <string name="title_activity_route_mapping">Mapping</string>
-    <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
 
     <string name="action_settings">Settings</string>
 

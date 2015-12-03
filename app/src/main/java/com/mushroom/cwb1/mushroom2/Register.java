@@ -137,12 +137,10 @@ public class Register extends AppCompatActivity {
                     if (nameCheck.equals(conn.AVAILABLE)) {
 
                         String result = conn.createServerUser(user);
-                        if (result.equals(conn.ADDED)) {
-                            createLocalUser(user);
-                        }
                         System.out.println("createServerUser result = " + result);
 
                         if (result.equals(conn.ADDED)) {
+                            conn.createLocalUser(user);
                             System.out.println("    -   [Server] User added");
                             finish();
                         } else if (result.equals(conn.NOT_FOUND)) {
@@ -186,11 +184,6 @@ public class Register extends AppCompatActivity {
             userNameField.setHint(R.string.register_text_user_needed);
             userNameField.requestFocus();
         }
-    }
-
-    public void createLocalUser(User user) {
-        userHandler.addUser(user);
-        dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
     }
 
 
