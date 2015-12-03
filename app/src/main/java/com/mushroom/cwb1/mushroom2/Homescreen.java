@@ -8,19 +8,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.ExecutionException;
+
 public class Homescreen extends AppCompatActivity {
 
-    public String currentUser;
+    private String currentUser;
+    private ServerConnection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
-        currentUser = ServerConnection.getActiveUser();
+        conn = new ServerConnection(getApplicationContext());
+        currentUser = conn.getActiveUser();
 
         Button mpbutton = (Button)findViewById(R.id.button4);
-
         mpbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -31,7 +35,6 @@ public class Homescreen extends AppCompatActivity {
         );
 
         Button Achievementsbutton = (Button)findViewById(R.id.button2);
-
         Achievementsbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -42,7 +45,6 @@ public class Homescreen extends AppCompatActivity {
         );
 
         Button rankingbutton  = (Button)findViewById(R.id.ranglijsten);
-
         rankingbutton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v) {
@@ -53,7 +55,6 @@ public class Homescreen extends AppCompatActivity {
         );
 
         Button rideActivitybutton = (Button)findViewById(R.id.rideActivityButton);
-
         rideActivitybutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -64,7 +65,6 @@ public class Homescreen extends AppCompatActivity {
         );
 
         Button ChallengesButton = (Button)findViewById(R.id.ChallengesButton);
-
         ChallengesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -79,7 +79,6 @@ public class Homescreen extends AppCompatActivity {
 
 
         Button persoonlijkeActivitybutton = (Button)findViewById(R.id.persoonlijkestatistieken);
-
         persoonlijkeActivitybutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -90,15 +89,24 @@ public class Homescreen extends AppCompatActivity {
         );
 
         Button  LogOutButton = (Button)findViewById(R.id.logout);
-
         LogOutButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), Login_screen.class);
                         startActivity(i);
                         finish();
-                        ServerConnection.setActiveUser(DataBaseHandler2.TABLE_DEFAULT);
-                        System.out.println("    -   User is logged out: " + currentUser);
+                        conn.setActiveUser(DataBaseHandler2.TABLE_DEFAULT);
+                        try {
+                            conn.updateServerUser(currentUser);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } finally {
+                            System.out.println("    -   User is logged out: " + currentUser);
+                        }
                     }
                 }
         );

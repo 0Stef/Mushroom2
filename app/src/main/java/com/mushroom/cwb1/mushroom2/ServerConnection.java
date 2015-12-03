@@ -320,7 +320,7 @@ public class ServerConnection {
     private String writeToServer(User user) {
         //NOT_FOUND, SUCCES, FAILED
 
-        //TODO
+        //TODO functie die een reeds bestaande gebruiker overschrijft
         return null;
     }
 

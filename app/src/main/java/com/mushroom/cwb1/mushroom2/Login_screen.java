@@ -95,9 +95,10 @@ public class Login_screen extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
                 if (userHandler.isRightPassword(userName, passWord)) {
+                    conn.updateLocalUser(userName);
+                    conn.setActiveUser(userName);
                     checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
-                    conn.setActiveUser(userName);
                     startActivity(i);
                     System.out.println("    -   User is logged in: " + userName);
                     finish();
@@ -112,7 +113,7 @@ public class Login_screen extends AppCompatActivity {
                     usernameEdit.setText("");
                     passwordEdit.setText("");
                     usernameEdit.requestFocus();
-                    //System.out.print("    -   Cmd");
+                    //System.out.println("    -   Cmd");
                 } else {
                     String result = conn.installUser(userName);
                     if (result.equals(conn.ADDED)) {
