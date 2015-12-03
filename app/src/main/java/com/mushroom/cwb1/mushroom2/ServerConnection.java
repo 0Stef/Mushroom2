@@ -219,10 +219,18 @@ public class ServerConnection {
         }
     }
 
-    //Update user information on the server
+    //Update user information
 
-    public String updateServerUser(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        //NOT_FOUND, ADDED, FAILED
+    public String updateServerUser(String userName) throws InterruptedException, UnsupportedEncodingException, ExecutionException {
+        return updateUser(userName, true, false);
+    }
+
+    public String updateLocalUser(String userName) throws InterruptedException, UnsupportedEncodingException, ExecutionException {
+        return updateUser(userName, false, true);
+    }
+
+    public String updateUser(String userName, boolean server, boolean local) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        //NOT_FOUND, SUCCES, FAILED
         dataToPut = userName;
         serverCheckResult =  new ArrayList<>();
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
@@ -236,8 +244,10 @@ public class ServerConnection {
             User localUser = userHandler.getUserInformation(userName);
             User serverUser = createUserInstance(serverCheckResult);
             User updatedUser = getUpdatedUser(serverUser, localUser);
-            //TODO update server
-            return "";
+
+            if (server) writeToServer(updatedUser);
+            if (local) writeToLocal(updatedUser);
+            return SUCCES;
         } else {
             return FAILED;
         }
@@ -246,6 +256,7 @@ public class ServerConnection {
     private User getUpdatedUser(User serverUser, User localUser) {
         User updatedUser = serverUser;
 
+        updatedUser.setFirst_login(Math.min(serverUser.getFirst_login(), localUser.getFirst_login()));
         updatedUser.setLast_login(localUser.getLast_login());
 
         updatedUser.setTotal_distance(Math.max(serverUser.getTotal_distance(), localUser.getTotal_distance()));
@@ -254,52 +265,63 @@ public class ServerConnection {
         updatedUser.setHighest_acceleration(Math.max(serverUser.getHighest_acceleration(), localUser.getHighest_acceleration()));
         updatedUser.setHighest_altitude_diff(Math.max(serverUser.getHighest_altitude_diff(), localUser.getHighest_altitude_diff()));
 
-        /*updatedUser.setNb_won_challenges();
-        updatedUser.setNb_days_biked();
-        updatedUser.setTotal_points();
-        updatedUser.setDaily_points();
-        updatedUser.setWeekly_points();
+        updatedUser.setNb_won_challenges(Math.max(serverUser.getNb_won_challenges(), localUser.getNb_won_challenges()));
+        updatedUser.setNb_days_biked(Math.max(serverUser.getNb_days_biked(), localUser.getNb_days_biked()));
+        updatedUser.setTotal_points(Math.max(serverUser.getTotal_points(), localUser.getTotal_points()));
+        updatedUser.setDaily_points(Math.max(serverUser.getDaily_points(), localUser.getDaily_points()));
+        updatedUser.setWeekly_points(Math.max(serverUser.getWeekly_points(), localUser.getWeekly_points()));
 
-        updatedUser.setDrive_1_km();
-        updatedUser.setDrive_5_km();
-        updatedUser.setDrive_10_km();
-        updatedUser.setDrive_50_km();
-        updatedUser.setDrive_100_km();
-        updatedUser.setDrive_250_km();
-        updatedUser.setDrive_500_km();
-        updatedUser.setDrive_1000_km();
-        updatedUser.setDrive_5000_km();
+        updatedUser.setDrive_1_km(Math.max(serverUser.getDrive_1_km(), localUser.getDrive_1_km()));
+        updatedUser.setDrive_5_km(Math.max(serverUser.getDrive_5_km(), localUser.getDrive_5_km()));
+        updatedUser.setDrive_10_km(Math.max(serverUser.getDrive_10_km(), localUser.getDrive_10_km()));
+        updatedUser.setDrive_50_km(Math.max(serverUser.getDrive_50_km(), localUser.getDrive_50_km()));
+        updatedUser.setDrive_100_km(Math.max(serverUser.getDrive_100_km(), localUser.getDrive_100_km()));
+        updatedUser.setDrive_250_km(Math.max(serverUser.getDrive_250_km(), localUser.getDrive_250_km()));
+        updatedUser.setDrive_500_km(Math.max(serverUser.getDrive_500_km(), localUser.getDrive_500_km()));
+        updatedUser.setDrive_1000_km(Math.max(serverUser.getDrive_1000_km(), localUser.getDrive_1000_km()));
+        updatedUser.setDrive_5000_km(Math.max(serverUser.getDrive_5000_km(), localUser.getDrive_5000_km()));
 
-        updatedUser.setTopspeed_30();
-        updatedUser.setTopspeed_35();
-        updatedUser.setTopspeed_40();
-        updatedUser.setTopspeed_45();
-        updatedUser.setTopspeed_50();
+        updatedUser.setTopspeed_30(Math.max(serverUser.getTopspeed_30(), localUser.getTopspeed_30()));
+        updatedUser.setTopspeed_35(Math.max(serverUser.getTopspeed_35(), localUser.getTopspeed_35()));
+        updatedUser.setTopspeed_40(Math.max(serverUser.getTopspeed_40(), localUser.getTopspeed_40()));
+        updatedUser.setTopspeed_45(Math.max(serverUser.getTopspeed_45(), localUser.getTopspeed_45()));
+        updatedUser.setTopspeed_50(Math.max(serverUser.getTopspeed_50(), localUser.getTopspeed_50()));
 
-        updatedUser.setNb_challenge_1();
-        updatedUser.setNb_challenge_5();
-        updatedUser.setNb_challenge_10();
-        updatedUser.setNb_challenge_50();
-        updatedUser.setNb_challenge_200();
-        updatedUser.setNb_challenge_500();
+        updatedUser.setNb_challenge_1(Math.max(serverUser.getNb_challenge_1(), localUser.getNb_challenge_1()));
+        updatedUser.setNb_challenge_5(Math.max(serverUser.getNb_challenge_5(), localUser.getNb_challenge_5()));
+        updatedUser.setNb_challenge_10(Math.max(serverUser.getNb_challenge_10(), localUser.getNb_challenge_10()));
+        updatedUser.setNb_challenge_50(Math.max(serverUser.getNb_challenge_50(), localUser.getNb_challenge_50()));
+        updatedUser.setNb_challenge_200(Math.max(serverUser.getNb_challenge_200(), localUser.getNb_challenge_200()));
+        updatedUser.setNb_challenge_500(Math.max(serverUser.getNb_challenge_500(), localUser.getNb_challenge_500()));
 
-        updatedUser.setBiked_days_1();
-        updatedUser.setBiked_days_2();
-        updatedUser.setBiked_days_5();
-        updatedUser.setBiked_days_7();
-        updatedUser.setBiked_days_14();
-        updatedUser.setBiked_days_31();
-        updatedUser.setBiked_days_100();
+        updatedUser.setBiked_days_1(Math.max(serverUser.getBiked_days_1(), localUser.getBiked_days_1()));
+        updatedUser.setBiked_days_2(Math.max(serverUser.getBiked_days_2(), localUser.getBiked_days_2()));
+        updatedUser.setBiked_days_5(Math.max(serverUser.getBiked_days_5(), localUser.getBiked_days_5()));
+        updatedUser.setBiked_days_7(Math.max(serverUser.getBiked_days_7(), localUser.getBiked_days_7()));
+        updatedUser.setBiked_days_14(Math.max(serverUser.getBiked_days_14(), localUser.getBiked_days_14()));
+        updatedUser.setBiked_days_31(Math.max(serverUser.getBiked_days_31(), localUser.getBiked_days_31()));
+        updatedUser.setBiked_days_100(Math.max(serverUser.getBiked_days_100(), localUser.getBiked_days_100()));
 
-        updatedUser.setAlt_diff_10m();
-        updatedUser.setAlt_diff_25m();
-        updatedUser.setAlt_diff_50m();
-        updatedUser.setAlt_diff_100m();
+        updatedUser.setAlt_diff_10m(Math.max(serverUser.getAlt_diff_10m(), localUser.getAlt_diff_10m()));
+        updatedUser.setAlt_diff_25m(Math.max(serverUser.getAlt_diff_25m(), localUser.getAlt_diff_25m()));
+        updatedUser.setAlt_diff_50m(Math.max(serverUser.getAlt_diff_50m(), localUser.getAlt_diff_50m()));
+        updatedUser.setAlt_diff_100m(Math.max(serverUser.getAlt_diff_100m(), localUser.getAlt_diff_100m()));
 
-        updatedUser.setStart_the_game();
-        updatedUser.setGet_all_achievements();*/
+        updatedUser.setStart_the_game(Math.max(serverUser.getStart_the_game(), localUser.getStart_the_game()));
+        updatedUser.setGet_all_achievements(Math.max(serverUser.getGet_all_achievements(), localUser.getGet_all_achievements()));
 
         return updatedUser;
+    }
+
+    private void writeToLocal(User user) {
+        userHandler.overWrite(user);
+    }
+
+    private String writeToServer(User user) {
+        //NOT_FOUND, SUCCES, FAILED
+
+        //TODO
+        return null;
     }
 
     //Extra functions
