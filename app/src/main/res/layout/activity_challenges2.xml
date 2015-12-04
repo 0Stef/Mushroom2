@@ -7,135 +7,126 @@
     tools:context="com.mushroom.cwb1.mushroom2.Challenges">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get highest speed"
-        android:id="@+id/button_highest_speed"
-        android:layout_marginBottom="192dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Get highest speed"-->
+        <!--android:id="@+id/button_highest_speed"-->
+        <!--android:layout_marginBottom="192dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get highest acceleration"
-        android:id="@+id/button_highest_acceleration"
-        android:layout_marginTop="42dp"
-        android:layout_alignTop="@+id/button_highest_speed" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Get highest acceleration"-->
+        <!--android:id="@+id/button_highest_acceleration"-->
+        <!--android:layout_marginTop="42dp"-->
+        <!--android:layout_alignTop="@+id/button_highest_speed" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get highest_altitude difference"
-        android:id="@+id/button_highest_altitude_difference"
-        android:layout_below="@+id/button_highest_acceleration"
-        android:layout_alignLeft="@+id/button_highest_acceleration"
-        android:layout_alignStart="@+id/button_highest_acceleration" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Get highest_altitude difference"-->
+        <!--android:id="@+id/button_highest_altitude_difference"-->
+        <!--android:layout_below="@+id/button_highest_acceleration"-->
+        <!--android:layout_alignLeft="@+id/button_highest_acceleration"-->
+        <!--android:layout_alignStart="@+id/button_highest_acceleration" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get highest temperature"
-        android:id="@+id/button_highest_temperature"
-        android:layout_below="@+id/button_highest_altitude_difference"
-        android:layout_alignLeft="@+id/button_highest_altitude_difference"
-        android:layout_alignStart="@+id/button_highest_altitude_difference" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Get highest temperature"-->
+        <!--android:id="@+id/button_highest_temperature"-->
+        <!--android:layout_below="@+id/button_highest_altitude_difference"-->
+        <!--android:layout_alignLeft="@+id/button_highest_altitude_difference"-->
+        <!--android:layout_alignStart="@+id/button_highest_altitude_difference" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get_longest_distance"
-        android:id="@+id/button_longest_distance"
-        android:layout_below="@+id/button_highest_temperature"
-        android:layout_alignLeft="@+id/button_highest_temperature"
-        android:layout_alignStart="@+id/button_highest_temperature" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Get_longest_distance"-->
+        <!--android:id="@+id/button_longest_distance"-->
+        <!--android:layout_below="@+id/button_highest_temperature"-->
+        <!--android:layout_alignLeft="@+id/button_highest_temperature"-->
+        <!--android:layout_alignStart="@+id/button_highest_temperature" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Possible challenges"
-        android:id="@+id/text_list_challenges"
-        android:layout_above="@+id/button_highest_speed"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Current challenge:"
-        android:id="@+id/textView4"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Possible challenges"-->
+        <!--android:id="@+id/text_list_challenges"-->
+        <!--android:layout_above="@+id/button_highest_speed"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose your challenge below"
-        android:id="@+id/chosen_challenge"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp"
-        android:layout_alignRight="@+id/text_list_challenges"
-        android:layout_alignEnd="@+id/text_list_challenges" />
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Give in your enemy"
         android:id="@+id/textView5"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
         android:id="@+id/enemy_name"
-        android:layout_alignTop="@+id/chosen_challenge"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5"
-        android:layout_toEndOf="@+id/button_longest_distance"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
+        android:layout_below="@id/textView5"
+        />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose your challenge below"
+        android:id="@+id/chosen_challenge"
+        android:layout_below="@+id/enemy_name"
+        />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@id/chosen_challenge"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Current challenge:"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/spinner"
+        />
+
+     <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Invited by:"
         android:id="@+id/textView9"
-        android:layout_below="@+id/chosen_challenge"
-        android:layout_alignLeft="@+id/enemy_name"
-        android:layout_alignStart="@+id/enemy_name"
-        android:layout_marginTop="14dp" />
+        android:layout_below="@+id/textView4"
+        />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="No invites"
         android:id="@+id/text_invite"
         android:layout_below="@+id/textView9"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_marginTop="17dp" />
+        />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Accept invite"
         android:id="@+id/invite_button"
-        android:layout_above="@+id/text_list_challenges"
-        android:layout_alignLeft="@+id/text_invite"
-        android:layout_alignStart="@+id/text_invite" />
+        android:layout_below="@+id/text_invite"
+        android:background="@color/orangeApp"
+        />
 </RelativeLayout>

@@ -263,4 +263,13 @@
 
     <string name="action_settings">Settings</string>
 
+    //Challenges2
+    <string-array name="challengesDropDown">
+        <item>Get highest speed</item>
+        <item>Get highest acceleration</item>
+        <item>Get highest altitude difference</item>
+        <item>Get highest temperature</item>
+        <item>Get longest distance</item>
+    </string-array>
+
 </resources>

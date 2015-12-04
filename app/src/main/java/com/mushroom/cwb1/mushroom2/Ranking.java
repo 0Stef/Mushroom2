@@ -65,7 +65,7 @@ public class Ranking extends AppCompatActivity {
             String[] splitString = ResultUser.split("=");
             String name = splitString[0];
             String points = splitString[1];
-            UserRanking newUser = new UserRanking(name, points);
+            UserRanking newUser = new UserRanking(name, points, index + 1 + ".");
             adapter.add(newUser);
         }
 

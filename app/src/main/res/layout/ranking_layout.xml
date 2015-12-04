@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <TextView
-        android:id="@+id/rName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name" />
-    <TextView
-        android:id="@+id/rPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/rName"
-        android:text="Points" />
-</RelativeLayout>
+    android:layout_height="fill_parent"
+    android:stretchColumns="2">
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/rNbRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="end"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/rName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Name"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/rPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="end"
+            android:text="Points" />
+
+    </TableRow>
+
+</TableLayout>

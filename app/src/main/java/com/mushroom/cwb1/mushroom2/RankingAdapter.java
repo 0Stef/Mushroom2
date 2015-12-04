@@ -28,11 +28,13 @@ public class RankingAdapter extends ArrayAdapter<UserRanking> {
         // Lookup view for data population
         TextView rName = (TextView) convertView.findViewById(R.id.rName);
         TextView rPoints = (TextView) convertView.findViewById(R.id.rPoints);
+        TextView rNbRanking = (TextView) convertView.findViewById(R.id.rNbRanking);
 
 
         // Populate the data into the template view using the data object
         rName.setText(userranking.name);
         rPoints.setText(userranking.points);
+        rNbRanking.setText(userranking.nbRank);
 
         // Return the completed view to render on screen
         return convertView;
