@@ -81,5 +81,61 @@
         android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
+        android:layout_marginTop="19dp"
+        android:layout_alignRight="@+id/text_list_challenges"
+        android:layout_alignEnd="@+id/text_list_challenges" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Give in your enemy"
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/enemy_name"
+        android:layout_alignTop="@+id/chosen_challenge"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_toEndOf="@+id/button_longest_distance"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Invited by:"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/chosen_challenge"
+        android:layout_alignLeft="@+id/enemy_name"
+        android:layout_alignStart="@+id/enemy_name"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="No invites"
+        android:id="@+id/text_invite"
+        android:layout_below="@+id/textView9"
+        android:layout_alignLeft="@+id/textView9"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_marginTop="17dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept invite"
+        android:id="@+id/invite_button"
+        android:layout_above="@+id/text_list_challenges"
+        android:layout_alignLeft="@+id/text_invite"
+        android:layout_alignStart="@+id/text_invite" />
 </RelativeLayout>

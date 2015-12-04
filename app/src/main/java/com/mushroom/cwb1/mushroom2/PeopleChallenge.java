@@ -1,6 +1,8 @@
 package com.mushroom.cwb1.mushroom2;
 
 
+import java.util.Calendar;
+
 public class PeopleChallenge {
 
     private String user1;
@@ -18,7 +20,13 @@ public class PeopleChallenge {
 
     private String winner;
 
+
+
     public PeopleChallenge(){
+
+    }
+
+    public PeopleChallenge(String user1, String user2, String challenge_name){
 
     }
 
@@ -117,6 +125,11 @@ public class PeopleChallenge {
 
     public void setUser2_double(double user2_double) {
         this.user2_double = user2_double;
+    }
+
+    public String getServerPeeps() {
+        long millisec = Calendar.getInstance().getTimeInMillis();
+        return user1 + millisec + user2;
     }
 }
 

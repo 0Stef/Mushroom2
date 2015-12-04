@@ -91,8 +91,8 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         values.put(COLUMN_USER1_DOUBLE,challenge.getUser1_double());
         values.put(COLUMN_USER2_DOUBLE,challenge.getUser2_double());
         values.put(COLUMN_START,challenge.getStart());
-        values.put(COLUMN_END,challenge.getEnd());
-        values.put(COLUMN_WINNER,challenge.getWinner());
+        values.put(COLUMN_END, challenge.getEnd());
+        values.put(COLUMN_WINNER, challenge.getWinner());
 
         return values;
     }
@@ -123,6 +123,22 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         //De tabel wordt verwijderd uit de database.
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + CHALLENGE_TABLE);
+    }
+
+
+    public void addChallenge(PeopleChallenge challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(challenge);
+        db.insert(CHALLENGE_TABLE, null, values);
+
+        db.close();
+    }
+
+    public void deleteChallenge(String challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(CHALLENGE_TABLE, COLUMN_CHALLENGE_NAME + " = " + "'" + challenge + "'", null);
+        db.close();
     }
 
     public boolean isChallenged() {
