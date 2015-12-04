@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 
@@ -97,7 +96,7 @@ public class Login_screen extends AppCompatActivity {
                 if (userHandler.isRightPassword(userName, passWord)) {
                     conn.updateLocalUser(userName);
                     conn.setActiveUser(userName);
-                    checkDay(userName);
+                    userHandler.checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
                     startActivity(i);
                     System.out.println("    -   User is logged in: " + userName);
@@ -153,30 +152,6 @@ public class Login_screen extends AppCompatActivity {
         passwordEdit.setHint("");
         registerbutton.setBackgroundColor(Color.parseColor("#2d95ff"));
         statusView.setText("");
-    }
-
-    public void checkDay(String userName) {
-        User user = userHandler.getUserInformation(userName);
-
-        Calendar calendar = Calendar.getInstance();
-        long millisec = calendar.getTimeInMillis();
-
-        long lastMillisec = user.getLast_login();
-        Calendar lastCalendar = Calendar.getInstance();
-        lastCalendar.setTimeInMillis(lastMillisec);
-
-        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
-                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
-
-        if (!sameDay) {
-            int nb = user.getNb_days_biked();
-            user.setNb_days_biked(nb + 1);
-        }
-        user.setLast_login(millisec);
-
-        System.out.println("--- time in millisec: "+millisec);
-
-        userHandler.overWrite(user);
     }
 
     @Override

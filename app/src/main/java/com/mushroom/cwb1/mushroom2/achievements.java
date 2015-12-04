@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 
-import java.util.Calendar;
-
 public class achievements extends AppCompatActivity {
 
     UserHandler handler;
@@ -69,7 +67,7 @@ public class achievements extends AppCompatActivity {
         User user = handler.getUserInformation(currentUser);
 
         nb_compl_achievements = 0;
-        checkDay(currentUser);
+        handler.checkDay(currentUser);
 
 
         //Creating the progressbars
@@ -351,28 +349,6 @@ public class achievements extends AppCompatActivity {
         // TODO naar de server overschrijven
     }
 
-    public void checkDay(String userName) {
-        User user = handler.getUserInformation(userName);
-
-        Calendar calendar = Calendar.getInstance();
-        long millisec = calendar.getTimeInMillis();
-
-        long lastMillisec = user.getLast_login();
-        Calendar lastCalendar = Calendar.getInstance();
-        lastCalendar.setTimeInMillis(lastMillisec);
-
-        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
-                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
-
-        if (!sameDay) {
-            int nb = user.getNb_days_biked();
-            user.setNb_days_biked(nb + 1);
-        }
-        user.setLast_login(millisec);
-
-        handler.overWrite(user);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -571,9 +547,8 @@ public class achievements extends AppCompatActivity {
             user.setStart_the_game(1);
             user.setTotal_points(user.getTotal_points() + 10);
         }
+
         handler.overWrite(user);
-
-
     }
 }
 
