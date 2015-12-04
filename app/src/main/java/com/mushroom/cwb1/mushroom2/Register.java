@@ -112,6 +112,7 @@ public class Register extends AppCompatActivity {
     }
 
 
+
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         User user = new User();
