@@ -174,6 +174,8 @@ public class Login_screen extends AppCompatActivity {
         }
         user.setLast_login(millisec);
 
+        System.out.println("--- time in millisec: "+millisec);
+
         userHandler.overWrite(user);
     }
 

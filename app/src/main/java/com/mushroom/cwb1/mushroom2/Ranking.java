@@ -57,12 +57,14 @@ public class Ranking extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //TODO result naar 2 arraylists splitsen voor Stephanie
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,result);
 
         listView.setAdapter(adapter);
 
         ownNameTextview.setText(userRanking + " " + currentUser);
         System.out.println("user points: " + user.getTotal_points());
+        System.out.println("total pointss "+user.getTotal_points());
         ownPointsTextview.setText(Integer.toString(user.getTotal_points()));
 
 
@@ -214,7 +216,7 @@ public class Ranking extends AppCompatActivity {
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
             String output;
-            System.out.println("Output from Server .... \n");
+            //System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
                 status.add(output);

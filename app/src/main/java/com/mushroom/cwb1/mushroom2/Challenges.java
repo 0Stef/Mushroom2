@@ -40,10 +40,10 @@ public class Challenges extends AppCompatActivity {
         final TextView text_current_challenge = (TextView)findViewById(R.id.chosen_challenge);
 
         // TODO
-        if (peoplechallengehandler.CheckTableExist()){
+        /*if (peoplechallengehandler.CheckTableExist()){
             text_current_challenge.setText(current_challenge.getChallenge_name());
             disable_buttons();
-        }
+        }*/
 
         GetHighestSpeedButton.setOnClickListener(
                 new Button.OnClickListener() {

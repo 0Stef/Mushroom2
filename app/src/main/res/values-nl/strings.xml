@@ -30,7 +30,7 @@
     <string name="login_button_login">INLOGGEN</string>
     <string name="login_button_password">REGISTREREN</string>
     <string name="login_text_exist">Deze gebruikersnaam bestaat niet.</string>
-    <string name="login_text_found">Je account werd gevonden!</string>
+    <string name="login_text_found">Uw account werd gevonden! Omdat dit de eerste keer op dit apparaat is moet u nogmaals inloggen.</string>
     <string name="login_text_incorrect">Wachtwoord is incorrect.</string>
     <string name="login_text_needed">Een gebruikersnaam is nodig.</string>
     <string name="login_view_password">Vul je wachtwoord in</string>

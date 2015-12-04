@@ -120,7 +120,9 @@ public class Register extends AppCompatActivity {
         city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
+        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+
+
 
         user.setInformation(userName, password, country, city, firstName, lastName);
 
