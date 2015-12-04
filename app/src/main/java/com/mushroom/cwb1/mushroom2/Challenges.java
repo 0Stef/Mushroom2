@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Challenges extends AppCompatActivity {
 
+
+
+
 //    PeopleChallenge current_challenge;
 //
 //
