@@ -247,6 +247,10 @@
     //Route mapping
     <string name="title_activity_route_mapping">Mapping</string>
 
+    <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
+
+    <string name="challenges_huidige_versnelling">Huidige versnelling</string>
+
     <string name="action_settings">Settings</string>
     <string name="challenges_huidige_versnelling">Huidige versnelling</string>
     <string name="title_activity_people_challenge_handler">Challenge Handler</string>
