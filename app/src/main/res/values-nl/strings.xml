@@ -151,6 +151,10 @@
     <string name="statistics_not_found_altitude">Geen altitudewaarden!</string>
     <string name="statistics_altitude">Altitude</string>
     <string name="ride_text_succes">Succes!</string>
+    <string name="ride_text_current_speed">Huidige snelheid:</string>
+    <string name="ride_text_average_speed">Gemiddelde snelheid:</string>
+    <string name="ride_text_elapsed_time">Verlopen tijd:</string>
+    <string name="ride_text_distance">Afgelegde afstand:</string>
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
     <string name="statistics_days_biked">Dagen gefietst.</string>

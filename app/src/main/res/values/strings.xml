@@ -189,12 +189,17 @@
     //Ride
     <string name="title_activity_ride">RideActivity</string>
     <string name="ride_default_value" translatable="false">0,0</string>
+    <string name="ride_default_value2" translatable="false">0,00</string>
     <string name="time_default_value" translatable="false">00:00:00</string>
     <string name="ride_unit_speed" translatable="false">km/h</string>
     <string name="ride_unit_acceleration" translatable="false">m/s\u00B2</string>
-    <string name="ride_unit_distance" translatable="false">m</string>
+    <string name="ride_unit_distance" translatable="false">km</string>
     <string name="ride_unit_time" translatable="false">s</string>
     <string name="ride_text_succes">Succes!</string>
+    <string name="ride_text_current_speed">Current speed:</string>
+    <string name="ride_text_average_speed">Average speed:</string>
+    <string name="ride_text_elapsed_time">Elapsed time:</string>
+    <string name="ride_text_distance">Distance:</string>
 
     <string-array name="ride_difficulty">
         <item>Easy</item>
