@@ -111,6 +111,7 @@ public class Register extends AppCompatActivity {
         cityField.setHint("");
     }
 
+
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         User user = new User();
