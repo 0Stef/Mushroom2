@@ -123,6 +123,7 @@ public class Register extends AppCompatActivity {
         lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
 
         user.setInformation(userName, password, country, city, firstName, lastName);
+        setDefault();
 
         Calendar calendar = Calendar.getInstance();
         long millisec = calendar.getTimeInMillis();
@@ -184,6 +185,13 @@ public class Register extends AppCompatActivity {
             userNameField.setHint(R.string.register_text_user_needed);
             userNameField.requestFocus();
         }
+    }
+
+    private void setDefault() {
+        if (country.isEmpty()) country = "/";
+        if (city.isEmpty()) city = "/";
+        if (firstName.isEmpty()) firstName = "/";
+        if (lastName.isEmpty()) lastName = "/";
     }
 
 
