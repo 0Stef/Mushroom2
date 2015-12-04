@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -30,22 +31,25 @@ public class Challenges extends AppCompatActivity {
         userhandler = new UserHandler(getApplicationContext());
         User user = userhandler.getUserInformation(currentUser);
 
-
-
         // TODO lijst verschillende mogelijke tegenstanders
-
-
 
         final Button GetHighestSpeedButton = (Button)findViewById(R.id.button_highest_speed);
         final Button GetHighestAccelerationButton = (Button)findViewById(R.id.button_highest_acceleration);
         final Button GetHighestAltitudeDifferenceButton = (Button)findViewById(R.id.button_highest_altitude_difference);
         final Button GetLongestDistanceButton = (Button)findViewById(R.id.button_longest_distance);
+        final TextView text_current_challenge = (TextView)findViewById(R.id.chosen_challenge);
+
+        // TODO
+        if (peoplechallengehandler.CheckTableExist()){
+            text_current_challenge.setText(current_challenge.getChallenge_name());
+            disable_buttons();
+        }
 
         GetHighestSpeedButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Highest_Speed");
-
+                        text_current_challenge.setText("Highest speed");
                         disable_buttons();
                     }
                 }
@@ -55,6 +59,7 @@ public class Challenges extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Highest_Acceleration");
+                        text_current_challenge.setText("Highest acceleration");
 
                         disable_buttons();
                     }
@@ -65,7 +70,7 @@ public class Challenges extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Highest_Altitude");
-
+                        text_current_challenge.setText("Highest altitude");
 
                         disable_buttons();
                     }
@@ -76,6 +81,7 @@ public class Challenges extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         current_challenge.setChallenge_name("Longest_distance");
+                        text_current_challenge.setText("Longest distance");
 
                         disable_buttons();
                     }
@@ -108,20 +114,25 @@ public class Challenges extends AppCompatActivity {
                 }
 
             }
+
+            String winner;
+            winner  = current_challenge.getWinner();
+
+            if (currentUser.equals(winner)){
+                int prev_points = user.getTotal_points();
+                user.setTotal_points(prev_points + 3000);
+                // TODO ook de challenges tegen andere spelers??
+                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+
+            }
+            // TODO klopt dit???
+            peoplechallengehandler.deleteTable();
         }
 
-        String winner;
-        winner  = current_challenge.getWinner();
 
-        if (currentUser.equals(winner)){
-            int prev_points = user.getTotal_points();
-            user.setTotal_points(prev_points + 3000);
-            // ook de challenges tegen andere spelers??
-            user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-
-        }
 
         userhandler.overWrite(user);
+        peoplechallengehandler.overWrite(current_challenge);
 
 
     }
@@ -222,6 +233,8 @@ public class Challenges extends AppCompatActivity {
 
 
         }
+
+        peoplechallengehandler.overWrite(current_challenge);
 
     }
 

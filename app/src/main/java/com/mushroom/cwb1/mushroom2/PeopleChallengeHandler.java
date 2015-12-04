@@ -1,5 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -78,7 +79,32 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         }
     }
 
-    // Table
+    private ContentValues getContentValues(PeopleChallenge challenge) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER1,challenge.getUser1());
+        values.put(COLUMN_USER2,challenge.getUser2());
+        values.put(COLUMN_STATUS,challenge.getStatus());
+        values.put(COLUMN_CHALLENGE_NAME,challenge.getChallenge_name());
+        values.put(COLUMN_USER1_FLOAT,challenge.getUser1_float());
+        values.put(COLUMN_USER2_FLOAT,challenge.getUser2_float());
+        values.put(COLUMN_USER1_DOUBLE,challenge.getUser1_double());
+        values.put(COLUMN_USER2_DOUBLE,challenge.getUser2_double());
+        values.put(COLUMN_START,challenge.getStart());
+        values.put(COLUMN_END,challenge.getEnd());
+        values.put(COLUMN_WINNER,challenge.getWinner());
+
+        return values;
+    }
+
+    public void overWrite(PeopleChallenge challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = getContentValues(challenge);
+        String challenge_name = challenge.getChallenge_name();
+        db.update(CHALLENGE_TABLE, values, COLUMN_CHALLENGE_NAME + " = " + "'" + challenge_name + "'", null);
+
+        db.close();
+    }
 
     public void eraseTable() {
         //Alle opgeslagen metingen worden gewist; _id telt verder.
@@ -96,6 +122,12 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         //De tabel wordt verwijderd uit de database.
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + CHALLENGE_TABLE);
+    }
+
+    // TODO deze functie afwerken
+    public void CheckTableExist() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
     }
 
 
