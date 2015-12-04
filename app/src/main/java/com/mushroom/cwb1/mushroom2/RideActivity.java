@@ -127,6 +127,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private SimpleDateFormat dateF;
     private SimpleDateFormat timeF;
     private DecimalFormat decimalF;
+    private DecimalFormat decimalF3;
 
     TextView punten;
 
@@ -203,6 +204,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 //        timeF.setTimeZone(TimeZone.getDefault());
 
         decimalF = new DecimalFormat("0.0");
+        decimalF3 = new DecimalFormat("0.00");
 
     }
 
@@ -343,7 +345,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(elapsedTimeToSet);
 
-                textDistance.setText(decimalF.format(distance));
+                textDistance.setText(decimalF3.format(distance/1000));
                 textElapsedTime.setText(timeF.format(calendar.getTime()));
 
                 lastPoint = new LatLng(latitude, longitude);

@@ -124,7 +124,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ride_default_value"
+            android:text="@string/ride_default_value2"
             android:id="@+id/distance"
             android:layout_alignLeft="@id/center"
             android:layout_alignStart="@id/center"
