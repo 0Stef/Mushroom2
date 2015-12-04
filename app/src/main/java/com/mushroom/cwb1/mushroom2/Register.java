@@ -111,6 +111,8 @@ public class Register extends AppCompatActivity {
         cityField.setHint("");
     }
 
+
+
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         User user = new User();
@@ -120,7 +122,9 @@ public class Register extends AppCompatActivity {
         city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
+        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+
+
 
         setDefault();
         user.setInformation(userName, password, country, city, firstName, lastName);

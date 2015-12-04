@@ -40,11 +40,6 @@ public class Ranking extends AppCompatActivity {
         User user = uHandler.getUserInformation(currentUser);
 
         currentUser = ServerConnection.getActiveUser();
-        listView = (ListView) findViewById(R.id.listView);
-
-        TextView ownNameTextview = (TextView) findViewById(R.id.ownname);
-        TextView ownPointsTextview = (TextView) findViewById(R.id.ownpoints);
-
 
         try {
             System.out.println("getRanking() ");
@@ -57,13 +52,22 @@ public class Ranking extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,result);
-
+        // Construct the data source
+        ArrayList<UserRanking> arrayOfUsers = new ArrayList<UserRanking>();
+        // Create the adapter to convert the array to views
+        RankingAdapter adapter = new RankingAdapter(this, arrayOfUsers);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        ownNameTextview.setText(userRanking + " " + currentUser);
-        System.out.println("user points: " + user.getTotal_points());
-        ownPointsTextview.setText(Integer.toString(user.getTotal_points()));
+        for (int index = 0; index < result.size(); index++) {
+            String ResultUser = (String) result.get(index);
+            String[] splitString = ResultUser.split("=");
+            String name = splitString[0];
+            String points = splitString[1];
+            UserRanking newUser = new UserRanking(name, points);
+            adapter.add(newUser);
+        }
 
 
     }
@@ -152,7 +156,7 @@ public class Ranking extends AppCompatActivity {
 
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+            String input = URLEncoder.encode("userName", "UTF-8") + " = " + URLEncoder.encode(dataToPut, "UTF-8");
 
 
             OutputStream os = conn.getOutputStream();
@@ -202,7 +206,7 @@ public class Ranking extends AppCompatActivity {
 
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
+            String input = URLEncoder.encode("userName", "UTF-8") + " = " + URLEncoder.encode(dataToPut, "UTF-8");
 
 
             OutputStream os = conn.getOutputStream();
@@ -214,7 +218,7 @@ public class Ranking extends AppCompatActivity {
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
             String output;
-            System.out.println("Output from Server .... \n");
+            //System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
                 status.add(output);

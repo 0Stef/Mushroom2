@@ -91,6 +91,7 @@ public class ServerConnection {
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(dataToPut, "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/login_check_user.php").get();
 
+
         if (serverCheckResult.size() < 1) {
             return FAILED;
         } else if (serverCheckResult.get(0).equals("no results")) {
@@ -110,7 +111,14 @@ public class ServerConnection {
         for(int l = 1; l < COL; l++){
             String rawString = serverCheckResult.get(l);
             String[] splitString = rawString.split("=");
-            variabelenMap.put(splitString[0], splitString[1]);
+//            System.out.println("--- splitsrting:");
+//            System.out.println("--- rawstring:" + rawString + " splitstring lengt " + splitString.length);
+            if (1 == splitString.length){
+//                System.out.println("splitstring[1]=");
+                variabelenMap.put(splitString[0], " ");
+            }else{
+                variabelenMap.put(splitString[0], splitString[1]);
+            }
         }
 
         String user_name = variabelenMap.get("username");
@@ -245,8 +253,12 @@ public class ServerConnection {
             User serverUser = createUserInstance(serverCheckResult);
             User updatedUser = getUpdatedUser(serverUser, localUser);
 
-            if (server) writeToServer(updatedUser);
-            if (local) writeToLocal(updatedUser);
+            //if (server) writeToServer(updatedUser);
+            //if (local) writeToLocal(updatedUser);
+            writeToServer(updatedUser);
+            writeToLocal(updatedUser);
+
+
             return SUCCES;
         } else {
             return FAILED;
@@ -317,13 +329,83 @@ public class ServerConnection {
         userHandler.overWrite(user);
     }
 
-    private String writeToServer(User user) {
+    private String writeToServer(User user) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //NOT_FOUND, SUCCES, FAILED
+
+        System.out.println("write to server started");
+
+        updateGeneralInfo(user);
+        updateAchievements(user);
+
+        System.out.println("write to server ended");
 
         //TODO functie die een reeds bestaande gebruiker overschrijft
         return null;
     }
 
+    public void updateGeneralInfo(User user) throws UnsupportedEncodingException {
+        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(user.getUser_name(), "UTF-8")
+                + "&" + URLEncoder.encode("last_login", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getLast_login()), "UTF-8")
+                + "&" + URLEncoder.encode("total_distance", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTotal_distance()), "UTF-8")
+                + "&" + URLEncoder.encode("total_time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTotal_time()), "UTF-8")
+                + "&" + URLEncoder.encode("highest_speed", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(12345), "UTF-8")
+                + "&" + URLEncoder.encode("highest_acceleration", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getHighest_acceleration()), "UTF-8")
+                + "&" + URLEncoder.encode("highest_altitude_diff", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getHighest_altitude_diff()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_won_challenges", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_won_challenges()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_days_biked", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_days_biked()), "UTF-8")
+                + "&" + URLEncoder.encode("total_points", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTotal_points()), "UTF-8")
+                + "&" + URLEncoder.encode("daily_points", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDaily_points()), "UTF-8")
+                + "&" + URLEncoder.encode("weekly_points", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getWeekly_points()), "UTF-8");
+        new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_algemene_gegevens.php");
+
+    }
+
+
+    public void updateAchievements(User user) throws UnsupportedEncodingException {
+        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(user.getUser_name(), "UTF-8")
+                + "&" + URLEncoder.encode("drive_1_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_1_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_5_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_5_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_10_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_10_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_50_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_50_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_100_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_100_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_250_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_250_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_500_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_500_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_1000_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_1000_km()), "UTF-8")
+                + "&" + URLEncoder.encode("drive_5000_km", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDrive_5000_km()), "UTF-8")
+
+                + "&" + URLEncoder.encode("topspeed_30", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTopspeed_30()), "UTF-8")
+                + "&" + URLEncoder.encode("topspeed_35", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTopspeed_35()), "UTF-8")
+                + "&" + URLEncoder.encode("topspeed_40", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTopspeed_40()), "UTF-8")
+                + "&" + URLEncoder.encode("topspeed_45", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTopspeed_45()), "UTF-8")
+                + "&" + URLEncoder.encode("topspeed_50", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTopspeed_50()), "UTF-8")
+
+                + "&" + URLEncoder.encode("nb_challenge_1", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_1()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_challenge_5", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_5()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_challenge_10", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_10()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_challenge_50", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_50()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_challenge_200", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_200()), "UTF-8")
+                + "&" + URLEncoder.encode("nb_challenge_500", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_challenge_500()), "UTF-8")
+
+                + "&" + URLEncoder.encode("biked_days_1", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_1()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_2", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_2()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_5", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_5()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_7", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_7()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_14", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_14()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_31", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_31()), "UTF-8")
+                + "&" + URLEncoder.encode("biked_days_100", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getBiked_days_100()), "UTF-8")
+
+                + "&" + URLEncoder.encode("alt_diff_10m", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getAlt_diff_10m()), "UTF-8")
+                + "&" + URLEncoder.encode("alt_diff_25m", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getAlt_diff_25m()), "UTF-8")
+                + "&" + URLEncoder.encode("alt_diff_50m", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getAlt_diff_50m()), "UTF-8")
+                + "&" + URLEncoder.encode("alt_diff_100m", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getAlt_diff_100m()), "UTF-8")
+
+                + "&" + URLEncoder.encode("start_the_game", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getStart_the_game()), "UTF-8")
+                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8")
+
+                ;
+        new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_achievements.php");
+
+    }
     //Extra functions
 
     public ArrayList<String> putDataToServer(String URL, String input){
