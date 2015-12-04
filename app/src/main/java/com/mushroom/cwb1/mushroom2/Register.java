@@ -122,8 +122,8 @@ public class Register extends AppCompatActivity {
         firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
 
-        user.setInformation(userName, password, country, city, firstName, lastName);
         setDefault();
+        user.setInformation(userName, password, country, city, firstName, lastName);
 
         Calendar calendar = Calendar.getInstance();
         long millisec = calendar.getTimeInMillis();
