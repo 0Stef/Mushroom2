@@ -122,6 +122,7 @@ public class Register extends AppCompatActivity {
         firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
         lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + " + " ", "");
 
+        setDefault();
         user.setInformation(userName, password, country, city, firstName, lastName);
 
         Calendar calendar = Calendar.getInstance();
@@ -186,6 +187,12 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    private void setDefault() {
+        if (country.isEmpty()) country = "/";
+        if (city.isEmpty()) city = "/";
+        if (firstName.isEmpty()) firstName = "/";
+        if (lastName.isEmpty()) lastName = "/";
+    }
 
     /*public String usernameServerUnique(String username) throws ExecutionException, InterruptedException {
 

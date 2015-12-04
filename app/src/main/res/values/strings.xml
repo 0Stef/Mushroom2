@@ -65,6 +65,7 @@
     <string name="challenges_curr_height_diff">Current height difference:</string>
     <string name="challenges_winddirection">Wind direction:</string>
     <string name="challenges_deviation">Deviation:</string>
+    <string name="challenges_huidige_versnelling">Huidige versnelling</string>
 
     <string name="challenges_expl_keepspeed1">Keep a speed of</string>
     <string name="challenges_expl_keepspeed2">km/h for 30 seconds</string>
@@ -224,9 +225,13 @@
     <string name="statistics_total_time">Total time.</string>
     <string name="statistics_total_distance">Total distance.</string>
     <string name="statistics_total_points">Total points.</string>
-    <string name="statistics_route">Route Mapping.</string>
+    <string name="statistics_route">Route Mapping</string>
     <string name="statistics_highest_altitude">Highest Altitude.</string>
     <string name="statistics_text_day">Days(s)</string>
+    <string name="Date">Date.</string>
+    <string name="Previous_ride">Earlier Ride</string>
+    <string name="Newer_ride">Newer Ride</string>
+
 
     <string name="statistics_not_found_velocity">No velocityvalues found!</string>
     <string name="statistics_not_found_distance">No distancevalues found!</string>
@@ -253,7 +258,7 @@
 
     <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
 
-    <string name="challenges_huidige_versnelling">Huidige versnelling</string>
+
 
     <string name="action_settings">Settings</string>
 

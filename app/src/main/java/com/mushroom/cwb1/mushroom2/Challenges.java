@@ -40,42 +40,42 @@ public class Challenges extends AppCompatActivity {
         final TextView text_current_challenge = (TextView)findViewById(R.id.chosen_challenge);
 
         // TODO
-        if (peoplechallengehandler.CheckTableExist()){
-            text_current_challenge.setText(current_challenge.getChallenge_name());
-            disable_buttons();
-        }
-
-        GetHighestSpeedButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        current_challenge.setChallenge_name("Highest_Speed");
-                        text_current_challenge.setText("Highest speed");
-                        disable_buttons();
-                    }
-                }
-        );
-
-        GetHighestAccelerationButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        current_challenge.setChallenge_name("Highest_Acceleration");
-                        text_current_challenge.setText("Highest acceleration");
-
-                        disable_buttons();
-                    }
-                }
-        );
-
-        GetHighestAltitudeDifferenceButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        current_challenge.setChallenge_name("Highest_Altitude");
-                        text_current_challenge.setText("Highest altitude");
-
-                        disable_buttons();
-                    }
-                }
-        );
+//        if (peoplechallengehandler.CheckTableExist()){
+//            text_current_challenge.setText(current_challenge.getChallenge_name());
+//            disable_buttons();
+//        }
+//
+//        GetHighestSpeedButton.setOnClickListener(
+//                new Button.OnClickListener() {
+//                    public void onClick(View v) {
+//                        current_challenge.setChallenge_name("Highest_Speed");
+//                        text_current_challenge.setText("Highest speed");
+//                        disable_buttons();
+//                    }
+//                }
+//        );
+//
+//        GetHighestAccelerationButton.setOnClickListener(
+//                new Button.OnClickListener() {
+//                    public void onClick(View v) {
+//                        current_challenge.setChallenge_name("Highest_Acceleration");
+//                        text_current_challenge.setText("Highest acceleration");
+//
+//                        disable_buttons();
+//                    }
+//                }
+//        );
+//
+//        GetHighestAltitudeDifferenceButton.setOnClickListener(
+//                new Button.OnClickListener() {
+//                    public void onClick(View v) {
+//                        current_challenge.setChallenge_name("Highest_Altitude");
+//                        text_current_challenge.setText("Highest altitude");
+//
+//                        disable_buttons();
+//                    }
+//                }
+//        );
 
         GetLongestDistanceButton.setOnClickListener(
                 new Button.OnClickListener() {

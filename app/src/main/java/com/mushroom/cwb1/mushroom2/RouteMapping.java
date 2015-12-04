@@ -25,9 +25,9 @@ public class RouteMapping extends FragmentActivity {
         setContentView(R.layout.activity_route_mapping);
 
         currentUser = getIntent().getStringExtra("username");
+        nbRide = getIntent().getIntExtra("nbRide", nbRide);
 
         DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
-        nbRide=handler.getGreatestRideID();
         list = handler.getList(handler.getAllThisRide(nbRide));
 
         setUpMapIfNeeded();
