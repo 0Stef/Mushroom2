@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,9 +60,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     float distanceToPrev = 0f;
     long timeToPrev = 0l;
     private long elapsedTime = 0l;
+    private long elapsedTimeToSet = -3600000l;
     private float distance = 0f;
     private float maxSpeed = 0f;
-    private float maxAcceleration = 0f;
+//    private float maxAcceleration = 0f;
     private float averageSpeed = 0f;
     private float averageAcceleration = 0f;
     private float speed = 0f;
@@ -191,13 +193,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
         elapsedTime = 0;
+        elapsedTimeToSet = -3600000l;
         distance = 0;
 
         dateF = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
         dateF.setTimeZone(TimeZone.getDefault());
 
         timeF = new SimpleDateFormat("HH:mm:ss", Locale.ENGLISH);
-        timeF.setTimeZone(TimeZone.getDefault());
+//        timeF.setTimeZone(TimeZone.getDefault());
 
         decimalF = new DecimalFormat("0.0");
 
@@ -282,9 +285,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
+                    elapsedTime = 0;
+                    elapsedTimeToSet = -3600000l;
+                    averageSpeed = 0;
+                    timeToPrev = 0;
+                    distance = 0;
+                    distanceToPrev = 0;
+                    maxSpeed = 0f;
+                    averageAcceleration = 0f;
                     customHandler.postDelayed(updateTimerThread, 0);
                     challengebutton.setVisibility(View.VISIBLE);
                     moeilijkheidsgraad.setVisibility(View.VISIBLE);
+                    uitleg.setVisibility(View.INVISIBLE);
+                    challenge1.setVisibility(View.INVISIBLE);
+                    challenge2.setVisibility(View.INVISIBLE);
                     wachten.setVisibility(View.INVISIBLE);
                     eerstekeer = false;
                 }
@@ -322,14 +336,15 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 }
 
-
                 elapsedTime = elapsedTime + timeToPrev;
+                elapsedTimeToSet = elapsedTimeToSet + timeToPrev;
                 distance = distance + distanceToPrev;
-                Date elapsed;
-                elapsed = new Date(elapsedTime/1000);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(elapsedTimeToSet);
 
                 textDistance.setText(decimalF.format(distance));
-                textElapsedTime.setText(timeF.format(elapsed));
+                textElapsedTime.setText(timeF.format(calendar.getTime()));
 
                 lastPoint = new LatLng(latitude, longitude);
 
@@ -399,11 +414,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void stoprecording(View view) {
-
+        eerstekeer = true;
 
         startrecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
+        moeilijkheidsgraad.setVisibility(View.INVISIBLE);
+        wachten.setVisibility(View.INVISIBLE);
+
 
 
         mSensorManager.unregisterListener(this);
@@ -891,14 +909,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void driveCircle(final int moeilijkheidsgraad){
         final int doel;
+        final double tekst;
         if (moeilijkheidsgraad == 1){
             doel = 500;
+            tekst = 0.5;
         } else if (moeilijkheidsgraad == 2){
             doel = 1000;
+            tekst = 1;
         }else {
             doel = 3000;
+            tekst = 3;
         }
-        uitleg.setText(getString(R.string.challenges_expl_drivecircle) + " " + doel/1000 + " " + getString(R.string.challenges_unit_distance));
+        uitleg.setText(getString(R.string.challenges_expl_drivecircle) + " " + tekst + " " + getString(R.string.challenges_unit_distance));
         uitleg.setVisibility(View.VISIBLE);
         final double startbreedte = latitude;
         final double startlengte = longitude;
