@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class UserHandler extends SQLiteOpenHelper {
@@ -545,5 +546,37 @@ public class UserHandler extends SQLiteOpenHelper {
         object.put(COLUMN_NB_DAYS_BIKED, user.getNb_days_biked());
 
         return object;
+    }
+
+    //Achievements
+
+    public void checkDay(String userName) {
+        User user = this.getUserInformation(userName);
+
+        Calendar calendar = Calendar.getInstance();
+        long millisec = calendar.getTimeInMillis();
+
+        long lastMillisec = user.getLast_login();
+        Calendar lastCalendar = Calendar.getInstance();
+        lastCalendar.setTimeInMillis(lastMillisec);
+
+        boolean sameDay = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
+                calendar.get(Calendar.DAY_OF_YEAR) == lastCalendar.get(Calendar.DAY_OF_YEAR);
+
+        if (!sameDay) {
+            int nb = user.getNb_days_biked();
+            user.setNb_days_biked(nb + 1);
+            user.setDaily_points(0);
+        }
+
+        boolean sameWeek = calendar.get(Calendar.YEAR) == lastCalendar.get(Calendar.YEAR) &&
+                calendar.get(Calendar.WEEK_OF_YEAR) == lastCalendar.get(Calendar.WEEK_OF_YEAR);
+
+        if (!sameWeek) {
+            user.setWeekly_points(0);
+        }
+
+        user.setLast_login(millisec);
+        this.overWrite(user);
     }
 }
