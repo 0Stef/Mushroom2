@@ -194,7 +194,6 @@ public class Register extends AppCompatActivity {
         if (lastName.isEmpty()) lastName = "/";
     }
 
-
     /*public String usernameServerUnique(String username) throws ExecutionException, InterruptedException {
 
         serverCheckResult =  new ArrayList<>();
