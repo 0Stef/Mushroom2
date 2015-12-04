@@ -3,6 +3,7 @@ package com.mushroom.cwb1.mushroom2;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,10 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Polyline;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Persoonlijke_statistieken extends AppCompatActivity {
@@ -35,6 +39,8 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
     private float rFlHighestAcceleration;
     private double rDbHighestAltitude;
     private long rLgTotatTime;
+    private long rLgFirstTime;
+    private DataBaseHandler2 handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +74,78 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         TextView BikedDays= (TextView) findViewById(R.id.BikedDays);
         BikedDays.setText(Integer.toString(user.getNb_days_biked()));
 
-
-        //Last ride statistics
-        DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
+        handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         nbRide = handler.getGreatestRideID();
-        list = handler.getList(handler.getAllThisRide(nbRide));
-        ArrayList<Integer> distanceList = handler.getDistanceList(handler.getAllThisRide(nbRide));
+        CreateRideStatistics(nbRide);
+
+        Button PreviousRide = (Button)findViewById(R.id.PreviousRide);
+
+        PreviousRide.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        if (nbRide > 0) {
+                            nbRide -= 1;
+                        }
+                        CreateRideStatistics(nbRide);
+                    }
+                }
+        );
+
+        Button NewerRide = (Button)findViewById(R.id.NewerRide);
+
+        NewerRide.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        if (nbRide < handler.getGreatestRideID()) {
+                            nbRide += 1;
+                        }
+                        CreateRideStatistics(nbRide);
+                    }
+                }
+        );
+
+        Button RouteMapping = (Button)findViewById(R.id.RouteMapping);
+
+        RouteMapping.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), RouteMapping.class);
+                        i.putExtra("username", currentUser);
+                        i.putExtra("nbRide", nbRide);
+                        startActivity(i);
+                    }
+                }
+        );
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_persoonlijke_statistieken, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void CreateRideStatistics(int nbRideLocal) {
+        //Last ride statistics
+        list = handler.getList(handler.getAllThisRide(nbRideLocal));
+        ArrayList<Integer> distanceList = handler.getDistanceList(handler.getAllThisRide(nbRideLocal));
 
         ArrayList<String> xVal = new ArrayList<String>();
         ArrayList<Entry> yVelocity = new ArrayList<Entry>();
@@ -88,11 +160,14 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rFlHighestAcceleration = 0;
         rDbHighestAltitude = 0;
         rLgTotatTime = 0;
+        rLgFirstTime = 0;
         if (list.size() != 0){
             dbRow FirstRow = (dbRow) list.get(0);
             dbRow LastRow = (dbRow) list.get(list.size() - 1);
             rLgTotatTime = LastRow.getMillisec() - FirstRow.getMillisec();
             rIntTotalDistance = distanceList.get(distanceList.size() - 1);
+            rLgFirstTime = FirstRow.getMillisec();
+
             for (int index = 0; index < list.size(); index++) {
                 dbRow row = (dbRow) list.get(index);
 
@@ -130,6 +205,9 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         TextView rTotalTime = (TextView) findViewById(R.id.rTotalTime);
         rTotalTime.setText(Float.toString(rLgTotatTime/3600000f)+" h");
+
+        TextView rFirstTime = (TextView) findViewById(R.id.rDate);
+        rFirstTime.setText(DateFormat.getDateInstance().format(rLgFirstTime));
 
 
         // Velocity chart
@@ -299,41 +377,5 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chAccelerometerZ.setData(dataAccelerometerZ);
         chAccelerometerZ.invalidate();
         chAccelerometerZ.animateY(3000);
-
-        Button RouteMapping = (Button)findViewById(R.id.RouteMapping);
-
-        RouteMapping.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), RouteMapping.class);
-                        i.putExtra("username", currentUser);
-                        startActivity(i);
-                    }
-                }
-        );
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_persoonlijke_statistieken, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
