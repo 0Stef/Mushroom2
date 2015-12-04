@@ -2,6 +2,7 @@ package com.mushroom.cwb1.mushroom2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -124,11 +125,14 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CHALLENGE_TABLE);
     }
 
-    // TODO deze functie afwerken
-    public void CheckTableExist() {
+    public boolean isChallenged() {
         SQLiteDatabase db = this.getReadableDatabase();
 
+        String searchQuery = "SELECT count(*) FROM table";
+        Cursor cursor = db.rawQuery(searchQuery, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+
+        return count > 0;
     }
-
-
 }
