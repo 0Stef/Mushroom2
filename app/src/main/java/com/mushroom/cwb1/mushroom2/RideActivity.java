@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,6 +44,8 @@ import java.util.TimeZone;
 public class RideActivity extends AppCompatActivity implements SensorEventListener, AdapterView.OnItemSelectedListener {
 
     private GoogleMap mMap;
+
+    private ServerConnection conn;
 
     TextView textCurrentSpeed;
     TextView textAverageSpeed;
@@ -113,6 +116,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
     private long time;
+    private float accGps;
     private float accx;
     private float accy;
     private float accz;
@@ -149,6 +153,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_ride);
 
         currentUser = ServerConnection.getActiveUser();
+
 
         setUpMapIfNeeded();
 
@@ -333,7 +338,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 //GPS controle acceleratie
                 if (eerstekeer = false){
-                    float accGps = (location.getSpeed()+previousLocation.getSpeed())/timeToPrev;
+                    accGps = (location.getSpeed()+previousLocation.getSpeed())/timeToPrev;
                     System.out.println("gps acc "+Float.toString(accGps)+" accelerometer "+accy);
 
                 }
@@ -360,7 +365,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-                dbRow punt = new dbRow(currentRideId, time, accx, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz);
+                dbRow punt = new dbRow(currentRideId, time, accGps, accy, accz, speed, longitude, latitude, altitude, magnfx, magnfy, magnfz);
                 handler.addPoint(punt);
 
 
@@ -408,15 +413,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
         // kan op netwerk locatie zoeken en op GPS of op beiede, voor fiets is GPS het interessantst
          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-        //TODO mag weg na testperiode
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
-
+        
     }
 
-    public void stoprecording(View view) {
+    public void stoprecording(View view) throws UnsupportedEncodingException {
         eerstekeer = true;
+        firstLocationSet = false;
 
         startrecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
@@ -461,6 +463,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
+
+        conn.updateGeneralInfo(user);
 
 
 

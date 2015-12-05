@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,8 +42,8 @@ public class Ranking extends AppCompatActivity {
         try {
             System.out.println("getRanking() ");
             result = getRanking();
-            System.out.println("getUserRanking(currentUser)");
-            userRanking = getUserRanking(currentUser);
+            //System.out.println("getUserRanking(currentUser)");
+            //userRanking = getUserRanking(currentUser);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -60,19 +58,26 @@ public class Ranking extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        for (int index = 0; index < result.size(); index++) {
-            String ResultUser = (String) result.get(index);
-            String[] splitString = ResultUser.split("=");
-            String name = splitString[0];
-            String points = splitString[1];
-            if (name.equals(currentUser)) {
-                UserRanking newUser = new UserRanking(name, points, index + 1 + ".", true);
+        if (result.size()>0) {
+            if (result.get(0).equals("Nothing to show...")){
+                UserRanking newUser = new UserRanking("Nothing to show... Please check your internet connection.","","",false);
                 adapter.add(newUser);
-            } else {
-                UserRanking newUser = new UserRanking(name, points, index + 1 + ".", false);
-                adapter.add(newUser);
+            }            else{
+            for (int index = 0; index < result.size(); index++) {
+                String ResultUser = (String) result.get(index);
+                String[] splitString = ResultUser.split("=");
+                String name = splitString[0];
+                String points = splitString[1];
+                if (name.equals(currentUser)) {
+                    UserRanking newUser = new UserRanking(name, points, index + 1 + ".", true);
+                    adapter.add(newUser);
+                } else {
+                    UserRanking newUser = new UserRanking(name, points, index + 1 + ".", false);
+                    adapter.add(newUser);
+                }
             }
 
+            }
         }
 
 
@@ -124,7 +129,7 @@ public class Ranking extends AppCompatActivity {
     }
 
 
-    private String getUserRanking(String userName) throws ExecutionException, InterruptedException {
+    /*private String getUserRanking(String userName) throws ExecutionException, InterruptedException {
         dataToPut = userName;
         String userRank;
         serverRankingResult = new ArrayList<>();
@@ -149,7 +154,7 @@ public class Ranking extends AppCompatActivity {
             return "-";
         }
 
-    }
+    }*/
 
     public ArrayList<String> putDataToServerone(String URL){
         ArrayList<String> status =  new ArrayList<>();
@@ -201,7 +206,7 @@ public class Ranking extends AppCompatActivity {
         }
     }
 
-    public ArrayList<String> putDataToServertwo(String URL){
+   /* public ArrayList<String> putDataToServertwo(String URL){
         ArrayList<String> status =  new ArrayList<>();
         try {
 
@@ -249,7 +254,7 @@ public class Ranking extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> result) {
             serverRankingResult = result;
         }
-    }
+    }*/
 
 
 

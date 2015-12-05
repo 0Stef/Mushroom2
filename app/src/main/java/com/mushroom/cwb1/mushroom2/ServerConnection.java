@@ -348,7 +348,7 @@ public class ServerConnection {
                 + "&" + URLEncoder.encode("last_login", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getLast_login()), "UTF-8")
                 + "&" + URLEncoder.encode("total_distance", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTotal_distance()), "UTF-8")
                 + "&" + URLEncoder.encode("total_time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getTotal_time()), "UTF-8")
-                + "&" + URLEncoder.encode("highest_speed", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(12345), "UTF-8")
+                + "&" + URLEncoder.encode("highest_speed", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getHighest_speed()), "UTF-8")
                 + "&" + URLEncoder.encode("highest_acceleration", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getHighest_acceleration()), "UTF-8")
                 + "&" + URLEncoder.encode("highest_altitude_diff", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getHighest_altitude_diff()), "UTF-8")
                 + "&" + URLEncoder.encode("nb_won_challenges", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getNb_won_challenges()), "UTF-8")
