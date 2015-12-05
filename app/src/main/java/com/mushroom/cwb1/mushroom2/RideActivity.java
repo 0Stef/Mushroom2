@@ -464,7 +464,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
 
-        conn.updateGeneralInfo(user);
+        //TODO volgende lijn laten werken
+        //conn.updateGeneralInfo(user);
 
 
 
