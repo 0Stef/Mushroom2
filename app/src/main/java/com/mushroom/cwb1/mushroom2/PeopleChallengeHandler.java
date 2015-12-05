@@ -80,7 +80,7 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         }
     }
 
-    private ContentValues getContentValues(PeopleChallenge challenge) {
+    private ContentValues getContentValues(Challenge challenge) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER1,challenge.getUser1());
         values.put(COLUMN_USER2,challenge.getUser2());
@@ -97,7 +97,7 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
         return values;
     }
 
-    public void overWrite(PeopleChallenge challenge) {
+    public void overWrite(Challenge challenge) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = getContentValues(challenge);
@@ -126,7 +126,7 @@ public class PeopleChallengeHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addChallenge(PeopleChallenge challenge) {
+    public void addChallenge(Challenge challenge) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(challenge);
         db.insert(CHALLENGE_TABLE, null, values);

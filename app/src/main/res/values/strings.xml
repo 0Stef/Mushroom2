@@ -264,6 +264,7 @@
 
     <string name="action_settings">Settings</string>
 
+
     //Challenges2
     <string-array name="challengesDropDown">
         <item>Get highest speed</item>
@@ -272,5 +273,12 @@
         <item>Get highest temperature</item>
         <item>Get longest distance</item>
     </string-array>
+
+
+    //Peeps
+    <string name="peeps_highest_speed">"Highest speed"</string>
+    <string name="peeps_highest_acceleration">Highest acceleration</string>
+    <string name="peeps_highest_altitude">Highest altitude</string>
+    <string name="peeps_greatest_distance">Greatest distance</string>
 
 </resources>

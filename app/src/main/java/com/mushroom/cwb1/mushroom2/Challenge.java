@@ -3,7 +3,18 @@ package com.mushroom.cwb1.mushroom2;
 
 import java.util.Calendar;
 
-public class PeopleChallenge {
+public class Challenge {
+
+    public static final int ENDED = 2;
+    public static final int ACCEPTED = 1;
+    public static final int CHALLENGED = 0;
+    public static final int REFUSED = -1;
+    public static final int FAILED = -2;
+
+    public static final String HIGHEST_SPEED = "Highest_Speed";
+    public static final String HIGHEST_ACCELERATION = "Highest_Acceleration";
+    public static final String HIGHEST_ALTITUDE = "Highest_Altitude";
+    public static final String GREATEST_DISTANCE = "Longest_Distance";
 
     private String user1;
     private String user2;
@@ -22,11 +33,11 @@ public class PeopleChallenge {
 
 
 
-    public PeopleChallenge(){
+    public Challenge(){
 
     }
 
-    public PeopleChallenge(String user1, String user2, String challenge_name){
+    public Challenge(String user1, String user2, String challenge_name){
 
     }
 
