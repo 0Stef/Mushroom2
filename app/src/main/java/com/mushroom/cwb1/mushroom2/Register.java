@@ -22,7 +22,7 @@ public class Register extends AppCompatActivity {
     private EditText passWordField;
     private EditText countryField;
     private EditText cityField;
-    private EditText firstnameField;
+    private EditText firstNameField;
     private EditText lastnameField;
     private TextView statusField;
 
@@ -39,6 +39,15 @@ public class Register extends AppCompatActivity {
     private String city;
     private String firstName;
     private String lastName;
+
+    private boolean userok;
+    private boolean passok;
+    private boolean cityok;
+    private boolean countryok;
+    private boolean firstok;
+    private boolean lastok;
+
+//    private String userr;
 
 
     @Override
@@ -57,7 +66,7 @@ public class Register extends AppCompatActivity {
 
         countryField = (EditText) findViewById(R.id.editText_register_country);
         cityField = (EditText) findViewById(R.id.editText_register_city);
-        firstnameField = (EditText) findViewById(R.id.editText_register_firstname);
+        firstNameField = (EditText) findViewById(R.id.editText_register_firstname);
         lastnameField = (EditText) findViewById(R.id.editText_register_lasstname);
 
         statusField = (TextView) findViewById(R.id.text_register_status);
@@ -115,16 +124,63 @@ public class Register extends AppCompatActivity {
 
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
+        userok = true;
+        passok = true;
+        cityok = true;
+        countryok = true;
+        firstok = true;
+        lastok = true;
+
         User user = new User();
 
-        userName = userNameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        password = passWordField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        firstName = firstnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+        userName = userNameField.getText().toString();
+        password = passWordField.getText().toString();
+        city = cityField.getText().toString();
+        country = countryField.getText().toString();
+        firstName = firstNameField.getText().toString();
+        lastName = lastnameField.getText().toString();
+
+//        userName = userNameField.getText().toString().replaceAll(".*[^a-zA-Z0-9] + .*", "");
+//        password = passWordField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+//        city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+//        country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+//        firstName = firstNameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
+//        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
 
 
+
+        if (!userName.matches("[a-zA-Z0-9]*")){
+            userNameField.setText("");
+            userNameField.setHint(R.string.register_text_invalid_characters);
+            userNameField.requestFocus();
+            userok = false;
+        }
+        if (!password.matches("[a-zA-Z0-9]*")){
+            passWordField.setText("");
+            passWordField.setHint(R.string.register_text_invalid_characters);
+            passWordField.requestFocus();
+            passok = false;
+        }
+        if (!city.matches("[a-zA-Z0-9]*")){
+            cityField.setText("");
+            cityField.setHint(R.string.register_text_invalid_characters);
+            cityok = false;
+        }
+        if (!country.matches("[a-zA-Z0-9]*")){
+            countryField.setText("");
+            countryField.setHint(R.string.register_text_invalid_characters);
+            countryok = false;
+        }
+        if (!firstName.matches("[a-zA-Z0-9]*")){
+            firstNameField.setText("");
+            firstNameField.setHint(R.string.register_text_invalid_characters);
+            firstok = false;
+        }
+        if (!lastName.matches("[a-zA-Z0-9]*")){
+            lastnameField.setText("");
+            lastnameField.setHint(R.string.register_text_invalid_characters);
+            lastok = false;
+        }
 
         setDefault();
         user.setInformation(userName, password, country, city, firstName, lastName);
@@ -133,61 +189,63 @@ public class Register extends AppCompatActivity {
         long millisec = calendar.getTimeInMillis();
         user.setFirst_login(millisec);
 
-        if (!userName.isEmpty()) {
-            if (!password.isEmpty()) {
-                if (!userHandler.isExistingUser(userName)) {
+        if (userok && passok && cityok && countryok && firstok && lastok) {
+            if (!userName.isEmpty()) {
+                if (!password.isEmpty()) {
+                    if (!userHandler.isExistingUser(userName)) {
 
-                    String nameCheck = conn.checkForName(userName);
+                        String nameCheck = conn.checkForName(userName);
 
-                    if (nameCheck.equals(conn.AVAILABLE)) {
+                        if (nameCheck.equals(conn.AVAILABLE)) {
 
-                        String result = conn.createServerUser(user);
-                        System.out.println("createServerUser result = " + result);
+                            String result = conn.createServerUser(user);
+                            System.out.println("createServerUser result = " + result);
 
-                        if (result.equals(conn.ADDED)) {
-                            conn.createLocalUser(user);
-                            System.out.println("    -   [Server] User added");
-                            finish();
-                        } else if (result.equals(conn.NOT_FOUND)) {
-                            statusField.setText(conn.NOT_FOUND);
-                            statusField.requestFocus();
+                            if (result.equals(conn.ADDED)) {
+                                conn.createLocalUser(user);
+                                System.out.println("    -   [Server] User added");
+                                finish();
+                            } else if (result.equals(conn.NOT_FOUND)) {
+                                statusField.setText(conn.NOT_FOUND);
+                                statusField.requestFocus();
+                                userNameField.setText("");
+                                //userNameField.setHint(R.string.regist);
+                            } else if (result.equals(conn.FAILED)) {
+                                statusField.setText(conn.FAILED);
+                                statusField.requestFocus();
+                                //statusView.setText(R.string.login_text_wrong);
+                                System.out.println("    -   [Server] Connection failed");
+                            }
+
+                        } else if (nameCheck.equals(conn.TAKEN)) {
                             userNameField.setText("");
-                            //userNameField.setHint(R.string.regist);
-                        } else if (result.equals(conn.FAILED)) {
+                            userNameField.setHint(R.string.register_text_exists);
+                            userNameField.requestFocus();
+                            System.out.println("    -   User already exists.");
+
+                        } else if (nameCheck.equals(conn.FAILED)) {
                             statusField.setText(conn.FAILED);
                             statusField.requestFocus();
                             //statusView.setText(R.string.login_text_wrong);
                             System.out.println("    -   [Server] Connection failed");
                         }
 
-                    } else if (nameCheck.equals(conn.TAKEN)){
+                    } else {
                         userNameField.setText("");
                         userNameField.setHint(R.string.register_text_exists);
                         userNameField.requestFocus();
                         System.out.println("    -   User already exists.");
-
-                    } else if (nameCheck.equals(conn.FAILED)){
-                        statusField.setText(conn.FAILED);
-                        statusField.requestFocus();
-                        //statusView.setText(R.string.login_text_wrong);
-                        System.out.println("    -   [Server] Connection failed");
                     }
-
                 } else {
-                    userNameField.setText("");
-                    userNameField.setHint(R.string.register_text_exists);
-                    userNameField.requestFocus();
-                    System.out.println("    -   User already exists.");
+                    passWordField.setText("");
+                    passWordField.setHint(R.string.register_text_pass_needed);
+                    passWordField.requestFocus();
                 }
             } else {
-                passWordField.setText("");
-                passWordField.setHint(R.string.register_text_pass_needed);
-                passWordField.requestFocus();
+                userNameField.setText("");
+                userNameField.setHint(R.string.register_text_user_needed);
+                userNameField.requestFocus();
             }
-        } else {
-            userNameField.setText("");
-            userNameField.setHint(R.string.register_text_user_needed);
-            userNameField.requestFocus();
         }
     }
 

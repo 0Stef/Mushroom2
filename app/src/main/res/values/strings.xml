@@ -19,8 +19,8 @@
 
     //Register
     <string name="title_activity_register">Register</string>
-    <string name="register_view_username">Enter your username</string>
-    <string name="register_view_password">Enter your password</string>
+    <string name="register_view_username">Enter your username *</string>
+    <string name="register_view_password">Enter your password *</string>
     <string name="register_view_country">Enter your country</string>
     <string name="register_view_city">Enter your city</string>
     <string name="register_view_firstname">Enter your first name</string>
@@ -30,6 +30,7 @@
     <string name="register_text_exists">Username already exists.</string>
     <string name="register_text_pass_needed">Password is needed.</string>
     <string name="register_text_user_needed">Username is needed.</string>
+    <string name="register_text_invalid_characters">Only numbers and letters</string>
 
 
 

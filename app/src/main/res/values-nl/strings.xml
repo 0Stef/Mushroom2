@@ -53,10 +53,11 @@
     <string name="register_text_exists">Gebruikersnaam bestaat al.</string>
     <string name="register_text_pass_needed">Wachtwoord is nodig.</string>
     <string name="register_text_user_needed">Gebruikersnaam is nodig.</string>
+    <string name="register_text_invalid_characters">Alleen letters en cijfers.</string>
     <string name="register_view_city">Vul uw stad in</string>
     <string name="register_view_country">Vul uw land in</string>
-    <string name="register_view_password">Vul uw wachtwoord in</string>
-    <string name="register_view_username">Vul uw gebruikersnaam in</string>
+    <string name="register_view_password">Vul uw wachtwoord in *</string>
+    <string name="register_view_username">Vul uw gebruikersnaam in *</string>
     <string name="register_view_firstname">Vul uw voornaam in</string>
     <string name="register_view_lastname">Vul uw familienaam in</string>
 
