@@ -18,8 +18,9 @@ public class Challenge {
 
     private String user1;
     private String user2;
-    private int status;
     private String challenge_name;
+    private int status;
+
     private float user1_float;
     private double user1_double;
 
@@ -32,13 +33,14 @@ public class Challenge {
     private String winner;
 
 
-
     public Challenge(){
-
+        //Sometimes, an empty line is all you need.
     }
 
     public Challenge(String user1, String user2, String challenge_name){
-
+        setUser1(user1);
+        setUser2(user2);
+        setChallenge_name(challenge_name);
     }
 
 

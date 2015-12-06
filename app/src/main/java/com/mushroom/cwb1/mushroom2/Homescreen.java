@@ -96,7 +96,7 @@ public class Homescreen extends AppCompatActivity {
                         finish();
                         conn.setActiveUser(DataBaseHandler2.TABLE_DEFAULT);
                         try {
-                            conn.updateServerUser(currentUser);
+                            conn.updateUser(currentUser);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (UnsupportedEncodingException e) {

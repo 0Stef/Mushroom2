@@ -111,10 +111,8 @@ public class ServerConnection {
         for(int l = 1; l < COL; l++){
             String rawString = serverCheckResult.get(l);
             String[] splitString = rawString.split("=");
-//            System.out.println("--- splitsrting:");
-//            System.out.println("--- rawstring:" + rawString + " splitstring lengt " + splitString.length);
+
             if (1 == splitString.length){
-//                System.out.println("splitstring[1]=");
                 variabelenMap.put(splitString[0], " ");
             }else{
                 variabelenMap.put(splitString[0], splitString[1]);
@@ -206,7 +204,7 @@ public class ServerConnection {
     //Register user on server
 
     public String createServerUser(User user) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
-
+        //NOT_FOUND, ADDED, FAILED
         serverCheckResult =  new ArrayList<>();
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(user.getUser_name(), "UTF-8")
                 + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(user.getPassword(), "UTF-8")
@@ -229,15 +227,7 @@ public class ServerConnection {
 
     //Update user information
 
-    public String updateServerUser(String userName) throws InterruptedException, UnsupportedEncodingException, ExecutionException {
-        return updateUser(userName, true, false);
-    }
-
-    public String updateLocalUser(String userName) throws InterruptedException, UnsupportedEncodingException, ExecutionException {
-        return updateUser(userName, false, true);
-    }
-
-    public String updateUser(String userName, boolean server, boolean local) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+    public String updateUser(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //NOT_FOUND, SUCCES, FAILED
         dataToPut = userName;
         serverCheckResult =  new ArrayList<>();
@@ -253,12 +243,8 @@ public class ServerConnection {
             User serverUser = createUserInstance(serverCheckResult);
             User updatedUser = getUpdatedUser(serverUser, localUser);
 
-            //if (server) writeToServer(updatedUser);
-            //if (local) writeToLocal(updatedUser);
             writeToServer(updatedUser);
             writeToLocal(updatedUser);
-
-
             return SUCCES;
         } else {
             return FAILED;
@@ -269,7 +255,7 @@ public class ServerConnection {
         User updatedUser = serverUser;
 
         updatedUser.setFirst_login(Math.min(serverUser.getFirst_login(), localUser.getFirst_login()));
-        updatedUser.setLast_login(localUser.getLast_login());
+        updatedUser.setLast_login(Math.max(serverUser.getLast_login(), localUser.getLast_login()));
 
         updatedUser.setTotal_distance(Math.max(serverUser.getTotal_distance(), localUser.getTotal_distance()));
         updatedUser.setTotal_time(Math.max(serverUser.getTotal_time(), localUser.getTotal_time()));
@@ -329,18 +315,13 @@ public class ServerConnection {
         userHandler.overWrite(user);
     }
 
-    private String writeToServer(User user) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        //NOT_FOUND, SUCCES, FAILED
-
-        System.out.println("write to server started");
+    private void writeToServer(User user) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        System.out.println("    -   Write to server started.");
 
         updateGeneralInfo(user);
         updateAchievements(user);
 
-        System.out.println("write to server ended");
-
-        //TODO functie die een reeds bestaande gebruiker overschrijft
-        return null;
+        System.out.println("    -   Write to server ended.");
     }
 
     public void updateGeneralInfo(User user) throws UnsupportedEncodingException {
@@ -357,9 +338,7 @@ public class ServerConnection {
                 + "&" + URLEncoder.encode("daily_points", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getDaily_points()), "UTF-8")
                 + "&" + URLEncoder.encode("weekly_points", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getWeekly_points()), "UTF-8");
         new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_algemene_gegevens.php");
-
     }
-
 
     public void updateAchievements(User user) throws UnsupportedEncodingException {
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(user.getUser_name(), "UTF-8")
@@ -400,12 +379,10 @@ public class ServerConnection {
                 + "&" + URLEncoder.encode("alt_diff_100m", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getAlt_diff_100m()), "UTF-8")
 
                 + "&" + URLEncoder.encode("start_the_game", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getStart_the_game()), "UTF-8")
-                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8")
-
-                ;
+                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8");
         new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_achievements.php");
-
     }
+
     //Extra functions
 
     public ArrayList<String> putDataToServer(String URL, String input){

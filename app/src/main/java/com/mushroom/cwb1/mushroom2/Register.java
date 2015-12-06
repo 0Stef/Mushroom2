@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 
 public class Register extends AppCompatActivity {
 
+    public static final String DEFAULT_ENTRY = "/";
+
     private EditText userNameField;
     private EditText passWordField;
     private EditText countryField;
@@ -39,16 +41,6 @@ public class Register extends AppCompatActivity {
     private String city;
     private String firstName;
     private String lastName;
-
-    private boolean userok;
-    private boolean passok;
-    private boolean cityok;
-    private boolean countryok;
-    private boolean firstok;
-    private boolean lastok;
-
-//    private String userr;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +116,7 @@ public class Register extends AppCompatActivity {
 
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
-        userok = true;
-        passok = true;
-        cityok = true;
-        countryok = true;
-        firstok = true;
-        lastok = true;
+        boolean validCharacters = true;
 
         User user = new User();
 
@@ -140,46 +127,37 @@ public class Register extends AppCompatActivity {
         firstName = firstNameField.getText().toString();
         lastName = lastnameField.getText().toString();
 
-//        userName = userNameField.getText().toString().replaceAll(".*[^a-zA-Z0-9] + .*", "");
-//        password = passWordField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-//        city = cityField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-//        country = countryField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-//        firstName = firstNameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-//        lastName = lastnameField.getText().toString().replaceAll("[^a-zA-Z0-9] + ", "");
-
-
-
         if (!userName.matches("[a-zA-Z0-9]*")){
             userNameField.setText("");
             userNameField.setHint(R.string.register_text_invalid_characters);
             userNameField.requestFocus();
-            userok = false;
+            validCharacters = false;
         }
         if (!password.matches("[a-zA-Z0-9]*")){
             passWordField.setText("");
             passWordField.setHint(R.string.register_text_invalid_characters);
             passWordField.requestFocus();
-            passok = false;
+            validCharacters = false;
         }
         if (!city.matches("[a-zA-Z0-9]*")){
             cityField.setText("");
             cityField.setHint(R.string.register_text_invalid_characters);
-            cityok = false;
+            validCharacters = false;
         }
         if (!country.matches("[a-zA-Z0-9]*")){
             countryField.setText("");
             countryField.setHint(R.string.register_text_invalid_characters);
-            countryok = false;
+            validCharacters = false;
         }
         if (!firstName.matches("[a-zA-Z0-9]*")){
             firstNameField.setText("");
             firstNameField.setHint(R.string.register_text_invalid_characters);
-            firstok = false;
+            validCharacters = false;
         }
         if (!lastName.matches("[a-zA-Z0-9]*")){
             lastnameField.setText("");
             lastnameField.setHint(R.string.register_text_invalid_characters);
-            lastok = false;
+            validCharacters = false;
         }
 
         setDefault();
@@ -189,7 +167,7 @@ public class Register extends AppCompatActivity {
         long millisec = calendar.getTimeInMillis();
         user.setFirst_login(millisec);
 
-        if (userok && passok && cityok && countryok && firstok && lastok) {
+        if (validCharacters) {
             if (!userName.isEmpty()) {
                 if (!password.isEmpty()) {
                     if (!userHandler.isExistingUser(userName)) {
@@ -250,127 +228,9 @@ public class Register extends AppCompatActivity {
     }
 
     private void setDefault() {
-        if (country.isEmpty()) country = "/";
-        if (city.isEmpty()) city = "/";
-        if (firstName.isEmpty()) firstName = "/";
-        if (lastName.isEmpty()) lastName = "/";
+        if (country.isEmpty()) country = DEFAULT_ENTRY;
+        if (city.isEmpty()) city = DEFAULT_ENTRY;
+        if (firstName.isEmpty()) firstName = DEFAULT_ENTRY;
+        if (lastName.isEmpty()) lastName = DEFAULT_ENTRY;
     }
-
-    /*public String usernameServerUnique(String username) throws ExecutionException, InterruptedException {
-
-        serverCheckResult =  new ArrayList<>();
-        serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/register_check_username.php").get();
-
-        if (serverCheckResult.size()<1){
-            System.out.println("checkserver niet gelukt");
-            return FAILED;
-        } else if (serverCheckResult.get(0).equals("taken")) {
-            //System.out.println("--- checkServer no results --- " + serverCheckResult.get(0));
-            return TAKEN;
-        } else if (serverCheckResult.get(0).equals("available")){
-            return AVAILABLE;
-        } else {
-            return FAILED;
-        }
-
-
-
-
-    }*/
-
-
-
-
-
-
-
-
-    /*public String createServerUser(User user) throws ExecutionException, InterruptedException {
-
-        serverCheckResult =  new ArrayList<>();
-        serverCheckResult = new PutAsyncTask().execute("http://mushroom.16mb.com/android/register_user.php").get();
-
-        if (serverCheckResult.size()<1){
-            System.out.println("checkserver niet gelukt geeft false terug");
-            return FAILED;
-        } else if (serverCheckResult.get(0).equals("error")) {
-            System.out.println("--- checkServer no results --- " + serverCheckResult.get(0));
-            return NO_RESULT;
-        } else if (serverCheckResult.get(0).equals("succes")){
-
-
-            System.out.println("online registreren gelukt lokaal aanmaken");
-            createLocalUser(user);
-            System.out.println("    -   Created new user: " + userName + ", " + password);
-
-            return ADDED;
-
-        } else {
-
-            return FAILED;
-        }
-
-
-    }*/
-
-    /*public ArrayList<String> putDataToServer(String URL){
-        ArrayList<String> status =  new ArrayList<>();
-        try {
-
-            java.net.URL url = new URL(URL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            //conn.setRequestProperty("Content-Type", "application/json");
-
-            //String input = dataToPut;
-            String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
-                   + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
-            + "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(city, "UTF-8")
-            + "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(country, "UTF-8")
-            + "&" + URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(firstName, "UTF-8")
-            + "&" + URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(lastName, "UTF-8");
-
-
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
-
-
-            //Read the acknowledgement message after putting data to server
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
-            String output;
-            //System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                //System.out.println(output);
-                status.add(output);
-            }
-            conn.disconnect();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return status;
-    }
-
-    class PutAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
-
-        @Override
-        protected ArrayList<String> doInBackground(String... urls) {
-            return putDataToServer(urls[0]);
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(ArrayList<String> result) {
-            //textView_1.setText(result.get(0)+" - "+result.get(1));
-            //super.onPostExecute(result);
-            serverCheckResult = result;
-            //debugView.setText("post exec"+result.get(0));
-        }
-    }*/
 }

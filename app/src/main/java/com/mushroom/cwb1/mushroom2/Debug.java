@@ -83,6 +83,7 @@ public class Debug {
             if (params.length > 2) amount = Integer.parseInt(params[2]);
 
             if (userHandler.isExistingUser(userName)) {
+                System.out.print(": started");
                 createMeasurements(userName, length, amount);
                 update(userName);
             }
@@ -92,6 +93,20 @@ public class Debug {
             System.out.println("    -   Update");
             if (userHandler.isExistingUser(param)) {
                 update(param);
+            }
+            return true;
+        }
+        if (command.equals("add_points") || command.equals("points") || command.equals("pnt")) {
+            System.out.println("    -   Points");
+            String[] params = param.split("_:_");
+
+            if (params.length == 2) {
+                String userName = params[0];
+                int points = Integer.parseInt(params[1]);
+
+                if (userHandler.isExistingUser(userName)) {
+                    addPoints(userName, points);
+                }
             }
             return true;
         }
@@ -141,12 +156,22 @@ public class Debug {
     private void showCommands() {
         debugView.append("\n");
         debugView.append("Commands:\n");
-        debugView.append("  - reset  [app/user]\n");
-        debugView.append("  - delete [user]\n");
-        debugView.append("  - stock  [user] [length] [amount]\n");
-        debugView.append("  - update [user]\n");
+        debugView.append("  - reset  <app/user>\n");
+        debugView.append("  - delete <user>\n");
+        debugView.append("  - stock  <user> [length] [amount]\n");
+        debugView.append("  - update <user>\n");
+        debugView.append("  - add points <user> <amount>\n");
         debugView.append("  - get userlist\n");
         debugView.append("  - clear screen\n");
+    }
+
+    private void addPoints(String userName, int amount) {
+        User user = userHandler.getUserInformation(userName);
+
+        int points = user.getTotal_points();
+        user.setTotal_points(points + amount);
+
+        userHandler.overWrite(user);
     }
 
     private void createMeasurements(String userName, int length, int amount) {
@@ -284,20 +309,7 @@ public class Debug {
         user.setTotal_distance(dbHandler.getDistance(dbHandler.getAll()));
         user.setTotal_time(dbHandler.getTime(dbHandler.getAll()));
         user.setHighest_speed(dbHandler.getGreatestValue(dbHandler.COLUMN_GPS_VEL).getVelocity());
-
-        float acc = 0f;
-        LinkedList<dbRow> list = dbHandler.getList(dbHandler.getAll());
-        for (dbRow row : list) {
-            float x = row.getAccelerometer_xValue();
-            float y = row.getAccelerometer_yValue();
-            float z = row.getAccelerometer_zValue();
-
-            float c = (float) (Math.pow(x,2d) + Math.pow(y,2d) + Math.pow(z,2d));
-            if (c > acc) {
-                acc = c;
-            }
-        }
-        user.setHighest_acceleration(acc);
+        user.setHighest_acceleration(dbHandler.getHighestAcceleration(dbHandler.getAll()));
 
         userHandler.overWrite(user);
     }

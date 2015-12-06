@@ -94,7 +94,7 @@ public class Login_screen extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
                 if (userHandler.isRightPassword(userName, passWord)) {
-                    conn.updateLocalUser(userName);
+                    conn.updateUser(userName);
                     conn.setActiveUser(userName);
                     userHandler.checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
