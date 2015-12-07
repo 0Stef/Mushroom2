@@ -280,5 +280,40 @@
     <string name="peeps_highest_acceleration">Highest acceleration</string>
     <string name="peeps_highest_altitude">Highest altitude</string>
     <string name="peeps_greatest_distance">Greatest distance</string>
+    
+    
+    //People Challenges
+    <string name="title_activity_people_challenges">Challenges</string>
+
+    <string name="people_root_current_challenge">Current challenge:</string>
+    <string name="people_root_type">Type: </string>
+    <string name="people_root_time">Time left: </string>
+    <string name="people_root_button_drive">DRIVE</string>
+    <string name="people_root_button_abord">ABORD</string>
+    <string name="people_root_button_send">SEND INVITATION</string>
+    <string name="people_root_button_show">SHOW INVITATIONS</string>
+    <string name="people_root_text_failed">Something went wrong with the server connection.</string>
+
+
+    <string name="people_inv_separator">OF</string>
+    <string name="people_inv_from">From: </string>
+    <string name="people_inv_type">Type: </string>
+    <string name="people_inv_button_accept">ACCEPT</string>
+    <string name="people_inv_button_refuse">REFUSE</string>
+    <string name="people_inv_button_previous">PREVIOUS</string>
+    <string name="people_inv_button_next">NEXT</string>
+    
+    <string name="people_send_heading">Send an invitation:</string>
+    <string name="people_send_username">Enter the username of the person you want to challenge:</string>
+    <string name="people_send_type">Choose the type of challenge you want to propose:</string>
+    <string name="people_send_button_send">SEND</string>
+    <string name="people_send_text_not_user">This user does not exist.</string>
+
+    <string-array name="people_send_array_types">
+        <item>Highest speed</item>
+        <item>Highest acceleration</item>
+        <item>Highest altitude</item>
+        <item>Longest distance</item>
+    </string-array>
 
 </resources>

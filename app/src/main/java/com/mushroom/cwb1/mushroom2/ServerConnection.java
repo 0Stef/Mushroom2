@@ -383,6 +383,32 @@ public class ServerConnection {
         new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_achievements.php");
     }
 
+    //Functionality for challenges.
+
+    public String createChallenge(Challenge challenge) {
+        //ADDED, FAILED
+
+        return null;
+    }
+
+    public ArrayList<Challenge> downloadChallenge(String userName) {
+        //When problems occur: status == Challenge.FAILED (first element of array)
+
+        return null;
+    }
+
+    public String updateChallenge(Challenge challenge) {
+        //SUCCES, FAILED
+
+        return null;
+    }
+
+    public String deleteChallenge(Challenge challenge) {
+        //SUCCES, FAILED
+
+        return null;
+    }
+
     //Extra functions
 
     public ArrayList<String> putDataToServer(String URL, String input){

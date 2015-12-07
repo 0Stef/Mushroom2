@@ -1,10 +1,22 @@
+/*
 package com.mushroom.cwb1.mushroom2;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 
 public class Challenges extends AppCompatActivity {
 
-    /*private String currentUser;
+private String currentUser;
     private Challenge challenge;
 
     private PeopleChallengeHandler peoplechallengehandler;
@@ -103,7 +115,7 @@ public class Challenges extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         pushNewChallenge(Challenge.HIGHEST_ACCELERATION, R.string.peeps_highest_acceleration);
-                                            }
+                     }
                 }
         );
 
@@ -189,8 +201,13 @@ public class Challenges extends AppCompatActivity {
 
                 disappearButtons();
                 textCurrentChallenge.setText(text);
-                conn.uploadChallenge();
-                //TODO Feedback: challenge verzonden naar server.
+                String result2 = conn.createChallenge(peeps);
+
+                if (result2.equals(ServerConnection.ADDED)) {
+                    //TODO Feedback: challenge verzonden naar server.
+                } else {
+                    //TODO Feedback: verbindingsproblemen.
+                }
             } else if (result.equals(conn.FAILED)) {
                 //Do something
             }
@@ -303,5 +320,7 @@ public class Challenges extends AppCompatActivity {
         GetHighestAccelerationButton.setVisibility(View.INVISIBLE);
         GetHighestAltitudeDifferenceButton.setVisibility(View.INVISIBLE);
         GetLongestDistanceButton.setVisibility(View.INVISIBLE);
-    }*/
+    }
+
 }
+*/

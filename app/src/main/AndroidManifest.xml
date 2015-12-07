@@ -94,13 +94,10 @@
                 android:value="com.mushroom.cwb1.mushroom2.Persoonlijke_statistieken" />
         </activity>
         <activity
-            android:name=".PeopleChallengeHandler"
-            android:label="@string/title_activity_people_challenge_handler" >
+            android:name=".PeopleChallenges"
+            android:label="@string/title_activity_people_challenges" >
         </activity>
-        <activity
-            android:name=".Challenges"
-            android:label="@string/title_activity_challenges" >
-        </activity>
+
     </application>
 
 </manifest>

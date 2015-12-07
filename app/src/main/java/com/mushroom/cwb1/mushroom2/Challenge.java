@@ -1,8 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
 
-import java.util.Calendar;
-
 public class Challenge {
 
     public static final int ENDED = 2;
@@ -38,12 +36,10 @@ public class Challenge {
     }
 
     public Challenge(String user1, String user2, String challenge_name){
-        setUser1(user1);
-        setUser2(user2);
-        setChallenge_name(challenge_name);
+        this.user1 = user1;
+        this.user2 = user2;
+        this.challenge_name = challenge_name;
     }
-
-
 
     // GETTERS AND SETTERS
 
@@ -140,9 +136,20 @@ public class Challenge {
         this.user2_double = user2_double;
     }
 
-    public String getServerPeeps() {
-        long millisec = Calendar.getInstance().getTimeInMillis();
-        return user1 + millisec + user2;
+    //Extra
+
+    public static String getChallengeType(int position) {
+        if (position == 0) {
+            return HIGHEST_SPEED;
+        } else if (position == 1) {
+            return HIGHEST_ACCELERATION;
+        } else if (position == 2) {
+            return HIGHEST_ALTITUDE;
+        } else if (position == 3) {
+            return GREATEST_DISTANCE;
+        } else {
+            return new String();
+        }
     }
 }
 
