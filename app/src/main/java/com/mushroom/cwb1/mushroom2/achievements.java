@@ -491,7 +491,7 @@ public class achievements extends AppCompatActivity {
         }
         if (user.getNb_won_challenges() >= 500 && user.getNb_challenge_500()==0){
             user.setNb_challenge_500(1);
-            user.setTotal_points(user.getTotal_points() + 744000);
+            user.setTotal_points(user.getTotal_points() + 600000);
         }
 
         // DAYS BIKED

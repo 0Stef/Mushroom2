@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Mushroom</string>
+    <string name="app_name" translatable="false">Bikegoals</string>
     <string name="app_save_file" translatable="false">saved_file</string>
     <string name="app_user_name" translatable="false">saved_user</string>
 
@@ -129,7 +129,9 @@
     <string name="point_1000">1000 Points.</string>
     <string name="point_2000">2000 Points.</string>
     <string name="point_2400">2400 Points.</string>
+    <string name="point_2500">2400 Points.</string>
     <string name="point_4800">4800 Points.</string>
+    <string name="point_5000">5000 Points.</string>
     <string name="point_8000">8000 Points.</string>
     <string name="point_10000">10000 Points.</string>
     <string name="point_20000">20000 Points.</string>
@@ -139,6 +141,7 @@
     <string name="point_168000">168000 Points.</string>
     <string name="point_336000">336000 Points.</string>
     <string name="point_400000">400000 Points.</string>
+    <string name="point_600000">600000 Points.</string>
     <string name="point_744000">744000 Points.</string>
     <string name="point_1000000">1000000 Points.</string>
     <string name="point_2400000">2400000 Points.</string>

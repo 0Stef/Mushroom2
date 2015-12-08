@@ -1029,7 +1029,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 } else if (moeilijkheidsgraad == 2){
                     points = 150;
                 }else {
-                    points = 300;
+                    points = 600;
                 }
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
@@ -1126,9 +1126,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 if (moeilijkheidsgraad == 1){
                     points = 100;
                 } else if (moeilijkheidsgraad == 2){
-                    points = 200;
+                    points = 400;
                 }else {
-                    points = 800;
+                    points = 1000;
                 }
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
