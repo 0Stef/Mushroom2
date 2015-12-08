@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 
 public class PeopleChallenges extends AppCompatActivity {
 
@@ -153,7 +155,16 @@ public class PeopleChallenges extends AppCompatActivity {
     private void refresh() {
         resetChallenge();
 
-        ArrayList<Challenge> serverChallenges = conn.downloadChallenge(currentUser);
+        ArrayList<Challenge> serverChallenges = null;
+        try {
+            serverChallenges = conn.downloadChallenge(currentUser);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         serverChallenges = placeholdeList();
         challenge = setInvitations(serverChallenges);
 

@@ -416,25 +416,24 @@ public class ServerConnection {
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
 
-        if (serverCheckResult.get(0).equals("no results")){
-
+        if (serverCheckResult.get(0).equals("no results")) {
+            result.add(new Challenge(Challenge.NOT_ACTIVE));
             return result;
+        } else {
+            for (int i = 0 ; i < serverCheckResult.size(); i++) {
 
-        }else{
+                String rawString = serverCheckResult.get(i);
+                String[] splitString = rawString.split("=");
 
-            for (int i = 0 ; i < serverCheckResult.size(); i++){
+                Challenge currentChallenge = new Challenge(splitString[0],splitString[1],splitString[2],
+                        Integer.parseInt(splitString[3]),Float.parseFloat(splitString[4]),Double.parseDouble(splitString[5]),
+                        Float.parseFloat(splitString[6]),Double.parseDouble(splitString[7]),Long.parseLong(splitString[8]),
+                        Long.parseLong(splitString[9]),splitString[10]);
 
-            String rawString = serverCheckResult.get(i);
-            String[] splitString = rawString.split("=");
-
-            Challenge currentChallenge = new Challenge(splitString[0],splitString[1],splitString[2],Integer.parseInt(splitString[3]),Float.parseFloat(splitString[4]),Double.parseDouble(splitString[5]),Float.parseFloat(splitString[6]),Double.parseDouble(splitString[7]),Long.parseLong(splitString[8]),Long.parseLong(splitString[9]),splitString[10]);
-
-            result.add(currentChallenge);
+                result.add(currentChallenge);
             }
-        return result;
-
+            return result;
         }
-
     }
 
     public String updateChallenge(Challenge challenge) {

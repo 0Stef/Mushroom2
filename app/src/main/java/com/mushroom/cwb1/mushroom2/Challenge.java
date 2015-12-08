@@ -42,6 +42,10 @@ public class Challenge implements Serializable {
         //Sometimes, an empty line is all you need.
     }
 
+    public Challenge(int status) {
+        this.status = status;
+    }
+
     public Challenge(String user1, String user2, String challenge_name, int status){
         this.user1 = user1;
         this.user2 = user2;
