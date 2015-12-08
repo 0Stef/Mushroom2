@@ -94,7 +94,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/people_root_button_abord"
         android:id="@+id/root_selection_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -105,7 +104,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/people_root_button_show"
         android:id="@+id/root_invitations_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

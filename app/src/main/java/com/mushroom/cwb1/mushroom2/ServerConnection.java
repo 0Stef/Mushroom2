@@ -37,7 +37,7 @@ public class ServerConnection {
     public static final String AVAILABLE = "username available";
     public static final String TAKEN = "username taken";
 
-    //Constructor
+    //Constructor ----------------------------------------------------------------------------------
 
     public ServerConnection(Context context) {
         userHandler = new UserHandler(context);
@@ -45,7 +45,7 @@ public class ServerConnection {
         this.context = context;
     }
 
-    //Active User
+    //Active User ----------------------------------------------------------------------------------
 
     public static String getActiveUser() {
         SharedPreferences settings = context.getSharedPreferences(context.getString(R.string.app_save_file), 0);
@@ -62,7 +62,7 @@ public class ServerConnection {
         editor.commit();
     }
 
-    //Check user name
+    //Check user name ------------------------------------------------------------------------------
 
     public String checkForName(String userName) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //AVAILABLE, TAKEN, FAILED
@@ -82,7 +82,7 @@ public class ServerConnection {
         }
     }
 
-    //Install user from server locally
+    //Install user from server locally -------------------------------------------------------------
 
     public String installUser(String userName) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //NOT_FOUND, ADDED, FAILED
@@ -225,7 +225,7 @@ public class ServerConnection {
         }
     }
 
-    //Update user information
+    //Update user information ----------------------------------------------------------------------
 
     public String updateUser(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //NOT_FOUND, SUCCES, FAILED
@@ -383,19 +383,58 @@ public class ServerConnection {
         new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_achievements.php");
     }
 
-    //Functionality for challenges.
+    //Functionality for challenges. ----------------------------------------------------------------
 
-    public String createChallenge(Challenge challenge) {
+    public String createChallenge(Challenge challenge) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+
+
+        //TODO afwerken
+//        serverCheckResult =  new ArrayList<>();
+//        String result;
+//
+//        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
+//                + "&" + URLEncoder.encode("start_the_game", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getStart_the_game()), "UTF-8")
+//                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8");
+//        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
+//
+
+
+
         //ADDED, FAILED
 
         return null;
     }
 
-    public ArrayList<Challenge> downloadChallenge(String userName) {
+    public ArrayList<Challenge> downloadChallenge(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //When problems occur: add new challenge with Challenge.FAILED as status.
         //The list is empty: add new challenge with Challenge.NOT_ACTIVE
+        //With other words... the list should not be empty!
 
-        return null;
+        serverCheckResult =  new ArrayList<>();
+        ArrayList result = new ArrayList<Challenge>();
+
+        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
+        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
+
+        if (serverCheckResult.get(0).equals("no results")){
+
+            return result;
+
+        }else{
+
+            for (int i = 0 ; i < serverCheckResult.size(); i++){
+
+            String rawString = serverCheckResult.get(i);
+            String[] splitString = rawString.split("=");
+
+            Challenge currentChallenge = new Challenge(splitString[0],splitString[1],splitString[2],Integer.parseInt(splitString[3]),Float.parseFloat(splitString[4]),Double.parseDouble(splitString[5]),Float.parseFloat(splitString[6]),Double.parseDouble(splitString[7]),Long.parseLong(splitString[8]),Long.parseLong(splitString[9]),splitString[10]);
+
+            result.add(currentChallenge);
+            }
+        return result;
+
+        }
+
     }
 
     public String updateChallenge(Challenge challenge) {
@@ -410,7 +449,7 @@ public class ServerConnection {
         return null;
     }
 
-    //Extra functions
+    //Extra functions ------------------------------------------------------------------------------
 
     public ArrayList<String> putDataToServer(String URL, String input){
         ArrayList<String> status =  new ArrayList<>();
