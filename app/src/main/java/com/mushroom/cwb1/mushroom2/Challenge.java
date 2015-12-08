@@ -1,9 +1,10 @@
 package com.mushroom.cwb1.mushroom2;
 
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Challenge {
+public class Challenge implements Serializable {
 
     public static final int NOT_ACTIVE = 42;
 
@@ -165,6 +166,20 @@ public class Challenge {
             return GREATEST_DISTANCE;
         } else {
             return new String();
+        }
+    }
+
+    public static int getChallengeDescription(String type) {
+        if (type.equals(HIGHEST_SPEED)) {
+            return R.string.people_inv_text_h_speed;
+        } else if (type.equals(HIGHEST_ACCELERATION)) {
+            return R.string.people_inv_text_h_acceleration;
+        } else if (type.equals(HIGHEST_ALTITUDE)) {
+            return R.string.people_inv_text_h_altitude;
+        } else if (type.equals(GREATEST_DISTANCE)) {
+            return R.string.people_inv_text_g_distance;
+        } else {
+            return Integer.parseInt(null);
         }
     }
 

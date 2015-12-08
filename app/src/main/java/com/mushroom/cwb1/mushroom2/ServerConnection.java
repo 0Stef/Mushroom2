@@ -388,7 +388,7 @@ public class ServerConnection {
     public String createChallenge(Challenge challenge) {
         //ADDED, FAILED
 
-        return null;
+        return ADDED;
     }
 
     public ArrayList<Challenge> downloadChallenge(String userName) {
@@ -404,13 +404,13 @@ public class ServerConnection {
     public String updateChallenge(Challenge challenge) {
         //SUCCES, FAILED
 
-        return null;
+        return SUCCES;
     }
 
     public String deleteChallenge(Challenge challenge) {
         //SUCCES, FAILED
 
-        return null;
+        return SUCCES;
     }
 
     //Extra functions ------------------------------------------------------------------------------

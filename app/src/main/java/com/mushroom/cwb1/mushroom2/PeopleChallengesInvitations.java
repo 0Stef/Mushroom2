@@ -1,5 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,6 +17,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
     private TextView inv_status;
     private TextView inv_opponent;
     private TextView inv_type;
+    private TextView inv_com;
     private Button inv_accept;
     private Button inv_refuse;
     private Button inv_prev;
@@ -29,6 +31,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
     private ArrayList<Challenge> invitations;
     private Challenge showing;
     private int position;
+    private boolean isActive;
 
 
     @Override
@@ -36,6 +39,9 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people_challenges_invitations);
 
+        Intent i = getIntent();
+        invitations = (ArrayList<Challenge>) i.getSerializableExtra("invitations");
+        isActive = i.getBooleanExtra("isActive", true);
         conn = new ServerConnection(getApplicationContext());
 
                 //Invitations
@@ -43,6 +49,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
         inv_status = (TextView) findViewById(R.id.invitation_status);
         inv_opponent = (TextView) findViewById(R.id.invitation_opponent_value);
         inv_type = (TextView) findViewById(R.id.invitation_type_value);
+        inv_com = (TextView) findViewById(R.id.invitation_comment);
 
         inv_accept = (Button) findViewById(R.id.invitation_accept_button);
         inv_refuse = (Button) findViewById(R.id.invitation_refuse_button);
@@ -61,8 +68,9 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                             String result = conn.updateChallenge(showing);
                             if (result.equals(conn.FAILED)) {
                                 inv_status.setText("The connection failed.");
-                            }
+                            } else isActive = true;
                         }
+                        refreshView();
                     }
                 }
         );
@@ -112,6 +120,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
     }
 
     private void refreshView() {
+        resetView();
         int size = invitations.size();
 
         if (position < 0) position = 0;
@@ -123,14 +132,23 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
         } else {
             inv_heading.setText("You don't have any invitations at the moment.");
         }
+
+        inv_accept.setEnabled(!isActive);
     }
 
     private void show(int position) {
-        String separator = getString(R.string.people_inv_from);
-        inv_heading.setText(position + separator + invitations.size());
+        String separator = getString(R.string.people_inv_separator);
+        inv_heading.setText(position+1 + "  " + separator + "  " + invitations.size());
 
+        inv_com.setText(getString(Challenge.getChallengeDescription(showing.getChallenge_name())));
         inv_opponent.setText(showing.getUser1());
         inv_type.setText(showing.getChallenge_name());
+    }
+
+    private void resetView() {
+        inv_com.setText("");
+        inv_opponent.setText("");
+        inv_type.setText("");
     }
 
     private void resetStatus() {

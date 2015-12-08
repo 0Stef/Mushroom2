@@ -24,14 +24,16 @@ public class PeopleChallenges extends AppCompatActivity {
     private ServerConnection conn;
 
     public int award = 3000;
+    public boolean isActive = true;
 
     private TextView root_type;
     private TextView root_time;
-    private TextView root_opponent;
-    private TextView root_opponent_value;
-    private TextView root_you;
-    private TextView root_you_value;
+    private TextView root_user1;
+    private TextView root_user1_value;
+    private TextView root_user2;
+    private TextView root_user2_value;
     private TextView root_status;
+    private TextView root_com;
     private Button root_drive;
     private Button root_select;
     private Button root_show;
@@ -52,16 +54,17 @@ public class PeopleChallenges extends AppCompatActivity {
         root_type = (TextView) findViewById(R.id.root_challenge_type_value);
         root_time = (TextView) findViewById(R.id.root_challenge_time_value);
         root_status = (TextView) findViewById(R.id.root_status_text);
-        root_opponent = (TextView) findViewById(R.id.root_opponent);
-        root_opponent_value = (TextView) findViewById(R.id.root_score_opponent);
-        root_you = (TextView) findViewById(R.id.root_current_user);
-        root_you_value = (TextView) findViewById(R.id.root_score_current_user);
+        root_user1 = (TextView) findViewById(R.id.root_opponent);
+        root_user1_value = (TextView) findViewById(R.id.root_score_opponent);
+        root_user2 = (TextView) findViewById(R.id.root_current_user);
+        root_user2_value = (TextView) findViewById(R.id.root_score_current_user);
+        root_com = (TextView) findViewById(R.id.root_comment);
 
         root_drive = (Button) findViewById(R.id.root_drive_button);
         root_select = (Button) findViewById(R.id.root_selection_button);
         root_show = (Button) findViewById(R.id.root_invitations_button);
 
-        root_select.setText("test");
+        root_select.setText(R.string.people_root_button_send);
         root_show.setText(R.string.people_root_button_show);
 
                 //Buttons
@@ -100,6 +103,8 @@ public class PeopleChallenges extends AppCompatActivity {
                     public void onClick(View v) {
                         System.out.println("    -   show");
                         Intent i = new Intent(getApplicationContext(), PeopleChallengesInvitations.class);
+                        i.putExtra("invitations", invitations);
+                        i.putExtra("isActive", isActive);
                         startActivity(i);
                     }
                 }
@@ -146,7 +151,7 @@ public class PeopleChallenges extends AppCompatActivity {
     //Main logic -----------------------------------------------------------------------------------
 
     private void refresh() {
-        //setContentView(R.layout.activity_people_challenges_root);
+        resetChallenge();
 
         ArrayList<Challenge> serverChallenges = conn.downloadChallenge(currentUser);
         serverChallenges = placeholdeList();
@@ -160,41 +165,51 @@ public class PeopleChallenges extends AppCompatActivity {
             update();
             checkWinner();
             conn.updateChallenge(challenge);
+            showChallenge();
+            root_com.setText(Challenge.getChallengeDescription(challenge.getChallenge_name()));
 
             //Je hebt een challenge verzonden of ontvangen.
         } else if (status == Challenge.CHALLENGED) {
-            //TODO Feedback: challenge nog niet geaccepteerd
+            showChallenge();
+            root_com.setText(R.string.people_root_text_not_accepted);
 
             //Je challenge is ten einde - de ander is gewonnen.
         } else if (status == Challenge.ENDED) {
-            //TODO Feedback: verloren
+            showChallenge();
+            root_com.setText(R.string.people_root_text_lost);
             conn.deleteChallenge(challenge);
 
             //De verzonden challenge is geweigerd.
         } else if (status == Challenge.REFUSED) {
-            //TODO Feedback: challenge geweigerd
+            root_com.setText(R.string.people_root_text_refused);
             conn.deleteChallenge(challenge);
 
             //De verbinding heeft gefaald.
         } else if (status == Challenge.FAILED){
-            //TODO Feedback: verbindingsproblemen.
+            root_com.setText(R.string.people_root_text_fail);
 
             //Je hebt momenteel geen challenge.
         } else if (status == Challenge.NOT_ACTIVE) {
-            //TODO Feedback: Je heb niets te doen momenteel.
+            root_com.setText(R.string.people_root_text_challenge);
         }
     }
 
     private ArrayList<Challenge> placeholdeList() {
         ArrayList<Challenge> list = new ArrayList<>();
 
-        //list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
+        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
         list.add(new Challenge("Bart", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
-        list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
+        list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ALTITUDE, Challenge.CHALLENGED));
+        list.add(new Challenge("Cato", currentUser, Challenge.GREATEST_DISTANCE, Challenge.CHALLENGED));
 
         Challenge challenge1 = new Challenge(currentUser, "Louis", Challenge.HIGHEST_ALTITUDE, Challenge.ENDED);
         challenge1.setWinner(currentUser);
         list.add(challenge1);
+
+        Challenge challenge2 = new Challenge("Sebastian", currentUser, Challenge.GREATEST_DISTANCE, Challenge.ACCEPTED);
+        challenge2.setUser1_float(200f);
+        challenge2.initialiseTime(50000000l);
+        //list.add(challenge2);
 
         return list;
     }
@@ -344,14 +359,55 @@ public class PeopleChallenges extends AppCompatActivity {
 
         if (status == Challenge.REFUSED || status == Challenge.ENDED || status == Challenge.NOT_ACTIVE) {
             root_select.setText(R.string.people_root_button_send);
+            isActive = false;
             System.out.println("    -   send");
         } else if (status == Challenge.ACCEPTED || (status == Challenge.CHALLENGED)) {
             root_select.setText(R.string.people_root_button_abord);
+            isActive = true;
             System.out.println("    -   don't send");
         } else {
-            //root_select.setEnabled(false);
-            //root_show.setEnabled(false);
+            if (status == Challenge.FAILED) {
+                root_status.setText(R.string.people_root_text_failed);
+            }
+            root_select.setEnabled(false);
+            root_show.setEnabled(false);
             System.out.println("    -   failed or else");
         }
+    }
+
+    private void showChallenge() {
+        String challengeName = challenge.getChallenge_name();
+
+        root_type.setText(challengeName);
+        root_time.setText(Long.toString(challenge.getTimeLeft()));
+
+        root_user1.setText(challenge.getUser1());
+        root_user2.setText(challenge.getUser2());
+
+
+        if (challengeName.equals(Challenge.GREATEST_DISTANCE) ||
+                challengeName.equals(Challenge.HIGHEST_ACCELERATION) ||
+                challengeName.equals(Challenge.HIGHEST_SPEED)){
+
+            root_user1_value.setText(Float.toString(challenge.getUser1_float()));
+            root_user2_value.setText(Float.toString(challenge.getUser2_float()));
+        }
+
+        else if (challengeName.equals(Challenge.HIGHEST_ALTITUDE)){
+            root_user1_value.setText(Double.toString(challenge.getUser1_double()));
+            root_user2_value.setText(Double.toString(challenge.getUser2_double()));
+        }
+    }
+
+    private void resetChallenge() {
+        root_type.setText("/");
+        root_time.setText("/");
+        root_com.setText("");
+
+        root_user1.setText("Challenger");
+        root_user2.setText("Opponent");
+
+        root_user1_value.setText("/");
+        root_user2_value.setText("/");
     }
 }

@@ -293,6 +293,24 @@
     <string name="people_root_button_show">SHOW INVITATIONS</string>
     <string name="people_root_text_failed">Something went wrong with the server connection.</string>
 
+    <string name="people_root_text_not_accepted">
+        So far your challenge wasn\'t accepted.\n
+        If you are tired of waiting, you can always press the abort button below.\n
+        Try to challenge people you know. This will make the process a lot faster.</string>
+    <string name="people_root_text_lost">
+        You lost.\n
+        Well that sounds awfull. Let\'s rephrase that.\n
+        You lost this challenge. Fortunately you can rechallenge someone right away.</string>
+    <string name="people_root_text_refused">
+        It looks like your opponent doesn\'t want to ride right now.\n
+        Better luck next time!</string>
+    <string name="people_root_text_fail">
+        You did it again! Somehow you broke your connection with the server.\n
+        But don\'t worry: you can always go drive for a while.</string>
+    <string name="people_root_text_challenge">
+        You don\'t have an active challenge at the moment.\n
+        You can challenge someone yourself or wait till an other person invites you for a challenge.</string>
+
 
     //People Challenges Invitations
     <string name="title_activity_people_challenges_invitations">Invitations</string>
@@ -303,6 +321,20 @@
     <string name="people_inv_button_refuse">REFUSE</string>
     <string name="people_inv_button_previous">PREVIOUS</string>
     <string name="people_inv_button_next">NEXT</string>
+
+    <string name="people_inv_text_h_speed">
+        In this challenge, you must try to get a higher speed than your opponent.\n
+        Winning a challenge grants you with 3000 points.</string>
+    <string name="people_inv_text_h_acceleration">
+        In this challenge, you must try to get a higher acceleration than your opponent.\n
+        Winning a challenge grants you with 3000 points.</string>
+    <string name="people_inv_text_h_altitude">
+        In this challenge, you must try to achieve a higher altitude difference than your opponent during your ride.\n
+        Winning a challenge grants you with 3000 points.</string>
+    <string name="people_inv_text_g_distance">
+        In this challenge, you must try to drive a greater distance than your opponent.\n
+        You have to do so in 24 hours. What are your still doing here?\n
+        Winning a challenge grants you with 3000 points.</string>
 
 
     //People Challenges Send
