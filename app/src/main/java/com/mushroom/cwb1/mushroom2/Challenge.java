@@ -48,6 +48,20 @@ public class Challenge {
         this.status = status;
     }
 
+    public Challenge(String user1, String user2, String challenge_name, int status, float user1_float, double user1_double, float user2_float, double user2_double, long start, long end, String winner){
+        this.user1 = user1;
+        this.user2 = user2;
+        this.challenge_name = challenge_name;
+        this.status = status;
+        this.user1_float = user1_float;
+        this.user1_double = user1_double;
+        this.user2_float = user2_float;
+        this.user2_double = user2_double;
+        this.start = start;
+        this.end = end;
+        this.winner = winner;
+    }
+
     // GETTERS AND SETTERS
 
     public String getUser1() {

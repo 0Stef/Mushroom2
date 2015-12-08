@@ -201,7 +201,7 @@ public class ServerConnection {
         dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
     }
 
-    //Register user on server ----------------------------------------------------------------------
+    //Register user on server
 
     public String createServerUser(User user) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //NOT_FOUND, ADDED, FAILED
@@ -385,20 +385,56 @@ public class ServerConnection {
 
     //Functionality for challenges. ----------------------------------------------------------------
 
-    public String createChallenge(Challenge challenge) {
+    public String createChallenge(Challenge challenge) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+
+
+        //TODO afwerken
+//        serverCheckResult =  new ArrayList<>();
+//        String result;
+//
+//        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
+//                + "&" + URLEncoder.encode("start_the_game", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getStart_the_game()), "UTF-8")
+//                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8");
+//        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
+//
+
+
+
         //ADDED, FAILED
 
         return null;
     }
 
-    public ArrayList<Challenge> downloadChallenge(String userName) {
-        ArrayList<Challenge> list = new ArrayList<>();
-
+    public ArrayList<Challenge> downloadChallenge(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //When problems occur: add new challenge with Challenge.FAILED as status.
         //The list is empty: add new challenge with Challenge.NOT_ACTIVE
         //With other words... the list should not be empty!
 
-        return list;
+        serverCheckResult =  new ArrayList<>();
+        ArrayList result = new ArrayList<Challenge>();
+
+        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
+        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
+
+        if (serverCheckResult.get(0).equals("no results")){
+
+            return result;
+
+        }else{
+
+            for (int i = 0 ; i < serverCheckResult.size(); i++){
+
+            String rawString = serverCheckResult.get(i);
+            String[] splitString = rawString.split("=");
+
+            Challenge currentChallenge = new Challenge(splitString[0],splitString[1],splitString[2],Integer.parseInt(splitString[3]),Float.parseFloat(splitString[4]),Double.parseDouble(splitString[5]),Float.parseFloat(splitString[6]),Double.parseDouble(splitString[7]),Long.parseLong(splitString[8]),Long.parseLong(splitString[9]),splitString[10]);
+
+            result.add(currentChallenge);
+            }
+        return result;
+
+        }
+
     }
 
     public String updateChallenge(Challenge challenge) {

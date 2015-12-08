@@ -94,6 +94,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
+    public boolean providerEnabled;
     private boolean eerstekeer = true;
     private long startTime = 0L;
 
@@ -211,6 +212,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         decimalF = new DecimalFormat("0.0");
         decimalF3 = new DecimalFormat("0.00");
 
+        wachten.setText("");
+
     }
 
     @Override
@@ -231,9 +234,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
-
-
-        wachten.setText("wachten op gps signaal");
+        wachten.setText("waiting for location service...");
         wachten.setVisibility(View.VISIBLE);
 
         final int previousRideId = handler.getGreatestRideID();
@@ -336,9 +337,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-                //GPS controle acceleratie
-                if (eerstekeer = false){
-                    accGps = (location.getSpeed()+previousLocation.getSpeed())/timeToPrev;
+                // TODO GPS controle acceleratie
+                // filteren
+                if (firstLocationSet){
+                    float speedDifference = location.getSpeed()-previousLocation.getSpeed();
+                    accGps = (float) speedDifference/(timeToPrev*1000);
                     System.out.println("gps acc "+Float.toString(accGps)+" accelerometer "+accy);
 
                 }
@@ -396,13 +399,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
             public void onProviderEnabled(String provider) {
 
-                Toast.makeText(RideActivity.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RideActivity.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
+                providerEnabled = true;
+                wachten.setText("waiting for location service...");
 
             }
 
             public void onProviderDisabled(String provider) {
 
-                Toast.makeText(RideActivity.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
+                providerEnabled = false;
+                //Toast.makeText(RideActivity.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
+                wachten.setText("turn on location service");
 
             }
         };
