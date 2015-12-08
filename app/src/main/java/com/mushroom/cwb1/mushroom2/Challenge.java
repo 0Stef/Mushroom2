@@ -1,7 +1,11 @@
 package com.mushroom.cwb1.mushroom2;
 
 
+import java.util.Calendar;
+
 public class Challenge {
+
+    public static final int NOT_ACTIVE = 42;
 
     public static final int ENDED = 2;
     public static final int ACCEPTED = 1;
@@ -31,14 +35,17 @@ public class Challenge {
     private String winner;
 
 
+    // CONSTRUCTORS
+
     public Challenge(){
         //Sometimes, an empty line is all you need.
     }
 
-    public Challenge(String user1, String user2, String challenge_name){
+    public Challenge(String user1, String user2, String challenge_name, int status){
         this.user1 = user1;
         this.user2 = user2;
         this.challenge_name = challenge_name;
+        this.status = status;
     }
 
     // GETTERS AND SETTERS
@@ -84,6 +91,15 @@ public class Challenge {
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    public void initialiseTime(long duration) {
+        this.start = Calendar.getInstance().getTimeInMillis();
+        this.end = start + duration;
+    }
+
+    public long getTimeLeft() {
+        return end - start;
     }
 
 
@@ -150,6 +166,14 @@ public class Challenge {
         } else {
             return new String();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "challenger: " + user1 +
+                ", opponent: " + user2 +
+                ", type: " + challenge_name +
+                ", status: " + status;
     }
 }
 

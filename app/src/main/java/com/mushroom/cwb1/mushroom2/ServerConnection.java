@@ -392,7 +392,8 @@ public class ServerConnection {
     }
 
     public ArrayList<Challenge> downloadChallenge(String userName) {
-        //When problems occur: status == Challenge.FAILED (first element of array)
+        //When problems occur: add new challenge with Challenge.FAILED as status.
+        //The list is empty: add new challenge with Challenge.NOT_ACTIVE
 
         return null;
     }

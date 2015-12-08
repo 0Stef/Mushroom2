@@ -1,20 +1,16 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.ExecutionException;
 
 public class PeopleChallenges extends AppCompatActivity {
 
@@ -22,15 +18,10 @@ public class PeopleChallenges extends AppCompatActivity {
     private Challenge challenge;
     private ArrayList<Challenge> invitations;
 
-
     private PeopleChallengeHandler peoplechallengehandler;
     private DataBaseHandler2 dbhandler;
     private UserHandler userhandler;
     private ServerConnection conn;
-
-    public static final long HOUR = 1000 * 60 * 60;
-    public static final long DAY = 1000 * 60 * 60 * 24;
-    public static final long WEEK = 1000 * 60 * 60 * 24 * 7;
 
     public int award = 3000;
 
@@ -45,26 +36,10 @@ public class PeopleChallenges extends AppCompatActivity {
     private Button root_select;
     private Button root_show;
 
-    private TextView inv_heading;
-    private TextView inv_status;
-    private TextView inv_opponent;
-    private TextView inv_type;
-    private Button inv_accept;
-    private Button inv_refuse;
-    private Button inv_prev;
-    private Button inv_next;
-
-    private TextView send_status;
-    private AutoCompleteTextView send_opponent;
-    private Spinner send_type;
-    private Button send_send;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_challenges2);
+        setContentView(R.layout.activity_people_challenges_root);
 
         conn = new ServerConnection(getApplicationContext());
         currentUser = conn.getActiveUser();
@@ -72,7 +47,6 @@ public class PeopleChallenges extends AppCompatActivity {
         userhandler = new UserHandler(getApplicationContext());
         dbhandler = new DataBaseHandler2(getApplicationContext(), currentUser);
         peoplechallengehandler = new PeopleChallengeHandler(getApplicationContext());
-
 
                 //Root
         root_type = (TextView) findViewById(R.id.root_challenge_type_value);
@@ -87,40 +61,13 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select = (Button) findViewById(R.id.root_selection_button);
         root_show = (Button) findViewById(R.id.root_invitations_button);
 
-
-                //Invitations
-        inv_heading = (TextView) findViewById(R.id.current_invitation);
-        inv_status = (TextView) findViewById(R.id.invitation_status);
-        inv_opponent = (TextView) findViewById(R.id.invitation_opponent_value);
-        inv_type = (TextView) findViewById(R.id.invitation_type_value);
-
-        inv_accept = (Button) findViewById(R.id.invitation_accept_button);
-        inv_refuse = (Button) findViewById(R.id.invitation_refuse_button);
-        inv_prev = (Button) findViewById(R.id.invitation_previous_button);
-        inv_next = (Button) findViewById(R.id.invitation_next_button);
-
-
-                //Send
-        send_status = (TextView) findViewById(R.id.send_status);
-        send_opponent = (AutoCompleteTextView) findViewById(R.id.send_opponent_selection);
-        send_type = (Spinner) findViewById(R.id.send_type_spinner);
-        send_send = (Button) findViewById(R.id.send_button_send);
-
-        //TODO genereer deze arraylist
-        String[] COUNTRIES = new String[] {"Pieter-Jan", "Jimmy", "Ted", "Alfred"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        //send_opponent.setAdapter(adapter);
-
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.people_send_array_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
                 //Buttons
-
         root_drive.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        //TODO to drive activity
+                        Intent i = new Intent(getApplicationContext(), RideActivity.class);
+                        startActivity(i);
+                        System.out.println("    -   drive");
                     }
                 }
         );
@@ -129,9 +76,12 @@ public class PeopleChallenges extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if (root_select.getText().toString().equals(getString(R.string.people_root_button_send))) {
-                            setContentView(R.layout.activity_people_challenges_send);
+                            System.out.println("    -   send");
+                            Intent i = new Intent(getApplicationContext(), PeopleChallengesSend.class);
+                            startActivity(i);
                         } else if (root_select.getText().toString().equals(getString(R.string.people_root_button_abord))) {
                             //TODO abord challenge: set to REFUSED?
+                            System.out.println("    -   abord");
                         }
                     }
                 }
@@ -140,101 +90,16 @@ public class PeopleChallenges extends AppCompatActivity {
         root_show.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        setContentView(R.layout.activity_people_challenges_invitations);
+                        Intent i = new Intent(getApplicationContext(), PeopleChallengesInvitations.class);
+                        startActivity(i);
                         //TODO show invitations
-                    }
-                }
-        );
-
-        inv_accept.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        //TODO accept invitation
-                    }
-                }
-        );
-
-        inv_refuse.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        //TODO refuse invitation
-                    }
-                }
-        );
-
-        inv_prev.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        //TODO previous invitation
-                    }
-                }
-        );
-
-        inv_next.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        //TODO next invitation
-                    }
-                }
-        );
-
-        send_type.setAdapter(spinnerAdapter);
-
-        send_send.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        pushNewChallenge();
+                        System.out.println("    -   show");
                     }
                 }
         );
 
         //And finally..;
         refresh();
-    }
-
-    //Functions related to button behavior ---------------------------------------------------------
-
-    public void pushNewChallenge() {
-        resetStatus();
-        Challenge invitation = new Challenge();
-
-        String opponent = send_opponent.getText().toString();
-        int type = send_type.getSelectedItemPosition();
-        String challengeName = Challenge.getChallengeType(type);
-
-        try {
-            String result = conn.checkForName(opponent);
-            if (result.equals(conn.TAKEN)) {
-                invitation.setUser1(currentUser);
-                invitation.setUser2(opponent);
-                invitation.setChallenge_name(challengeName);
-                invitation.setStatus(Challenge.CHALLENGED);
-
-                String result2 = conn.createChallenge(invitation);
-                if (result2.equals(ServerConnection.ADDED)) {
-                    refresh();
-                } else {
-                    send_status.setText(R.string.people_root_text_failed);
-                }
-            } else if (result.equals(conn.AVAILABLE)){
-                send_opponent.setText("");
-                send_opponent.setHint(R.string.people_send_text_not_user);
-            } else if (result.equals(conn.FAILED)) {
-                send_status.setText(R.string.people_root_text_failed);
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void resetStatus() {
-        root_status.setText("");
-        inv_status.setText("");
-        send_status.setText("");
     }
 
     //@Override ------------------------------------------------------------------------------------
@@ -260,21 +125,28 @@ public class PeopleChallenges extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        refresh();
+    }
+
     //Main logic -----------------------------------------------------------------------------------
 
     private void refresh() {
         setContentView(R.layout.activity_people_challenges_root);
 
         ArrayList<Challenge> serverChallenges = conn.downloadChallenge(currentUser);
+        serverChallenges = placeholdeList();
         challenge = setInvitations(serverChallenges);
 
-        int status = 42;
+        int status = Challenge.NOT_ACTIVE;
         if (challenge != null) status = challenge.getStatus();
         adaptView(status);
 
-        //Je bent bezig met een challenge.
+            //Je bent bezig met een challenge.
         if (status == Challenge.ACCEPTED) {
-
             update();
             checkWinner();
             conn.updateChallenge(challenge);
@@ -296,7 +168,25 @@ public class PeopleChallenges extends AppCompatActivity {
             //De verbinding heeft gefaald.
         } else if (status == Challenge.FAILED){
             //TODO Feedback: verbindingsproblemen.
+
+            //Je hebt momenteel geen challenge.
+        } else if (status == Challenge.NOT_ACTIVE) {
+
         }
+    }
+
+    private ArrayList<Challenge> placeholdeList() {
+        ArrayList<Challenge> list = new ArrayList<>();
+
+        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
+        list.add(new Challenge("Bart", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
+        list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
+
+        Challenge challenge1 = new Challenge(currentUser, "Louis", Challenge.HIGHEST_ALTITUDE, Challenge.ENDED);
+        challenge1.setWinner(currentUser);
+        list.add(challenge1);
+
+        return list;
     }
 
     //Main functions -------------------------------------------------------------------------------
@@ -402,15 +292,25 @@ public class PeopleChallenges extends AppCompatActivity {
     }
 
     public Challenge setInvitations(ArrayList<Challenge> list) {
+        invitations = new ArrayList<>();
+        ArrayList<Challenge> other = new ArrayList<>();
+
         for (Challenge elem : list) {
-            if (elem.getStatus() == Challenge.CHALLENGED && !elem.getUser1().equals(currentUser)) {
+            System.out.println(elem.toString());
+            if (elem.getStatus() == Challenge.CHALLENGED && elem.getUser2().equals(currentUser)) {
+                System.out.println("    -   Added invitation");
                 invitations.add(elem);
-                list.remove(elem);
+            } else if (elem.getStatus() == Challenge.ENDED && elem.getWinner().equals(currentUser)) {
+                System.out.println("    -   You won this one.");
+                //Do nothing. You already know you won. Selbstverständlich.
+            } else {
+                other.add(elem);
             }
         }
 
-        if (list.size() > 0) {
-            return list.get(0);
+        if (other.size() > 0) {
+            System.out.println("other: " + other.get(0).toString());
+            return other.get(0);
         } else {
             return null;
         }
@@ -418,22 +318,26 @@ public class PeopleChallenges extends AppCompatActivity {
 
     public void adaptView(int status) {
         int size = invitations.size();
+        System.out.println("    -   Size:" + size);
         if (size > 0) {
             root_show.setText(getString(R.string.people_root_button_show) + " (" + size + ")");
-            root_show.setEnabled(true);
+            System.out.println("    -   show");
         } else {
             root_show.setText(R.string.people_root_button_show);
-            root_show.setEnabled(false);
+            System.out.println("    -   don't show");
         }
 
         root_select.setEnabled(true);
-        if (status == Challenge.REFUSED || status == Challenge.ENDED || status == 42) {
+        if (status == Challenge.REFUSED || status == Challenge.ENDED || status == Challenge.NOT_ACTIVE) {
             root_select.setText(R.string.people_root_button_send);
-        } else if (status == Challenge.ACCEPTED || status == Challenge.CHALLENGED) {
+            System.out.println("    -   send");
+        } else if (status == Challenge.ACCEPTED || (status == Challenge.CHALLENGED)) {
             root_select.setText(R.string.people_root_button_abord);
+            System.out.println("    -   don't send");
         } else {
             root_select.setEnabled(false);
             root_show.setEnabled(false);
+            System.out.println("    -   failed or else");
         }
     }
 }

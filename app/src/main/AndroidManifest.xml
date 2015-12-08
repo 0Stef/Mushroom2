@@ -97,6 +97,20 @@
             android:name=".PeopleChallenges"
             android:label="@string/title_activity_people_challenges" >
         </activity>
+        <activity
+            android:name=".PeopleChallengesSend"
+            android:label="@string/title_activity_people_challenges_send" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.PeopleChallenges" />
+        </activity>
+        <activity
+            android:name=".PeopleChallengesInvitations"
+            android:label="@string/title_activity_people_challenges_invitations" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.PeopleChallenges" />
+        </activity>
 
     </application>
 
