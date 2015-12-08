@@ -37,7 +37,7 @@ public class ServerConnection {
     public static final String AVAILABLE = "username available";
     public static final String TAKEN = "username taken";
 
-    //Constructor
+    //Constructor ----------------------------------------------------------------------------------
 
     public ServerConnection(Context context) {
         userHandler = new UserHandler(context);
@@ -45,7 +45,7 @@ public class ServerConnection {
         this.context = context;
     }
 
-    //Active User
+    //Active User ----------------------------------------------------------------------------------
 
     public static String getActiveUser() {
         SharedPreferences settings = context.getSharedPreferences(context.getString(R.string.app_save_file), 0);
@@ -62,7 +62,7 @@ public class ServerConnection {
         editor.commit();
     }
 
-    //Check user name
+    //Check user name ------------------------------------------------------------------------------
 
     public String checkForName(String userName) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //AVAILABLE, TAKEN, FAILED
@@ -82,7 +82,7 @@ public class ServerConnection {
         }
     }
 
-    //Install user from server locally
+    //Install user from server locally -------------------------------------------------------------
 
     public String installUser(String userName) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //NOT_FOUND, ADDED, FAILED
@@ -201,7 +201,7 @@ public class ServerConnection {
         dbHandler.createTable(dbHandler.getWritableDatabase(), user.getUser_name());
     }
 
-    //Register user on server
+    //Register user on server ----------------------------------------------------------------------
 
     public String createServerUser(User user) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //NOT_FOUND, ADDED, FAILED
@@ -225,7 +225,7 @@ public class ServerConnection {
         }
     }
 
-    //Update user information
+    //Update user information ----------------------------------------------------------------------
 
     public String updateUser(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //NOT_FOUND, SUCCES, FAILED
@@ -383,7 +383,7 @@ public class ServerConnection {
         new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/update_achievements.php");
     }
 
-    //Functionality for challenges.
+    //Functionality for challenges. ----------------------------------------------------------------
 
     public String createChallenge(Challenge challenge) {
         //ADDED, FAILED
@@ -392,10 +392,13 @@ public class ServerConnection {
     }
 
     public ArrayList<Challenge> downloadChallenge(String userName) {
+        ArrayList<Challenge> list = new ArrayList<>();
+
         //When problems occur: add new challenge with Challenge.FAILED as status.
         //The list is empty: add new challenge with Challenge.NOT_ACTIVE
+        //With other words... the list should not be empty!
 
-        return null;
+        return list;
     }
 
     public String updateChallenge(Challenge challenge) {
@@ -410,7 +413,7 @@ public class ServerConnection {
         return null;
     }
 
-    //Extra functions
+    //Extra functions ------------------------------------------------------------------------------
 
     public ArrayList<String> putDataToServer(String URL, String input){
         ArrayList<String> status =  new ArrayList<>();

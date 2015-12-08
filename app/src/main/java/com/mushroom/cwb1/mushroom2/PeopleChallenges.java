@@ -61,6 +61,9 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select = (Button) findViewById(R.id.root_selection_button);
         root_show = (Button) findViewById(R.id.root_invitations_button);
 
+        root_select.setText("test");
+        root_show.setText(R.string.people_root_button_show);
+
                 //Buttons
         root_drive.setOnClickListener(
                 new Button.OnClickListener() {
@@ -75,13 +78,18 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        System.out.println("    -   select");
                         if (root_select.getText().toString().equals(getString(R.string.people_root_button_send))) {
                             System.out.println("    -   send");
                             Intent i = new Intent(getApplicationContext(), PeopleChallengesSend.class);
                             startActivity(i);
+
                         } else if (root_select.getText().toString().equals(getString(R.string.people_root_button_abord))) {
-                            //TODO abord challenge: set to REFUSED?
                             System.out.println("    -   abord");
+                            challenge.setStatus(Challenge.REFUSED);
+                            if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
+                                root_status.setText(R.string.people_root_text_failed);
+                            }
                         }
                     }
                 }
@@ -90,16 +98,19 @@ public class PeopleChallenges extends AppCompatActivity {
         root_show.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        System.out.println("    -   show");
                         Intent i = new Intent(getApplicationContext(), PeopleChallengesInvitations.class);
                         startActivity(i);
-                        //TODO show invitations
-                        System.out.println("    -   show");
                     }
                 }
         );
 
         //And finally..;
         refresh();
+    }
+
+    private void resetStatus() {
+        root_status.setText("");
     }
 
     //@Override ------------------------------------------------------------------------------------
@@ -135,14 +146,13 @@ public class PeopleChallenges extends AppCompatActivity {
     //Main logic -----------------------------------------------------------------------------------
 
     private void refresh() {
-        setContentView(R.layout.activity_people_challenges_root);
+        //setContentView(R.layout.activity_people_challenges_root);
 
         ArrayList<Challenge> serverChallenges = conn.downloadChallenge(currentUser);
         serverChallenges = placeholdeList();
         challenge = setInvitations(serverChallenges);
 
-        int status = Challenge.NOT_ACTIVE;
-        if (challenge != null) status = challenge.getStatus();
+        int status = challenge.getStatus();
         adaptView(status);
 
             //Je bent bezig met een challenge.
@@ -171,14 +181,14 @@ public class PeopleChallenges extends AppCompatActivity {
 
             //Je hebt momenteel geen challenge.
         } else if (status == Challenge.NOT_ACTIVE) {
-
+            //TODO Feedback: Je heb niets te doen momenteel.
         }
     }
 
     private ArrayList<Challenge> placeholdeList() {
         ArrayList<Challenge> list = new ArrayList<>();
 
-        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
+        //list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
         list.add(new Challenge("Bart", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
         list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
 
@@ -312,7 +322,9 @@ public class PeopleChallenges extends AppCompatActivity {
             System.out.println("other: " + other.get(0).toString());
             return other.get(0);
         } else {
-            return null;
+            Challenge stub = new Challenge();
+            stub.setStatus(Challenge.NOT_ACTIVE);
+            return stub;
         }
     }
 
@@ -328,6 +340,8 @@ public class PeopleChallenges extends AppCompatActivity {
         }
 
         root_select.setEnabled(true);
+        root_show.setEnabled(true);
+
         if (status == Challenge.REFUSED || status == Challenge.ENDED || status == Challenge.NOT_ACTIVE) {
             root_select.setText(R.string.people_root_button_send);
             System.out.println("    -   send");
@@ -335,8 +349,8 @@ public class PeopleChallenges extends AppCompatActivity {
             root_select.setText(R.string.people_root_button_abord);
             System.out.println("    -   don't send");
         } else {
-            root_select.setEnabled(false);
-            root_show.setEnabled(false);
+            //root_select.setEnabled(false);
+            //root_show.setEnabled(false);
             System.out.println("    -   failed or else");
         }
     }
