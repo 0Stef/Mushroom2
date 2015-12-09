@@ -143,6 +143,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button startrecordingbutton;
     Button stoprecordingbutton;
     Button challengebutton;
+    Button newChallengebutton;
 
     Spinner moeilijkheidsgraad;
 
@@ -185,9 +186,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
         stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         challengebutton = (Button) findViewById(R.id.challengebutton);
+        newChallengebutton = (Button) findViewById(R.id.new_challenge_button);
         startrecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
 
         moeilijkheidsgraad = (Spinner) findViewById(R.id.moeilijkheidsgraad);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
@@ -235,7 +238,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
-        wachten.setText("waiting for location service...");
+        wachten.setText(getString(R.string.ride_text_wait_location));
         wachten.setVisibility(View.VISIBLE);
 
         uitleg.setVisibility(View.INVISIBLE);
@@ -408,7 +411,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 //Toast.makeText(RideActivity.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
                 providerEnabled = true;
-                wachten.setText("waiting for location service...");
+                wachten.setText(getString(R.string.ride_text_wait_location));
 
             }
 
@@ -416,7 +419,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 providerEnabled = false;
                 //Toast.makeText(RideActivity.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
-                wachten.setText("turn on location service");
+                wachten.setText(getString(R.string.ride_text_wait_provider));
 
             }
         };
@@ -439,6 +442,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challengebutton.setVisibility(View.INVISIBLE);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
         wachten.setVisibility(View.INVISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
 
 
 
@@ -691,6 +695,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
+                    newChallengebutton.setVisibility(View.VISIBLE);
                 } catch (InterruptedException e) {
 
                 }
@@ -766,6 +771,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -826,6 +832,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -868,6 +875,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -924,6 +932,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -997,6 +1006,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -1048,6 +1058,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -1107,6 +1118,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -1150,6 +1162,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -1228,6 +1241,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.setVisibility(View.VISIBLE);
             }
         }).start();
     }
@@ -1270,5 +1284,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (challengenr == 9){
             altitudeDifference(moeilijkheid);
         } else randomChallenge();
+    }
+
+    public void newChallenge(View view){
+        uitleg.setVisibility(View.INVISIBLE);
+        challenge1.setVisibility(View.INVISIBLE);
+        challenge2.setVisibility(View.INVISIBLE);
+        Succes.setVisibility(View.INVISIBLE);
+        challengebutton.setVisibility(View.VISIBLE);
+        moeilijkheidsgraad.setVisibility(View.VISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
+        randomChallenge();
     }
 }
