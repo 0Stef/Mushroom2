@@ -132,10 +132,20 @@ public class Register extends AppCompatActivity {
             userNameField.setHint(R.string.register_text_invalid_characters);
             userNameField.requestFocus();
             validCharacters = false;
+        } else if (userName.length() > 30){
+            userNameField.setText("");
+            userNameField.setHint(R.string.register_text_too_long);
+            userNameField.requestFocus();
+            validCharacters = false;
         }
         if (!password.matches("[a-zA-Z0-9]*")){
             passWordField.setText("");
             passWordField.setHint(R.string.register_text_invalid_characters);
+            passWordField.requestFocus();
+            validCharacters = false;
+        } else if (password.length() > 30){
+            passWordField.setText("");
+            passWordField.setHint(R.string.register_text_too_long);
             passWordField.requestFocus();
             validCharacters = false;
         }
@@ -143,20 +153,40 @@ public class Register extends AppCompatActivity {
             cityField.setText("");
             cityField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
+        } else if (city.length() > 30){
+            cityField.setText("");
+            cityField.setHint(R.string.register_text_too_long);
+            cityField.requestFocus();
+            validCharacters = false;
         }
         if (!country.matches("[a-zA-Z0-9]*")){
             countryField.setText("");
             countryField.setHint(R.string.register_text_invalid_characters);
+            validCharacters = false;
+        } else if (country.length() > 30){
+            countryField.setText("");
+            countryField.setHint(R.string.register_text_too_long);
+            countryField.requestFocus();
             validCharacters = false;
         }
         if (!firstName.matches("[a-zA-Z0-9]*")){
             firstNameField.setText("");
             firstNameField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
+        } else if (firstName.length() > 30){
+            firstNameField.setText("");
+            firstNameField.setHint(R.string.register_text_too_long);
+            firstNameField.requestFocus();
+            validCharacters = false;
         }
         if (!lastName.matches("[a-zA-Z0-9]*")){
             lastnameField.setText("");
             lastnameField.setHint(R.string.register_text_invalid_characters);
+            validCharacters = false;
+        } else if (lastName.length() > 30){
+            lastnameField.setText("");
+            lastnameField.setHint(R.string.register_text_too_long);
+            lastnameField.requestFocus();
             validCharacters = false;
         }
 

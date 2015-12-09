@@ -54,6 +54,7 @@
     <string name="register_text_pass_needed">Wachtwoord is nodig.</string>
     <string name="register_text_user_needed">Gebruikersnaam is nodig.</string>
     <string name="register_text_invalid_characters">Alleen letters en cijfers.</string>
+    <string name="register_text_too_long">Maximum 30 tekens</string>
     <string name="register_view_city">Vul uw stad in</string>
     <string name="register_view_country">Vul uw land in</string>
     <string name="register_view_password">Vul uw wachtwoord in *</string>

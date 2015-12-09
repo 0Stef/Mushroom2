@@ -31,6 +31,7 @@
     <string name="register_text_pass_needed">Password is needed.</string>
     <string name="register_text_user_needed">Username is needed.</string>
     <string name="register_text_invalid_characters">Only numbers and letters</string>
+    <string name="register_text_too_long">Maximum 30 characters</string>
 
 
 
