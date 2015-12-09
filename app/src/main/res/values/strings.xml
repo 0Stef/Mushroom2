@@ -72,7 +72,7 @@
 
     <string name="challenges_expl_keepspeed1">Keep a speed of</string>
     <string name="challenges_expl_keepspeed2">km/h for 30 seconds</string>
-    <string name="challenges_expl_keepacc1">Keep en acceleration of</string>
+    <string name="challenges_expl_keepacc1">Keep an acceleration of</string>
     <string name="challenges_expl_keepacc2"> m/s² for 5 seconds</string>
     <string name="challenges_expl_tempdiff1">Find a place with a temperature difference of</string>
     <string name="challenges_expl_averagespeed">This ride (at least five minutes long), get an average speed of</string>
