@@ -49,7 +49,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         currentUser = ServerConnection.getActiveUser();
 
-        //Last ride statistics
+        //Global statistics
         UserHandler uHandler = new UserHandler(getApplicationContext());
         User user = uHandler.getUserInformation(currentUser);
 
@@ -57,7 +57,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         TotalDistance.setText(Float.toString(user.getTotal_distance()/1000f)+" km");
 
         TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
-        HighestVelocity.setText(Float.toString(user.getHighest_speed()*3.6f)+" km/h");
+        HighestVelocity.setText(Float.toString(user.getHighest_speed())+" km/h");
 
         TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
         HighestAcceleration.setText(Float.toString(user.getHighest_acceleration())+" m/s²");

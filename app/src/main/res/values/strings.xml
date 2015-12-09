@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Bikegoals</string>
+    <string name="app_name" translatable="false">BikeGoals</string>
     <string name="app_save_file" translatable="false">saved_file</string>
     <string name="app_user_name" translatable="false">saved_user</string>
 
