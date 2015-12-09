@@ -110,6 +110,8 @@ public class Register extends AppCompatActivity {
         passWordField.setHint("");
         countryField.setHint("");
         cityField.setHint("");
+        firstNameField.setHint("");
+        lastnameField.setHint("");
     }
 
 
