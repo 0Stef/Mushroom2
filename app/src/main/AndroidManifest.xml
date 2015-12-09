@@ -96,7 +96,10 @@
         </activity>
         <activity
             android:name=".PeopleChallenges"
-            android:label="@string/title_activity_people_challenges" >
+            android:label="@string/title_activity_people_challenges">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
         </activity>
         <activity
             android:name=".PeopleChallengesSend"

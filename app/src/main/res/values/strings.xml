@@ -288,7 +288,7 @@
     
     //People Challenges Root
     <string name="title_activity_people_challenges">Challenges</string>
-    <string name="people_root_current_challenge">Current challenge:</string>
+    <string name="people_root_current_challenge">Current challenge.</string>
     <string name="people_root_type">Type: </string>
     <string name="people_root_time">Time left: </string>
     <string name="people_root_button_drive">DRIVE</string>
@@ -342,7 +342,7 @@
 
 
     //People Challenges Send
-    <string name="title_activity_people_challenges_send">Challenges</string>
+    <string name="title_activity_people_challenges_send">Invite</string>
     <string name="people_send_heading">Send an invitation:</string>
     <string name="people_send_username">Enter the username of the person you want to challenge:</string>
     <string name="people_send_type">Choose the type of challenge you want to propose:</string>
