@@ -348,8 +348,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 float msTokmu = 3.6f;
                 speed = location.getSpeed() * msTokmu;
 
-//                if (maxSpeed < speed) {
-//                    maxSpeed = speed;
+                if (maxSpeed < speed) {
+                    maxSpeed = speed;
+                }
 //                    textMaximumSpeed.setText(decimalF.format(maxSpeed));
 //                }
                 altitude = location.getAltitude();

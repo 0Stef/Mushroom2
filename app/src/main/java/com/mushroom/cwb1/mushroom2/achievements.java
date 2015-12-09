@@ -149,15 +149,6 @@ public class achievements extends AppCompatActivity {
         set_achievements(user);
 
 
-
-
-
-//        if ((user.getDrive_1_km() ==1) && (user.getDrive_5_km() == 1) && (user.getDrive_10_km() == 1) && (user.getDrive_50_km() == 1) && (user.getDrive_100_km() == 1) && (user.getDrive_250_km() == 1) &&
-//                (user.getDrive_500_km() == 1) && (user.getDrive_1000_km() ==1) && (user.getDrive_5000_km() == 1) && (user.getTopspeed_30() == 1) && (user.getTopspeed_35() == 1) && (user.getTopspeed_40() == 1) &&
-//                (user.getTopspeed_45() == 1) && (user.getTopspeed_50() == 1) && (user.getNb_challenge_1() == 1) && (user.getNb_challenge_5() == 1) && (user.getNb_challenge_10() == 1) && (user.getNb_challenge_50() == 1) &&
-//                (user.getNb_challenge_1() == 1) &&
-
-
         // DISTANCE ACHIEVEMENTS
         if (user.getDrive_1_km() == 1 ){
             progress_1_km.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
