@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 public class RideActivity extends AppCompatActivity implements SensorEventListener, AdapterView.OnItemSelectedListener {
 
@@ -143,6 +144,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button startrecordingbutton;
     Button stoprecordingbutton;
     Button challengebutton;
+    Button newChallengebutton;
 
     Spinner moeilijkheidsgraad;
 
@@ -161,8 +163,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
-
-
 
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
@@ -185,9 +185,23 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         startrecordingbutton = (Button) findViewById(R.id.startrecordingbutton);
         stoprecordingbutton = (Button) findViewById(R.id.stoprecordingbutton);
         challengebutton = (Button) findViewById(R.id.challengebutton);
+        newChallengebutton = (Button) findViewById(R.id.new_challenge_button);
         startrecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
+
+        stoprecordingbutton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        try {
+                            stoprecording();
+                        } catch (UnsupportedEncodingException e) {
+
+                        }
+                    }
+                }
+        );
 
         moeilijkheidsgraad = (Spinner) findViewById(R.id.moeilijkheidsgraad);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
@@ -218,6 +232,15 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
+    public void onBackPressed(){
+        try {
+            stoprecording();
+        } catch (UnsupportedEncodingException e){
+
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
@@ -235,7 +258,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         startrecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
-        wachten.setText("waiting for location service...");
+        wachten.setText(getString(R.string.ride_text_wait_location));
         wachten.setVisibility(View.VISIBLE);
 
         uitleg.setVisibility(View.INVISIBLE);
@@ -408,7 +431,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 //Toast.makeText(RideActivity.this, "onProviderEnabled", Toast.LENGTH_SHORT).show();
                 providerEnabled = true;
-                wachten.setText("waiting for location service...");
+                wachten.setText(getString(R.string.ride_text_wait_location));
 
             }
 
@@ -416,7 +439,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 providerEnabled = false;
                 //Toast.makeText(RideActivity.this, "onProviderDisabled", Toast.LENGTH_SHORT).show();
-                wachten.setText("turn on location service");
+                wachten.setText(getString(R.string.ride_text_wait_provider));
 
             }
         };
@@ -430,7 +453,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         
     }
 
-    public void stoprecording(View view) throws UnsupportedEncodingException {
+    public void stoprecording() throws UnsupportedEncodingException {
         eerstekeer = true;
         firstLocationSet = false;
 
@@ -439,6 +462,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challengebutton.setVisibility(View.INVISIBLE);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
         wachten.setVisibility(View.INVISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
 
 
 
@@ -691,6 +715,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
+                    challenge1.post(new Runnable() {
+                        public void run() {
+                            challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                        }
+                    });
                 } catch (InterruptedException e) {
 
                 }
@@ -766,6 +795,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -826,6 +860,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -868,6 +907,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -924,6 +968,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -997,6 +1046,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -1022,7 +1076,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     while (acct < doel) {
                         challenge1.post(new Runnable() {
                             public void run() {
-                                challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + acct + " m/s²");
+                                challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + decimalF.format(acct) + " m/s²");
                             }
                         });
                         Thread.sleep(500);
@@ -1048,6 +1102,15 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                newChallengebutton.post(new Runnable() {
+                    public void run() {
+                        challenge1.post(new Runnable() {
+                            public void run() {
+                                challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                            }
+                        });
+                    }
+                });
             }
         }).start();
     }
@@ -1107,6 +1170,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -1150,6 +1218,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -1228,6 +1301,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
+                challenge1.post(new Runnable() {
+                    public void run() {
+                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                    }
+                });
             }
         }).start();
     }
@@ -1248,7 +1326,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public void randomChallenge(){
         int challengenr = r.nextInt(10);
-
+//        int challengenr = 1;
         if (challengenr == 0){
             getSpeed(moeilijkheid);
         } else if (challengenr == 1 && accs){
@@ -1270,5 +1348,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         } else if (challengenr == 9){
             altitudeDifference(moeilijkheid);
         } else randomChallenge();
+    }
+
+    public void newChallenge(View view){
+        uitleg.setVisibility(View.INVISIBLE);
+        challenge1.setVisibility(View.INVISIBLE);
+        challenge2.setVisibility(View.INVISIBLE);
+        Succes.setVisibility(View.INVISIBLE);
+        challengebutton.setVisibility(View.VISIBLE);
+        moeilijkheidsgraad.setVisibility(View.VISIBLE);
+        newChallengebutton.setVisibility(View.INVISIBLE);
+        challengeButton(view);
     }
 }

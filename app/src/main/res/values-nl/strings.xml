@@ -15,6 +15,7 @@
 
     <string name="challenges_view_title">Uitdagingen</string>
     <string name="challenges_button_start">Start uitdaging</string>
+    <string name="challenges_button_new_challenge">nieuwe uitdaging</string>
 
     <string name="home_button_challenges">Uitdagingen</string>
     <string name="home_button_friends">Vrienden</string>
@@ -157,6 +158,8 @@
     <string name="ride_text_average_speed">Gemiddelde snelheid:</string>
     <string name="ride_text_elapsed_time">Verlopen tijd:</string>
     <string name="ride_text_distance">Afgelegde afstand:</string>
+    <string name="ride_text_wait_location">wachten op gps-signaal</string>
+    <string name="ride_text_wait_provider">zet gps aan</string>
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
     <string name="statistics_days_biked">Dagen gefietst.</string>

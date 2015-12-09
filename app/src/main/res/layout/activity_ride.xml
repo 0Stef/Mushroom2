@@ -246,6 +246,18 @@
             android:id="@+id/succes"
             android:layout_marginTop="15dp"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_challenge_button"
+            android:text="@string/challenges_button_new_challenge"
+            android:onClick="newChallenge"
+            android:layout_toEndOf="@id/succes"
+            android:layout_toRightOf="@id/succes"
+            android:layout_alignBottom="@id/succes"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"/>
+
     </RelativeLayout>
 
 <RelativeLayout
@@ -272,8 +284,7 @@
         android:background="#ff0046"
         android:gravity="center"
         android:textStyle="bold"
-        android:padding="10dp"
-        android:onClick="stoprecording" />
+        android:padding="10dp" />
 
 </RelativeLayout>
 

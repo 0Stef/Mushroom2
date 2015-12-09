@@ -56,6 +56,7 @@
     <string name="challenges_view_2">Get speed over 20 km/h</string>
     <string name="challenges_view_3">Continue driving north for 1 km</string>
     <string name="challenges_button_start">Start challenge</string>
+    <string name="challenges_button_new_challenge">new challenge</string>
 
     <string name="challenges_time">Time:</string>
     <string name="challenges_start_temp">Starting temperature:</string>
@@ -71,7 +72,7 @@
 
     <string name="challenges_expl_keepspeed1">Keep a speed of</string>
     <string name="challenges_expl_keepspeed2">km/h for 30 seconds</string>
-    <string name="challenges_expl_keepacc1">Keep en acceleration of</string>
+    <string name="challenges_expl_keepacc1">Keep an acceleration of</string>
     <string name="challenges_expl_keepacc2"> m/s² for 5 seconds</string>
     <string name="challenges_expl_tempdiff1">Find a place with a temperature difference of</string>
     <string name="challenges_expl_averagespeed">This ride (at least five minutes long), get an average speed of</string>
@@ -205,6 +206,8 @@
     <string name="ride_text_average_speed">Average speed:</string>
     <string name="ride_text_elapsed_time">Elapsed time:</string>
     <string name="ride_text_distance">Distance:</string>
+    <string name="ride_text_wait_location">waiting for location service...</string>
+    <string name="ride_text_wait_provider">turn on location service</string>
 
     <string-array name="ride_difficulty">
         <item>Easy</item>
