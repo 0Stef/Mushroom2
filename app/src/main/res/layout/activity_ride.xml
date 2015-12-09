@@ -255,7 +255,8 @@
             android:layout_toEndOf="@id/succes"
             android:layout_toRightOf="@id/succes"
             android:layout_alignBottom="@id/succes"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"/>
 
     </RelativeLayout>
 
@@ -283,8 +284,7 @@
         android:background="#ff0046"
         android:gravity="center"
         android:textStyle="bold"
-        android:padding="10dp"
-        android:onClick="stoprecording" />
+        android:padding="10dp" />
 
 </RelativeLayout>
 
