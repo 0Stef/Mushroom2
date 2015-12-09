@@ -3,7 +3,6 @@ package com.mushroom.cwb1.mushroom2;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,9 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Polyline;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Persoonlijke_statistieken extends AppCompatActivity {
@@ -195,7 +192,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rTotalDistance.setText(Float.toString(rIntTotalDistance/1000f)+" km");
 
         TextView rHighestVelocity = (TextView) findViewById(R.id.rHighestVelocity);
-        rHighestVelocity.setText(Float.toString(rFlHighestVelocity*3.6f)+" km/h");
+        rHighestVelocity.setText(Float.toString(rFlHighestVelocity)+" km/h");
 
         TextView rHighestAcceleration = (TextView) findViewById(R.id.rHighestAcceleration);
         rHighestAcceleration.setText(Float.toString(rFlHighestAcceleration)+" m/s²");

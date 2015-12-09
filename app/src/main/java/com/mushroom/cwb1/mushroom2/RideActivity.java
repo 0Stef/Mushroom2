@@ -231,14 +231,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    @Override
-    public void onBackPressed(){
-        try {
-            stoprecording();
-        } catch (UnsupportedEncodingException e){
-
-        }
-    }
+//    @Override
+//    public void onBackPressed(){
+//        try {
+//            stoprecording();
+//        } catch (UnsupportedEncodingException e){
+//
+//        }
+//    }
 
     @Override
     protected void onResume() {

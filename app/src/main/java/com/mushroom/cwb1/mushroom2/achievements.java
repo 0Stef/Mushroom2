@@ -69,7 +69,6 @@ public class achievements extends AppCompatActivity {
         nb_compl_achievements = 0;
         handler.checkDay(currentUser);
 
-
         //Creating the progressbars
         progress_1_km = (ProgressBar) findViewById(R.id.progress_1_km);
         progress_1_km.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
@@ -143,8 +142,6 @@ public class achievements extends AppCompatActivity {
         progress_get_all_achievements = (ProgressBar) findViewById(R.id.progress_get_all_achievements);
         progress_get_all_achievements.getProgressDrawable().setColorFilter(Color.rgb(255,191,106), PorterDuff.Mode.SRC_IN);
 
-        //TODO verder uitwerken
-        //TOTAL DISTANCE
 
         set_achievements(user);
 
@@ -337,7 +334,7 @@ public class achievements extends AppCompatActivity {
         }
 
         handler.overWrite(user);
-        // TODO naar de server overschrijven
+
     }
 
     @Override
@@ -541,6 +538,7 @@ public class achievements extends AppCompatActivity {
 
         handler.overWrite(user);
     }
+
 }
 
 
