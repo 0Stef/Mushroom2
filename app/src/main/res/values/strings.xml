@@ -36,7 +36,7 @@
 
 
     //Homescreen
-    <string name="title_activity_homescreen" translatable="false">Mushroom</string>
+    <string name="title_activity_homescreen" translatable="false">Bikegoals</string>
     <string name="home_button_ride">Ride mode</string>
     <string name="home_button_optional">Milestones</string>
     <string name="home_button_ranking">Ranking</string>
