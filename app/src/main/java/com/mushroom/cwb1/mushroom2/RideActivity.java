@@ -82,6 +82,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private String zoekrichting;
     private Random r = new Random();
     private int moeilijkheid;
+    private double starthoogte;
 
 
     private double highest_altitude;
@@ -1066,7 +1067,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
 
             public void run() {
-                final double starthoogte = altitude;
                 challenge1.post(new Runnable() {
                     public void run() {
                         challenge1.setText(getString(R.string.challenges_curr_height_diff) + " 0 m");
@@ -1074,7 +1074,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     }
                 });
                 try {
-                    while (altitude - starthoogte <= doel) {
+                    starthoogte = altitude;
+                    while (altitude - starthoogte < doel) {
+                        if (starthoogte > altitude){
+                            starthoogte = altitude;
+                        }
                         challenge1.post(new Runnable() {
                             public void run() {
                                 challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
