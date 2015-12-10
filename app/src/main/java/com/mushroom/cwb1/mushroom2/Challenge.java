@@ -46,14 +46,17 @@ public class Challenge implements Serializable {
         this.status = status;
     }
 
-    public Challenge(String user1, String user2, String challenge_name, int status){
+    public Challenge(String user1, String user2, String challenge_name, int status) {
         this.user1 = user1;
         this.user2 = user2;
         this.challenge_name = challenge_name;
         this.status = status;
     }
 
-    public Challenge(String user1, String user2, String challenge_name, int status, float user1_float, double user1_double, float user2_float, double user2_double, long start, long end, String winner){
+    public Challenge(String user1, String user2, String challenge_name, int status, float user1_float,
+                     double user1_double, float user2_float, double user2_double, long start, long end,
+                     String winner) {
+
         this.user1 = user1;
         this.user2 = user2;
         this.challenge_name = challenge_name;

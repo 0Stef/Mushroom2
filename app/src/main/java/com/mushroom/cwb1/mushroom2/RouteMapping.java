@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class RouteMapping extends FragmentActivity {
 
@@ -18,11 +19,15 @@ public class RouteMapping extends FragmentActivity {
     private LinkedList list;
     private int nbRide;
     private String currentUser;
+    private Random r = new Random();
+    public int polylineColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_mapping);
+
+        randomColor();
 
         currentUser = getIntent().getStringExtra("username");
         nbRide = getIntent().getIntExtra("nbRide", nbRide);
@@ -37,6 +42,26 @@ public class RouteMapping extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    public void randomColor(){
+
+        int colorNb = r.nextInt(5);
+
+        if (colorNb == 0) {
+            polylineColor  = Color.CYAN;
+        }else if (colorNb == 1){
+            polylineColor = Color.GREEN;
+        }else if (colorNb == 2){
+            polylineColor = Color.MAGENTA;
+        }else if (colorNb == 3){
+            polylineColor = Color.YELLOW;
+        }else if (colorNb == 4){
+            polylineColor = Color.RED;
+        }else{
+            polylineColor  = Color.BLUE;
+        }
+
     }
 
     /**
@@ -84,7 +109,7 @@ public class RouteMapping extends FragmentActivity {
                 mPolylineOptions.add(new LatLng(rowprev.getLatitude(),rowprev.getLongitude()), new LatLng(row.getLatitude(),row.getLongitude()));
             }
         }
-        mPolylineOptions.width(5).color(Color.BLUE);
+        mPolylineOptions.width(5).color(polylineColor);
         mMap.addPolyline(mPolylineOptions);
         dbRow rowlast = (dbRow) list.get((list.size()-1)/2);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rowlast.getLatitude(), rowlast.getLongitude()), 15.0f));

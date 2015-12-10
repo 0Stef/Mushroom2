@@ -64,7 +64,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     float distanceToPrev = 0f;
     long timeToPrev = 0l;
     private long elapsedTime = 0l;
-    private long elapsedTimeToSet = -3600000l;
+    //private long elapsedTimeToSet = -3600000l;
     private float distance = 0f;
     private float maxSpeed = 0f;
 //    private float maxAcceleration = 0f;
@@ -100,6 +100,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private boolean eerstekeer = true;
     private long startTime = 0L;
 
+    public boolean inRide;
+
     private android.os.Handler customHandler = new android.os.Handler();
 
 
@@ -130,6 +132,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private LatLng lastPoint;
     private List<LatLng> gpsPoints;
     private Polyline route;
+    public int polylineColor;
 
     private SimpleDateFormat dateF;
     private SimpleDateFormat timeF;
@@ -157,6 +160,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_ride);
 
         currentUser = ServerConnection.getActiveUser();
+        randomColor();
 
 
         setUpMapIfNeeded();
@@ -215,7 +219,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
         elapsedTime = 0;
-        elapsedTimeToSet = -3600000l;
+        //elapsedTimeToSet = -3600000l;
         distance = 0;
 
         dateF = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.ENGLISH);
@@ -231,14 +235,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-//    @Override
-//    public void onBackPressed(){
-//        try {
-//            stoprecording();
-//        } catch (UnsupportedEncodingException e){
-//
-//        }
-//    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(inRide){
+            Toast.makeText(RideActivity.this, getString(R.string.ride_text_in_ride), Toast.LENGTH_SHORT).show();
+
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 
     @Override
     protected void onResume() {
@@ -252,6 +260,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void startrecording(View view) {
+
+        inRide = true;
 
         //TODO zet een scherm met wacht op signaal vn gps
 
@@ -323,7 +333,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
                     elapsedTime = 0;
-                    elapsedTimeToSet = -3600000l;
+                    //elapsedTimeToSet = -3600000l;
                     averageSpeed = 0;
                     timeToPrev = 0;
                     distance = 0;
@@ -372,20 +382,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 // filteren
                 if (firstLocationSet){
                     float speedDifference = location.getSpeed()-previousLocation.getSpeed();
-                    accGps = (float) speedDifference/(timeToPrev*1000);
-                    System.out.println("gps acc "+Float.toString(accGps)+" accelerometer "+accy);
+                    accGps = (float) (speedDifference/(timeToPrev))*1000;
+                    //System.out.println("gps acc "+Float.toString(accGps)+" accelerometer "+accy);
 
                 }
 
                 elapsedTime = elapsedTime + timeToPrev;
-                elapsedTimeToSet = elapsedTimeToSet + timeToPrev;
+                //elapsedTimeToSet = elapsedTimeToSet + timeToPrev;
                 distance = distance + distanceToPrev;
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(elapsedTimeToSet);
+                //Calendar calendar = Calendar.getInstance();
+                //calendar.setTimeInMillis(elapsedTimeToSet);
 
                 textDistance.setText(decimalF3.format(distance/1000));
-                textElapsedTime.setText(timeF.format(calendar.getTime()));
+                //textElapsedTime.setText(timeF.format(calendar.getTime()));
 
                 lastPoint = new LatLng(latitude, longitude);
 
@@ -451,12 +461,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
         // kan op netwerk locatie zoeken en op GPS of op beiede, voor fiets is GPS het interessantst
          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        
+
+        //TODO MOET weg na testperiode
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+
     }
 
     public void stoprecording() throws UnsupportedEncodingException {
         eerstekeer = true;
         firstLocationSet = false;
+        inRide = false;
+
+        customHandler.removeCallbacks(updateTimerThread);
+
 
         startrecordingbutton.setVisibility(View.VISIBLE);
         stoprecordingbutton.setVisibility(View.INVISIBLE);
@@ -466,9 +484,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         newChallengebutton.setVisibility(View.INVISIBLE);
 
 
-
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
+
+        gpsPoints.clear();
+        randomColor();
 
 
 
@@ -522,6 +542,25 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    public void randomColor(){
+
+        int colorNb = r.nextInt(5);
+
+        if (colorNb == 0) {
+            polylineColor  = Color.CYAN;
+        }else if (colorNb == 1){
+            polylineColor = Color.GREEN;
+        }else if (colorNb == 2){
+            polylineColor = Color.MAGENTA;
+        }else if (colorNb == 3){
+            polylineColor = Color.YELLOW;
+        }else if (colorNb == 4){
+            polylineColor = Color.RED;
+        }else{
+            polylineColor  = Color.BLUE;
+        }
+
+    }
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -572,18 +611,19 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         public void run() {
 
-//            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-//
-//            updatedTime = timeSwapBuff + timeInMilliseconds;
-//
-//            int secs = (int) (updatedTime / 1000);
-//            int mins = secs / 60;
-//            secs = secs % 60;
-//            int milliseconds = (int) (updatedTime % 1000);
-//            textAverageSpeed.setText("" + mins + ":"
-//                    + String.format("%02d", secs) + ":"
-//                    + String.format("%03d", milliseconds));
-//            customHandler.postDelayed(this, 0);
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+
+            int secs = (int) (updatedTime / 1000);
+            int hours = secs / 3600;
+            int mins = (secs / 60) % 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedTime % 1000);
+            textElapsedTime.setText("" + hours + ":"
+                    + String.format("%02d", mins) + ":"
+                    + String.format("%02d", secs));
+            customHandler.postDelayed(this, 0);
         }
 
     };
@@ -631,7 +671,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //route = mMap.addPolyline(mPolylineOptions);
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
-        mPolylineOptions.width(5).color(Color.BLUE);
+        mPolylineOptions.width(5).color(polylineColor);
         route = mMap.addPolyline(mPolylineOptions);
 
 
@@ -716,9 +756,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
-                    challenge1.post(new Runnable() {
+                    newChallengebutton.post(new Runnable() {
                         public void run() {
-                            challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
+                            newChallengebutton.setVisibility(View.VISIBLE);
                         }
                     });
                 } catch (InterruptedException e) {
@@ -796,10 +836,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -861,10 +900,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -908,10 +946,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -969,10 +1006,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -1047,10 +1083,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -1105,12 +1140,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 userhandler.overWrite(user);
                 newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.post(new Runnable() {
-                            public void run() {
-                                challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                            }
-                        });
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -1171,10 +1201,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -1219,10 +1248,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();
@@ -1302,10 +1330,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 user.setTotal_points(user.getTotal_points() + points);
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                 userhandler.overWrite(user);
-                challenge1.post(new Runnable() {
+                newChallengebutton.post(new Runnable() {
                     public void run() {
-                        challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
-                    }
+                        newChallengebutton.setVisibility(View.VISIBLE);                       }
                 });
             }
         }).start();

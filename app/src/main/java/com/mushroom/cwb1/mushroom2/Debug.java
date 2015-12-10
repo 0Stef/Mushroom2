@@ -98,7 +98,7 @@ public class Debug {
         }
         if (command.equals("add_points") || command.equals("points") || command.equals("pnt")) {
             System.out.println("    -   Points");
-            String[] params = param.split("_:_");
+            String[] params = param.split(":");
 
             if (params.length == 2) {
                 String userName = params[0];
@@ -170,6 +170,7 @@ public class Debug {
 
         int points = user.getTotal_points();
         user.setTotal_points(points + amount);
+        System.out.println("    -   " + points + amount);
 
         userHandler.overWrite(user);
     }

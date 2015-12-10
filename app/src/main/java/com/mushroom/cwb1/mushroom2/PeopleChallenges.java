@@ -56,10 +56,10 @@ public class PeopleChallenges extends AppCompatActivity {
         root_type = (TextView) findViewById(R.id.root_challenge_type_value);
         root_time = (TextView) findViewById(R.id.root_challenge_time_value);
         root_status = (TextView) findViewById(R.id.root_status_text);
-        root_user1 = (TextView) findViewById(R.id.root_opponent);
-        root_user1_value = (TextView) findViewById(R.id.root_score_opponent);
-        root_user2 = (TextView) findViewById(R.id.root_current_user);
-        root_user2_value = (TextView) findViewById(R.id.root_score_current_user);
+        root_user2 = (TextView) findViewById(R.id.root_opponent);
+        root_user2_value = (TextView) findViewById(R.id.root_score_opponent);
+        root_user1 = (TextView) findViewById(R.id.root_current_user);
+        root_user1_value = (TextView) findViewById(R.id.root_score_current_user);
         root_com = (TextView) findViewById(R.id.root_comment);
 
         root_drive = (Button) findViewById(R.id.root_drive_button);
@@ -262,10 +262,13 @@ public class PeopleChallenges extends AppCompatActivity {
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
             }
             challenge.setStatus(Challenge.ENDED);
+
+            user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+            userhandler.overWrite(user);
         }
     }
 
-    public void update(){
+    public void update() {
 
         String name = challenge.getChallenge_name();
         long start = challenge.getStart();

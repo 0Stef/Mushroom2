@@ -196,7 +196,7 @@
     <string name="title_activity_ride">RideActivity</string>
     <string name="ride_default_value" translatable="false">0,0</string>
     <string name="ride_default_value2" translatable="false">0,00</string>
-    <string name="time_default_value" translatable="false">00:00:00</string>
+    <string name="time_default_value" translatable="false">0:00:00</string>
     <string name="ride_unit_speed" translatable="false">km/h</string>
     <string name="ride_unit_acceleration" translatable="false">m/s\u00B2</string>
     <string name="ride_unit_distance" translatable="false">km</string>
@@ -208,6 +208,7 @@
     <string name="ride_text_distance">Distance:</string>
     <string name="ride_text_wait_location">waiting for location service...</string>
     <string name="ride_text_wait_provider">turn on location service</string>
+    <string name="ride_text_in_ride">You cannot leave while in a ride</string>
 
     <string-array name="ride_difficulty">
         <item>Easy</item>
@@ -266,7 +267,7 @@
     //Route mapping
     <string name="title_activity_route_mapping">Mapping</string>
 
-    <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
+    <string name="title_activity_people_challenge_handler" translatable="false">PeopleChallengeHandler</string>
 
 
 
@@ -284,7 +285,7 @@
 
 
     //Peeps
-    <string name="peeps_highest_speed">"Highest speed"</string>
+    <string name="peeps_highest_speed">Highest speed</string>
     <string name="peeps_highest_acceleration">Highest acceleration</string>
     <string name="peeps_highest_altitude">Highest altitude</string>
     <string name="peeps_greatest_distance">Greatest distance</string>
@@ -296,7 +297,7 @@
     <string name="people_root_type">Type: </string>
     <string name="people_root_time">Time left: </string>
     <string name="people_root_button_drive">DRIVE</string>
-    <string name="people_root_button_abord">ABORD</string>
+    <string name="people_root_button_abord">ABORT</string>
     <string name="people_root_button_send">SEND INVITATION</string>
     <string name="people_root_button_show">SHOW INVITATIONS</string>
     <string name="people_root_text_failed">Something went wrong with the server connection.</string>
@@ -343,6 +344,7 @@
         In this challenge, you must try to drive a greater distance than your opponent.\n
         You have to do so in 24 hours. What are your still doing here?\n
         Winning a challenge grants you with 3000 points.</string>
+    <string name="people_inv_text_failed">Your connection failed.\nTry again later.</string>
 
 
     //People Challenges Send
