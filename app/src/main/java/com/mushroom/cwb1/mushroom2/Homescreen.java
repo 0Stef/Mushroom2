@@ -74,9 +74,6 @@ public class Homescreen extends AppCompatActivity {
                 }
         );
 
-
-
-
         Button persoonlijkeActivitybutton = (Button)findViewById(R.id.persoonlijkestatistieken);
         persoonlijkeActivitybutton.setOnClickListener(
                 new Button.OnClickListener() {
@@ -136,5 +133,20 @@ public class Homescreen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        try {
+            conn.updateUser(currentUser);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

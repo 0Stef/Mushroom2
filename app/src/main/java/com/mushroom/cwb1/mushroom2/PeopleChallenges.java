@@ -262,10 +262,13 @@ public class PeopleChallenges extends AppCompatActivity {
                 user.setNb_won_challenges(user.getNb_won_challenges() + 1);
             }
             challenge.setStatus(Challenge.ENDED);
+
+            user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+            userhandler.overWrite(user);
         }
     }
 
-    public void update(){
+    public void update() {
 
         String name = challenge.getChallenge_name();
         long start = challenge.getStart();

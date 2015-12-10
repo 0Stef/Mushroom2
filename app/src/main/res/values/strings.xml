@@ -265,7 +265,7 @@
     //Route mapping
     <string name="title_activity_route_mapping">Mapping</string>
 
-    <string name="title_activity_people_challenge_handler">PeopleChallengeHandler</string>
+    <string name="title_activity_people_challenge_handler" translatable="false">PeopleChallengeHandler</string>
 
 
 
@@ -283,7 +283,7 @@
 
 
     //Peeps
-    <string name="peeps_highest_speed">"Highest speed"</string>
+    <string name="peeps_highest_speed">Highest speed</string>
     <string name="peeps_highest_acceleration">Highest acceleration</string>
     <string name="peeps_highest_altitude">Highest altitude</string>
     <string name="peeps_greatest_distance">Greatest distance</string>
@@ -295,7 +295,7 @@
     <string name="people_root_type">Type: </string>
     <string name="people_root_time">Time left: </string>
     <string name="people_root_button_drive">DRIVE</string>
-    <string name="people_root_button_abord">ABORD</string>
+    <string name="people_root_button_abord">ABORT</string>
     <string name="people_root_button_send">SEND INVITATION</string>
     <string name="people_root_button_show">SHOW INVITATIONS</string>
     <string name="people_root_text_failed">Something went wrong with the server connection.</string>
@@ -342,6 +342,7 @@
         In this challenge, you must try to drive a greater distance than your opponent.\n
         You have to do so in 24 hours. What are your still doing here?\n
         Winning a challenge grants you with 3000 points.</string>
+    <string name="people_inv_text_failed">Your connection failed.\nTry again later.</string>
 
 
     //People Challenges Send
