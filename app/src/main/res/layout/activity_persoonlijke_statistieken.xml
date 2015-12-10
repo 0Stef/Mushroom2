@@ -218,6 +218,21 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/statistics_avarage_speed"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rAvarageVelocity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/orangeApp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/statistics_highest_acceleration"
                 />
 

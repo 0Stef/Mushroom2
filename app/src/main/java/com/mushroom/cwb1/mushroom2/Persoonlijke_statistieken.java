@@ -38,6 +38,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
     private long rLgTotatTime;
     private long rLgFirstTime;
     private DataBaseHandler2 handler;
+    private float rFlAverageVelocity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +159,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rDbHighestAltitude = 0;
         rLgTotatTime = 0;
         rLgFirstTime = 0;
+        rFlAverageVelocity = 0;
         if (list.size() != 0){
             dbRow FirstRow = (dbRow) list.get(0);
             dbRow LastRow = (dbRow) list.get(list.size() - 1);
@@ -176,6 +178,8 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
                     rDbHighestAltitude = row.getAltitude();
                 }
 
+                rFlAverageVelocity += row.getVelocity();
+
                 //Chart Data
                 xVal.add("" + index);
                 yVelocity.add(new Entry(row.getVelocity(), index));
@@ -186,6 +190,8 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
                 yAltitude.add(new Entry((float) row.getAltitude(), index));
 
             }
+
+            rFlAverageVelocity /= (float) list.size();
         }
 
         TextView rTotalDistance = (TextView) findViewById(R.id.rTotalDistance);
@@ -193,6 +199,9 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         TextView rHighestVelocity = (TextView) findViewById(R.id.rHighestVelocity);
         rHighestVelocity.setText(Float.toString(rFlHighestVelocity)+" km/h");
+
+        TextView rAvarageVelocity = (TextView) findViewById(R.id.rAvarageVelocity);
+        rAvarageVelocity.setText(Float.toString(rFlAverageVelocity)+" km/h");
 
         TextView rHighestAcceleration = (TextView) findViewById(R.id.rHighestAcceleration);
         rHighestAcceleration.setText(Float.toString(rFlHighestAcceleration)+" m/s²");
