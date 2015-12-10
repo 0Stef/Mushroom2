@@ -480,7 +480,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
-        wachten.setVisibility(View.VISIBLE);
+        wachten.setVisibility(View.INVISIBLE);
         newChallengebutton.setVisibility(View.INVISIBLE);
 
 
