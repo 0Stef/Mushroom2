@@ -68,9 +68,13 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                             String result = conn.updateChallenge(showing);
                             if (result.equals(conn.FAILED)) {
                                 inv_status.setText("The connection failed.");
-                            } else isActive = true;
+                            } else {
+                                isActive = true;
+                                invitations.remove(showing);
+                                position--;
+                                refreshView();
+                            }
                         }
-                        refreshView();
                     }
                 }
         );
