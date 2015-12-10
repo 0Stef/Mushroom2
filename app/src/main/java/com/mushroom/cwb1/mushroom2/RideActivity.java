@@ -240,7 +240,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     public void onBackPressed() {
 
         if(inRide){
-            wachten.setText("You cannot leave while in a ride.");
+            Toast.makeText(RideActivity.this, getString(R.string.ride_text_in_ride), Toast.LENGTH_SHORT).show();
 
         }else{
             super.onBackPressed();
