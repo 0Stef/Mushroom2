@@ -259,7 +259,7 @@ public class PeopleChallenges extends AppCompatActivity {
             conn.deleteChallenge(challenge);
 
             //De verbinding heeft gefaald.
-        } else if (status == Challenge.FAILED){
+        } else if (status == Challenge.FAILED) {
             root_com.setText(R.string.people_root_text_fail);
 
             //Je hebt momenteel geen challenge.
@@ -403,12 +403,11 @@ public class PeopleChallenges extends AppCompatActivity {
     public void adaptView(int status) {
         int size = invitations.size();
         System.out.println("    -   Size:" + size);
+
         if (size > 0) {
             root_show.setText(getString(R.string.people_root_button_show) + " (" + size + ")");
-            System.out.println("    -   show");
         } else {
             root_show.setText(R.string.people_root_button_show);
-            System.out.println("    -   don't show");
         }
 
         root_select.setEnabled(true);
@@ -421,6 +420,7 @@ public class PeopleChallenges extends AppCompatActivity {
         } else if (status == Challenge.ACCEPTED || (status == Challenge.CHALLENGED)) {
             root_select.setText(R.string.people_root_button_abord);
             isActive = true;
+
             System.out.println("    -   don't send");
         } else {
             if (status == Challenge.FAILED) {
