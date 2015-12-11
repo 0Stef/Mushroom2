@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.mushroom.cwb1.mushroom2.achievements"
+    tools:context="com.mushroom.cwb1.mushroom2.PeopleChallenges"
     android:background="#ffffff"
     >
 
@@ -36,93 +36,78 @@
                 android:layout_marginBottom="10dp"
                 />
 
-            <LinearLayout
+            <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
+                android:stretchColumns="1"
+                android:layout_marginBottom="10dp"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/people_root_type"
-                    android:id="@+id/root_challenge_type"
-                    />
+                <TableRow>
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/root_challenge_time_value"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/people_root_type"
+                        android:id="@+id/root_challenge_type"
+                        />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/root_challenge_time_value"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
+                        />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
-                >
+                </TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/people_root_time"
-                    android:id="@+id/root_challenge_time"
-                    />
+                <TableRow>
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/root_challenge_type_value"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginStart="17dp"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/people_root_time"
+                        android:id="@+id/root_challenge_time"
+                        />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/root_challenge_type_value"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
+                        />
 
+                </TableRow>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
-                >
+                <TableRow>
 
-
-                <TextView
+                    <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/root_current_user"
                     android:text="@string/people_root_text_opponent" />
 
-                <TextView
+                    <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/root_score_current_user"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     />
 
-            </LinearLayout>
+                </TableRow>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
-                >
+                <TableRow>
 
-                <TextView
+                    <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -130,30 +115,24 @@
                     android:id="@+id/root_opponent"
                     />
 
-                <TextView
+                    <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/root_score_opponent"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     />
 
-             </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="10dp"
-                />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/root_status_text"
-                android:layout_marginBottom="5dp"
                 />
 
             <TextView
@@ -171,16 +150,6 @@
                 android:layout_marginBottom="10dp"
                 />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/root_server_status"
-                android:gravity="center"
-                android:textColor="@color/red"
-                android:layout_marginBottom="5dp"
-                />
-
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -195,6 +164,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 >
 
                 <Button
@@ -218,6 +188,17 @@
                     />
 
             </LinearLayout>
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/root_server_status"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:layout_marginBottom="5dp"
+                />
 
         </LinearLayout>
 
