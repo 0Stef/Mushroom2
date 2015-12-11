@@ -69,6 +69,7 @@
     <string name="challenges_winddirection">Wind direction:</string>
     <string name="challenges_deviation">Deviation:</string>
     <string name="challenges_huidige_versnelling">Current acceleration</string>
+    <string name="challenges_points">points!</string>
 
     <string name="challenges_expl_keepspeed1">Keep a speed of</string>
     <string name="challenges_expl_keepspeed2">km/h for 30 seconds</string>

@@ -209,6 +209,7 @@
     <string name="challenges_expl_drivedirection">km naar het</string>
     <string name="challenges_winddirection">Windrichting:</string>
     <string name="challenges_deviation">Afwijking:</string>
+    <string name="challenges_points">punten!</string>
     <string name="statistics_text_day"> Dag(en)</string>
     <string name="action_settings">Instellingen</string>
     <string name="login_text_wrong">Zo te zien is er iets fout gelopen.</string>
