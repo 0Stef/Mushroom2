@@ -385,6 +385,9 @@ public class PeopleChallenges extends AppCompatActivity {
             } else if (elem.getStatus() == Challenge.ENDED && elem.getWinner().equals(currentUser)) {
                 System.out.println("    -   You won this one.");
                 //Do nothing. You already know you won. Selbstverständlich.
+            } else if (elem.getStatus() == Challenge.REFUSED && elem.getUser1().equals(currentUser)) {
+                System.out.println("    -   Abort this one.");
+                //Do nothing. You refused this one yourself.
             } else {
                 other.add(elem);
             }
