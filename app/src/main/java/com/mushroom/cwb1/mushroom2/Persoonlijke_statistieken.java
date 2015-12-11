@@ -210,7 +210,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rHighestAltitudeDiff.setText(Double.toString(rDbHighestAltitude)+" m");
 
         TextView rTotalTime = (TextView) findViewById(R.id.rTotalTime);
-        rTotalTime.setText(Float.toString(rLgTotatTime/3600000f)+" h");
+        rTotalTime.setText(Float.toString(rLgTotatTime/60000f)+" min");
 
         TextView rFirstTime = (TextView) findViewById(R.id.rDate);
         rFirstTime.setText(DateFormat.getDateInstance().format(rLgFirstTime));
