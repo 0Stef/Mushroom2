@@ -137,14 +137,18 @@ public class Homescreen extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        try {
-            conn.updateUser(currentUser);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    conn.updateUser(currentUser);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

@@ -504,7 +504,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
 
-        gpsPoints.clear();
+        if (!route.getPoints().isEmpty()) {
+            gpsPoints.clear();
+        }
         randomColor();
 
 
@@ -538,7 +540,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             user.setHighest_altitude_diff(current_highest_alt_diff);
 
         // AWARD POINTS FOR RIDE
-        int points = Math.round(distance * averageSpeed);
+        int points = Math.round(distance * averageSpeed/1000);
         user.setTotal_points(user.getTotal_points() + points);
 
         // OVERWRITE TO DATABASE
