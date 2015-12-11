@@ -724,7 +724,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 });
                 try {
                     long gestart = SystemClock.uptimeMillis();
-                    while (eltime < 30000) {
+                    while (eltime < 30000 && inRide) {
                         if (speed >= snelheid) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
@@ -738,29 +738,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         }
                         Thread.sleep(500);
                     }
-                    Succes.post(new Runnable() {
-                        public void run() {
-                            Succes.setVisibility(View.VISIBLE);
+                    if (inRide) {
+                        Succes.post(new Runnable() {
+                            public void run() {
+                                Succes.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        userhandler = new UserHandler(getApplicationContext());
+                        User user = userhandler.getUserInformation(currentUser);
+                        int points;
+                        if (moeilijkheidsgraad == 1) {
+                            points = 100;
+                        } else if (moeilijkheidsgraad == 2) {
+                            points = 400;
+                        } else {
+                            points = 1000;
                         }
-                    });
-                    userhandler = new UserHandler(getApplicationContext());
-                    User user =userhandler.getUserInformation(currentUser);
-                    int points;
-                    if (moeilijkheidsgraad == 1){
-                        points = 100;
-                    } else if (moeilijkheidsgraad == 2){
-                        points = 400;
-                    }else {
-                        points = 1000;
+                        user.setTotal_points(user.getTotal_points() + points);
+                        user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                        userhandler.overWrite(user);
+                        newChallengebutton.post(new Runnable() {
+                            public void run() {
+                                newChallengebutton.setVisibility(View.VISIBLE);
+                            }
+                        });
                     }
-                    user.setTotal_points(user.getTotal_points() + points);
-                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                    userhandler.overWrite(user);
-                    newChallengebutton.post(new Runnable() {
-                        public void run() {
-                            newChallengebutton.setVisibility(View.VISIBLE);
-                        }
-                    });
                 } catch (InterruptedException e) {
 
                 }
@@ -796,7 +798,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 });
                 try {
                     long gestart = SystemClock.uptimeMillis();
-                    while (eltime < 5000) {
+                    while (eltime < 5000 && inRide) {
                         if (acct >= versnelling) {
                             eltime = (SystemClock.uptimeMillis() - gestart);
                             challenge1.post(new Runnable() {
@@ -815,31 +817,34 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         });
                         Thread.sleep(500);
                     }
+                } catch (InterruptedException e) {
+
+                }
+                if (inRide) {
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
                         }
                     });
-                } catch (InterruptedException e) {
-
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 100;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 300;
+                    } else {
+                        points = 800;
+                    }
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 100;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 300;
-                }else {
-                    points = 800;
-                }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -871,7 +876,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     }
                 });
                 try {
-                    while (Math.abs(temperature - starttemperatuur) < 1) {
+                    while (Math.abs(temperature - starttemperatuur) < 1 && inRide) {
                         challenge2.post(new Runnable() {
                             public void run() {
                                 challenge2.setText(getString(R.string.challenges_curr_temp) + " " + String.valueOf(temperature) + " " + getString(R.string.challenges_unit_temperature));
@@ -882,28 +887,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 100;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 300;
+                    } else {
+                        points = 800;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 100;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 300;
-                }else {
-                    points = 800;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -922,34 +930,37 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (elapsedTime < 5 * 60000 || averageSpeed < snelheid) {
+                    while ((elapsedTime < 5 * 60000 || averageSpeed < snelheid) && inRide) {
                         Thread.sleep(1000);
                     }
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 75;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 300;
+                    } else {
+                        points = 1000;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 75;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 300;
-                }else {
-                    points = 1000;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -972,7 +983,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (elapsedTime < 5 * 60000 || averageAcceleration < versnelling) {
+                    while ((elapsedTime < 5 * 60000 || averageAcceleration < versnelling) && inRide) {
                         challenge1.post(new Runnable() {
                             public void run() {
                                 challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + decimalF.format(acct) + " " + getString(R.string.challenges_unit_acceleration));
@@ -988,28 +999,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 50;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 200;
+                    } else {
+                        points = 500;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 50;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 200;
-                }else {
-                    points = 500;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -1046,7 +1060,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while(afwijking > 10 || afstand < doel){
+                    while((afwijking > 10 || afstand < doel) && inRide){
                         Thread.sleep(1000);
                         afstand = distance - startafstand;
                         challenge1.post(new Runnable() {
@@ -1065,28 +1079,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 75;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 200;
+                    } else {
+                        points = 500;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 75;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 200;
-                }else {
-                    points = 500;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -1109,7 +1126,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (acct < doel) {
+                    while (acct < doel && inRide) {
                         challenge1.post(new Runnable() {
                             public void run() {
                                 challenge1.setText(getString(R.string.challenges_curr_acceleration) + " " + decimalF.format(acct) + " m/s²");
@@ -1117,31 +1134,34 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         });
                         Thread.sleep(500);
                     }
-                }catch (InterruptedException e){
+                } catch (InterruptedException e) {
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 50;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 150;
+                    } else {
+                        points = 600;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 50;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 150;
-                }else {
-                    points = 600;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -1169,7 +1189,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 });
                 try {
                     starthoogte = altitude;
-                    while (altitude - starthoogte < doel) {
+                    while (altitude - starthoogte < doel && inRide) {
                         if (starthoogte > altitude){
                             starthoogte = altitude;
                         }
@@ -1183,28 +1203,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 } catch (InterruptedException e) {
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 75;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 200;
+                    } else {
+                        points = 500;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 75;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 200;
-                }else {
-                    points = 500;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -1224,34 +1247,37 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (speed < doel) {
+                    while (speed < doel && inRide) {
                         Thread.sleep(500);
                     }
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 100;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 400;
+                    } else {
+                        points = 1000;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 100;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 400;
-                }else {
-                    points = 1000;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
@@ -1289,7 +1315,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 try {
                     float startafstand = distance;
-                    while (afstand < doel * 1000) {
+                    while (afstand < doel * 1000 && inRide) {
                         if (windrichting.equals(zoekrichting)){
                             afstand = distance - startafstand;
                         }
@@ -1312,28 +1338,31 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 }catch (InterruptedException e){
 
                 }
-                Succes.post(new Runnable() {
-                    public void run() {
-                        Succes.setVisibility(View.VISIBLE);
+                if (inRide) {
+                    Succes.post(new Runnable() {
+                        public void run() {
+                            Succes.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    userhandler = new UserHandler(getApplicationContext());
+                    User user = userhandler.getUserInformation(currentUser);
+                    int points;
+                    if (moeilijkheidsgraad == 1) {
+                        points = 100;
+                    } else if (moeilijkheidsgraad == 2) {
+                        points = 300;
+                    } else {
+                        points = 900;
                     }
-                });
-                userhandler = new UserHandler(getApplicationContext());
-                User user =userhandler.getUserInformation(currentUser);
-                int points;
-                if (moeilijkheidsgraad == 1){
-                    points = 100;
-                } else if (moeilijkheidsgraad == 2){
-                    points = 300;
-                }else {
-                    points = 900;
+                    user.setTotal_points(user.getTotal_points() + points);
+                    user.setNb_won_challenges(user.getNb_won_challenges() + 1);
+                    userhandler.overWrite(user);
+                    newChallengebutton.post(new Runnable() {
+                        public void run() {
+                            newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
-                user.setTotal_points(user.getTotal_points() + points);
-                user.setNb_won_challenges(user.getNb_won_challenges() + 1);
-                userhandler.overWrite(user);
-                newChallengebutton.post(new Runnable() {
-                    public void run() {
-                        newChallengebutton.setVisibility(View.VISIBLE);                       }
-                });
             }
         }).start();
     }
