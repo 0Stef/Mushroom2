@@ -114,8 +114,6 @@ public class Register extends AppCompatActivity {
         lastnameField.setHint("");
     }
 
-
-
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         boolean validCharacters = true;
@@ -134,10 +132,7 @@ public class Register extends AppCompatActivity {
             userNameField.setHint(R.string.register_text_invalid_characters);
             userNameField.requestFocus();
             validCharacters = false;
-        } else if (userName.length() > 30){
-            userNameField.setText("");
-            userNameField.setHint(R.string.register_text_too_long);
-            userNameField.requestFocus();
+        } else if (checkSize(userNameField)){
             validCharacters = false;
         }
         if (!password.matches("[a-zA-Z0-9-_]*")){
@@ -145,50 +140,35 @@ public class Register extends AppCompatActivity {
             passWordField.setHint(R.string.register_text_invalid_characters);
             passWordField.requestFocus();
             validCharacters = false;
-        } else if (password.length() > 30){
-            passWordField.setText("");
-            passWordField.setHint(R.string.register_text_too_long);
-            passWordField.requestFocus();
+        } else if (checkSize(passWordField)){
             validCharacters = false;
         }
         if (!city.matches("[a-zA-Z0-9-_]*")){
             cityField.setText("");
             cityField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
-        } else if (city.length() > 30){
-            cityField.setText("");
-            cityField.setHint(R.string.register_text_too_long);
-            cityField.requestFocus();
+        } else if (checkSize(cityField)){
             validCharacters = false;
         }
         if (!country.matches("[a-zA-Z0-9-_]*")){
             countryField.setText("");
             countryField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
-        } else if (country.length() > 30){
-            countryField.setText("");
-            countryField.setHint(R.string.register_text_too_long);
-            countryField.requestFocus();
+        } else if (checkSize(countryField)){
             validCharacters = false;
         }
         if (!firstName.matches("[a-zA-Z0-9-_]*")){
             firstNameField.setText("");
             firstNameField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
-        } else if (firstName.length() > 30){
-            firstNameField.setText("");
-            firstNameField.setHint(R.string.register_text_too_long);
-            firstNameField.requestFocus();
+        } else if (checkSize(firstNameField)){
             validCharacters = false;
         }
         if (!lastName.matches("[a-zA-Z0-9-_]*")){
             lastnameField.setText("");
             lastnameField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
-        } else if (lastName.length() > 30){
-            lastnameField.setText("");
-            lastnameField.setHint(R.string.register_text_too_long);
-            lastnameField.requestFocus();
+        } else if (checkSize(lastnameField)){
             validCharacters = false;
         }
 
@@ -198,6 +178,7 @@ public class Register extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         long millisec = calendar.getTimeInMillis();
         user.setFirst_login(millisec);
+        System.out.println("    -   First login: " + millisec);
 
         if (validCharacters) {
             if (!userName.isEmpty()) {
@@ -264,5 +245,16 @@ public class Register extends AppCompatActivity {
         if (city.isEmpty()) city = DEFAULT_ENTRY;
         if (firstName.isEmpty()) firstName = DEFAULT_ENTRY;
         if (lastName.isEmpty()) lastName = DEFAULT_ENTRY;
+    }
+
+    private boolean checkSize(EditText edit) {
+        if (lastName.length() > 30) {
+            edit.setText("");
+            edit.setHint(R.string.register_text_too_long);
+            edit.requestFocus();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
