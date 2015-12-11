@@ -181,6 +181,9 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             countryField.setText("");
             countryField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
+            if (country.contains("ë")){
+                validCharacters = true;
+            }
         } else if (checkSize(countryField)){
             validCharacters = false;
         }

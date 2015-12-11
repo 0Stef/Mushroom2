@@ -579,4 +579,10 @@ public class UserHandler extends SQLiteOpenHelper {
         user.setLast_login(millisec);
         this.overWrite(user);
     }
+
+    public void addPoints(User user, int points) {
+        user.setTotal_points(user.getTotal_points() + points);
+        user.setWeekly_points(user.getWeekly_points() + points);
+        user.setDaily_points(user.getDaily_points() + points);
+    }
 }
