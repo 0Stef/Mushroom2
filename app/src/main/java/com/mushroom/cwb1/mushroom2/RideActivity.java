@@ -537,6 +537,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         if (current_highest_alt_diff >= prev_highest_alt_diff)
             user.setHighest_altitude_diff(current_highest_alt_diff);
 
+        // AWARD POINTS FOR RIDE
+        int points = Math.round(distance * averageSpeed);
+        user.setTotal_points(user.getTotal_points() + points);
+
         // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
 
