@@ -30,10 +30,10 @@
 
     <string name="login_button_login">INLOGGEN</string>
     <string name="login_button_password">REGISTREREN</string>
-    <string name="login_text_exist">Deze gebruikersnaam bestaat niet.</string>
+    <string name="login_text_exist">Gebruikersnaam bestaat niet.</string>
     <string name="login_text_found">Uw account werd gevonden! Omdat dit de eerste keer op dit apparaat is moet u nogmaals inloggen.</string>
     <string name="login_text_incorrect">Wachtwoord is incorrect.</string>
-    <string name="login_text_needed">Een gebruikersnaam is nodig.</string>
+    <string name="login_text_needed">Gebruikersnaam is nodig.</string>
     <string name="login_view_password">Vul je wachtwoord in</string>
     <string name="login_view_username">Vul je gebruikersnaam in</string>
 
@@ -91,7 +91,7 @@
 
     <string name="challenges_view_1">Bereik een versnelling van 3 m/s²</string>
     <string name="challenges_view_2">Behaal een snelheid van meer dan 20 km/h</string>
-    <string name="challenges_view_3">Rij 1 km naar het noorden</string>
+    <string name="challenges_view_3">Rijd 1 km naar het noorden</string>
 
     <string name="achievement_21">Gebruik de app 1 dag.</string>
     <string name="achievement_22">Gebruik de app 2 dagen.</string>
@@ -107,15 +107,15 @@
     <string name="achievement_18">Win 50 uitdagingen.</string>
     <string name="achievement_19">Win 200 uitdagingen.</string>
     <string name="achievement_20">Win 500 uitdagingen.</string>
-    <string name="achievement_2">Rij 5 kilometer.</string>
-    <string name="achievement_3">Rij 10 kilometer.</string>
+    <string name="achievement_2">Rijd 5 kilometer.</string>
+    <string name="achievement_3">Rijd 10 kilometer.</string>
     <string name="achievement_30">Hoogteverschil van 10 meter.</string>
-    <string name="achievement_4">Rij 50 kilometer.</string>
-    <string name="achievement_5">Rij 100 kilometer.</string>
-    <string name="achievement_6">Rij 250 kilometer.</string>
-    <string name="achievement_7">Rij 500 kilometer.</string>
-    <string name="achievement_8">Rij 1000 kilometer.</string>
-    <string name="achievement_9">Rij 5000 kilometer.</string>
+    <string name="achievement_4">Rijd 50 kilometer.</string>
+    <string name="achievement_5">Rijd 100 kilometer.</string>
+    <string name="achievement_6">Rijd 250 kilometer.</string>
+    <string name="achievement_7">Rijd 500 kilometer.</string>
+    <string name="achievement_8">Rijd 1000 kilometer.</string>
+    <string name="achievement_9">Rijd 5000 kilometer.</string>
     <string name="achievement_31">Hoogteverschil van 25 meter.</string>
     <string name="achievement_32">Hoogteverschil van 50 meter.</string>
     <string name="achievement_33">Hoogteverschil van 100 meter.</string>
@@ -253,4 +253,8 @@
     <string name="title_activity_people_challenges">Uitdagingen</string>
     <string name="title_activity_people_challenges_invitations">Uitnodigingen</string>
     <string name="title_activity_people_challenges_send">Nodig uit</string>
+    <string name="point_2500">2400 Punten.</string>
+    <string name="point_5000">5000 Punten.</string>
+    <string name="point_600000">600000 Punen.</string>
+    <string name="challenges_huidige_versnelling">Huidige versnelling</string>
 </resources>
