@@ -1465,8 +1465,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void randomChallenge(){
-//        int challengenr = r.nextInt(10);
-        int challengenr = 1;
+        int challengenr = r.nextInt(10);
+//        int challengenr = 1;
         if (challengenr == 0){
             getSpeed(moeilijkheid);
         } else if (challengenr == 1 && accs){
