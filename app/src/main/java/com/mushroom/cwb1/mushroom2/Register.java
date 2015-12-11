@@ -129,7 +129,7 @@ public class Register extends AppCompatActivity {
         firstName = firstNameField.getText().toString();
         lastName = lastnameField.getText().toString();
 
-        if (!userName.matches("[a-zA-Z0-9]*")){
+        if (!userName.matches("[a-zA-Z0-9-_]*")){
             userNameField.setText("");
             userNameField.setHint(R.string.register_text_invalid_characters);
             userNameField.requestFocus();
@@ -140,7 +140,7 @@ public class Register extends AppCompatActivity {
             userNameField.requestFocus();
             validCharacters = false;
         }
-        if (!password.matches("[a-zA-Z0-9]*")){
+        if (!password.matches("[a-zA-Z0-9-_]*")){
             passWordField.setText("");
             passWordField.setHint(R.string.register_text_invalid_characters);
             passWordField.requestFocus();
@@ -151,7 +151,7 @@ public class Register extends AppCompatActivity {
             passWordField.requestFocus();
             validCharacters = false;
         }
-        if (!city.matches("[a-zA-Z0-9]*")){
+        if (!city.matches("[a-zA-Z0-9-_]*")){
             cityField.setText("");
             cityField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
@@ -161,7 +161,7 @@ public class Register extends AppCompatActivity {
             cityField.requestFocus();
             validCharacters = false;
         }
-        if (!country.matches("[a-zA-Z0-9]*")){
+        if (!country.matches("[a-zA-Z0-9-_]*")){
             countryField.setText("");
             countryField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
@@ -171,7 +171,7 @@ public class Register extends AppCompatActivity {
             countryField.requestFocus();
             validCharacters = false;
         }
-        if (!firstName.matches("[a-zA-Z0-9]*")){
+        if (!firstName.matches("[a-zA-Z0-9-_]*")){
             firstNameField.setText("");
             firstNameField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
@@ -181,7 +181,7 @@ public class Register extends AppCompatActivity {
             firstNameField.requestFocus();
             validCharacters = false;
         }
-        if (!lastName.matches("[a-zA-Z0-9]*")){
+        if (!lastName.matches("[a-zA-Z0-9-_]*")){
             lastnameField.setText("");
             lastnameField.setHint(R.string.register_text_invalid_characters);
             validCharacters = false;
