@@ -88,8 +88,8 @@ public class Login_screen extends AppCompatActivity {
     }
 
     public void login() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
-        String userName = usernameEdit.getText().toString().replaceAll("[^a-zA-Z0-9-]+", "_");
-        String passWord = passwordEdit.getText().toString().replaceAll("[^a-zA-Z0-9-]+", "_");
+        String userName = usernameEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
+        String passWord = passwordEdit.getText().toString().replaceAll("[^a-zA-Z0-9]+", "_");
 
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
