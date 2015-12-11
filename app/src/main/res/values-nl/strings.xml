@@ -212,6 +212,7 @@
     <string name="statistics_text_day"> Dag(en)</string>
     <string name="action_settings">Instellingen</string>
     <string name="login_text_wrong">Zo te zien is er iets fout gelopen.</string>
+    <string name="statistics_avarage_speed">Gemiddelde snelheid.</string>
     <string name="Date">Datum.</string>
     <string name="Newer_ride">Nieuwere rit</string>
     <string name="Previous_ride">Eerdere rit</string>

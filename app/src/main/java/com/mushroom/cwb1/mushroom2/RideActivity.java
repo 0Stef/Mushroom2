@@ -775,11 +775,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     public void keepAcceleration(final int moeilijkheidsgraad) {
         final int versnelling;
         if (moeilijkheidsgraad == 1){
-            versnelling = 2;
+            versnelling = 1;
         } else if (moeilijkheidsgraad == 2) {
-            versnelling = 5;
+            versnelling = 2;
         }else {
-            versnelling = 10;
+            versnelling = 4;
         }
         eltime = 0l;
         uitleg.setText(getString(R.string.challenges_expl_keepacc1) + " " + versnelling + " " + getString(R.string.challenges_expl_keepacc2));
@@ -955,13 +955,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void averageAcceleration(final int moeilijkheidsgraad) {
-        final int versnelling;
+        final double versnelling;
         if (moeilijkheidsgraad == 1){
-            versnelling = 1;
+            versnelling = 0.75;
         } else if (moeilijkheidsgraad == 2){
-            versnelling = 2;
+            versnelling = 1;
         }else {
-            versnelling = 4;
+            versnelling = 2;
         }
         uitleg.setText(getString(R.string.challenges_expl_averageacc) + " " + versnelling + " " + getString(R.string.challenges_unit_acceleration));
         uitleg.setVisibility(View.VISIBLE);
@@ -1096,11 +1096,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 //        int moeilijkheidsgraad = 1;
         final int doel;
         if (moeilijkheidsgraad == 1) {
-            doel = 5;
+            doel = 2;
         } else if (moeilijkheidsgraad == 2) {
-            doel = 10;
+            doel = 3;
         }else {
-            doel = 15;
+            doel = 5;
         }
         uitleg.setText(getString(R.string.challenges_expl_getacc) + " " + doel + " m/s²");
         uitleg.setVisibility(View.VISIBLE);

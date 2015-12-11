@@ -241,6 +241,7 @@
     <string name="Date">Date.</string>
     <string name="Previous_ride">Earlier Ride</string>
     <string name="Newer_ride">Newer Ride</string>
+    <string name="statistics_avarage_speed">Avarage speed.</string>
 
 
     <string name="statistics_not_found_velocity">No velocityvalues found!</string>
