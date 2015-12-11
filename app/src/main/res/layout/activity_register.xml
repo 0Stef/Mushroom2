@@ -63,7 +63,7 @@
             android:layout_below="@+id/register_password"
             android:layout_centerHorizontal="true"
             android:inputType="textPassword"
-            android:maxLength="32" />
+            android:maxLength="30" />
 
 
 
@@ -87,7 +87,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_firstname"
             android:layout_centerHorizontal="true"
-            android:maxLength="32" />
+            android:maxLength="30" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_lastname"
             android:layout_centerHorizontal="true"
-            android:maxLength="32" />
+            android:maxLength="30" />
 
 
 
@@ -119,9 +119,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/register_view_country"
             android:id="@+id/register_country"
-            android:layout_below="@+id/editText_register_lasstname"
+            android:layout_below="@+id/editText_register_city"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp" />
+
+        <Spinner
+            android:id="@+id/countrylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/register_country"
+            android:ems="10"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            />
 
         <EditText
             android:layout_width="wrap_content"
@@ -130,9 +140,9 @@
             android:singleLine="true"
             android:id="@+id/editText_register_country"
             android:layout_marginTop="5dp"
-            android:layout_below="@+id/register_country"
+            android:layout_below="@+id/countrylist"
             android:layout_centerHorizontal="true"
-            android:maxLength="32" />
+            android:maxLength="30" />
 
         <TextView
         android:layout_width="wrap_content"
@@ -140,7 +150,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/register_view_city"
         android:id="@+id/register_city"
-        android:layout_below="@+id/editText_register_country"
+        android:layout_below="@+id/editText_register_lasstname"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
@@ -154,16 +164,17 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_city"
             android:layout_centerHorizontal="true"
-            android:maxLength="32" />
+            android:maxLength="30" />
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/register_button_register"
             android:id="@+id/registeract_register"
-            android:layout_below="@+id/editText_register_city"
+            android:layout_below="@+id/editText_register_country"
             android:layout_centerHorizontal="true"
-            android:background="@color/orangeApp"/>
+            android:background="@color/orangeApp"
+            android:layout_marginTop="10dp"/>
 
     </RelativeLayout>
 

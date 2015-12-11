@@ -7,15 +7,18 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String DEFAULT_ENTRY = "/";
 
@@ -39,11 +42,20 @@ public class Register extends AppCompatActivity {
     private String city;
     private String firstName;
     private String lastName;
+    Spinner countrylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        countrylist = (Spinner) findViewById(R.id.countrylist);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.countrylist, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        countrylist.setAdapter(adapter);
+        countrylist.setOnItemSelectedListener(this);
+
 
         userHandler = new UserHandler(getApplicationContext());
         dbHandler = new DataBaseHandler2(getApplicationContext());
@@ -59,13 +71,15 @@ public class Register extends AppCompatActivity {
         firstNameField = (EditText) findViewById(R.id.editText_register_firstname);
         lastnameField = (EditText) findViewById(R.id.editText_register_lasstname);
 
+        countryField.setVisibility(View.INVISIBLE);
+
         statusField = (TextView) findViewById(R.id.text_register_status);
 
         registerButton = (Button) findViewById(R.id.registeract_register);
 
         registerButton.setOnClickListener(
-                new Button.OnClickListener(){
-                    public void onClick(View v){
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
                         resetHints();
                         try {
                             registerUser();
@@ -112,6 +126,19 @@ public class Register extends AppCompatActivity {
         lastnameField.setHint("");
     }
 
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        country = parent.getItemAtPosition(pos).toString();
+        if (country.equals(getString(R.string.register_text_other))){
+            countryField.setVisibility(View.VISIBLE);
+        } else {
+            countryField.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        country = getString(R.string.register_text_belgium);
+    }
+
     public void registerUser() throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         boolean validCharacters = true;
@@ -121,7 +148,9 @@ public class Register extends AppCompatActivity {
         userName = userNameField.getText().toString().replaceAll("[-]+", "_");
         password = passWordField.getText().toString().replaceAll("[-]+", "_");
         city = cityField.getText().toString().replaceAll("[-]+", "_");
-        country = countryField.getText().toString().replaceAll("[-]+", "_");
+        if (country.equals(getString(R.string.register_text_other))){
+            country = countryField.getText().toString().replaceAll("[-]+", "_");
+        }
         firstName = firstNameField.getText().toString().replaceAll("[-]+", "_");
         lastName = lastnameField.getText().toString().replaceAll("[-]+", "_");
 
@@ -245,7 +274,7 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean checkSize(EditText edit) {
-        if (lastName.length() > 30) {
+        if (edit.length() > 30) {
             edit.setText("");
             edit.setHint(R.string.register_text_too_long);
             edit.requestFocus();
