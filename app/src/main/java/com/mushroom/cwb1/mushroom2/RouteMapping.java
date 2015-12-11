@@ -3,7 +3,11 @@ package com.mushroom.cwb1.mushroom2;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -12,7 +16,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 public class RouteMapping extends FragmentActivity {
@@ -23,7 +26,6 @@ public class RouteMapping extends FragmentActivity {
     private String currentUser;
     private Random r = new Random();
     public int polylineColor;
-    private PolylineOptions mPolylineOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,8 @@ public class RouteMapping extends FragmentActivity {
         DataBaseHandler2 handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         list = handler.getList(handler.getAllThisRide(nbRide));
 
-
         setUpMapIfNeeded();
+
     }
 
     @Override
@@ -103,29 +105,31 @@ public class RouteMapping extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        FrameLayout mapLayout = (FrameLayout)findViewById(R.id.map);
+        mapLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-        if (list.size() != 0){
-            for (int index = 1; index < list.size(); index++) {
-                dbRow rowprev = (dbRow) list.get(index-1);
-                dbRow row = (dbRow) list.get(index);
-                mPolylineOptions.add(new LatLng(rowprev.getLatitude(),rowprev.getLongitude()), new LatLng(row.getLatitude(),row.getLongitude()));
+                PolylineOptions mPolylineOptions = new PolylineOptions();
+
+                if (list.size() != 0){
+                    for (int index = 1; index < list.size(); index++) {
+                        dbRow rowprev = (dbRow) list.get(index-1);
+                        dbRow row = (dbRow) list.get(index);
+                        mPolylineOptions.add(new LatLng(rowprev.getLatitude(), rowprev.getLongitude()), new LatLng(row.getLatitude(), row.getLongitude()));
+                        builder.include(new LatLng(rowprev.getLatitude(), rowprev.getLongitude()));
+                    }
+                }
+
+                mPolylineOptions.width(5).color(polylineColor);
+                mMap.addPolyline(mPolylineOptions);
+
+                LatLngBounds bounds = builder.build();
+                int padding = 30; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                mMap.animateCamera(cu);
             }
-        }
-        mPolylineOptions.width(5).color(polylineColor);
-        mMap.addPolyline(mPolylineOptions);
-        dbRow rowlast = (dbRow) list.get((list.size()-1)/2);
-        fixZoom();
-    }
-
-    private void fixZoom() {
-        List<LatLng> points = mPolylineOptions.getPoints(); // route is instance of PolylineOptions
-
-        LatLngBounds.Builder bc = new LatLngBounds.Builder();
-
-        for (LatLng item : points) {
-            bc.include(item);
-        }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
+        });
     }
 }
