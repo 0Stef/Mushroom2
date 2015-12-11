@@ -365,177 +365,174 @@ public class achievements extends AppCompatActivity {
         User user = handler.getUserInformation(username);
 
         if (user.getDrive_1_km() == 1) {
-            setpoints(user,100);
+            handler.addPoints(user, 100);
         }
 
         if (user.getTopspeed_30() == 1) {
-            setpoints(user,1000);
+            handler.addPoints(user, 1000);
         }
         if (user.getNb_challenge_1() == 1){
-            setpoints(user,500);
+            handler.addPoints(user, 500);
         }
         if (user.getBiked_days_1() == 1){
-            setpoints(user,100);
+            handler.addPoints(user, 100);
         }
         if (user.getAlt_diff_10m() == 1){
-            setpoints(user,1000);
+            handler.addPoints(user, 1000);
         }
         if (user.getStart_the_game() == 1){
-            setpoints(user,10);
+            handler.addPoints(user, 0);
         }
         if (user.getGet_all_achievements() == 1){
-            setpoints(user,10000000);
+            handler.addPoints(user, 10000000);
         }
+
+        handler.overWrite(user);
     }
 
-    private void setpoints(User user, int points){
-        user.setTotal_points(user.getTotal_points() + points);
-        user.setWeekly_points(user.getWeekly_points() + points);
-        user.setDaily_points(user.getDaily_points() + points);
-    }
+
 
     private void set_achievements(User user){
         if (user.getTotal_distance() >= 1000.0f && user.getDrive_1_km() ==0){
             user.setDrive_1_km(1);
-            user.setTotal_points(user.getTotal_points() + 100);
+            handler.addPoints(user, 100);
         }
         if (user.getTotal_distance() >= 5000.0f && user.getDrive_5_km() == 0){
             user.setDrive_5_km(1);
-            user.setTotal_points(user.getTotal_points() + 200);
+            handler.addPoints(user, 200);
         }
         if (user.getTotal_distance() >= 10000.0f && user.getDrive_10_km() == 0){
             user.setDrive_10_km(1);
-            user.setTotal_points(user.getTotal_points() + 300);
+            handler.addPoints(user, 300);
         }
         if (user.getTotal_distance() >= 50000.0f && user.getDrive_50_km() == 0){
             user.setDrive_50_km(1);
-            user.setTotal_points(user.getTotal_points() + 600);
+            handler.addPoints(user, 600);
         }
         if (user.getTotal_distance() >= 100000.0f && user.getDrive_100_km() == 0){
             user.setDrive_100_km(1);
-            user.setTotal_points(user.getTotal_points() + 2000);
+            handler.addPoints(user, 2000);
         }
         if (user.getTotal_distance() >= 250000.0f && user.getDrive_250_km() == 0){
             user.setDrive_250_km(1);
-            user.setTotal_points(user.getTotal_points() + 5000);
+            handler.addPoints(user, 5000);
 
         }
         if (user.getTotal_distance() >= 500000.0f && user.getDrive_500_km() == 0){
             user.setDrive_500_km(1);
-            user.setTotal_points(user.getTotal_points() + 20000);
+            handler.addPoints(user, 2000);
         }
         if (user.getTotal_distance() >= 1000000.0f && user.getDrive_1000_km() == 0){
             user.setDrive_1000_km(1);
-            user.setTotal_points(user.getTotal_points() + 100000);
+            handler.addPoints(user, 10000);
         }
         if (user.getTotal_distance() >= 5000000.0f && user.getDrive_5000_km() == 0){
             user.setDrive_5000_km(1);
-            user.setTotal_points(user.getTotal_points() + 400000);
+            handler.addPoints(user, 400000);
         }
 
 
         //TOPSPEED
         if (user.getHighest_speed() >=30.0f && user.getTopspeed_30() == 0){
             user.setTopspeed_30(1);
-            user.setTotal_points(user.getTotal_points() + 1000);
+            handler.addPoints(user, 1000);
         }
         if (user.getHighest_speed() >=35.0f && user.getTopspeed_35() == 0){
             user.setTopspeed_35(1);
-            user.setTotal_points(user.getTotal_points() + 2000);
+            handler.addPoints(user, 2000);
         }
         if (user.getHighest_speed() >=40.0f && user.getTopspeed_40() == 0){
             user.setTopspeed_40(1);
-            user.setTotal_points(user.getTotal_points() + 5000);
+            handler.addPoints(user, 5000);
         }
         if (user.getHighest_speed() >=45.0f && user.getTopspeed_45() == 0){
             user.setTopspeed_45(1);
-            user.setTotal_points(user.getTotal_points() + 8000);
+            handler.addPoints(user, 8000);
         }
         if (user.getHighest_speed() >=50.0f && user.getTopspeed_50() == 0){
             user.setTopspeed_50(1);
-            user.setTotal_points(user.getTotal_points() + 10000);
+            handler.addPoints(user, 10000);
         }
 
         //NB _ CHALLENGES
         if (user.getNb_won_challenges() >= 1 && user.getNb_challenge_1() == 0){
             user.setNb_challenge_1(1);
-            user.setTotal_points(user.getTotal_points() + 500);
+            handler.addPoints(user, 500);
         }
         if (user.getNb_won_challenges() >= 5 && user.getNb_challenge_5() == 0){
             user.setNb_challenge_5(1);
-            user.setTotal_points(user.getTotal_points() + 1000);
+            handler.addPoints(user, 1000);
         }
         if (user.getNb_won_challenges() >= 10 && user.getNb_challenge_10() == 0){
             user.setNb_challenge_10(1);
-            user.setTotal_points(user.getTotal_points() + 10000);
+            handler.addPoints(user, 10000);
         }
         if (user.getNb_won_challenges() >= 50 && user.getNb_challenge_50() == 0){
             user.setNb_challenge_50(1);
-            user.setTotal_points(user.getTotal_points() + 40000);
+            handler.addPoints(user, 40000);
         }
         if (user.getNb_won_challenges() >= 200 && user.getNb_challenge_200() == 0){
             user.setNb_challenge_200(1);
-            user.setTotal_points(user.getTotal_points() + 400000);
+            handler.addPoints(user, 400000);
         }
         if (user.getNb_won_challenges() >= 500 && user.getNb_challenge_500()==0){
             user.setNb_challenge_500(1);
-            user.setTotal_points(user.getTotal_points() + 600000);
+            handler.addPoints(user, 600000);
         }
 
         // DAYS BIKED
         if (user.getNb_days_biked() >= 1 && user.getBiked_days_1() == 0) {
             user.setBiked_days_1(1);
-            user.setTotal_points(user.getTotal_points() + 100);
+            handler.addPoints(user, 100);
         }
         if (user.getNb_days_biked() >= 2 && user.getBiked_days_2() == 0) {
             user.setBiked_days_2(1);
-            user.setTotal_points(user.getTotal_points() + 200);
+            handler.addPoints(user, 200);
 
         }
         if (user.getNb_days_biked() >= 5 && user.getBiked_days_5() == 0) {
             user.setBiked_days_5(1);
-            user.setTotal_points(user.getTotal_points() + 2500);
+            handler.addPoints(user, 2500);
         }
         if (user.getNb_days_biked() >= 7 && user.getBiked_days_7() == 0) {
             user.setBiked_days_7(1);
-            user.setTotal_points(user.getTotal_points() + 5000);
+            handler.addPoints(user, 5000);
         }
         if (user.getNb_days_biked() >= 14 && user.getBiked_days_14() == 0) {
             user.setBiked_days_14(1);
-            user.setTotal_points(user.getTotal_points() + 8000);
+            handler.addPoints(user, 8000);
         }
         if (user.getNb_days_biked() >= 31 && user.getBiked_days_31() == 0) {
             user.setBiked_days_31(1);
-            user.setTotal_points(user.getTotal_points() + 10000);
+            handler.addPoints(user, 10000);
         }
         if (user.getNb_days_biked() >= 100 && user.getBiked_days_100() == 0) {
             user.setBiked_days_100(1);
-            user.setTotal_points(user.getTotal_points() + 40000);
+            handler.addPoints(user, 40000);
         }
 
         // ALTITUDE
         if (user.getHighest_altitude_diff() >= 10.0f && user.getAlt_diff_10m() == 0){
             user.setAlt_diff_10m(1);
-            user.setTotal_points(user.getTotal_points() + 1000);
+            handler.addPoints(user, 1000);
         }
         if (user.getHighest_altitude_diff() >= 25.0f && user.getAlt_diff_25m() == 0){
             user.setAlt_diff_25m(1);
-            user.setTotal_points(user.getTotal_points() + 2500);
+            handler.addPoints(user, 2500);;
         }
         if (user.getHighest_altitude_diff() >= 50.0f && user.getAlt_diff_50m() == 0){
             user.setAlt_diff_50m(1);
-            user.setTotal_points(user.getTotal_points() + 5000);
+            handler.addPoints(user, 5000);
         }
         if (user.getHighest_altitude_diff() >= 100.0f && user.getAlt_diff_100m() == 0){
             user.setAlt_diff_100m(1);
-            user.setTotal_points(user.getTotal_points() + 10000);
+            handler.addPoints(user, 10000);
         }
 
         if (user.getStart_the_game() == 0){
             user.setStart_the_game(1);
-            user.setTotal_points(user.getTotal_points() + 10);
+            handler.addPoints(user, 10);
         }
-
         handler.overWrite(user);
     }
 

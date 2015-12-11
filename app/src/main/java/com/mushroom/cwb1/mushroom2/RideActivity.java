@@ -541,7 +541,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         // AWARD POINTS FOR RIDE
         int points = Math.round(distance * averageSpeed/1000);
-        user.setTotal_points(user.getTotal_points() + points);
+        userhandler.addPoints(user, points);
+        userhandler.overWrite(user);
 
         // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
@@ -778,7 +779,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                             points = 1000;
                         }
                         displayPoints(points);
-                        user.setTotal_points(user.getTotal_points() + points);
+                        userhandler.addPoints(user, points);
                         user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                         userhandler.overWrite(user);
                         newChallengebutton.post(new Runnable() {
@@ -866,7 +867,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 800;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -939,7 +940,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 800;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -994,7 +995,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 1000;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1063,7 +1064,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 500;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1149,7 +1150,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 500;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1213,7 +1214,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 600;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1285,7 +1286,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 500;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1341,7 +1342,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 1000;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
@@ -1432,7 +1433,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         points = 900;
                     }
                     displayPoints(points);
-                    user.setTotal_points(user.getTotal_points() + points);
+                    userhandler.addPoints(user, points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {

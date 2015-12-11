@@ -1,7 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +35,6 @@ public class RankingAdapter extends ArrayAdapter<UserRanking> {
         rName.setText(userranking.name);
         rPoints.setText(userranking.points);
         rNbRanking.setText(userranking.nbRank);
-        if (userranking.name.equals(ServerConnection.getActiveUser())) {
-            rName.setTextColor(Color.rgb(255, 191, 106));
-            rPoints.setTextColor(Color.rgb(255, 191, 106));
-            rNbRanking.setTextColor(Color.rgb(255, 191, 106));
-        }
 
         // Return the completed view to render on screen
         return convertView;
