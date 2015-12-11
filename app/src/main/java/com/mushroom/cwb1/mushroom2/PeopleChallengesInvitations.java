@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class PeopleChallengesInvitations extends AppCompatActivity {
 
@@ -65,8 +67,20 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                             showing.setStatus(Challenge.ACCEPTED);
                             showing.initialiseTime(DAY);
 
-                            String result = conn.updateChallenge(showing);
-                            if (result.equals(conn.FAILED)) {
+                            String result = null;
+                            try {
+                                result = conn.updateChallenge(showing);
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (result == null) {
+                                inv_status.setText(R.string.people_root_text_failed);
+                            } else if (result.equals(conn.FAILED)) {
                                 inv_status.setText(R.string.people_root_text_failed);
                             } else {
                                 isActive = true;
@@ -86,9 +100,21 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                         resetStatus();
                         if (showing != null) {
                             showing.setStatus(Challenge.REFUSED);
-                            String result = conn.updateChallenge(showing);
+                            String result = null;
+                            try {
+                                result = conn.updateChallenge(showing);
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
 
-                            if (result.equals(conn.FAILED)) {
+                            if (result == null) {
+                                inv_status.setText(R.string.people_root_text_failed);
+                                showing.setStatus(Challenge.CHALLENGED);
+                            } else if (result.equals(conn.FAILED)) {
                                 inv_status.setText(R.string.people_root_text_failed);
                                 showing.setStatus(Challenge.CHALLENGED);
                             } else if (result.equals(conn.SUCCES)) {

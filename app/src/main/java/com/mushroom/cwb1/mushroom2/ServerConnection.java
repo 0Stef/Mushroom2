@@ -387,23 +387,27 @@ public class ServerConnection {
     //Functionality for challenges. ----------------------------------------------------------------
 
     public String createChallenge(Challenge challenge) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-
-
-        //TODO afwerken
-//        serverCheckResult =  new ArrayList<>();
-//        String result;
-//
-//        String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
-//                + "&" + URLEncoder.encode("start_the_game", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getStart_the_game()), "UTF-8")
-//                + "&" + URLEncoder.encode("get_all_achievements", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getGet_all_achievements()), "UTF-8");
-//        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
-//
-
-
-
         //ADDED, FAILED
+        serverCheckResult = new ArrayList<>();
 
-        return ADDED;
+        String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
+                + "&" + URLEncoder.encode("user2", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser2(), "UTF-8")
+                + "&" + URLEncoder.encode("challenge_name", "UTF-8") + "=" + URLEncoder.encode(challenge.getChallenge_name(), "UTF-8")
+                + "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStatus()), "UTF-8")
+                //+ "&" + URLEncoder.encode("user1_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_float()), "UTF-8")
+                //+ "&" + URLEncoder.encode("user1_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_double()), "UTF-8")
+                //+ "&" + URLEncoder.encode("user2_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_float()), "UTF-8")
+                //+ "&" + URLEncoder.encode("user2_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_double()), "UTF-8")
+                + "&" + URLEncoder.encode("start", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStart()), "UTF-8")
+                + "&" + URLEncoder.encode("end", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getEnd()), "UTF-8");
+                //+ "&" + URLEncoder.encode("winner", "UTF-8") + "=" + URLEncoder.encode(challenge.getWinner(), "UTF-8");
+        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_add.php").get();
+
+        if (serverCheckResult.get(0).equals("succes")) {
+            return ADDED;
+        } else {
+            return FAILED;
+        }
     }
 
     public ArrayList<Challenge> downloadChallenge(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
@@ -412,7 +416,7 @@ public class ServerConnection {
         //With other words... the list should not be empty!
 
         serverCheckResult =  new ArrayList<>();
-        ArrayList result = new ArrayList<Challenge>();
+        ArrayList<Challenge> result = new ArrayList<>();
 
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
@@ -424,12 +428,13 @@ public class ServerConnection {
             for (int i = 0 ; i < serverCheckResult.size(); i++) {
 
                 String rawString = serverCheckResult.get(i);
+                System.out.println(rawString);
                 String[] splitString = rawString.split("=");
 
-                Challenge currentChallenge = new Challenge(splitString[0],splitString[1],splitString[2],
-                        Integer.parseInt(splitString[3]),Float.parseFloat(splitString[4]),Double.parseDouble(splitString[5]),
-                        Float.parseFloat(splitString[6]),Double.parseDouble(splitString[7]),Long.parseLong(splitString[8]),
-                        Long.parseLong(splitString[9]),splitString[10]);
+                Challenge currentChallenge = new Challenge(splitString[0], splitString[1], splitString[3],
+                        Integer.parseInt(splitString[2]), Float.parseFloat(splitString[4]), Double.parseDouble(splitString[5]),
+                        Float.parseFloat(splitString[6]), Double.parseDouble(splitString[7]), Long.parseLong(splitString[8]),
+                        Long.parseLong(splitString[9]), splitString[10]);
 
                 result.add(currentChallenge);
             }
@@ -437,16 +442,43 @@ public class ServerConnection {
         }
     }
 
-    public String updateChallenge(Challenge challenge) {
+    public String updateChallenge(Challenge challenge) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         //SUCCES, FAILED
+        serverCheckResult = new ArrayList<>();
 
-        return SUCCES;
+        String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
+                + "&" + URLEncoder.encode("user2", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser2(), "UTF-8")
+                + "&" + URLEncoder.encode("challenge_name", "UTF-8") + "=" + URLEncoder.encode(challenge.getChallenge_name(), "UTF-8")
+                + "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStatus()), "UTF-8")
+                + "&" + URLEncoder.encode("user1_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_float()), "UTF-8")
+                + "&" + URLEncoder.encode("user1_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_double()), "UTF-8")
+                + "&" + URLEncoder.encode("user2_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_float()), "UTF-8")
+                + "&" + URLEncoder.encode("user2_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_double()), "UTF-8")
+                + "&" + URLEncoder.encode("start", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStart()), "UTF-8")
+                + "&" + URLEncoder.encode("end", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getEnd()), "UTF-8")
+                + "&" + URLEncoder.encode("winner", "UTF-8") + "=" + URLEncoder.encode(challenge.getWinner(), "UTF-8");
+        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_updaten.php").get();
+
+        if (serverCheckResult.get(0).equals("succes")) {
+            return SUCCES;
+        } else {
+            return FAILED;
+        }
     }
 
-    public String deleteChallenge(Challenge challenge) {
+    public String deleteChallenge(Challenge challenge) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //SUCCES, FAILED
+        serverCheckResult = new ArrayList<>();
 
-        return SUCCES;
+        String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
+                + "&" + URLEncoder.encode("user2", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser2(), "UTF-8");
+        serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_remove.php").get();
+
+        if (serverCheckResult.get(0).equals("succes")) {
+            return SUCCES;
+        } else {
+            return FAILED;
+        }
     }
 
     //Extra functions ------------------------------------------------------------------------------

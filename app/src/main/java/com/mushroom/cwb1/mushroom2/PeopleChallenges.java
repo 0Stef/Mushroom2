@@ -51,6 +51,10 @@ public class PeopleChallenges extends AppCompatActivity {
         userhandler = new UserHandler(getApplicationContext());
         dbhandler = new DataBaseHandler2(getApplicationContext(), currentUser);
         peoplechallengehandler = new PeopleChallengeHandler(getApplicationContext());
+    }
+
+    private void createView() {
+        setContentView(R.layout.activity_people_challenges_root);
 
                 //Root
         root_type = (TextView) findViewById(R.id.root_challenge_type_value);
@@ -69,7 +73,7 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select.setText(R.string.people_root_button_send);
         root_show.setText(R.string.people_root_button_show);
 
-                //Buttons
+        //Buttons
         root_drive.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -90,10 +94,19 @@ public class PeopleChallenges extends AppCompatActivity {
                             startActivity(i);
 
                         } else if (root_select.getText().toString().equals(getString(R.string.people_root_button_abord))) {
-                            System.out.println("    -   abord");
+                            System.out.println("    -   abort");
                             challenge.setStatus(Challenge.REFUSED);
-                            if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
-                                root_status.setText(R.string.people_root_text_failed);
+                            try {
+                                if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
+                                    root_status.setText(R.string.people_root_text_failed);
+                                }
+                                refresh();
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -111,9 +124,6 @@ public class PeopleChallenges extends AppCompatActivity {
                     }
                 }
         );
-
-        //And finally..;
-        refresh();
     }
 
     private void resetStatus() {
@@ -153,11 +163,62 @@ public class PeopleChallenges extends AppCompatActivity {
     //Main logic -----------------------------------------------------------------------------------
 
     private void refresh() {
-        resetChallenge();
+        prepare();
+        createView();
+        try {
+            logic();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /*private class ChallengeTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            System.out.println("    -   Task: preExecute");
+            setContentView(R.layout.activity_loading_screen);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            System.out.println("    -   Task: prepare");
+            prepare();
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            System.out.println("    -   Task: postExecute");
+            createView();
+            try {
+                System.out.println("    -   Task: create view");
+                logic();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }*/
+
+    private void prepare() {
         ArrayList<Challenge> serverChallenges = null;
+
         try {
             serverChallenges = conn.downloadChallenge(currentUser);
+            challenge = setInvitations(serverChallenges);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -165,16 +226,18 @@ public class PeopleChallenges extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        serverChallenges = placeholdeList();
-        challenge = setInvitations(serverChallenges);
+    }
 
-        int status = challenge.getStatus();
+    private void logic() throws InterruptedException, UnsupportedEncodingException, ExecutionException {
+        int status = Challenge.FAILED;
+        if (challenge != null) status = challenge.getStatus();
         adaptView(status);
 
-            //Je bent bezig met een challenge.
+        //Je bent bezig met een challenge.
         if (status == Challenge.ACCEPTED) {
             update();
             checkWinner();
+
             conn.updateChallenge(challenge);
             showChallenge();
             root_com.setText(Challenge.getChallengeDescription(challenge.getChallenge_name()));
@@ -203,26 +266,6 @@ public class PeopleChallenges extends AppCompatActivity {
         } else if (status == Challenge.NOT_ACTIVE) {
             root_com.setText(R.string.people_root_text_challenge);
         }
-    }
-
-    private ArrayList<Challenge> placeholdeList() {
-        ArrayList<Challenge> list = new ArrayList<>();
-
-//        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
-        list.add(new Challenge("Bart", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
-        list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ALTITUDE, Challenge.CHALLENGED));
-        list.add(new Challenge("Cato", currentUser, Challenge.GREATEST_DISTANCE, Challenge.CHALLENGED));
-
-        Challenge challenge1 = new Challenge(currentUser, "Louis", Challenge.HIGHEST_ALTITUDE, Challenge.ENDED);
-        challenge1.setWinner(currentUser);
-        list.add(challenge1);
-
-        Challenge challenge2 = new Challenge("Sebastian", currentUser, Challenge.GREATEST_DISTANCE, Challenge.ACCEPTED);
-        challenge2.setUser1_float(200f);
-        challenge2.initialiseTime(50000000l);
-        list.add(challenge2);
-
-        return list;
     }
 
     //Main functions -------------------------------------------------------------------------------

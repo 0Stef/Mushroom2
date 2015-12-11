@@ -28,6 +28,8 @@ public class Homescreen extends AppCompatActivity {
         mpbutton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), Preferences.class);
+                        startActivity(i);
                     }
                 }
         );

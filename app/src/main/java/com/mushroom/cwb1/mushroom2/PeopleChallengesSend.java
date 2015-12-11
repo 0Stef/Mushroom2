@@ -71,12 +71,13 @@ public class PeopleChallengesSend extends AppCompatActivity {
             if (result.equals(conn.TAKEN)) {
                 invitation.setUser1(currentUser);
                 invitation.setUser2(opponent);
+                System.out.println("    -   challengeName: " + challengeName);
                 invitation.setChallenge_name(challengeName);
                 invitation.setStatus(Challenge.CHALLENGED);
 
                 String result2 = conn.createChallenge(invitation);
                 if (result2.equals(ServerConnection.ADDED)) {
-                    //TODO succes (finish)
+                    finish();
                 } else {
                     send_status.setText(R.string.people_root_text_failed);
                 }

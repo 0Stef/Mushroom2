@@ -72,7 +72,7 @@ public class Debug {
         }
         if (command.equals("stock") || command.equals("fill")) {
             System.out.println("    -   Stock");
-            String[] params = param.split("_:_");
+            String[] params = param.split("_-_");
 
             String userName = "";
             int length = 250;
@@ -98,7 +98,7 @@ public class Debug {
         }
         if (command.equals("add_points") || command.equals("points") || command.equals("pnt")) {
             System.out.println("    -   Points");
-            String[] params = param.split(":");
+            String[] params = param.split("_-_");
 
             if (params.length == 2) {
                 String userName = params[0];
