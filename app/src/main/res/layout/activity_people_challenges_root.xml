@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/root_current_user"
-                    android:text="Opponent:"/>
+                    android:text="@string/people_root_text_opponent" />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Challenger:"
+                    android:text="@string/people_root_text_challenger"
                     android:id="@+id/root_opponent"
                     />
 
@@ -218,9 +218,6 @@
                     />
 
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 

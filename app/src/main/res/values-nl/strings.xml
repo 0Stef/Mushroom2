@@ -30,7 +30,7 @@
 
     <string name="login_button_login">INLOGGEN</string>
     <string name="login_button_password">REGISTREREN</string>
-    <string name="login_text_exist">Gebruikersnaam bestaat niet.</string>
+    <string name="login_text_exist">Bestaat niet.</string>
     <string name="login_text_found">Uw account werd gevonden! Omdat dit de eerste keer op dit apparaat is moet u nogmaals inloggen.</string>
     <string name="login_text_incorrect">Wachtwoord is incorrect.</string>
     <string name="login_text_needed">Gebruikersnaam is nodig.</string>
@@ -258,4 +258,7 @@
     <string name="point_5000">5000 Punten.</string>
     <string name="point_600000">600000 Punen.</string>
     <string name="challenges_huidige_versnelling">Huidige versnelling</string>
+    <string name="people_inv_text_not_possible">EERST VOLTOOIEN</string>
+    <string name="people_root_text_opponent">Tegenstander: </string>
+    <string name="people_root_text_challenger">Uitdager: </string>
 </resources>
