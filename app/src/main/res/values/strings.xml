@@ -391,4 +391,9 @@
     <string name="preferences_button_all">DELETE USER COMPLETELY</string>
     <string name="preferences_button_confirm">CONFIRM</string>
 
+    //Ranking
+    <string name="daily">Day</string>
+    <string name="weekly">Week</string>
+    <string name="alltime">Ever</string>
+
 </resources>
