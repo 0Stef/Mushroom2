@@ -211,7 +211,8 @@ public class ServerConnection {
                 + "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(user.getCity(), "UTF-8")
                 + "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(user.getCountry(), "UTF-8")
                 + "&" + URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(user.getFirst_name(), "UTF-8")
-                + "&" + URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(user.getLast_name(), "UTF-8");
+                + "&" + URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(user.getLast_name(), "UTF-8")
+                + "&" + URLEncoder.encode("firstLogin", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(user.getFirst_login()), "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/register_user.php").get();
 
         if (serverCheckResult.size() < 1){

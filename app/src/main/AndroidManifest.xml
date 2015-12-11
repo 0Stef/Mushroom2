@@ -21,7 +21,6 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -96,7 +95,7 @@
         </activity>
         <activity
             android:name=".PeopleChallenges"
-            android:label="@string/title_activity_people_challenges">
+            android:label="@string/title_activity_people_challenges" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
@@ -115,7 +114,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mushroom.cwb1.mushroom2.PeopleChallenges" />
         </activity>
-
+        <activity android:name=".Preferences" >
+        </activity>
     </application>
 
 </manifest>

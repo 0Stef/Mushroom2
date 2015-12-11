@@ -418,8 +418,8 @@ public class PeopleChallenges extends AppCompatActivity {
         root_time.setText("/");
         root_com.setText("");
 
-        root_user1.setText("Challenger");
-        root_user2.setText("Opponent");
+        root_user1.setText(R.string.people_root_text_challenger);
+        root_user2.setText(R.string.people_root_text_opponent);
 
         root_user1_value.setText("/");
         root_user2_value.setText("/");

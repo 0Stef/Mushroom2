@@ -40,7 +40,8 @@
             android:id="@+id/editText_register_username"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/text_register_username"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLength="30" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +62,8 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_password"
             android:layout_centerHorizontal="true"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:maxLength="32" />
 
 
 
@@ -84,7 +86,8 @@
             android:id="@+id/editText_register_firstname"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_firstname"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLength="32" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +108,8 @@
             android:id="@+id/editText_register_lasstname"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_lastname"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLength="32" />
 
 
 
@@ -127,7 +131,8 @@
             android:id="@+id/editText_register_country"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_country"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLength="32" />
 
         <TextView
         android:layout_width="wrap_content"
@@ -148,7 +153,8 @@
             android:id="@+id/editText_register_city"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/register_city"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLength="32" />
 
         <Button
             android:layout_width="fill_parent"
