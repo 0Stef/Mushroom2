@@ -57,7 +57,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/root_challenge_time_value"
+                        android:id="@+id/root_challenge_type_value"
                         android:layout_marginLeft="3dp"
                         android:layout_marginStart="3dp"
                         />
@@ -78,7 +78,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/root_challenge_type_value"
+                        android:id="@+id/root_challenge_time_value"
                         android:layout_marginLeft="3dp"
                         android:layout_marginStart="3dp"
                         />

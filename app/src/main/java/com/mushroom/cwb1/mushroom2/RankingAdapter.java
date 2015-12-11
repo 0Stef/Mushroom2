@@ -36,7 +36,7 @@ public class RankingAdapter extends ArrayAdapter<UserRanking> {
         rName.setText(userranking.name);
         rPoints.setText(userranking.points);
         rNbRanking.setText(userranking.nbRank);
-        if (userranking.ThisUser) {
+        if (userranking.name.equals(ServerConnection.getActiveUser())) {
             rName.setTextColor(Color.rgb(255, 191, 106));
             rPoints.setTextColor(Color.rgb(255, 191, 106));
             rNbRanking.setTextColor(Color.rgb(255, 191, 106));
