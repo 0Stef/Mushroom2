@@ -334,6 +334,7 @@
     <string name="people_inv_button_next">NEXT</string>
 
     <string name="people_inv_text_not_possible">FINISH CHALLENGE FIRST</string>
+    <string name="people_inv_text_no_inv">You don't have any invitations at the moment.</string>
 
     <string name="people_inv_text_h_speed">
         In this challenge, you must try to get a higher speed than your opponent.\n
@@ -365,5 +366,16 @@
         <item>Highest altitude</item>
         <item>Longest distance</item>
     </string-array>
+    
+    
+    //Preferences
+    <string name="preferences_text_local">Remove the user that is currently logged in from this device.\n
+    Your achievements and points will remain saved on the server.</string>
+    <string name="preferences_text_all">Remove the user that is currently logged in from this device and our databases.\n
+    All your progress on achievements and points will be removed forever.\n
+    Forever is a very long time!</string>
+    <string name="preferences_button_local">DELETE LOCAL</string>
+    <string name="preferences_button_all">DELETE USER</string>
+    <string name="preferences_button_confirm">CONFIRM</string>
 
 </resources>

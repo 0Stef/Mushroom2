@@ -89,7 +89,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                             String result = conn.updateChallenge(showing);
 
                             if (result.equals(conn.FAILED)) {
-                                inv_status.setText("The connection failed.");
+                                inv_status.setText(R.string.people_root_text_failed);
                                 showing.setStatus(Challenge.CHALLENGED);
                             } else if (result.equals(conn.SUCCES)) {
                                 invitations.remove(showing);
@@ -135,7 +135,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
             showing = invitations.get(position);
             show(position);
         } else {
-            inv_heading.setText("You don't have any invitations at the moment.");
+            inv_heading.setText(R.string.people_inv_text_no_inv);
         }
 
         inv_accept.setEnabled(!isActive);

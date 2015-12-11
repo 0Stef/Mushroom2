@@ -261,4 +261,9 @@
     <string name="people_inv_text_not_possible">EERST VOLTOOIEN</string>
     <string name="people_root_text_opponent">Tegenstander: </string>
     <string name="people_root_text_challenger">Uitdager: </string>
+    <string name="preferences_button_all">VERWIJDER GEBRUIKER</string>
+    <string name="preferences_button_confirm">BEVESTIGEN</string>
+    <string name="preferences_button_local">VERWIJDER OP APPARAAT</string>
+    <string name="preferences_text_all">Verwijder de gebruiker die momenteel ingelogd is van dit apparaat en van onze databanken.\nAl je bereikte mijlpalen en punten zullen voor altijd verwijderd worden.\nVoor altijd is een zeer lange tijd.</string>
+    <string name="preferences_text_local">Verwijder de gebruiker die momenteel ingelogd is van dit apparaat.\nJe mijlpalen en punten blijven opgeslagen op de server.</string>
 </resources>

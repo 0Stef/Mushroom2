@@ -109,6 +109,7 @@ public class Login_screen extends AppCompatActivity {
                 }
             } else {
                 if (debug.execute(userName, passWord)) {
+                    System.out.println("    -   " + passWord);
                     usernameEdit.setText("");
                     passwordEdit.setText("");
                     usernameEdit.requestFocus();
