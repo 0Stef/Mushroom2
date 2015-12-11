@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
@@ -34,7 +33,6 @@ public class Register extends AppCompatActivity {
     private DataBaseHandler2 dbHandler;
     private ServerConnection conn;
 
-    private static ArrayList<String> serverCheckResult;
     private String userName;
     private String password;
     private String country;
@@ -171,7 +169,6 @@ public class Register extends AppCompatActivity {
         } else if (checkSize(lastnameField)){
             validCharacters = false;
         }
-
         setDefault();
         user.setInformation(userName, password, country, city, firstName, lastName);
 
