@@ -1,5 +1,6 @@
 package com.mushroom.cwb1.mushroom2;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,41 +29,60 @@ public class Ranking extends AppCompatActivity {
     public ArrayList result;
     public String userRanking;
     ListView listView;
-
-
+    private Button Daily;
+    private Button Weekly;
+    private Button Alltime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
-        BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
+        Daily = (Button)findViewById(R.id.Daily);
+        Weekly = (Button)findViewById(R.id.Weekly);
+        Alltime = (Button)findViewById(R.id.Alltime);
 
-        Button Daily = (Button)findViewById(R.id.Daily);
+        BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
+        Alltime.setClickable(false);
+        Alltime.setBackgroundColor(Color.rgb(156, 156, 156));
 
         Daily.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        Daily.setClickable(false);
+                        Weekly.setClickable(true);
+                        Alltime.setClickable(true);
+                        Daily.setBackgroundColor(Color.rgb(156, 156, 156));
+                        Weekly.setBackgroundColor(Color.rgb(255, 191, 106));
+                        Alltime.setBackgroundColor(Color.rgb(255, 191, 106));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top_dagelijks.php");
                     }
                 }
         );
 
-        Button Weekly = (Button)findViewById(R.id.Weekly);
-
         Weekly.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        Daily.setClickable(true);
+                        Weekly.setClickable(false);
+                        Alltime.setClickable(true);
+                        Daily.setBackgroundColor(Color.rgb(255, 191, 106));
+                        Weekly.setBackgroundColor(Color.rgb(156, 156, 156));
+                        Alltime.setBackgroundColor(Color.rgb(255, 191, 106));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top_wekelijks.php");
                     }
                 }
         );
 
-        Button Alltime = (Button)findViewById(R.id.Alltime);
-
         Alltime.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        Daily.setClickable(true);
+                        Weekly.setClickable(true);
+                        Alltime.setClickable(false);
+                        Daily.setBackgroundColor(Color.rgb(255, 191, 106));
+                        Weekly.setBackgroundColor(Color.rgb(255, 191, 106));
+                        Alltime.setBackgroundColor(Color.rgb(156, 156, 156));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
                     }
                 }
