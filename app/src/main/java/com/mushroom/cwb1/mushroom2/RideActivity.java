@@ -58,6 +58,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     TextView challenge1;
     TextView uitleg;
     TextView wachten;
+    TextView puntenchallenges;
 
     private Boolean firstLocationSet = false;
     private Location previousLocation;
@@ -150,6 +151,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Button newChallengebutton;
 
     Spinner moeilijkheidsgraad;
+    Spinner moeilijkheidsgraad2;
 
     public String currentUser;
 
@@ -179,10 +181,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challenge2 = (TextView) findViewById(R.id.challenge2);
         uitleg = (TextView) findViewById(R.id.uitleg);
         wachten = (TextView) findViewById(R.id.wachten);
+        puntenchallenges = (TextView) findViewById(R.id.points);
         Succes.setVisibility(View.INVISIBLE);
         challenge1.setVisibility(View.INVISIBLE);
         challenge2.setVisibility(View.INVISIBLE);
         uitleg.setVisibility(View.INVISIBLE);
+        puntenchallenges.setVisibility(View.INVISIBLE);
 
 
 
@@ -214,6 +218,14 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         moeilijkheidsgraad.setAdapter(adapter);
         moeilijkheidsgraad.setOnItemSelectedListener(this);
+
+        moeilijkheidsgraad2 = (Spinner) findViewById(R.id.moeilijkheidsgraad2);
+        moeilijkheidsgraad2.setVisibility(View.INVISIBLE);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.ride_difficulty, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        moeilijkheidsgraad2.setAdapter(adapter);
+        moeilijkheidsgraad2.setOnItemSelectedListener(this);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -275,6 +287,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challenge1.setVisibility(View.INVISIBLE);
         challenge2.setVisibility(View.INVISIBLE);
         Succes.setVisibility(View.INVISIBLE);
+        puntenchallenges.setVisibility(View.INVISIBLE);
+        moeilijkheidsgraad2.setVisibility(View.INVISIBLE);
 
         final int previousRideId = handler.getGreatestRideID();
         currentRideId = previousRideId + 1;
@@ -348,6 +362,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     challenge2.setVisibility(View.INVISIBLE);
                     wachten.setVisibility(View.INVISIBLE);
                     Succes.setVisibility(View.INVISIBLE);
+                    puntenchallenges.setVisibility(View.INVISIBLE);
+
                     eerstekeer = false;
                 }
 
@@ -480,6 +496,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         stoprecordingbutton.setVisibility(View.INVISIBLE);
         challengebutton.setVisibility(View.INVISIBLE);
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
+        moeilijkheidsgraad2.setVisibility(View.INVISIBLE);
         wachten.setVisibility(View.INVISIBLE);
         newChallengebutton.setVisibility(View.INVISIBLE);
 
@@ -754,12 +771,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         } else {
                             points = 1000;
                         }
+                        displayPoints(points);
                         user.setTotal_points(user.getTotal_points() + points);
                         user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                         userhandler.overWrite(user);
                         newChallengebutton.post(new Runnable() {
                             public void run() {
                                 newChallengebutton.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        moeilijkheidsgraad2.post(new Runnable() {
+                            public void run() {
+                                moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -836,12 +859,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 800;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -903,12 +932,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 800;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -952,12 +987,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 1000;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1015,12 +1056,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 500;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1095,12 +1142,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 500;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1153,12 +1206,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 600;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1219,12 +1278,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 500;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1269,12 +1334,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 1000;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1354,12 +1425,18 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     } else {
                         points = 900;
                     }
+                    displayPoints(points);
                     user.setTotal_points(user.getTotal_points() + points);
                     user.setNb_won_challenges(user.getNb_won_challenges() + 1);
                     userhandler.overWrite(user);
                     newChallengebutton.post(new Runnable() {
                         public void run() {
                             newChallengebutton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    moeilijkheidsgraad2.post(new Runnable() {
+                        public void run() {
+                            moeilijkheidsgraad2.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -1382,8 +1459,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void randomChallenge(){
-        int challengenr = r.nextInt(10);
-//        int challengenr = 1;
+//        int challengenr = r.nextInt(10);
+        int challengenr = 1;
         if (challengenr == 0){
             getSpeed(moeilijkheid);
         } else if (challengenr == 1 && accs){
@@ -1415,6 +1492,17 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         challengebutton.setVisibility(View.VISIBLE);
         moeilijkheidsgraad.setVisibility(View.VISIBLE);
         newChallengebutton.setVisibility(View.INVISIBLE);
+        puntenchallenges.setVisibility(View.INVISIBLE);
+        moeilijkheidsgraad2.setVisibility(View.INVISIBLE);
         challengeButton(view);
+    }
+
+    public void displayPoints(final int points){
+        puntenchallenges.post(new Runnable() {
+            public void run() {
+                puntenchallenges.setText(points + " " + getString(R.string.challenges_points));
+                puntenchallenges.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

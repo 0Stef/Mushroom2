@@ -237,14 +237,32 @@
             android:id="@+id/challenge2"
             android:text="Test"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ride_text_succes"
             android:layout_below="@id/challenge1"
-            android:textSize="40sp"
+            android:textSize="30dp"
             android:id="@+id/succes"
             android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/points"
+            android:text="test"
+            android:layout_below="@id/succes"
+            android:textSize="30dp"/>
+
+        <Spinner
+            android:id="@+id/moeilijkheidsgraad2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/succes"
+            android:layout_toRightOf="@id/points"
+            android:layout_toEndOf="@id/points"
+            android:layout_alignBottom="@id/points"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -255,8 +273,8 @@
             android:layout_toEndOf="@id/succes"
             android:layout_toRightOf="@id/succes"
             android:layout_alignBottom="@id/succes"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_alignLeft="@id/moeilijkheidsgraad2"
+            android:layout_alignStart="@id/moeilijkheidsgraad2"/>
 
     </RelativeLayout>
 
