@@ -118,12 +118,12 @@ public class Register extends AppCompatActivity {
 
         User user = new User();
 
-        userName = userNameField.getText().toString();
-        password = passWordField.getText().toString();
-        city = cityField.getText().toString();
-        country = countryField.getText().toString();
-        firstName = firstNameField.getText().toString();
-        lastName = lastnameField.getText().toString();
+        userName = userNameField.getText().toString().replaceAll("[-]+", "_");
+        password = passWordField.getText().toString().replaceAll("[-]+", "_");
+        city = cityField.getText().toString().replaceAll("[-]+", "_");
+        country = countryField.getText().toString().replaceAll("[-]+", "_");
+        firstName = firstNameField.getText().toString().replaceAll("[-]+", "_");
+        lastName = lastnameField.getText().toString().replaceAll("[-]+", "_");
 
         if (!userName.matches("[a-zA-Z0-9-_]*")){
             userNameField.setText("");
