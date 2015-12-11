@@ -55,7 +55,7 @@ public class PeopleChallenges extends AppCompatActivity {
                 //Root
         root_type = (TextView) findViewById(R.id.root_challenge_type_value);
         root_time = (TextView) findViewById(R.id.root_challenge_time_value);
-        root_status = (TextView) findViewById(R.id.root_status_text);
+        root_status = (TextView) findViewById(R.id.root_server_status);
         root_user2 = (TextView) findViewById(R.id.root_opponent);
         root_user2_value = (TextView) findViewById(R.id.root_score_opponent);
         root_user1 = (TextView) findViewById(R.id.root_current_user);
@@ -125,7 +125,7 @@ public class PeopleChallenges extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_challenges, menu);
+        getMenuInflater().inflate(R.menu.menu_people_challenge_root, menu);
         return true;
     }
 
@@ -208,7 +208,7 @@ public class PeopleChallenges extends AppCompatActivity {
     private ArrayList<Challenge> placeholdeList() {
         ArrayList<Challenge> list = new ArrayList<>();
 
-        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
+//        list.add(new Challenge(currentUser, "Adriaan", Challenge.GREATEST_DISTANCE, Challenge.NOT_ACTIVE));
         list.add(new Challenge("Bart", currentUser, Challenge.HIGHEST_ACCELERATION, Challenge.CHALLENGED));
         list.add(new Challenge("Gérard", currentUser, Challenge.HIGHEST_ALTITUDE, Challenge.CHALLENGED));
         list.add(new Challenge("Cato", currentUser, Challenge.GREATEST_DISTANCE, Challenge.CHALLENGED));
@@ -220,7 +220,7 @@ public class PeopleChallenges extends AppCompatActivity {
         Challenge challenge2 = new Challenge("Sebastian", currentUser, Challenge.GREATEST_DISTANCE, Challenge.ACCEPTED);
         challenge2.setUser1_float(200f);
         challenge2.initialiseTime(50000000l);
-        //list.add(challenge2);
+        list.add(challenge2);
 
         return list;
     }

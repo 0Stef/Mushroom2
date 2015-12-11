@@ -163,7 +163,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_challenges, menu);
+        getMenuInflater().inflate(R.menu.menu_people_challenge_root, menu);
         return true;
     }
 
