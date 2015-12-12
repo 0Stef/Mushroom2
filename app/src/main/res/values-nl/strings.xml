@@ -164,7 +164,7 @@
     <string name="statistics_not_found_velocity">Geen snelheidswaarden!</string>
     <string name="statistics_not_found_accelerometer">Geen accelerometerwaarden!</string>
     <string name="statistics_not_found_altitude">Geen altitudewaarden!</string>
-    <string name="statistics_altitude">Hoogte</string>
+    <string name="statistics_altitude">Hoogte.</string>
     <string name="ride_text_succes">Succes!</string>
     <string name="ride_text_current_speed">Huidige snelheid:</string>
     <string name="ride_text_average_speed">Gemiddelde snelheid:</string>

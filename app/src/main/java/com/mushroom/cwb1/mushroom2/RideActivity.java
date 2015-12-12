@@ -23,10 +23,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -154,6 +156,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     Spinner moeilijkheidsgraad2;
 
     public String currentUser;
+
+    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
 
     @Override
@@ -354,6 +358,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     distanceToPrev = 0;
                     maxSpeed = 0f;
                     averageAcceleration = 0f;
+
+                    mMap.clear();
+                    builder = new LatLngBounds.Builder();
+                    PolylineOptions mPolylineOptions = new PolylineOptions();
+                    mPolylineOptions.width(5).color(polylineColor);
+                    route = mMap.addPolyline(mPolylineOptions);
+
                     customHandler.postDelayed(updateTimerThread, 0);
                     challengebutton.setVisibility(View.VISIBLE);
                     moeilijkheidsgraad.setVisibility(View.VISIBLE);
@@ -382,6 +393,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 altitude = location.getAltitude();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+
+                builder.include(new LatLng(latitude, longitude));
 
 
                 if (elapsedTime != 0 || timeToPrev != 0) {
@@ -500,6 +513,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         wachten.setVisibility(View.INVISIBLE);
         newChallengebutton.setVisibility(View.INVISIBLE);
 
+        LatLngBounds bounds = builder.build();
+        int padding = 30; // offset from edges of the map in pixels
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        mMap.animateCamera(cu);
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
@@ -713,8 +730,8 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPointLatLng, 10.0f));
             punten.setText("longitude != 0");
         } else {
-            LatLng defaultPointLatLng = new LatLng(51.0015, 4.58550);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 10.0f));
+            LatLng defaultPointLatLng = new LatLng(50.5, 4.668056);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 6.2f));
             //punten.setText("longitude = 0");
         }
 
