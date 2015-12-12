@@ -283,4 +283,11 @@
     <string name="weekly">Week</string>
     <string name="daily">Dag</string>
     <string name="alltime">Eeuwig</string>
+
+    <string-array name="people_send_array_types">
+        <item>Grootste snelheid</item>
+        <item>Grootste versnelling</item>
+        <item>Grootste hoogteverschil</item>
+        <item>Grootste afstand</item>
+    </string-array>
 </resources>
