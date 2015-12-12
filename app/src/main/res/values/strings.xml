@@ -347,7 +347,7 @@
     <string name="people_inv_button_next">NEXT</string>
 
     <string name="people_inv_text_not_possible">FINISH CHALLENGE FIRST</string>
-    <string name="people_inv_text_no_inv">You donn\'t have any invitations at the moment.</string>
+    <string name="people_inv_text_no_inv">You don\'t have any invitations at the moment.</string>
 
     <string name="people_inv_text_h_speed">
         In this challenge, you must try to get a higher speed than your opponent.\n
