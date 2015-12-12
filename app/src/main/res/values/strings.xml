@@ -394,6 +394,6 @@
     //Ranking
     <string name="daily">Day</string>
     <string name="weekly">Week</string>
-    <string name="alltime">Ever</string>
+    <string name="alltime">All-time</string>
 
 </resources>
