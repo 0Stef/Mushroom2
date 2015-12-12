@@ -178,6 +178,10 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
                     rDbHighestAltitude = row.getAltitude();
                 }
 
+                if (row.getAccelerometer_xValue() > rFlHighestAcceleration) {
+                    rFlHighestAcceleration = row.getAccelerometer_xValue();
+                }
+
                 rFlAverageVelocity += row.getVelocity();
 
                 //Chart Data

@@ -3,12 +3,16 @@ package com.mushroom.cwb1.mushroom2;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +25,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+
 public class Ranking extends AppCompatActivity {
 
     public String currentUser;
@@ -32,6 +37,7 @@ public class Ranking extends AppCompatActivity {
     private Button Daily;
     private Button Weekly;
     private Button Alltime;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +47,23 @@ public class Ranking extends AppCompatActivity {
         Daily = (Button)findViewById(R.id.Daily);
         Weekly = (Button)findViewById(R.id.Weekly);
         Alltime = (Button)findViewById(R.id.Alltime);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
 
-        BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
         Alltime.setClickable(false);
         Alltime.setBackgroundColor(Color.rgb(156, 156, 156));
+
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         Daily.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        spinner.setVisibility(View.VISIBLE);
                         Daily.setClickable(false);
                         Weekly.setClickable(true);
                         Alltime.setClickable(true);
@@ -56,6 +71,7 @@ public class Ranking extends AppCompatActivity {
                         Weekly.setBackgroundColor(Color.rgb(255, 191, 106));
                         Alltime.setBackgroundColor(Color.rgb(255, 191, 106));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top_dagelijks.php");
+                        spinner.setVisibility(View.INVISIBLE);
                     }
                 }
         );
@@ -63,6 +79,7 @@ public class Ranking extends AppCompatActivity {
         Weekly.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        spinner.setVisibility(View.VISIBLE);
                         Daily.setClickable(true);
                         Weekly.setClickable(false);
                         Alltime.setClickable(true);
@@ -70,6 +87,7 @@ public class Ranking extends AppCompatActivity {
                         Weekly.setBackgroundColor(Color.rgb(156, 156, 156));
                         Alltime.setBackgroundColor(Color.rgb(255, 191, 106));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top_wekelijks.php");
+                        spinner.setVisibility(View.INVISIBLE);
                     }
                 }
         );
@@ -77,6 +95,7 @@ public class Ranking extends AppCompatActivity {
         Alltime.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        spinner.setVisibility(View.VISIBLE);
                         Daily.setClickable(true);
                         Weekly.setClickable(true);
                         Alltime.setClickable(false);
@@ -84,12 +103,15 @@ public class Ranking extends AppCompatActivity {
                         Weekly.setBackgroundColor(Color.rgb(255, 191, 106));
                         Alltime.setBackgroundColor(Color.rgb(156, 156, 156));
                         BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
+                        spinner.setVisibility(View.INVISIBLE);
                     }
                 }
         );
 
-    }
+        BuildList("http://mushroom.16mb.com/android/ranglijst_top.php");
+        spinner.setVisibility(View.INVISIBLE);
 
+    }
 
 
     @Override
