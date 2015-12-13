@@ -496,13 +496,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         };
 
-
 // Register the listener with the Location Manager to receive location updates
         // Deze requestLocationUpdates() moet bij klik op start opgeroepen worden
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
         // kan op netwerk locatie zoeken en op GPS of op beiede, voor fiets is GPS het interessantst
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
 
     }
 
