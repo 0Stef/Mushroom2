@@ -356,9 +356,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 }
 
-                if (meerderekeer){
+                /*if (meerderekeer){
                     route.setPoints(gpsPoints);
-                }
+                }*/
 
                 if (eerstekeer) {
                     startTime = SystemClock.uptimeMillis();
@@ -526,10 +526,13 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         wachten.setVisibility(View.INVISIBLE);
         newChallengebutton.setVisibility(View.INVISIBLE);
 
+
+        if (handler.getLastEntryRide(currentRideId)==null){
         LatLngBounds bounds = builder.build();
         int padding = 30; // offset from edges of the map in pixels
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
+        }
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);

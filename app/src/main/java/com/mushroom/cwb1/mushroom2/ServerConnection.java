@@ -390,6 +390,8 @@ public class ServerConnection {
         //ADDED, FAILED
         serverCheckResult = new ArrayList<>();
 
+        String challengeWinner = "/";
+
         String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
                 + "&" + URLEncoder.encode("user2", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser2(), "UTF-8")
                 + "&" + URLEncoder.encode("challenge_name", "UTF-8") + "=" + URLEncoder.encode(challenge.getChallenge_name(), "UTF-8")
@@ -399,8 +401,8 @@ public class ServerConnection {
                 //+ "&" + URLEncoder.encode("user2_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_float()), "UTF-8")
                 //+ "&" + URLEncoder.encode("user2_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_double()), "UTF-8")
                 + "&" + URLEncoder.encode("start", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStart()), "UTF-8")
-                + "&" + URLEncoder.encode("end", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getEnd()), "UTF-8");
-                //+ "&" + URLEncoder.encode("winner", "UTF-8") + "=" + URLEncoder.encode(challenge.getWinner(), "UTF-8");
+                + "&" + URLEncoder.encode("end", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getEnd()), "UTF-8")
+                + "&" + URLEncoder.encode("winner", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challengeWinner), "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_add.php").get();
 
         if (serverCheckResult.get(0).equals("succes")) {
@@ -427,9 +429,17 @@ public class ServerConnection {
         } else {
             for (int i = 0 ; i < serverCheckResult.size(); i++) {
 
+                System.out.println(i + "serverCheckResult.get(i): " + serverCheckResult.get(i));
+
                 String rawString = serverCheckResult.get(i);
                 System.out.println(rawString);
                 String[] splitString = rawString.split("=");
+
+                System.out.println("splitstring 1 - 10");
+                System.out.println(splitString[0]);
+                System.out.println(splitString[1]);
+                System.out.println(splitString[2]);
+                System.out.println(splitString[10]);
 
                 Challenge currentChallenge = new Challenge(splitString[0], splitString[1], splitString[3],
                         Integer.parseInt(splitString[2]), Float.parseFloat(splitString[4]), Double.parseDouble(splitString[5]),
