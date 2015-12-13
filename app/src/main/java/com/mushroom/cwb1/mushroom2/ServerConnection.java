@@ -491,6 +491,7 @@ public class ServerConnection {
         }
     }
 
+
     //Extra functions ------------------------------------------------------------------------------
 
     public ArrayList<String> putDataToServer(String URL, String input){
