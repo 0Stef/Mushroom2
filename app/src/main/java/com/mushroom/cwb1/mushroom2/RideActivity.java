@@ -1274,7 +1274,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                                 challenge1.setText(getString(R.string.challenges_curr_height_diff) + " " + (altitude - starthoogte) + " m");
                             }
                         });
-                        Thread.sleep(2500);
+                        Thread.sleep(1000);
                     }
                 } catch (InterruptedException e) {
 
@@ -1483,10 +1483,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         moeilijkheidsgraad.setVisibility(View.INVISIBLE);
         randomChallenge();
     }
-
+    int yow = 0;
     public void randomChallenge(){
-        int challengenr = r.nextInt(10);
-//        int challengenr = 1;
+//        int challengenr = r.nextInt(10);
+
+        int challengenr = 9 - yow;
+        yow += 1;
         if (challengenr == 0){
             getSpeed(moeilijkheid);
         } else if (challengenr == 1 && accs){
