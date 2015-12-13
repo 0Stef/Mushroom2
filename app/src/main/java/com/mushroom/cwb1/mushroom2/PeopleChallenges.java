@@ -426,7 +426,8 @@ public class PeopleChallenges extends AppCompatActivity {
         String challengeName = challenge.getChallenge_name();
 
         root_type.setText(challengeName);
-        root_time.setText(Long.toString(challenge.getTimeLeft()));
+        root_time.setText(String.format("%.1f", ((float) challenge.getTimeLeft() / PeopleChallengesInvitations.HOUR))
+                + " " + getString(R.string.people_root_unit_time));
 
         root_user1.setText(challenge.getUser1());
         root_user2.setText(challenge.getUser2());

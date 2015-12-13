@@ -316,6 +316,7 @@
     <string name="people_root_text_failed">Something went wrong with the server connection.</string>
     <string name="people_root_text_opponent">Opponent: </string>
     <string name="people_root_text_challenger">Challenger: </string>
+    <string name="people_root_unit_time">h</string>
 
     <string name="people_root_text_not_accepted">
         So far your challenge wasn\'t accepted.\n

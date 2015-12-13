@@ -121,7 +121,7 @@ public class Challenge implements Serializable {
     }
 
     public long getTimeLeft() {
-        return end - start;
+        return end - Calendar.getInstance().getTimeInMillis();
     }
 
 
