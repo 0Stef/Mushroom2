@@ -411,7 +411,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
                 if (elapsedTime != 0 || timeToPrev != 0) {
                     averageSpeed = (averageSpeed * elapsedTime + speed * timeToPrev) / (elapsedTime + timeToPrev);
-                    averageAcceleration = (averageAcceleration * elapsedTime + accy * timeToPrev) / (elapsedTime + timeToPrev);
+                    averageAcceleration = (averageAcceleration * elapsedTime + accGps * timeToPrev) / (elapsedTime + timeToPrev);
                 }
 
                 textCurrentSpeed.setText(decimalF.format(speed));
@@ -1265,7 +1265,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                 });
                 try {
                     starthoogte = altitude;
-                    while (altitude - starthoogte < doel && inRide) {
+                    while (((altitude - starthoogte) < doel) && inRide) {
                         if (starthoogte > altitude){
                             starthoogte = altitude;
                         }
