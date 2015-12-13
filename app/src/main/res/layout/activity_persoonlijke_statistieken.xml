@@ -65,7 +65,7 @@
                 android:textColor="@color/orangeApp"
                 />
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -78,7 +78,7 @@
                 android:id="@+id/HighestAcceleration"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/orangeApp"
-                />
+                />-->
 
             <TextView
                 android:layout_width="fill_parent"
@@ -95,7 +95,7 @@
                 android:textColor="@color/orangeApp"
                 />
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -108,7 +108,7 @@
                 android:id="@+id/TotalTime"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/orangeApp"
-                />
+                />-->
 
             <TextView
                 android:layout_width="fill_parent"
