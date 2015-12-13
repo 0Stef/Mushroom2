@@ -72,22 +72,22 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         TextView HighestVelocity = (TextView) findViewById(R.id.HighestVelocity);
         HighestVelocity.setText(Float.toString(user.getHighest_speed())+" km/h");
 
-        TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
-        HighestAcceleration.setText(Float.toString(user.getHighest_acceleration())+" m/s²");
+        //TextView HighestAcceleration = (TextView) findViewById(R.id.HighestAcceleration);
+        //HighestAcceleration.setText(Float.toString(user.getHighest_acceleration())+" m/s²");
 
         TextView HighestAltitudeDiff = (TextView) findViewById(R.id.HighestAltitudeDiff);
         HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff()) + " m");
 
-        TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
+        //TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
 
 
-       long millis = user.getTotal_time();
+       /*long millis = user.getTotal_time();
         System.out.println("user.getTotal_time()" + Double.toString(user.getTotal_time()) + millis);
         String globalTotalTime = String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        TotalTime.setText(globalTotalTime);
+        TotalTime.setText(globalTotalTime);*/
 
         //TotalTime.setText(Double.toString(user.getTotal_time()/3600000f)+" h");
 
