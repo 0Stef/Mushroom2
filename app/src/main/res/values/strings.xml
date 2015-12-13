@@ -395,5 +395,6 @@
     <string name="daily">Day</string>
     <string name="weekly">Week</string>
     <string name="alltime">All-time</string>
+    <string name="check_internet">Nothing to show... Please check your internet connection.</string>
 
 </resources>

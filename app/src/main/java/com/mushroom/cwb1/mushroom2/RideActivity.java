@@ -761,6 +761,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                         Succes.post(new Runnable() {
                             public void run() {
                                 Succes.setVisibility(View.VISIBLE);
+                                uitleg.setVisibility(View.INVISIBLE);
+                                challenge1.setVisibility(View.INVISIBLE);
+                                challenge2.setVisibility(View.INVISIBLE);
                             }
                         });
                         userhandler = new UserHandler(getApplicationContext());
@@ -849,6 +852,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -922,6 +928,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -977,6 +986,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1046,6 +1058,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1132,6 +1147,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1196,6 +1214,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1268,6 +1289,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1324,6 +1348,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());
@@ -1415,6 +1442,9 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     Succes.post(new Runnable() {
                         public void run() {
                             Succes.setVisibility(View.VISIBLE);
+                            uitleg.setVisibility(View.INVISIBLE);
+                            challenge1.setVisibility(View.INVISIBLE);
+                            challenge2.setVisibility(View.INVISIBLE);
                         }
                     });
                     userhandler = new UserHandler(getApplicationContext());

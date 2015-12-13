@@ -171,7 +171,7 @@
     <string name="ride_text_elapsed_time">Verlopen tijd:</string>
     <string name="ride_text_distance">Afgelegde afstand:</string>
     <string name="ride_text_wait_location">wachten op gps-signaal</string>
-    <string name="ride_text_wait_provider">zet gps aan</string>
+    <string name="ride_text_wait_provider">zet uw GPS aan aub</string>
     <string name="ride_text_in_ride">Je kan niet teruggaan in een rit</string>
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
@@ -186,6 +186,7 @@
     <string name="title_activity_ranking">Ranglijsten</string>
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
+    <string name="check_internet">Niets te zien... Kijk a.u.b. uw internetverbinding na.</string>
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="statistics_highest_altitude">Hoogste punt</string>
 
