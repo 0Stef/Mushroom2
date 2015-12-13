@@ -211,17 +211,18 @@
             android:id="@+id/moeilijkheidsgraad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/challengebutton"
-            android:layout_toEndOf="@id/challengebutton"
-            android:layout_alignBottom="@id/challengebutton"/>
+            android:layout_alignBottom="@+id/challengebutton"
+            android:layout_toRightOf="@+id/challengebutton"
+            android:layout_toEndOf="@+id/challengebutton" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/uitleg"
-            android:layout_below="@id/averageSpeed"
-            android:layout_marginTop="20dp"
-            android:text="Test"/>
+            android:text="Test"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -240,16 +241,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/challenge1"
             android:text="Test"
-            android:layout_alignBaseline="@+id/challengebutton"
-            android:layout_alignBottom="@+id/challengebutton"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/uitleg"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/challenge2"
             android:text="Test"
-            android:layout_alignTop="@+id/challenge1"
+            android:layout_below="@+id/challenge1"
             android:layout_alignLeft="@+id/challenge1"
             android:layout_alignStart="@+id/challenge1" />
 
@@ -259,9 +260,10 @@
             android:text="@string/ride_text_succes"
             android:textSize="30dp"
             android:id="@+id/succes"
-            android:layout_alignTop="@+id/uitleg"
-            android:layout_toRightOf="@+id/challengebutton"
-            android:layout_toEndOf="@+id/challengebutton" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -287,9 +289,10 @@
             android:id="@+id/new_challenge_button"
             android:text="@string/challenges_button_new_challenge"
             android:onClick="newChallenge"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />"/>
+            android:layout_below="@+id/points"
+            />
+
+
 
     </RelativeLayout>
 
