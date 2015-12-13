@@ -78,13 +78,13 @@
     <string name="speed_speed">Snelheid:</string>
     <string name="speed_succes">Succes!</string>
 
-    <string name="statistics_accelerometer_x">Accelerometer x-waarden.</string>
-    <string name="statistics_accelerometer_y">Accelerometer y-waarden.</string>
-    <string name="statistics_accelerometer_z">Accelerometer z-waarden.</string>
-    <string name="statistics_distance">Afstand.</string>
-    <string name="statistics_global">Globaal.</string>
-    <string name="statistics_last_ride">Laatste rit.</string>
-    <string name="statistics_speed">Snelheid.</string>
+    <string name="statistics_accelerometer_x">Versnelling</string>
+    <string name="statistics_accelerometer_y">Accelerometer y-waarden</string>
+    <string name="statistics_accelerometer_z">Accelerometer z-waarden</string>
+    <string name="statistics_distance">Afstand</string>
+    <string name="statistics_global">Globaal</string>
+    <string name="statistics_last_ride">Laatste rit</string>
+    <string name="statistics_speed">Snelheid</string>
 
     <string name="title_activity_achievements">Mijlpalen</string>
     <string name="title_activity_challenges">Uitdagingen</string>
@@ -164,7 +164,7 @@
     <string name="statistics_not_found_velocity">Geen snelheidswaarden!</string>
     <string name="statistics_not_found_accelerometer">Geen accelerometerwaarden!</string>
     <string name="statistics_not_found_altitude">Geen altitudewaarden!</string>
-    <string name="statistics_altitude">Hoogte.</string>
+    <string name="statistics_altitude">Hoogte</string>
     <string name="ride_text_succes">Succes!</string>
     <string name="ride_text_current_speed">Huidige snelheid:</string>
     <string name="ride_text_average_speed">Gemiddelde snelheid:</string>
@@ -176,18 +176,18 @@
     <string name="speed_button_start">Start</string>
     <string name="speed_button_stop">Stop</string>
     <string name="statistics_days_biked">Dagen gefietst.</string>
-    <string name="statistics_highest_acceleration">Hoogste acceleratie.</string>
-    <string name="statistics_highest_altitude_diff">Hoogste hoogteverschil.</string>
-    <string name="statistics_highest_speed">Topsnelheid.</string>
-    <string name="statistics_total_distance">Totale afstand.</string>
-    <string name="statistics_total_points">Totaal punten.</string>
-    <string name="statistics_total_time">Totale tijd.</string>
+    <string name="statistics_highest_acceleration">Grootste versnelling</string>
+    <string name="statistics_highest_altitude_diff">Grootste hoogteverschil</string>
+    <string name="statistics_highest_speed">Topsnelheid</string>
+    <string name="statistics_total_distance">Totale afstand</string>
+    <string name="statistics_total_points">Totaal aantal punten</string>
+    <string name="statistics_total_time">Totale tijd</string>
     <string name="statistics_route">Toon kaart</string>
     <string name="title_activity_ranking">Ranglijsten</string>
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
     <string name="title_activity_route_mapping">Mapping</string>
-    <string name="statistics_highest_altitude">Hoogste Altitude.</string>
+    <string name="statistics_highest_altitude">Hoogste punt</string>
 
 
     //challenges
@@ -225,8 +225,8 @@
     <string name="statistics_text_day"> Dag(en)</string>
     <string name="action_settings">Instellingen</string>
     <string name="login_text_wrong">Zo te zien is er iets fout gelopen.</string>
-    <string name="statistics_avarage_speed">Gemiddelde snelheid.</string>
-    <string name="Date">Datum.</string>
+    <string name="statistics_avarage_speed">Gemiddelde snelheid</string>
+    <string name="Date">Datum</string>
     <string name="Newer_ride">Nieuwere rit</string>
     <string name="Previous_ride">Eerdere rit</string>
     <string name="people_inv_button_accept">ACCEPTEER</string>

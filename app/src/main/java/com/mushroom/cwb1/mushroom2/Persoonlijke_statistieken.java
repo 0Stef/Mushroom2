@@ -14,15 +14,17 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Polyline;
 
-import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class Persoonlijke_statistieken extends AppCompatActivity {
 
@@ -40,12 +42,24 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
     private DataBaseHandler2 handler;
     private float rFlAverageVelocity;
 
+
+    public String formattedTotalTime;
+    private SimpleDateFormat dateF;
+    private DecimalFormat decimalF;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persoonlijke_statistieken);
 
         currentUser = ServerConnection.getActiveUser();
+
+
+        dateF = new SimpleDateFormat("EEEE dd MMMM yyyy  HH:mm");
+        dateF.setTimeZone(TimeZone.getDefault());
+
+        decimalF = new DecimalFormat("0.00");
+
 
         //Global statistics
         UserHandler uHandler = new UserHandler(getApplicationContext());
@@ -61,10 +75,20 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         HighestAcceleration.setText(Float.toString(user.getHighest_acceleration())+" m/s²");
 
         TextView HighestAltitudeDiff = (TextView) findViewById(R.id.HighestAltitudeDiff);
-        HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff())+" m");
+        HighestAltitudeDiff.setText(Double.toString(user.getHighest_altitude_diff()) + " m");
 
         TextView TotalTime = (TextView) findViewById(R.id.TotalTime);
-        TotalTime.setText(Double.toString(user.getTotal_time()/3600000f)+" h");
+
+
+       long millis = user.getTotal_time();
+        System.out.println("user.getTotal_time()" + Double.toString(user.getTotal_time()) + millis);
+        String globalTotalTime = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+        TotalTime.setText(globalTotalTime);
+
+        //TotalTime.setText(Double.toString(user.getTotal_time()/3600000f)+" h");
 
         TextView TotalPoints = (TextView) findViewById(R.id.TotalPoints);
         TotalPoints.setText(Integer.toString(user.getTotal_points()));
@@ -160,10 +184,18 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         rLgTotatTime = 0;
         rLgFirstTime = 0;
         rFlAverageVelocity = 0;
+
         if (list.size() != 0){
             dbRow FirstRow = (dbRow) list.get(0);
             dbRow LastRow = (dbRow) list.get(list.size() - 1);
             rLgTotatTime = LastRow.getMillisec() - FirstRow.getMillisec();
+            long millis = rLgTotatTime;
+            formattedTotalTime = String.format("%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
             rIntTotalDistance = distanceList.get(distanceList.size() - 1);
             rLgFirstTime = FirstRow.getMillisec();
 
@@ -199,25 +231,30 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         }
 
         TextView rTotalDistance = (TextView) findViewById(R.id.rTotalDistance);
-        rTotalDistance.setText(Float.toString(rIntTotalDistance/1000f)+" km");
+        if (rIntTotalDistance>1000){
+            rTotalDistance.setText(decimalF.format(rIntTotalDistance/1000f)+" km");
+        }else{
+            rTotalDistance.setText(rIntTotalDistance+" m");
+        }
 
         TextView rHighestVelocity = (TextView) findViewById(R.id.rHighestVelocity);
-        rHighestVelocity.setText(Float.toString(rFlHighestVelocity)+" km/h");
+        rHighestVelocity.setText(decimalF.format(rFlHighestVelocity)+" km/h");
 
         TextView rAvarageVelocity = (TextView) findViewById(R.id.rAvarageVelocity);
-        rAvarageVelocity.setText(Float.toString(rFlAverageVelocity)+" km/h");
+        rAvarageVelocity.setText(decimalF.format(rFlAverageVelocity)+" km/h");
 
         TextView rHighestAcceleration = (TextView) findViewById(R.id.rHighestAcceleration);
-        rHighestAcceleration.setText(Float.toString(rFlHighestAcceleration)+" m/s²");
+        rHighestAcceleration.setText(decimalF.format(rFlHighestAcceleration)+" m/s²");
 
         TextView rHighestAltitudeDiff = (TextView) findViewById(R.id.rHighestAltitudeDiff);
-        rHighestAltitudeDiff.setText(Double.toString(rDbHighestAltitude)+" m");
+        rHighestAltitudeDiff.setText(decimalF.format(rDbHighestAltitude) + " m");
 
         TextView rTotalTime = (TextView) findViewById(R.id.rTotalTime);
-        rTotalTime.setText(Float.toString(rLgTotatTime/60000f)+" min");
+        rTotalTime.setText(formattedTotalTime);
 
         TextView rFirstTime = (TextView) findViewById(R.id.rDate);
-        rFirstTime.setText(DateFormat.getDateInstance().format(rLgFirstTime));
+
+        rFirstTime.setText(dateF.format(rLgFirstTime));
 
 
         // Velocity chart
@@ -248,33 +285,33 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chVelocity.invalidate();
         chVelocity.animateY(3000);
 
-        // Distance chart
-        LineChart chDistance = (LineChart) findViewById(R.id.chDistance);
-        chDistance.setDescription("");
-        chDistance.setDrawGridBackground(false);
-        chDistance.setNoDataText(getString(R.string.statistics_not_found_distance));
-        Legend lDistance = chDistance.getLegend();
-        lDistance.setEnabled(false);
-        YAxis y12Distance = chDistance.getAxisRight();
-        y12Distance.setEnabled(false);
-        XAxis x1Distance = chDistance.getXAxis();
-        x1Distance.setDrawGridLines(false);
-        x1Distance.setPosition(XAxis.XAxisPosition.BOTTOM);
-        YAxis y1Distance = chDistance.getAxisLeft();
-        y1Distance.setDrawGridLines(false);
-
-        LineDataSet setDistance = new LineDataSet(yDistance, "");
-        setDistance.setDrawCubic(true);
-        setDistance.setDrawFilled(true);
-        setDistance.setDrawValues(false);
-        setDistance.setDrawCircles(false);
-        setDistance.setColor(Color.rgb(255, 100, 0));
-        setDistance.setFillColor(Color.rgb(255, 191, 106));
-        setDistance.setCircleColor(Color.rgb(255, 100, 0));
-        LineData dataDistance = new LineData(xVal, setDistance);
-        chDistance.setData(dataDistance);
-        chDistance.invalidate();
-        chDistance.animateY(3000);
+//        // Distance chart
+//        LineChart chDistance = (LineChart) findViewById(R.id.chDistance);
+//        chDistance.setDescription("");
+//        chDistance.setDrawGridBackground(false);
+//        chDistance.setNoDataText(getString(R.string.statistics_not_found_distance));
+//        Legend lDistance = chDistance.getLegend();
+//        lDistance.setEnabled(false);
+//        YAxis y12Distance = chDistance.getAxisRight();
+//        y12Distance.setEnabled(false);
+//        XAxis x1Distance = chDistance.getXAxis();
+//        x1Distance.setDrawGridLines(false);
+//        x1Distance.setPosition(XAxis.XAxisPosition.BOTTOM);
+//        YAxis y1Distance = chDistance.getAxisLeft();
+//        y1Distance.setDrawGridLines(false);
+//
+//        LineDataSet setDistance = new LineDataSet(yDistance, "");
+//        setDistance.setDrawCubic(true);
+//        setDistance.setDrawFilled(true);
+//        setDistance.setDrawValues(false);
+//        setDistance.setDrawCircles(false);
+//        setDistance.setColor(Color.rgb(255, 100, 0));
+//        setDistance.setFillColor(Color.rgb(255, 191, 106));
+//        setDistance.setCircleColor(Color.rgb(255, 100, 0));
+//        LineData dataDistance = new LineData(xVal, setDistance);
+//        chDistance.setData(dataDistance);
+//        chDistance.invalidate();
+//        chDistance.animateY(3000);
 
         // Altitude chart
         LineChart chAltitude = (LineChart) findViewById(R.id.chAltitude);
@@ -333,7 +370,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         chAccelerometerX.animateY(3000);
 
         // AccelerometerY
-        LineChart chAccelerometerY = (LineChart) findViewById(R.id.chAccelerometerY);
+/*        LineChart chAccelerometerY = (LineChart) findViewById(R.id.chAccelerometerY);
         chAccelerometerY.setDescription("");
         chAccelerometerY.setDrawGridBackground(false);
         chAccelerometerY.setNoDataText(getString(R.string.statistics_not_found_accelerometer));
@@ -358,9 +395,9 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineData dataAccelerometerY = new LineData(xVal, setAccelerometerY);
         chAccelerometerY.setData(dataAccelerometerY);
         chAccelerometerY.invalidate();
-        chAccelerometerY.animateY(3000);
+        chAccelerometerY.animateY(3000);*/
 
-        // AccelerometerZ
+/*        // AccelerometerZ
         LineChart chAccelerometerZ = (LineChart) findViewById(R.id.chAccelerometerZ);
         chAccelerometerZ.setDescription("");
         chAccelerometerZ.setDrawGridBackground(false);
@@ -386,6 +423,6 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         LineData dataAccelerometerZ = new LineData(xVal, setAccelerometerZ);
         chAccelerometerZ.setData(dataAccelerometerZ);
         chAccelerometerZ.invalidate();
-        chAccelerometerZ.animateY(3000);
+        chAccelerometerZ.animateY(3000);*/
     }
 }
