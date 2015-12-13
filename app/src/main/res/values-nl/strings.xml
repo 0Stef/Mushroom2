@@ -25,7 +25,7 @@
     <string name="home_button_preferences">Persoonlijke instellingen</string>
     <string name="home_button_ranking">Ranglijsten</string>
     <string name="home_button_settings">Instellingen</string>
-    <string name="home_button_ride">Rit modus</string>
+    <string name="home_button_ride">Rit-mode</string>
     <string name="home_button_statistics">Persoonlijke statistieken</string>
 
     <string name="login_button_login">INLOGGEN</string>
