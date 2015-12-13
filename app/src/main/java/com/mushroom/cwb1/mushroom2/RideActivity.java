@@ -522,17 +522,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         newChallengebutton.setVisibility(View.INVISIBLE);
 
 
-        if (handler.getLastEntryRide(currentRideId)==null){
-        LatLngBounds bounds = builder.build();
-        int padding = 30; // offset from edges of the map in pixels
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.animateCamera(cu);
-        }
+
 
         mSensorManager.unregisterListener(this);
         locationManager.removeUpdates(locationListener);
 
         if (!route.getPoints().isEmpty()) {
+            LatLngBounds bounds = builder.build();
+            int padding = 30; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            mMap.animateCamera(cu);
             gpsPoints.clear();
         }
         randomColor();
@@ -708,7 +707,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
            System.out.println("geen laatste punt gevonden dus map naar defaultPoint");
         } else {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
-            System.out.println("laatste punt gevonden en map naar gezoomd"+lastEntryLatLng.toString());
+            System.out.println("laatste punt gevonden en map naar gezoomd" + lastEntryLatLng.toString());
 
         }
 
