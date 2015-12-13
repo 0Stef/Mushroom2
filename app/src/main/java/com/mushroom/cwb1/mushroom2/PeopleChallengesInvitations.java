@@ -66,6 +66,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                         if (showing != null) {
                             showing.setStatus(Challenge.ACCEPTED);
                             showing.initialiseTime(DAY);
+                            System.out.println("        -   Timespan: " + showing.getStart() + ", " + showing.getEnd());
 
                             String result = null;
                             try {

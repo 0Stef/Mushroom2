@@ -3,16 +3,13 @@ package com.mushroom.cwb1.mushroom2;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -161,7 +158,7 @@ public class Ranking extends AppCompatActivity {
 
         if (result.size()>0) {
             if (result.get(0).equals("Nothing to show...")){
-                UserRanking newUser = new UserRanking("Nothing to show... Please check your internet connection.","","");
+                UserRanking newUser = new UserRanking(getString(R.string.check_internet),"","");
                 adapter.add(newUser);
             } else {
                 for (int index = 0; index < result.size(); index++) {

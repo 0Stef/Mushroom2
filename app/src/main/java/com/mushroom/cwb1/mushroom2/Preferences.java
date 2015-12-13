@@ -83,5 +83,8 @@ public class Preferences extends AppCompatActivity {
         Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+
+        conn.setActiveUser(DataBaseHandler2.TABLE_DEFAULT);
+        finish();
     }
 }

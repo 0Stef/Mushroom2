@@ -108,7 +108,7 @@ public class ServerConnection {
         Map<String ,String> variabelenMap = new HashMap<String,String>();
         User newuser = new User();
 
-        for(int l = 1; l < COL; l++){
+        for(int l = 0; l < COL; l++){
             String rawString = serverCheckResult.get(l);
             String[] splitString = rawString.split("=");
 
@@ -390,16 +390,12 @@ public class ServerConnection {
         //ADDED, FAILED
         serverCheckResult = new ArrayList<>();
 
-        String challengeWinner = "/";
+        String challengeWinner = "N/A";
 
         String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
                 + "&" + URLEncoder.encode("user2", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser2(), "UTF-8")
                 + "&" + URLEncoder.encode("challenge_name", "UTF-8") + "=" + URLEncoder.encode(challenge.getChallenge_name(), "UTF-8")
                 + "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStatus()), "UTF-8")
-                //+ "&" + URLEncoder.encode("user1_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_float()), "UTF-8")
-                //+ "&" + URLEncoder.encode("user1_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser1_double()), "UTF-8")
-                //+ "&" + URLEncoder.encode("user2_float", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_float()), "UTF-8")
-                //+ "&" + URLEncoder.encode("user2_double", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getUser2_double()), "UTF-8")
                 + "&" + URLEncoder.encode("start", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getStart()), "UTF-8")
                 + "&" + URLEncoder.encode("end", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challenge.getEnd()), "UTF-8")
                 + "&" + URLEncoder.encode("winner", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(challengeWinner), "UTF-8");
@@ -413,6 +409,7 @@ public class ServerConnection {
     }
 
     public ArrayList<Challenge> downloadChallenge(String userName) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        System.out.println("    -   Download challenge");
         //When problems occur: add new challenge with Challenge.FAILED as status.
         //The list is empty: add new challenge with Challenge.NOT_ACTIVE
         //With other words... the list should not be empty!
@@ -427,19 +424,13 @@ public class ServerConnection {
             result.add(new Challenge(Challenge.NOT_ACTIVE));
             return result;
         } else {
-            for (int i = 0 ; i < serverCheckResult.size(); i++) {
+            System.out.println("        -   Server result size: " + serverCheckResult.size());
 
-                System.out.println(i + "serverCheckResult.get(i): " + serverCheckResult.get(i));
+            for (int i = 0 ; i < serverCheckResult.size(); i++) {
+                System.out.println("        -   nr. " + i + ": " + serverCheckResult.get(i));
 
                 String rawString = serverCheckResult.get(i);
-                System.out.println(rawString);
                 String[] splitString = rawString.split("=");
-
-                System.out.println("splitstring 1 - 10");
-                System.out.println(splitString[0]);
-                System.out.println(splitString[1]);
-                System.out.println(splitString[2]);
-                System.out.println(splitString[10]);
 
                 Challenge currentChallenge = new Challenge(splitString[0], splitString[1], splitString[3],
                         Integer.parseInt(splitString[2]), Float.parseFloat(splitString[4]), Double.parseDouble(splitString[5]),
@@ -478,6 +469,7 @@ public class ServerConnection {
 
     public String deleteChallenge(Challenge challenge) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
         //SUCCES, FAILED
+        System.out.println("        -   Delete: " + challenge.toString());
         serverCheckResult = new ArrayList<>();
 
         String input = URLEncoder.encode("user1", "UTF-8") + "=" + URLEncoder.encode(challenge.getUser1(), "UTF-8")
@@ -490,7 +482,6 @@ public class ServerConnection {
             return FAILED;
         }
     }
-
 
     //Extra functions ------------------------------------------------------------------------------
 
@@ -548,3 +539,40 @@ public class ServerConnection {
         }
     }
 }
+
+/*private class ChallengeTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            System.out.println("    -   Task: preExecute");
+            setContentView(R.layout.activity_loading_screen);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            System.out.println("    -   Task: prepare");
+            prepare();
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            System.out.println("    -   Task: postExecute");
+            createView();
+            try {
+                System.out.println("    -   Task: create view");
+                logic();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }*/

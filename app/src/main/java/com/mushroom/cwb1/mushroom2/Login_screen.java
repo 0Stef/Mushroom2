@@ -94,7 +94,7 @@ public class Login_screen extends AppCompatActivity {
         if (!userName.isEmpty()) {
             if (userHandler.isExistingUser(userName)) {
                 if (userHandler.isRightPassword(userName, passWord)) {
-                    conn.updateUser(userName);
+                    //conn.updateUser(userName);
                     conn.setActiveUser(userName);
                     userHandler.checkDay(userName);
                     Intent i = new Intent(getApplicationContext(), Homescreen.class);
@@ -175,5 +175,10 @@ public class Login_screen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.out.println("    -   I don't think so!");
     }
 }

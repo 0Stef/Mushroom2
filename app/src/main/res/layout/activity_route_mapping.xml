@@ -5,4 +5,5 @@
     android:id="@+id/map"
     tools:context="com.mushroom.cwb1.mushroom2.RouteMapping"
     android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:background="@color/white"
     />

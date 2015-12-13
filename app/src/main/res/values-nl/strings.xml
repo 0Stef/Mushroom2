@@ -186,6 +186,7 @@
     <string name="title_activity_ranking">Ranglijsten</string>
     <string name="ranking_name">Naam</string>
     <string name="ranking_points">Punten</string>
+    <string name="check_internet">Niets te zien... Kijk a.u.b. uw internetverbinding na.</string>
     <string name="title_activity_route_mapping">Mapping</string>
     <string name="statistics_highest_altitude">Hoogste punt</string>
 
@@ -272,7 +273,7 @@
     <string name="point_600000">600000 Punen.</string>
     <string name="challenges_huidige_versnelling">Huidige versnelling</string>
     <string name="people_inv_text_not_possible">EERST VOLTOOIEN</string>
-    <string name="people_inv_text_no_inv">U heeft momenteel geen uitnodigingen</string>
+    <string name="people_inv_text_no_inv">U heeft momenteel geen uitnodigingen.</string>
     <string name="people_root_text_opponent">Tegenstander: </string>
     <string name="people_root_text_challenger">Uitdager: </string>
     <string name="preferences_button_all">VERWIJDER GEBRUIKER VOLLEDIG</string>
@@ -290,4 +291,6 @@
         <item>Grootste hoogteverschil</item>
         <item>Grootste afstand</item>
     </string-array>
+
+    <string name="people_root_unit_time">u</string>
 </resources>
