@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,18 +51,16 @@ public class RouteMapping extends FragmentActivity {
 
     public void randomColor(){
 
-        int colorNb = r.nextInt(5);
+        int colorNb = r.nextInt(4);
 
         if (colorNb == 0) {
-            polylineColor  = Color.CYAN;
+            polylineColor  = Color.RED;
         }else if (colorNb == 1){
             polylineColor = Color.GREEN;
         }else if (colorNb == 2){
             polylineColor = Color.MAGENTA;
-        }else if (colorNb == 3){
+        }else if (colorNb == 3) {
             polylineColor = Color.YELLOW;
-        }else if (colorNb == 4){
-            polylineColor = Color.RED;
         }else{
             polylineColor  = Color.BLUE;
         }

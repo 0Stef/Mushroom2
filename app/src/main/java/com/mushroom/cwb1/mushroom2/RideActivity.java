@@ -35,14 +35,11 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
-import java.util.concurrent.ExecutionException;
 
 public class RideActivity extends AppCompatActivity implements SensorEventListener, AdapterView.OnItemSelectedListener {
 
@@ -101,6 +98,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public boolean providerEnabled;
     private boolean eerstekeer = true;
+    private boolean meerderekeer = false;
     private long startTime = 0L;
 
     public boolean inRide;
@@ -108,7 +106,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     private android.os.Handler customHandler = new android.os.Handler();
 
 
-    //TODO timer met running weergeven
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -157,7 +154,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
     public String currentUser;
 
+
+    public LatLng lastEntryLatLng;
+
     LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+
 
 
     @Override
@@ -169,11 +171,16 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         randomColor();
 
 
-        setUpMapIfNeeded();
+
 
         handler = new DataBaseHandler2(getApplicationContext(), currentUser);
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
+        dbRow LastEntry = handler.getLastPoint();
+        lastEntryLatLng = new LatLng(LastEntry.getLatitude(),LastEntry.getLongitude());
+        System.out.println("LastEntry" + LastEntry.toString());
+
+        setUpMapIfNeeded();
 
         textCurrentSpeed = (TextView) findViewById(R.id.currentSpeed);
         textAverageSpeed = (TextView) findViewById(R.id.averageSpeed);
@@ -279,9 +286,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
         inRide = true;
 
-        //TODO zet een scherm met wacht op signaal vn gps
-
-
         startrecordingbutton.setVisibility(View.INVISIBLE);
         stoprecordingbutton.setVisibility(View.VISIBLE);
         wachten.setText(getString(R.string.ride_text_wait_location));
@@ -295,7 +299,11 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         moeilijkheidsgraad2.setVisibility(View.INVISIBLE);
 
         final int previousRideId = handler.getGreatestRideID();
+        System.out.println("previous ride id: " + previousRideId);
         currentRideId = previousRideId + 1;
+        System.out.println("current ride id: "+currentRideId);
+
+
 
 
         Sensor mAcceleration;
@@ -346,6 +354,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
                     distanceToPrev = location.distanceTo(previousLocation);
                     timeToPrev = location.getTime() - previousLocation.getTime();
 
+                }
+
+                if (meerderekeer){
+                    route.setPoints(gpsPoints);
                 }
 
                 if (eerstekeer) {
@@ -489,10 +501,10 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // Deze requestLocationUpdates() moet bij klik op start opgeroepen worden
         // de twee nullen zijn de frequentie, de eerste is het minimum frequentie en tweede is de min afst, 0 = zo snel mogelijk
         // kan op netwerk locatie zoeken en op GPS of op beiede, voor fiets is GPS het interessantst
-         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         //TODO MOET weg na testperiode
-        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
     }
@@ -501,6 +513,7 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         eerstekeer = true;
         firstLocationSet = false;
         inRide = false;
+        meerderekeer = true;
 
         customHandler.removeCallbacks(updateTimerThread);
 
@@ -564,39 +577,20 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         // OVERWRITE TO DATABASE
         userhandler.overWrite(user);
 
-        //TODO volgende lijn laten werken
-        //conn.updateGeneralInfo(user);
-
-
-
-
-
-        //TODO kiezen tss linked en arraylist
-        gpsPoints = new LinkedList<>();
-
-        //TODO route uploaden nr server indien verbinding
-
-        //TODO punten van rit toevoegen
-
-        //TODO zoom veranderen zodat hele rit in beeld is
-
-
-    }
+          }
 
     public void randomColor(){
 
-        int colorNb = r.nextInt(5);
+        int colorNb = r.nextInt(4);
 
         if (colorNb == 0) {
-            polylineColor  = Color.CYAN;
+            polylineColor  = Color.RED;
         }else if (colorNb == 1){
             polylineColor = Color.GREEN;
         }else if (colorNb == 2){
             polylineColor = Color.MAGENTA;
         }else if (colorNb == 3){
             polylineColor = Color.YELLOW;
-        }else if (colorNb == 4){
-            polylineColor = Color.RED;
         }else{
             polylineColor  = Color.BLUE;
         }
@@ -645,8 +639,6 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             }
         }
     }
-
-
 
     private Runnable updateTimerThread = new Runnable() {
 
@@ -705,41 +697,24 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
     }
 
 
-
     private void setUpMap() {
-
-        //mPolylineOptions.width(5).color(Color.BLUE);
-        //route = mMap.addPolyline(mPolylineOptions);
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
         mPolylineOptions.width(5).color(polylineColor);
         route = mMap.addPolyline(mPolylineOptions);
 
 
-        //TODO fixen laatste punt  uit db
-
-        //dbRow LastPoint = handler.getGreatestValue(handler.COLUMN_TIME);
-        //punten.setText("lastpoint voor setup" + LastPoint.toString());
-
-        //dbRow LastPoint = new dbRow(10,22222,1f,1f,1f,0.0f,0.0d,0.0d,0.0f,51.0081564f,4.58057f,0.0f,0f,1000000);
-        dbRow LastPoint = new dbRow(10, 22222, 1f, 1f, 1f, 0.0f, 0.0d, 0.0d, 0.0f, 0f, 0f, 0.0f);
-
-
-        if (LastPoint.getLongitude() != 0.0f) {
-            LatLng lastPointLatLng = new LatLng(LastPoint.getLatitude(), LastPoint.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastPointLatLng, 10.0f));
-            punten.setText("longitude != 0");
+       if (lastEntryLatLng == null) {
+           LatLng defaultPointLatLng = new LatLng(50.52, 4.41);
+           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 11f));
+           System.out.println("geen laatste punt gevonden dus map naar defaultPoint");
         } else {
-            LatLng defaultPointLatLng = new LatLng(50.5, 4.668056);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 6.2f));
-            //punten.setText("longitude = 0");
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
+            System.out.println("laatste punt gevonden en map naar gezoomd"+lastEntryLatLng.toString());
+
         }
 
     }
-
-
-
-
 
     Long eltime = 0l;
 
