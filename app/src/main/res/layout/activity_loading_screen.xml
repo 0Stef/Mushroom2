@@ -11,6 +11,7 @@
         android:id="@+id/loading_progressbar"
         android:indeterminate="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"/>
 
 </RelativeLayout>
