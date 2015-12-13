@@ -420,11 +420,12 @@ public class ServerConnection {
         String input = URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
         serverCheckResult = new PutAsyncTask(input).execute("http://mushroom.16mb.com/android/challenges_get_all_challenges.php").get();
 
+        System.out.println("        -   Server result size: " + serverCheckResult.size());
+
         if (serverCheckResult.get(0).equals("no results")) {
             result.add(new Challenge(Challenge.NOT_ACTIVE));
             return result;
         } else {
-            System.out.println("        -   Server result size: " + serverCheckResult.size());
 
             for (int i = 0 ; i < serverCheckResult.size(); i++) {
                 System.out.println("        -   nr. " + i + ": " + serverCheckResult.get(i));

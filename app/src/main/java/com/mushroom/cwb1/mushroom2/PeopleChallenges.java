@@ -166,9 +166,9 @@ public class PeopleChallenges extends AppCompatActivity {
     //Main logic -----------------------------------------------------------------------------------
 
     private void refresh() {
-        prepare();
-        createView();
         try {
+            prepare();
+            createView();
             logic();
         } catch (InterruptedException e) {
             failed();
@@ -184,23 +184,12 @@ public class PeopleChallenges extends AppCompatActivity {
 
 
 
-    private void prepare() {
+    private void prepare() throws InterruptedException, UnsupportedEncodingException, ExecutionException {
         System.out.println("    -   Prepare");
         ArrayList<Challenge> serverChallenges;
 
-        try {
-            serverChallenges = conn.downloadChallenge(currentUser);
-            challenge = setInvitations(serverChallenges);
-        } catch (UnsupportedEncodingException e) {
-            failed();
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            failed();
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            failed();
-            e.printStackTrace();
-        }
+        serverChallenges = conn.downloadChallenge(currentUser);
+        challenge = setInvitations(serverChallenges);
     }
 
     private void logic() throws InterruptedException, UnsupportedEncodingException, ExecutionException {
@@ -432,7 +421,6 @@ public class PeopleChallenges extends AppCompatActivity {
         root_user1.setText(challenge.getUser1());
         root_user2.setText(challenge.getUser2());
 
-
         if (challengeName.equals(Challenge.GREATEST_DISTANCE) ||
                 challengeName.equals(Challenge.HIGHEST_ACCELERATION) ||
                 challengeName.equals(Challenge.HIGHEST_SPEED)){
@@ -461,5 +449,9 @@ public class PeopleChallenges extends AppCompatActivity {
 
     private void failed() {
         this.challenge = new Challenge(Challenge.FAILED);
+        this.invitations = new ArrayList<>();
+        createView();
+        adaptView(Challenge.FAILED);
+        root_com.setText(R.string.people_root_text_fail);
     }
 }
