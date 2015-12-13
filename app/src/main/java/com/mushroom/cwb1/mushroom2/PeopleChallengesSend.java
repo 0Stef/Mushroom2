@@ -71,9 +71,10 @@ public class PeopleChallengesSend extends AppCompatActivity {
             if (result.equals(conn.TAKEN)) {
                 invitation.setUser1(currentUser);
                 invitation.setUser2(opponent);
-                System.out.println("    -   challengeName: " + challengeName);
                 invitation.setChallenge_name(challengeName);
                 invitation.setStatus(Challenge.CHALLENGED);
+
+                System.out.println("    -   Invitation: " + invitation.toString());
 
                 String result2 = conn.createChallenge(invitation);
                 if (result2.equals(ServerConnection.ADDED)) {

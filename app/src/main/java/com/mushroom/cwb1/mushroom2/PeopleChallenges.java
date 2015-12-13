@@ -73,13 +73,13 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select.setText(R.string.people_root_button_send);
         root_show.setText(R.string.people_root_button_show);
 
-        //Buttons
+                //Buttons
         root_drive.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), RideActivity.class);
                         startActivity(i);
-                        System.out.println("    -   drive");
+                        System.out.println("    -   Drive");
                     }
                 }
         );
@@ -87,17 +87,20 @@ public class PeopleChallenges extends AppCompatActivity {
         root_select.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        System.out.println("    -   select");
                         if (root_select.getText().toString().equals(getString(R.string.people_root_button_send))) {
-                            System.out.println("    -   send");
+                            System.out.println("    -   Send");
                             Intent i = new Intent(getApplicationContext(), PeopleChallengesSend.class);
                             startActivity(i);
 
                         } else if (root_select.getText().toString().equals(getString(R.string.people_root_button_abord))) {
-                            System.out.println("    -   abort");
+                            System.out.println("    -   Abort");
                             challenge.setStatus(Challenge.REFUSED);
                             try {
-                                if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
+                                if (challenge.getUser1().equals(currentUser)) {
+                                    if (conn.deleteChallenge(challenge).equals(conn.FAILED)) {
+                                        root_status.setText(R.string.people_root_text_failed);
+                                    }
+                                } else if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
                                     root_status.setText(R.string.people_root_text_failed);
                                 }
                                 refresh();
@@ -116,7 +119,7 @@ public class PeopleChallenges extends AppCompatActivity {
         root_show.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        System.out.println("    -   show");
+                        System.out.println("    -   Show invitations");
                         Intent i = new Intent(getApplicationContext(), PeopleChallengesInvitations.class);
                         i.putExtra("invitations", invitations);
                         i.putExtra("isActive", isActive);
@@ -168,68 +171,42 @@ public class PeopleChallenges extends AppCompatActivity {
         try {
             logic();
         } catch (InterruptedException e) {
+            failed();
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
+            failed();
             e.printStackTrace();
         } catch (ExecutionException e) {
+            failed();
             e.printStackTrace();
         }
     }
 
-    /*private class ChallengeTask extends AsyncTask<String, Void, String> {
 
-        @Override
-        protected void onPreExecute() {
-            System.out.println("    -   Task: preExecute");
-            setContentView(R.layout.activity_loading_screen);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            System.out.println("    -   Task: prepare");
-            prepare();
-
-            return "Executed";
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            System.out.println("    -   Task: postExecute");
-            createView();
-            try {
-                System.out.println("    -   Task: create view");
-                logic();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-        }
-    }*/
 
     private void prepare() {
-        ArrayList<Challenge> serverChallenges = null;
+        System.out.println("    -   Prepare");
+        ArrayList<Challenge> serverChallenges;
 
         try {
             serverChallenges = conn.downloadChallenge(currentUser);
             challenge = setInvitations(serverChallenges);
         } catch (UnsupportedEncodingException e) {
+            failed();
             e.printStackTrace();
         } catch (ExecutionException e) {
+            failed();
             e.printStackTrace();
         } catch (InterruptedException e) {
+            failed();
             e.printStackTrace();
         }
     }
 
     private void logic() throws InterruptedException, UnsupportedEncodingException, ExecutionException {
+        System.out.println("    -   Logic");
         int status = Challenge.FAILED;
+
         if (challenge != null) status = challenge.getStatus();
         adaptView(status);
 
@@ -374,38 +351,47 @@ public class PeopleChallenges extends AppCompatActivity {
     }
 
     public Challenge setInvitations(ArrayList<Challenge> list) {
+        System.out.println("    -   Set invitations");
+
         invitations = new ArrayList<>();
         ArrayList<Challenge> other = new ArrayList<>();
 
-        for (Challenge elem : list) {
-            System.out.println(elem.toString());
-            if (elem.getStatus() == Challenge.CHALLENGED && elem.getUser2().equals(currentUser)) {
-                System.out.println("    -   Added invitation");
-                invitations.add(elem);
-            } else if (elem.getStatus() == Challenge.ENDED && elem.getWinner().equals(currentUser)) {
-                System.out.println("    -   You won this one.");
-                //Do nothing. You already know you won. Selbstverständlich.
-            } else if (elem.getStatus() == Challenge.REFUSED && elem.getUser1().equals(currentUser)) {
-                System.out.println("    -   Abort this one.");
-                //Do nothing. You refused this one yourself.
-            } else {
-                other.add(elem);
-            }
-        }
-
-        if (other.size() > 0) {
-            System.out.println("other: " + other.get(0).toString());
-            return other.get(0);
+        if (list.size() <= 0) {
+            System.out.println("        -   List is empty.");
+            return new Challenge(Challenge.FAILED);
         } else {
-            Challenge stub = new Challenge();
-            stub.setStatus(Challenge.NOT_ACTIVE);
-            return stub;
+            System.out.println("        -   List is not empty: " + list.size());
+            for (Challenge elem : list) {
+                if (elem.getStatus() == Challenge.CHALLENGED && elem.getUser2().equals(currentUser)) {
+                    System.out.println("            -   Added invitation: " + elem.toString());
+                    invitations.add(elem);
+                } else if (elem.getStatus() == Challenge.ENDED && elem.getWinner().equals(currentUser)) {
+                    System.out.println("            -   You won this one: " + elem.toString());
+                    //Do nothing. You already know you won. Selbstverständlich.
+                } else if (elem.getStatus() == Challenge.REFUSED && elem.getUser1().equals(currentUser)) {
+                    System.out.println("            -   Abort this one: " + elem.toString());
+                    //Do nothing. You refused this one yourself.
+                } else {
+                    other.add(elem);
+                }
+            }
+
+            if (other.size() > 0) {
+                System.out.println("        -   Other size: " + other.size());
+                System.out.println("        -   Other: " + other.get(0).toString());
+                return other.get(0);
+            } else {
+                Challenge stub = new Challenge();
+                stub.setStatus(Challenge.NOT_ACTIVE);
+                return stub;
+            }
         }
     }
 
     public void adaptView(int status) {
         int size = invitations.size();
-        System.out.println("    -   Size:" + size);
+        System.out.println("        -   Create view");
+        System.out.println("            -   Number of invitations: " + size);
 
         if (size > 0) {
             root_show.setText(getString(R.string.people_root_button_show) + " (" + size + ")");
@@ -419,19 +405,20 @@ public class PeopleChallenges extends AppCompatActivity {
         if (status == Challenge.REFUSED || status == Challenge.ENDED || status == Challenge.NOT_ACTIVE) {
             root_select.setText(R.string.people_root_button_send);
             isActive = false;
-            System.out.println("    -   send");
+            System.out.println("            -   Button: SEND");
+
         } else if (status == Challenge.ACCEPTED || (status == Challenge.CHALLENGED)) {
             root_select.setText(R.string.people_root_button_abord);
             isActive = true;
+            System.out.println("            -   Button: ABORT");
 
-            System.out.println("    -   don't send");
         } else {
             if (status == Challenge.FAILED) {
                 root_status.setText(R.string.people_root_text_failed);
             }
             root_select.setEnabled(false);
             root_show.setEnabled(false);
-            System.out.println("    -   failed or else");
+            System.out.println("            -   Button selection failed");
         }
     }
 
@@ -469,5 +456,9 @@ public class PeopleChallenges extends AppCompatActivity {
 
         root_user1_value.setText("/");
         root_user2_value.setText("/");
+    }
+
+    private void failed() {
+        this.challenge = new Challenge(Challenge.FAILED);
     }
 }
