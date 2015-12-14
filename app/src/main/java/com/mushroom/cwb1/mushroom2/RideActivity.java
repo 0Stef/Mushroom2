@@ -177,8 +177,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
         dbRow LastEntry = handler.getLastPoint();
-        lastEntryLatLng = new LatLng(LastEntry.getLatitude(),LastEntry.getLongitude());
-        System.out.println("LastEntry" + LastEntry.toString());
+        if (LastEntry == null){
+            lastEntryLatLng = null;
+        } else {
+            lastEntryLatLng = new LatLng(LastEntry.getLatitude(), LastEntry.getLongitude());
+            System.out.println("LastEntry" + LastEntry.toString());
+        }
 
         setUpMapIfNeeded();
 
@@ -687,9 +691,15 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
+//            if (mMap != null) {
+//                setUpMap();
+//            }
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    setUpMap();
+                }
+            });
         }
     }
 
@@ -702,14 +712,19 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
 
 
        if (lastEntryLatLng == null) {
-           LatLng defaultPointLatLng = new LatLng(50.52, 4.41);
-           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 11f));
+//           LatLng defaultPointLatLng = new LatLng(50.52, 4.41);
+           LatLng southwest = new LatLng(49.5, 2.5);
+           LatLng northeast = new LatLng(51.5, 6.5);
+           LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+           int padding = 10;
+           CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+           mMap.animateCamera(cu);
+//           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 7f));
            System.out.println("geen laatste punt gevonden dus map naar defaultPoint");
-        } else {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
-            System.out.println("laatste punt gevonden en map naar gezoomd" + lastEntryLatLng.toString());
-
-        }
+       } else {
+           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
+           System.out.println("laatste punt gevonden en map naar gezoomd" + lastEntryLatLng.toString());
+       }
 
     }
 

@@ -410,7 +410,12 @@ public class DataBaseHandler2 extends SQLiteOpenHelper {
     }
 
     public dbRow getLastPoint(){
-        dbRow row = getRow(getLastThisRide(getGreatestRideID()));
+        dbRow row;
+        if (getGreatestRideID() == 0) {
+            row = null;
+        } else {
+            row = getRow(getLastThisRide(getGreatestRideID()));
+        }
 
         return row;
     }
