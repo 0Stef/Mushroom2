@@ -33,6 +33,11 @@
     <string name="register_text_invalid_characters">Only numbers and letters</string>
     <string name="register_text_too_long">Maximum 30 characters</string>
     <string name="register_text_belgium">Belgium</string>
+    <string name="register_text_germany">Germany</string>
+    <string name="register_text_netherlands">Netherlands</string>
+    <string name="register_text_great_britain">Great-Britain</string>
+    <string name="register_text_france">France</string>
+    <string name="register_text_luxembourg">Luxembourg</string>
     <string name="register_text_other">Other</string>
 
     <string-array name="countrylist">
@@ -252,6 +257,7 @@
     <string name="statistics_highest_altitude">Highest Altitude.</string>
     <string name="statistics_text_day">Days(s)</string>
     <string name="Date">Date.</string>
+    <string name="No_Date">You haven\'t recorded a ride yet!</string>
     <string name="Previous_ride">Earlier Ride</string>
     <string name="Newer_ride">Newer Ride</string>
     <string name="statistics_avarage_speed">Avarage speed.</string>
