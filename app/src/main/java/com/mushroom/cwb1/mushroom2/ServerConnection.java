@@ -425,20 +425,26 @@ public class ServerConnection {
         if (serverCheckResult.get(0).equals("no results")) {
             result.add(new Challenge(Challenge.NOT_ACTIVE));
             return result;
-        } else {
+        }
+        else {
+            try {
+                for (int i = 0; i < serverCheckResult.size(); i++) {
+                    System.out.println("        -   nr. " + i + ": " + serverCheckResult.get(i));
 
-            for (int i = 0 ; i < serverCheckResult.size(); i++) {
-                System.out.println("        -   nr. " + i + ": " + serverCheckResult.get(i));
+                    String rawString = serverCheckResult.get(i);
+                    String[] splitString = rawString.split("=");
 
-                String rawString = serverCheckResult.get(i);
-                String[] splitString = rawString.split("=");
+                    Challenge currentChallenge = new Challenge(splitString[0], splitString[1], splitString[3],
+                            Integer.parseInt(splitString[2]), Float.parseFloat(splitString[4]), Double.parseDouble(splitString[5]),
+                            Float.parseFloat(splitString[6]), Double.parseDouble(splitString[7]), Long.parseLong(splitString[8]),
+                            Long.parseLong(splitString[9]), splitString[10]);
 
-                Challenge currentChallenge = new Challenge(splitString[0], splitString[1], splitString[3],
-                        Integer.parseInt(splitString[2]), Float.parseFloat(splitString[4]), Double.parseDouble(splitString[5]),
-                        Float.parseFloat(splitString[6]), Double.parseDouble(splitString[7]), Long.parseLong(splitString[8]),
-                        Long.parseLong(splitString[9]), splitString[10]);
-
-                result.add(currentChallenge);
+                    result.add(currentChallenge);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("        -   [ERROR] IndexOutOfBoundsException");
+                result.clear();
+                result.add(new Challenge(Challenge.FAILED));
             }
             return result;
         }

@@ -94,14 +94,19 @@ public class PeopleChallenges extends AppCompatActivity {
 
                         } else if (root_select.getText().toString().equals(getString(R.string.people_root_button_abord))) {
                             System.out.println("    -   Abort");
+                            int status = challenge.getStatus();
                             challenge.setStatus(Challenge.REFUSED);
+                            challenge.setWinner(currentUser);
+
                             try {
-                                if (challenge.getUser1().equals(currentUser)) {
+                                if (challenge.getUser1().equals(currentUser) && status == Challenge.CHALLENGED) {
                                     if (conn.deleteChallenge(challenge).equals(conn.FAILED)) {
                                         root_status.setText(R.string.people_root_text_failed);
                                     }
-                                } else if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
-                                    root_status.setText(R.string.people_root_text_failed);
+                                } else {
+                                    if (conn.updateChallenge(challenge).equals(conn.FAILED)) {
+                                        root_status.setText(R.string.people_root_text_failed);
+                                    }
                                 }
                                 refresh();
                             } catch (UnsupportedEncodingException e) {
@@ -357,7 +362,7 @@ public class PeopleChallenges extends AppCompatActivity {
                 } else if (elem.getStatus() == Challenge.ENDED && elem.getWinner().equals(currentUser)) {
                     System.out.println("            -   You won this one: " + elem.toString());
                     //Do nothing. You already know you won. Selbstverständlich.
-                } else if (elem.getStatus() == Challenge.REFUSED && elem.getUser1().equals(currentUser)) {
+                } else if (elem.getStatus() == Challenge.REFUSED && elem.getWinner().equals(currentUser)) {
                     System.out.println("            -   Abort this one: " + elem.toString());
                     //Do nothing. You refused this one yourself.
                 } else {
@@ -415,8 +420,12 @@ public class PeopleChallenges extends AppCompatActivity {
         String challengeName = challenge.getChallenge_name();
 
         root_type.setText(challengeName);
-        root_time.setText(String.format("%.1f", ((float) challenge.getTimeLeft() / PeopleChallengesInvitations.HOUR))
-                + " " + getString(R.string.people_root_unit_time));
+        if (challenge.getTimeLeft() > 0) {
+            root_time.setText(String.format("%.1f", ((float) challenge.getTimeLeft() / PeopleChallengesInvitations.HOUR))
+                    + " " + getString(R.string.people_root_unit_time));
+        } else {
+            root_time.setText(0 + " " + getString(R.string.people_root_unit_time));
+        }
 
         root_user1.setText(challenge.getUser1());
         root_user2.setText(challenge.getUser2());

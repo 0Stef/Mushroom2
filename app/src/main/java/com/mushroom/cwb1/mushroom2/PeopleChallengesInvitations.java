@@ -101,6 +101,7 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                         resetStatus();
                         if (showing != null) {
                             showing.setStatus(Challenge.REFUSED);
+                            showing.setWinner(ServerConnection.getActiveUser());
                             String result = null;
                             try {
                                 result = conn.updateChallenge(showing);
@@ -115,9 +116,11 @@ public class PeopleChallengesInvitations extends AppCompatActivity {
                             if (result == null) {
                                 inv_status.setText(R.string.people_root_text_failed);
                                 showing.setStatus(Challenge.CHALLENGED);
+                                showing.setWinner("N/A");
                             } else if (result.equals(conn.FAILED)) {
                                 inv_status.setText(R.string.people_root_text_failed);
                                 showing.setStatus(Challenge.CHALLENGED);
+                                showing.setWinner("N/A");
                             } else if (result.equals(conn.SUCCES)) {
                                 invitations.remove(showing);
                                 position--;
