@@ -106,7 +106,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         PreviousRide.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        if (nbRide > 0) {
+                        if (nbRide > 1) {
                             nbRide -= 1;
                         }
                         CreateRideStatistics(nbRide);
