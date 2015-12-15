@@ -115,6 +115,9 @@
                 android:value="com.mushroom.cwb1.mushroom2.PeopleChallenges" />
         </activity>
         <activity android:name=".Preferences" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mushroom.cwb1.mushroom2.Homescreen" />
         </activity>
     </application>
 
