@@ -422,12 +422,11 @@ public class ServerConnection {
 
         System.out.println("        -   Server result size: " + serverCheckResult.size());
 
-        if (serverCheckResult.get(0).equals("no results")) {
-            result.add(new Challenge(Challenge.NOT_ACTIVE));
-            return result;
-        }
-        else {
-            try {
+        try {
+            if (serverCheckResult.get(0).equals("no results")) {
+                result.add(new Challenge(Challenge.NOT_ACTIVE));
+            }
+            else {
                 for (int i = 0; i < serverCheckResult.size(); i++) {
                     System.out.println("        -   nr. " + i + ": " + serverCheckResult.get(i));
 
@@ -441,13 +440,13 @@ public class ServerConnection {
 
                     result.add(currentChallenge);
                 }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("        -   [ERROR] IndexOutOfBoundsException");
-                result.clear();
-                result.add(new Challenge(Challenge.FAILED));
             }
-            return result;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("        -   [ERROR] IndexOutOfBoundsException");
+            result.clear();
+            result.add(new Challenge(Challenge.FAILED));
         }
+        return result;
     }
 
     public String updateChallenge(Challenge challenge) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
