@@ -256,7 +256,8 @@
     <string name="statistics_route">Show route</string>
     <string name="statistics_highest_altitude">Highest Altitude</string>
     <string name="statistics_text_day">Days(s)</string>
-    <string name="No_Date">You haven\'t recorded a ride yet!</string>
+    <string name="No_Date">You haven\'t recorded any rides yet!</string>
+    <string name="no_rides">You don\'t yet have any rides to show!</string>
     <string name="Date">Date</string>
     <string name="Previous_ride">Earlier Ride</string>
     <string name="Newer_ride">Newer Ride</string>

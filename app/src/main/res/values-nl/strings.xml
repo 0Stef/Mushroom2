@@ -233,7 +233,8 @@
     <string name="login_text_wrong">Zo te zien is er iets fout gelopen.</string>
     <string name="statistics_avarage_speed">Gemiddelde snelheid</string>
     <string name="Date">Datum</string>
-    <string name="No_Date">Je hebt nog geen rit gedaan!</string>
+    <string name="No_Date">Je hebt nog geen ritten gedaan!</string>
+    <string name="no_rides">Je hebt nog geen ritten om te tonen!</string>
     <string name="Newer_ride">Nieuwere rit</string>
     <string name="Previous_ride">Eerdere rit</string>
     <string name="people_inv_button_accept">ACCEPTEER</string>

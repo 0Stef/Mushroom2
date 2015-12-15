@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -132,10 +133,14 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         RouteMapping.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), RouteMapping.class);
-                        i.putExtra("username", currentUser);
-                        i.putExtra("nbRide", nbRide);
-                        startActivity(i);
+                        if (nbRide == 0){
+                            Toast.makeText(Persoonlijke_statistieken.this, getString(R.string.no_rides), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent i = new Intent(getApplicationContext(), RouteMapping.class);
+                            i.putExtra("username", currentUser);
+                            i.putExtra("nbRide", nbRide);
+                            startActivity(i);
+                        }
                     }
                 }
         );
