@@ -157,10 +157,16 @@ public class Ranking extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         if (result.size()>0) {
-            if (result.get(0).equals("Nothing to show...")){
-                UserRanking newUser = new UserRanking(getString(R.string.check_internet),"","");
+            if (result.get(0).equals("Nothing to show...")) {
+                System.out.print("Nothing to show...");
+                UserRanking newUser = new UserRanking(getString(R.string.check_internet), "", "");
                 adapter.add(newUser);
-            } else {
+            }else if (result.get(0).equals("No scores yet")){
+                System.out.print("No scores yet");
+                UserRanking newUser = new UserRanking(getString(R.string.no_scores_yet), "", "");
+                adapter.add(newUser);
+            }else {
+                System.out.print("Making ranking");
                 for (int index = 0; index < result.size(); index++) {
                     String ResultUser = (String) result.get(index);
                     String[] splitString = ResultUser.split("=");
@@ -185,6 +191,7 @@ public class Ranking extends AppCompatActivity {
 
         if (serverRankingResult.size() > 0) {
             System.out.println("checkserver.size = " + serverRankingResult.size());
+            System.out.println("checkserver.get(0) = " + serverRankingResult.get(0));
             return serverRankingResult;
         } else {
             ArrayList<String> failedResult = new ArrayList<>();
