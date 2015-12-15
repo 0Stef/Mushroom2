@@ -33,6 +33,11 @@
     <string name="register_text_invalid_characters">Only numbers and letters</string>
     <string name="register_text_too_long">Maximum 30 characters</string>
     <string name="register_text_belgium">Belgium</string>
+    <string name="register_text_germany">Germany</string>
+    <string name="register_text_netherlands">Netherlands</string>
+    <string name="register_text_great_britain">Great-Britain</string>
+    <string name="register_text_france">France</string>
+    <string name="register_text_luxembourg">Luxembourg</string>
     <string name="register_text_other">Other</string>
 
     <string-array name="countrylist">
@@ -220,7 +225,7 @@
     <string name="ride_text_elapsed_time">Elapsed time:</string>
     <string name="ride_text_distance">Distance:</string>
     <string name="ride_text_wait_location">waiting for location service...</string>
-    <string name="ride_text_wait_provider">turn on location service</string>
+    <string name="ride_text_wait_provider">turn on location service please</string>
     <string name="ride_text_in_ride">You cannot leave while in a ride</string>
 
     <string-array name="ride_difficulty">
@@ -232,29 +237,30 @@
 
     //Personal statistics
     <string name="title_activity_persoonlijke_statistieken">Statistics</string>
-    <string name="statistics_last_ride">Last ride.</string>
-    <string name="statistics_speed">Speed.</string>
-    <string name="statistics_accelerometer_x">Accelerometer x-values.</string>
+    <string name="statistics_last_ride">Last ride</string>
+    <string name="statistics_speed">Speed</string>
+    <string name="statistics_accelerometer_x">Acceleration</string>
     <string name="statistics_accelerometer_y">Accelerometer y-values.</string>
     <string name="statistics_accelerometer_z">Accelerometer z-values.</string>
-    <string name="statistics_global">Global.</string>
-    <string name="statistics_distance">Distance.</string>
+    <string name="statistics_global">Global</string>
+    <string name="statistics_distance">Distance</string>
     <string name="statistics_altitude">Altitude</string>
 
-    <string name="statistics_highest_speed">Highest speed.</string>
-    <string name="statistics_highest_acceleration">Highest acceleration.</string>
-    <string name="statistics_highest_altitude_diff">Highest altitude difference.</string>
-    <string name="statistics_days_biked">Days biked.</string>
-    <string name="statistics_total_time">Total time.</string>
-    <string name="statistics_total_distance">Total distance.</string>
-    <string name="statistics_total_points">Total points.</string>
-    <string name="statistics_route">Route Mapping</string>
-    <string name="statistics_highest_altitude">Highest Altitude.</string>
+    <string name="statistics_highest_speed">Highest speed</string>
+    <string name="statistics_highest_acceleration">Highest acceleration</string>
+    <string name="statistics_highest_altitude_diff">Highest altitude difference</string>
+    <string name="statistics_days_biked">Days biked</string>
+    <string name="statistics_total_time">Total time</string>
+    <string name="statistics_total_distance">Total distance</string>
+    <string name="statistics_total_points">Total points</string>
+    <string name="statistics_route">Show route</string>
+    <string name="statistics_highest_altitude">Highest Altitude</string>
     <string name="statistics_text_day">Days(s)</string>
-    <string name="Date">Date.</string>
+    <string name="No_Date">You haven\'t recorded a ride yet!</string>
+    <string name="Date">Date</string>
     <string name="Previous_ride">Earlier Ride</string>
     <string name="Newer_ride">Newer Ride</string>
-    <string name="statistics_avarage_speed">Avarage speed.</string>
+    <string name="statistics_avarage_speed">Avarage speed</string>
 
 
     <string name="statistics_not_found_velocity">No velocityvalues found!</string>
@@ -397,5 +403,6 @@
     <string name="weekly">Week</string>
     <string name="alltime">All-time</string>
     <string name="check_internet">Nothing to show... Please check your internet connection.</string>
+    <string name="no_scores_yet">No-one got points yet... Be the first!</string>
 
 </resources>

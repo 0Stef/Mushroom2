@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -177,8 +178,12 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         //handler.onUpgrade(handler.getWritableDatabase(), 0, 0);
 
         dbRow LastEntry = handler.getLastPoint();
-        lastEntryLatLng = new LatLng(LastEntry.getLatitude(),LastEntry.getLongitude());
-        System.out.println("LastEntry" + LastEntry.toString());
+        if (LastEntry == null){
+            lastEntryLatLng = null;
+        } else {
+            lastEntryLatLng = new LatLng(LastEntry.getLatitude(), LastEntry.getLongitude());
+            System.out.println("LastEntry" + LastEntry.toString());
+        }
 
         setUpMapIfNeeded();
 
@@ -687,9 +692,15 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap();
-            }
+//            if (mMap != null) {
+//                setUpMap();
+//            }
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    setUpMap();
+                }
+            });
         }
     }
 
@@ -700,16 +711,42 @@ public class RideActivity extends AppCompatActivity implements SensorEventListen
         mPolylineOptions.width(5).color(polylineColor);
         route = mMap.addPolyline(mPolylineOptions);
 
+        userhandler = new UserHandler(getApplicationContext());
+        User user =userhandler.getUserInformation(currentUser);
+        String country = user.getCountry();
+
+
 
        if (lastEntryLatLng == null) {
-           LatLng defaultPointLatLng = new LatLng(50.52, 4.41);
-           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 11f));
+//           LatLng defaultPointLatLng = new LatLng(50.52, 4.41);
+           LatLng southwest = new LatLng(49.5, 2.5);
+           LatLng northeast = new LatLng(51.5, 6.5);
+           if(country.equals(getString(R.string.register_text_germany))){
+               southwest = new LatLng(47, 5);
+               northeast = new LatLng(55, 16);
+           } else if(country.equals(getString(R.string.register_text_netherlands))){
+               southwest = new LatLng(50.6, 3.3);
+               northeast = new LatLng(53.5, 7.1);
+           } else if(country.equals(getString(R.string.register_text_france))){
+               southwest = new LatLng(41.4, 356.1);
+               northeast = new LatLng(51.2, 8);
+           } else if(country.equals(getString(R.string.register_text_luxembourg))){
+               southwest = new LatLng(49.45, 5.6);
+               northeast = new LatLng(50.2, 6.6);
+           } else if(country.equals(getString(R.string.register_text_great_britain))){
+               southwest = new LatLng(49.5, 352);
+               northeast = new LatLng(59, 2);
+           }
+           LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+           int padding = 10;
+           CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+           mMap.animateCamera(cu);
+//           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPointLatLng, 7f));
            System.out.println("geen laatste punt gevonden dus map naar defaultPoint");
-        } else {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
-            System.out.println("laatste punt gevonden en map naar gezoomd" + lastEntryLatLng.toString());
-
-        }
+       } else {
+           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastEntryLatLng, 13f));
+               System.out.println("laatste punt gevonden en map naar gezoomd" + lastEntryLatLng.toString());
+       }
 
     }
 

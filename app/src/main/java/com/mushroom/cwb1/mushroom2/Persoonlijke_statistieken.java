@@ -106,7 +106,7 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
         PreviousRide.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        if (nbRide > 0) {
+                        if (nbRide > 1) {
                             nbRide -= 1;
                         }
                         CreateRideStatistics(nbRide);
@@ -255,7 +255,12 @@ public class Persoonlijke_statistieken extends AppCompatActivity {
 
         TextView rFirstTime = (TextView) findViewById(R.id.rDate);
 
-        rFirstTime.setText(dateF.format(rLgFirstTime));
+
+        if (rLgFirstTime == 0){
+            rFirstTime.setText(getString(R.string.No_Date));
+        } else {
+            rFirstTime.setText(dateF.format(rLgFirstTime));
+        }
 
 
         // Velocity chart
